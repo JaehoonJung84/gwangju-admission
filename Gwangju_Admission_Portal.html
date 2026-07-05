@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광주대학교 외국인 입학지원 시스템 | Gwangju University International Admissions</title>
+<style>
+  :root{
+    --green:#1e6b3a;        /* wordmark dark green */
+    --green-2:#2e8b57;      /* accent */
+    --lime:#6fbf44;         /* bright block */
+    --sky:#7ec8e6;
+    --bg:#f4f7f3;
+    --card:#ffffff;
+    --line:#e3e8e0;
+    --text:#20261f;
+    --muted:#6b7568;
+    --danger:#c0392b;
+    --shadow:0 6px 24px rgba(30,107,58,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI","Malgun Gothic",Roboto,"Noto Sans",system-ui,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;
+  }
+  img{max-width:100%}
+  .hidden{display:none!important}
+
+  /* ---------- Logo ---------- */
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo svg{display:block;height:44px;width:auto}
+  .logo .wm{display:flex;flex-direction:column;line-height:1.05}
+  .logo .wm b{color:var(--green);font-size:18px;font-weight:800;letter-spacing:.5px}
+  .logo .wm span{color:var(--muted);font-size:11px;letter-spacing:1.5px}
+
+  /* ---------- Language Screen ---------- */
+  #langScreen{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:40px 20px;text-align:center;
+    background:linear-gradient(160deg,#eaf3ea 0%,#f4f7f3 45%,#e7f0f6 100%);
+  }
+  #langScreen .logo{margin-bottom:28px;transform:scale(1.15)}
+  #langScreen h1{font-size:26px;color:var(--green);margin-bottom:6px}
+  #langScreen p{color:var(--muted);margin-bottom:34px}
+  .lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:640px;width:100%}
+  .lang-btn{
+    background:var(--card);border:2px solid var(--line);border-radius:16px;
+    padding:22px 14px;cursor:pointer;transition:.18s;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .lang-btn:hover{border-color:var(--lime);transform:translateY(-3px)}
+  .lang-btn .flag{font-size:34px;line-height:1}
+  .lang-btn .native{font-size:17px;font-weight:700;color:var(--green)}
+  .lang-btn .eng{font-size:12px;color:var(--muted);letter-spacing:.5px}
+  @media(max-width:560px){.lang-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- Top bar ---------- */
+  header.topbar{
+    background:var(--card);border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:30;
+  }
+  .topbar-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .top-actions{display:flex;align-items:center;gap:10px}
+  .lang-switch{
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 12px;
+    font-size:13px;color:var(--text);cursor:pointer
+  }
+  .btn{
+    border:none;border-radius:10px;padding:11px 20px;font-size:14px;font-weight:700;
+    cursor:pointer;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--green);color:#fff}
+  .btn-primary:hover{background:#17542d}
+  .btn-lime{background:var(--lime);color:#14431f}
+  .btn-lime:hover{background:#5fae37}
+  .btn-ghost{background:#eef3ec;color:var(--green)}
+  .btn-ghost:hover{background:#e2ebde}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg,var(--green) 0%,#25834a 60%,#3a9b5c 100%);
+    color:#fff;padding:56px 20px;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-60px;bottom:-60px;width:260px;height:260px;
+    background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+  .hero h1{font-size:30px;margin-bottom:12px;position:relative}
+  .hero p{font-size:16px;opacity:.92;max-width:640px;margin:0 auto 26px;position:relative}
+  .hero .btn{font-size:16px;padding:15px 34px;box-shadow:0 8px 20px rgba(0,0,0,.15);position:relative}
+  .badge-round{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+    padding:5px 14px;border-radius:999px;font-size:13px;margin-bottom:18px}
+
+  /* ---------- Content ---------- */
+  main{max-width:1080px;margin:0 auto;padding:36px 20px 60px}
+  section.block{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:24px 26px;margin-bottom:22px;box-shadow:var(--shadow)}
+  .block h2{font-size:19px;color:var(--green);display:flex;align-items:center;gap:9px;margin-bottom:16px}
+  .block h2 .ic{width:26px;height:26px;background:#eaf4ea;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+
+  table.sched{width:100%;border-collapse:collapse;font-size:14px}
+  table.sched th,table.sched td{border:1px solid var(--line);padding:11px 10px;text-align:center}
+  table.sched th{background:#f0f6ef;color:var(--green);font-weight:700}
+  table.sched td.round{background:#fafcf9;font-weight:700;color:var(--green-2)}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.info-grid{grid-template-columns:1fr}}
+  .mini{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fafcf9}
+  .mini h4{font-size:14px;color:var(--green);margin-bottom:6px}
+  .mini ul{list-style:none;font-size:13.5px;color:var(--text)}
+  .mini li{padding:3px 0;display:flex;justify-content:space-between;gap:10px}
+  .mini li span:last-child{color:var(--muted);text-align:right}
+
+  .track{display:flex;gap:12px;flex-wrap:wrap}
+  .track .t{flex:1;min-width:240px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .track .t .th{background:var(--green);color:#fff;padding:9px 14px;font-weight:700;font-size:14px}
+  .track .t .tb{padding:12px 14px;font-size:13.5px;color:var(--text)}
+
+  ol.steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(max-width:720px){ol.steps{grid-template-columns:1fr}}
+  ol.steps li{counter-increment:s;position:relative;padding:11px 12px 11px 44px;border:1px solid var(--line);
+    border-radius:10px;background:#fafcf9;font-size:13.5px}
+  ol.steps li::before{content:counter(s);position:absolute;left:10px;top:50%;transform:translateY(-50%);
+    width:24px;height:24px;background:var(--lime);color:#14431f;border-radius:50%;display:flex;
+    align-items:center;justify-content:center;font-weight:800;font-size:12px}
+
+  ul.notice{list-style:none}
+  ul.notice li{position:relative;padding:7px 0 7px 24px;font-size:14px;border-bottom:1px dashed var(--line)}
+  ul.notice li:last-child{border-bottom:none}
+  ul.notice li::before{content:"!";position:absolute;left:0;top:8px;width:17px;height:17px;background:#fdeceb;
+    color:var(--danger);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+
+  .contact-box{display:flex;flex-wrap:wrap;gap:10px}
+  .contact-box .c{border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13.5px;background:#fafcf9}
+  .contact-box .c b{color:var(--green);display:block}
+
+  /* ---------- Application view ---------- */
+  .app-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+  .app-head h1{font-size:23px;color:var(--green)}
+  .progress-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:20px;box-shadow:var(--shadow)}
+  .progress-top{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:8px;color:var(--muted)}
+  .progress-top b{color:var(--green)}
+  .bar{height:10px;background:#eef3ec;border-radius:99px;overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--green-2));transition:width .35s}
+
+  .step1{background:linear-gradient(135deg,#f0f7ef,#eaf2f6);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;margin-bottom:22px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .step1 .txt{flex:1;min-width:220px}
+  .step1 .txt h3{color:var(--green);font-size:17px;margin-bottom:4px}
+  .step1 .txt p{font-size:13.5px;color:var(--muted)}
+  .step1 .acts{display:flex;gap:10px;flex-wrap:wrap}
+
+  .doc-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.doc-list{grid-template-columns:1fr}}
+  .doc{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    box-shadow:var(--shadow);transition:.15s;display:flex;flex-direction:column;gap:10px
+  }
+  .doc.done{border-color:var(--lime);background:#f6fcf3}
+  .doc .dtop{display:flex;align-items:flex-start;gap:10px}
+  .doc .dicon{width:34px;height:34px;flex:none;background:#eaf4ea;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .doc.done .dicon{background:var(--lime)}
+  .doc .dname{font-size:14.5px;font-weight:700;line-height:1.35}
+  .doc .dtag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;margin-top:4px}
+  .dtag.req{background:#fbeaea;color:var(--danger)}
+  .dtag.opt{background:#eef3ec;color:var(--muted)}
+  .doc .dbottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+  .doc .fname{font-size:12.5px;color:var(--green-2);word-break:break-all;flex:1}
+  .doc .fname.empty{color:var(--muted)}
+  .upbtn{border:1px solid var(--green);color:var(--green);background:#fff;border-radius:9px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .upbtn:hover{background:#f0f7ef}
+  .doc.done .upbtn{border-color:var(--muted);color:var(--muted)}
+  .check{color:var(--green-2);font-weight:800}
+
+  .final-wrap{text-align:center;margin-top:28px}
+  .final-note{font-size:13px;color:var(--muted);margin-top:10px}
+
+  /* ---------- Modal ---------- */
+  .modal{position:fixed;inset:0;background:rgba(20,40,25,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:60}
+  .modal .box{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:34px 30px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  .modal .ok{width:70px;height:70px;margin:0 auto 16px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff}
+  .modal h3{color:var(--green);font-size:20px;margin-bottom:8px}
+  .modal p{color:var(--muted);font-size:14px;margin-bottom:22px}
+
+  footer{background:#14351f;color:#cfe3d4;font-size:12.5px;text-align:center;padding:22px 20px}
+  footer .logo .wm b{color:#fff}
+  footer .logo{justify-content:center;margin-bottom:10px}
+  footer .logo .wm span{color:#9fc3aa}
+</style>
+</head>
+<body>
+
+<!-- ================= LANGUAGE SELECTION ================= -->
+<div id="langScreen">
+  <div class="logo" aria-hidden="true">
+    <!-- Gwangju emblem (recreated) -->
+    <svg viewBox="0 0 120 150" role="img">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8fd14f"/><stop offset="1" stop-color="#4c9c2e"/>
+        </linearGradient>
+      </defs>
+      <rect x="14" y="8" width="92" height="134" rx="8" fill="url(#g1)"/>
+      <path d="M14 66 V16 a8 8 0 0 1 8 -8 h76 a8 8 0 0 1 8 8 V66 Z" fill="#7ec8e6"/>
+      <path d="M14 70 L38 44 L52 58 L70 34 L88 54 L106 40 L106 74 L14 74 Z" fill="#fff"/>
+    </svg>
+    <div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div>
+  </div>
+  <h1>International Admissions</h1>
+  <p>Please select your language · 언어를 선택하세요</p>
+  <div class="lang-grid" id="langGrid"></div>
+</div>
+
+<!-- ================= HOME (INFO) ================= -->
+<div id="homeView" class="hidden">
+  <header class="topbar">
+    <div class="topbar-in">
+      <div class="logo">
+        <svg viewBox="0 0 120 150" role="img">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd14f"/><stop offset="1" stop-color="#4c9c2e"/></linearGradient></defs>
+          <rect x="14" y="8" width="92" height="134" rx="8" fill="url(#g2)"/>
+          <path d="M14 66 V16 a8 8 0 0 1 8 -8 h76 a8 8 0 0 1 8 8 V66 Z" fill="#7ec8e6"/>
+          <path d="M14 70 L38 44 L52 58 L70 34 L88 54 L106 40 L106 74 L14 74 Z" fill="#fff"/>
+        </svg>
+        <div class="wm"><b>광주대학교</b><span data-i="brand">GWANGJU UNIVERSITY</span></div>
+      </div>
+      <div class="top-actions">
+        <select class="lang-switch" id="langSwitch"></select>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero">
+    <span class="badge-round" data-i="heroBadge">2026 후기 외국인 신·편입생 특별전형</span>
+    <h1 data-i="heroTitle">외국인 유학생 입학지원 시스템</h1>
+    <p data-i="heroDesc">광주대학교 외국인 신·편입생 특별전형 온라인 지원 포털입니다.</p>
+    <button class="btn btn-lime" id="goApply" data-i="apply">입학지원 바로가기</button>
+  </div>
+
+  <main>
+    <!-- schedule -->
+    <section class="block">
+      <h2><span class="ic">📅</span><span data-i="s_schedule">전형일정</span></h2>
+      <table class="sched">
+        <thead>
+          <tr>
+            <th data-i="c_round">모집시기</th>
+            <th data-i="c_apply">원서접수</th>
+            <th data-i="c_result">합격자 발표</th>
+            <th data-i="c_reg">등록기간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="round" data-i="round1">1차</td>
+            <td>2026.06.01 ~ 06.10</td>
+            <td><span data-i="before">이전</span> 2026.06.24</td>
+            <td>2026.07.20 ~ 07.24</td>
+          </tr>
+          <tr>
+            <td class="round" data-i="round2">2차</td>
+            <td>2026.06.22 ~ 07.01</td>
+            <td><span data-i="before">이전</span> 2026.07.15</td>
+            <td>2026.07.20 ~ 07.24</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px" data-i="method_desc">전형방법: 서류전형 100% (학업능력·어학능력·지원동기·인성 종합평가, 필요 시 대면/화상 면접).</p>
+    </section>
+
+    <!-- language req -->
+    <section class="block">
+      <h2><span class="ic">🗣️</span><span data-i="s_lang">언어능력 요건 (신입학)</span></h2>
+      <div class="track">
+        <div class="t">
+          <div class="th" data-i="lang_ko_t">한국어트랙</div>
+          <div class="tb" data-i="lang_ko_r">TOPIK 3급 이상 또는 동등 자격 (예체능 2급 이상)</div>
+        </div>
+        <div class="t">
+          <div class="th" data-i="lang_en_t">영어트랙</div>
+          <div class="tb" data-i="lang_en_r">TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 이상</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- tuition / costs -->
+    <section class="block">
+      <h2><span class="ic">💳</span><span data-i="s_tuition">등록금 및 유학경비</span></h2>
+      <div class="info-grid">
+        <div class="mini">
+          <h4 data-i="t_fee">등록금 (학기)</h4>
+          <ul>
+            <li><span data-i="t_fee_a">인문·사회 계열</span><span>3,167,000₩</span></li>
+            <li><span data-i="t_fee_b">이공·예체능 계열</span><span>3,744,000₩</span></li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4 data-i="t_dorm">기숙사 (학기)</h4>
+          <ul>
+            <li><span data-i="t_dorm_a">4인실 / 3인실 / 2인실</span><span>889,200 ~ 1,269,000₩</span></li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4 data-i="t_meal">식비 (학기)</h4>
+          <ul>
+            <li><span data-i="t_meal_a">1식 / 2식 / 3식</span><span>550,200 ~ 1,650,600₩</span></li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4 data-i="t_sch">장학금</h4>
+          <ul>
+            <li><span>TOPIK 4~6급</span><span data-i="t_sch_a">등록금 100% 면제</span></li>
+            <li><span>TOPIK 3급 / IELTS 5.5</span><span data-i="t_sch_b">40% / 50% 면제</span></li>
+          </ul>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px" data-i="t_ins">보험료: 입국 후 국민건강보험 자동 가입(의무). 재정보증 보증금액 1,600만원.</p>
+    </section>
+
+    <!-- process -->
+    <section class="block">
+      <h2><span class="ic">🧭</span><span data-i="s_process">입학절차</span></h2>
+      <ol class="steps" id="stepsList"></ol>
+    </section>
+
+    <!-- notice -->
+    <section class="block">
+      <h2><span class="ic">⚠️</span><span data-i="s_notice">주의사항</span></h2>
+      <ul class="notice" id="noticeList"></ul>
+    </section>
+
+    <!-- contact -->
+    <section class="block">
+      <h2><span class="ic">☎️</span><span data-i="s_contact">문의</span></h2>
+      <div class="contact-box">
+        <div class="c"><b data-i="ct_zh">중국</b>062-670-2855 · china@gwangju.ac.kr</div>
+        <div class="c"><b data-i="ct_vi">베트남</b>062-670-2779 · vietnam@gwangju.ac.kr</div>
+        <div class="c"><b data-i="ct_en">영어</b>062-670-2288 · global@gwangju.ac.kr</div>
+        <div class="c"><b data-i="ct_etc">몽골 및 기타</b>062-670-2569 · global@gwangju.ac.kr</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo">
+      <svg viewBox="0 0 120 150" style="height:34px" role="img">
+        <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd14f"/><stop offset="1" stop-color="#4c9c2e"/></linearGradient></defs>
+        <rect x="14" y="8" width="92" height="134" rx="8" fill="url(#g3)"/>
+        <path d="M14 66 V16 a8 8 0 0 1 8 -8 h76 a8 8 0 0 1 8 8 V66 Z" fill="#7ec8e6"/>
+        <path d="M14 70 L38 44 L52 58 L70 34 L88 54 L106 40 L106 74 L14 74 Z" fill="#fff"/>
+      </svg>
+      <div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div>
+    </div>
+    <div>277 Hyodeok-ro, Nam-gu, Gwangju, Korea 61743</div>
+    <div style="margin-top:6px;opacity:.7" data-i="foot">본 페이지는 초안(prototype)이며 실제 접수 처리는 이루어지지 않습니다.</div>
+  </footer>
+</div>
+
+<!-- ================= APPLICATION ================= -->
+<div id="appView" class="hidden">
+  <header class="topbar">
+    <div class="topbar-in">
+      <div class="logo">
+        <svg viewBox="0 0 120 150" role="img">
+          <defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd14f"/><stop offset="1" stop-color="#4c9c2e"/></linearGradient></defs>
+          <rect x="14" y="8" width="92" height="134" rx="8" fill="url(#g4)"/>
+          <path d="M14 66 V16 a8 8 0 0 1 8 -8 h76 a8 8 0 0 1 8 8 V66 Z" fill="#7ec8e6"/>
+          <path d="M14 70 L38 44 L52 58 L70 34 L88 54 L106 40 L106 74 L14 74 Z" fill="#fff"/>
+        </svg>
+        <div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div>
+      </div>
+      <button class="btn btn-ghost" id="backHome" data-i="backHome">← 안내로 돌아가기</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="app-head">
+      <h1 data-i="appTitle">입학지원서 및 제출서류 업로드</h1>
+    </div>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:18px" data-i="appDesc">지원서를 내려받아 작성한 뒤 업로드하고, 아래 제출서류를 각각 첨부해 주세요.</p>
+
+    <!-- progress -->
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span data-i="progressLabel">필수 서류 제출 현황</span>
+        <span><b id="pgDone">0</b> / <span id="pgTotal">0</span></span>
+      </div>
+      <div class="bar"><i id="pgBar"></i></div>
+    </div>
+
+    <!-- step 1: form -->
+    <div class="step1">
+      <div class="txt">
+        <h3 data-i="step1Title">STEP 1 · 입학지원서 양식</h3>
+        <p data-i="step1Desc">지원서·유학계획서·자기소개서·유학경비부담서약서가 포함된 공식 양식입니다.</p>
+      </div>
+      <div class="acts">
+        <a class="btn btn-primary" id="downloadForm" download>
+          <span>⬇</span><span data-i="downloadBtn">지원서 다운로드</span>
+        </a>
+        <button class="btn btn-lime" id="uploadFormBtn"><span>⬆</span><span data-i="uploadFormBtn">작성본 업로드</span></button>
+        <input type="file" id="formInput" class="hidden">
+        <span class="fname empty" id="formName" data-i="noFile">선택된 파일 없음</span>
+      </div>
+    </div>
+
+    <h2 style="font-size:17px;color:var(--green);margin:6px 0 14px" data-i="docsTitle">제출서류</h2>
+    <div class="doc-list" id="docList"></div>
+
+    <div class="final-wrap">
+      <button class="btn btn-primary" id="finalSubmit" style="font-size:16px;padding:15px 40px" disabled>
+        <span data-i="finalSubmit">최종 제출</span>
+      </button>
+      <p class="final-note" id="finalNote" data-i="notReadyMsg">모든 필수 서류를 업로드하면 제출할 수 있습니다.</p>
+    </div>
+  </main>
+</div>
+
+<!-- ================= SUCCESS MODAL ================= -->
+<div id="modal" class="modal hidden">
+  <div class="box">
+    <div class="ok">✓</div>
+    <h3 data-i="successTitle">지원서가 제출되었습니다</h3>
+    <p data-i="successDesc">접수가 정상적으로 완료되었습니다. 합격자 발표 일정을 확인해 주세요. (초안 시연)</p>
+    <button class="btn btn-primary" id="modalClose" data-i="close">확인</button>
+  </div>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const FORM_FILE = "Admission Application Form_Gwangju University.docx";
+
+/* Documents: key, required flag, emoji */
+const DOCS = [
+  {k:"agree",    req:true,  ic:"📝"},
+  {k:"passport", req:true,  ic:"🛂"},
+  {k:"id",       req:true,  ic:"🪪"},
+  {k:"family",   req:true,  ic:"👪"},
+  {k:"edu",      req:true,  ic:"🎓"},
+  {k:"finance",  req:true,  ic:"🏦"},
+  {k:"employ",   req:true,  ic:"💼"},
+  {k:"arc",      req:false, ic:"🗂️"},
+  {k:"topik",    req:false, ic:"🇰🇷"}
+];
+
+/* ================= I18N ================= */
+const I18N = {
+  ko:{ native:"한국어", eng:"KOREAN", flag:"🇰🇷",
+    brand:"GWANGJU UNIVERSITY",
+    heroBadge:"2026 후기 외국인 신·편입생 특별전형",
+    heroTitle:"외국인 유학생 입학지원 시스템",
+    heroDesc:"광주대학교 외국인 신·편입생 특별전형 온라인 지원 포털입니다.",
+    apply:"입학지원 바로가기",
+    s_schedule:"전형일정", c_round:"모집시기", c_apply:"원서접수", c_result:"합격자 발표", c_reg:"등록기간",
+    round1:"1차", round2:"2차", before:"이전",
+    method_desc:"전형방법: 서류전형 100% (학업능력·어학능력·지원동기·인성 종합평가, 필요 시 대면/화상 면접).",
+    s_lang:"언어능력 요건 (신입학)", lang_ko_t:"한국어트랙", lang_ko_r:"TOPIK 3급 이상 또는 동등 자격 (예체능 2급 이상)",
+    lang_en_t:"영어트랙", lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 이상",
+    s_tuition:"등록금 및 유학경비", t_fee:"등록금 (학기)", t_fee_a:"인문·사회 계열", t_fee_b:"이공·예체능 계열",
+    t_dorm:"기숙사 (학기)", t_dorm_a:"4인실 / 3인실 / 2인실", t_meal:"식비 (학기)", t_meal_a:"1식 / 2식 / 3식",
+    t_sch:"장학금", t_sch_a:"등록금 100% 면제", t_sch_b:"40% / 50% 면제",
+    t_ins:"보험료: 입국 후 국민건강보험 자동 가입(의무). 재정보증 보증금액 1,600만원.",
+    s_process:"입학절차",
+    steps:["입학원서(서류제출)","자격(서류)심사","면접심사(필요 시)","합격자 발표","등록금 납부","표준입학허가서 발급","비자 신청","입국","입학생 오리엔테이션","개강"],
+    s_notice:"주의사항",
+    notices:["지원자는 두 개 이상의 모집단위에 복수 지원할 수 없습니다.","서류 위조 등 부정한 방법으로 합격한 사실이 발견되면 합격이 취소됩니다.","신입생은 입학 후 첫 학기에 휴학할 수 없습니다.","기간 내 등록금을 납부하지 않으면 합격이 취소될 수 있습니다.","대한민국 국민건강보험에 의무적으로 가입해야 합니다.","등록금 및 장학금은 본교 규정에 따릅니다.","제출한 서류는 반환되지 않습니다."],
+    s_contact:"문의", ct_zh:"중국", ct_vi:"베트남", ct_en:"영어", ct_etc:"몽골 및 기타",
+    foot:"본 페이지는 초안(prototype)이며 실제 접수 처리는 이루어지지 않습니다.",
+    backHome:"← 안내로 돌아가기",
+    appTitle:"입학지원서 및 제출서류 업로드",
+    appDesc:"지원서를 내려받아 작성한 뒤 업로드하고, 아래 제출서류를 각각 첨부해 주세요.",
+    progressLabel:"필수 서류 제출 현황",
+    step1Title:"STEP 1 · 입학지원서 양식", step1Desc:"지원서·유학계획서·자기소개서·유학경비부담서약서가 포함된 공식 양식입니다.",
+    downloadBtn:"지원서 다운로드", uploadFormBtn:"작성본 업로드", noFile:"선택된 파일 없음",
+    docsTitle:"제출서류", finalSubmit:"최종 제출", notReadyMsg:"모든 필수 서류를 업로드하면 제출할 수 있습니다.",
+    readyMsg:"모든 필수 서류가 준비되었습니다. 최종 제출해 주세요.",
+    chooseFile:"파일 선택", required:"필수", optional:"해당자",
+    successTitle:"지원서가 제출되었습니다", successDesc:"접수가 정상적으로 완료되었습니다. 합격자 발표 일정을 확인해 주세요. (초안 시연)", close:"확인",
+    confirmSubmit:"입학지원서를 최종 제출하시겠습니까?",
+    docNames:{form:"입학지원서 (작성본)", agree:"개인정보 수집·이용·제공 동의서", passport:"여권 사본 및 여권용 사진 2매",
+      id:"본인 및 부모 신분증 사본", family:"가족관계증명서", edu:"최종학교 졸업·성적증명서 (아포스티유/영사인증 포함)",
+      finance:"재정보증서류 (보증금 1,600만원)", employ:"부모님 재직증명서 및 수입증명서",
+      arc:"대한민국 외국인등록증", topik:"TOPIK 성적증명서"}
+  },
+
+  en:{ native:"English", eng:"ENGLISH", flag:"🇬🇧",
+    brand:"GWANGJU UNIVERSITY",
+    heroBadge:"2026 Fall International Freshman & Transfer Admission",
+    heroTitle:"International Student Admission Portal",
+    heroDesc:"Online application portal for Gwangju University's special admission for international students.",
+    apply:"Start Application",
+    s_schedule:"Admission Schedule", c_round:"Round", c_apply:"Application Period", c_result:"Result Announcement", c_reg:"Enrollment Period",
+    round1:"Round 1", round2:"Round 2", before:"by",
+    method_desc:"Evaluation: 100% document screening (academics, language, motivation, character) — interview if required.",
+    s_lang:"Language Requirements (Freshman)", lang_ko_t:"Korean Track", lang_ko_r:"TOPIK Level 3+ or equivalent (Arts/Sports: Level 2+)",
+    lang_en_t:"English Track", lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 or higher",
+    s_tuition:"Tuition & Living Costs", t_fee:"Tuition (per semester)", t_fee_a:"Humanities & Social Sciences", t_fee_b:"Science/Eng. & Arts/Sports",
+    t_dorm:"Dormitory (per semester)", t_dorm_a:"4 / 3 / 2-person room", t_meal:"Meals (per semester)", t_meal_a:"1 / 2 / 3 meals",
+    t_sch:"Scholarship", t_sch_a:"100% tuition waiver", t_sch_b:"40% / 50% waiver",
+    t_ins:"Insurance: mandatory National Health Insurance upon entry. Financial guarantee deposit: 16,000,000 KRW.",
+    s_process:"Admission Procedure",
+    steps:["Application (submit documents)","Eligibility screening","Interview (if required)","Result announcement","Tuition payment","Certificate of Admission issued","Visa application","Entry to Korea","Student orientation","Start of classes"],
+    s_notice:"Important Notes",
+    notices:["Applicants may not apply to more than one program.","Admission will be cancelled if obtained through forged documents or fraud.","Freshmen may not take a leave of absence in their first semester.","Admission may be cancelled if tuition is not paid on time.","Enrollment in Korean National Health Insurance is mandatory.","Tuition and scholarships follow university regulations.","Submitted documents will not be returned."],
+    s_contact:"Contact", ct_zh:"China", ct_vi:"Vietnam", ct_en:"English", ct_etc:"Mongolia & Others",
+    foot:"This page is a prototype; no actual applications are processed.",
+    backHome:"← Back to Information",
+    appTitle:"Upload Application Form & Documents",
+    appDesc:"Download the application form, fill it out and upload it, then attach each required document below.",
+    progressLabel:"Required document progress",
+    step1Title:"STEP 1 · Application Form", step1Desc:"Official form including the application, study plan, self-introduction and financial pledge.",
+    downloadBtn:"Download Form", uploadFormBtn:"Upload Completed Form", noFile:"No file selected",
+    docsTitle:"Required Documents", finalSubmit:"Final Submit", notReadyMsg:"You can submit once all required documents are uploaded.",
+    readyMsg:"All required documents are ready. Please submit.",
+    chooseFile:"Choose File", required:"Required", optional:"If applicable",
+    successTitle:"Application Submitted", successDesc:"Your application has been received. Please check the result announcement schedule. (Prototype demo)", close:"OK",
+    confirmSubmit:"Do you want to submit your application?",
+    docNames:{form:"Application Form (completed)", agree:"Personal Information Consent Form", passport:"Passport copy & 2 passport photos",
+      id:"ID copies of applicant & parents", family:"Family Relationship Certificate", edu:"Final school diploma & transcript (with apostille/consular auth.)",
+      finance:"Financial guarantee documents (16M KRW deposit)", employ:"Parents' employment & income certificates",
+      arc:"Korean Alien Registration Card", topik:"TOPIK score certificate"}
+  },
+
+  zh:{ native:"中文", eng:"CHINESE", flag:"🇨🇳",
+    brand:"GWANGJU UNIVERSITY",
+    heroBadge:"2026学年后期 外国人新生·插班生特别招生",
+    heroTitle:"外国留学生入学申请系统",
+    heroDesc:"光州大学外国人新生·插班生特别招生在线申请门户。",
+    apply:"开始申请",
+    s_schedule:"招生日程", c_round:"招生批次", c_apply:"报名时间", c_result:"录取公布", c_reg:"注册时间",
+    round1:"第一批", round2:"第二批", before:"之前",
+    method_desc:"选拔方式：材料审核100%（学业能力·语言能力·申请动机·品德综合评价），必要时进行面试。",
+    s_lang:"语言能力要求（新生）", lang_ko_t:"韩语轨道", lang_ko_r:"TOPIK 3级以上或同等资格（艺体2级以上）",
+    lang_en_t:"英语轨道", lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 以上",
+    s_tuition:"学费及留学费用", t_fee:"学费（每学期）", t_fee_a:"人文·社会类", t_fee_b:"理工·艺体类",
+    t_dorm:"宿舍（每学期）", t_dorm_a:"4人间 / 3人间 / 2人间", t_meal:"餐费（每学期）", t_meal_a:"1餐 / 2餐 / 3餐",
+    t_sch:"奖学金", t_sch_a:"学费全免100%", t_sch_b:"减免40% / 50%",
+    t_ins:"保险：入境后自动加入国民健康保险（义务）。财政担保金额1,600万韩元。",
+    s_process:"入学流程",
+    steps:["入学申请（提交材料）","资格（材料）审核","面试（如需要）","录取公布","缴纳学费","签发标准入学许可书","申请签证","入境","新生说明会","开学"],
+    s_notice:"注意事项",
+    notices:["申请人不得同时申请两个以上招生单位。","如发现通过伪造材料等不正当手段被录取，将取消录取资格。","新生入学后第一学期不得休学。","未在规定期限内缴纳学费者，可能被取消录取资格。","必须加入韩国国民健康保险。","学费及奖学金按本校规定执行。","已提交的材料不予退还。"],
+    s_contact:"咨询", ct_zh:"中国", ct_vi:"越南", ct_en:"英语", ct_etc:"蒙古及其他",
+    foot:"本页面为初稿（原型），不进行实际受理。",
+    backHome:"← 返回信息页",
+    appTitle:"上传入学申请表及提交材料",
+    appDesc:"请下载申请表，填写后上传，并分别附上以下提交材料。",
+    progressLabel:"必需材料提交进度",
+    step1Title:"STEP 1 · 入学申请表", step1Desc:"包含申请书·留学计划书·自我介绍·留学费用担保书的正式表格。",
+    downloadBtn:"下载申请表", uploadFormBtn:"上传填写完成的表格", noFile:"未选择文件",
+    docsTitle:"提交材料", finalSubmit:"最终提交", notReadyMsg:"上传所有必需材料后即可提交。",
+    readyMsg:"所有必需材料已备齐，请最终提交。",
+    chooseFile:"选择文件", required:"必需", optional:"适用者",
+    successTitle:"申请已提交", successDesc:"已成功受理您的申请，请确认录取公布日程。（原型演示）", close:"确定",
+    confirmSubmit:"是否最终提交您的入学申请？",
+    docNames:{form:"入学申请表（已填写）", agree:"个人信息收集·使用·提供同意书", passport:"护照复印件及护照照片2张",
+      id:"本人及父母身份证复印件", family:"家庭关系证明", edu:"最终学历毕业·成绩证明（含阿波斯提尔/领事认证）",
+      finance:"财政担保材料（担保金1,600万韩元）", employ:"父母在职证明及收入证明",
+      arc:"韩国外国人登录证", topik:"TOPIK成绩证明"}
+  },
+
+  vi:{ native:"Tiếng Việt", eng:"VIETNAMESE", flag:"🇻🇳",
+    brand:"GWANGJU UNIVERSITY",
+    heroBadge:"Tuyển sinh đặc biệt sinh viên quốc tế Kỳ Thu 2026",
+    heroTitle:"Hệ thống Đăng ký Nhập học Sinh viên Quốc tế",
+    heroDesc:"Cổng đăng ký trực tuyến tuyển sinh đặc biệt dành cho sinh viên quốc tế của Đại học Gwangju.",
+    apply:"Bắt đầu đăng ký",
+    s_schedule:"Lịch tuyển sinh", c_round:"Đợt", c_apply:"Thời gian nộp hồ sơ", c_result:"Công bố kết quả", c_reg:"Thời gian nhập học",
+    round1:"Đợt 1", round2:"Đợt 2", before:"trước",
+    method_desc:"Phương thức: xét hồ sơ 100% (học lực, ngoại ngữ, động cơ, nhân cách); phỏng vấn nếu cần.",
+    s_lang:"Yêu cầu ngôn ngữ (Tân sinh viên)", lang_ko_t:"Hệ tiếng Hàn", lang_ko_r:"TOPIK cấp 3 trở lên hoặc tương đương (Nghệ thuật/Thể thao: cấp 2+)",
+    lang_en_t:"Hệ tiếng Anh", lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 trở lên",
+    s_tuition:"Học phí & Chi phí", t_fee:"Học phí (mỗi kỳ)", t_fee_a:"Nhân văn & Xã hội", t_fee_b:"Kỹ thuật & Nghệ thuật/Thể thao",
+    t_dorm:"Ký túc xá (mỗi kỳ)", t_dorm_a:"Phòng 4 / 3 / 2 người", t_meal:"Tiền ăn (mỗi kỳ)", t_meal_a:"1 / 2 / 3 bữa",
+    t_sch:"Học bổng", t_sch_a:"Miễn 100% học phí", t_sch_b:"Miễn 40% / 50%",
+    t_ins:"Bảo hiểm: tự động tham gia Bảo hiểm Y tế Quốc gia khi nhập cảnh (bắt buộc). Tiền bảo lãnh tài chính: 16.000.000 KRW.",
+    s_process:"Quy trình nhập học",
+    steps:["Nộp hồ sơ đăng ký","Xét duyệt hồ sơ","Phỏng vấn (nếu cần)","Công bố kết quả","Đóng học phí","Cấp Giấy phép nhập học","Xin visa","Nhập cảnh Hàn Quốc","Định hướng tân sinh viên","Khai giảng"],
+    s_notice:"Lưu ý quan trọng",
+    notices:["Thí sinh không được đăng ký từ hai ngành trở lên.","Sẽ bị hủy kết quả nếu trúng tuyển bằng hồ sơ giả mạo hoặc gian lận.","Tân sinh viên không được bảo lưu trong học kỳ đầu tiên.","Kết quả có thể bị hủy nếu không đóng học phí đúng hạn.","Bắt buộc tham gia Bảo hiểm Y tế Quốc gia Hàn Quốc.","Học phí và học bổng theo quy định của nhà trường.","Hồ sơ đã nộp sẽ không được hoàn trả."],
+    s_contact:"Liên hệ", ct_zh:"Trung Quốc", ct_vi:"Việt Nam", ct_en:"Tiếng Anh", ct_etc:"Mông Cổ & Khác",
+    foot:"Trang này là bản nháp (prototype); không xử lý hồ sơ thực tế.",
+    backHome:"← Quay lại thông tin",
+    appTitle:"Tải lên đơn đăng ký & hồ sơ",
+    appDesc:"Hãy tải đơn đăng ký về, điền và tải lên, sau đó đính kèm từng hồ sơ bên dưới.",
+    progressLabel:"Tiến độ hồ sơ bắt buộc",
+    step1Title:"BƯỚC 1 · Đơn đăng ký", step1Desc:"Mẫu chính thức gồm đơn đăng ký, kế hoạch học tập, giới thiệu bản thân và cam kết tài chính.",
+    downloadBtn:"Tải đơn về", uploadFormBtn:"Tải đơn đã điền lên", noFile:"Chưa chọn tệp",
+    docsTitle:"Hồ sơ nộp", finalSubmit:"Nộp cuối cùng", notReadyMsg:"Bạn có thể nộp sau khi tải lên tất cả hồ sơ bắt buộc.",
+    readyMsg:"Đã đủ hồ sơ bắt buộc. Vui lòng nộp.",
+    chooseFile:"Chọn tệp", required:"Bắt buộc", optional:"Nếu có",
+    successTitle:"Đã nộp hồ sơ", successDesc:"Hồ sơ của bạn đã được tiếp nhận. Vui lòng kiểm tra lịch công bố kết quả. (Bản demo)", close:"OK",
+    confirmSubmit:"Bạn có muốn nộp đơn đăng ký không?",
+    docNames:{form:"Đơn đăng ký (đã điền)", agree:"Bản đồng ý thu thập·sử dụng thông tin cá nhân", passport:"Bản sao hộ chiếu & 2 ảnh thẻ",
+      id:"Bản sao CMND/CCCD của thí sinh & cha mẹ", family:"Giấy chứng nhận quan hệ gia đình", edu:"Bằng & bảng điểm trường cuối (kèm apostille/xác nhận lãnh sự)",
+      finance:"Hồ sơ bảo lãnh tài chính (đặt cọc 16 triệu KRW)", employ:"Giấy xác nhận công việc & thu nhập của cha mẹ",
+      arc:"Thẻ đăng ký người nước ngoài Hàn Quốc", topik:"Chứng nhận điểm TOPIK"}
+  },
+
+  mn:{ native:"Монгол", eng:"MONGOLIAN", flag:"🇲🇳",
+    brand:"GWANGJU UNIVERSITY",
+    heroBadge:"2026 намрын гадаад оюутны тусгай элсэлт",
+    heroTitle:"Гадаад оюутны элсэлтийн бүртгэлийн систем",
+    heroDesc:"Кванжү Их Сургуулийн гадаад оюутны тусгай элсэлтийн онлайн бүртгэлийн портал.",
+    apply:"Бүртгүүлж эхлэх",
+    s_schedule:"Элсэлтийн хуваарь", c_round:"Ээлж", c_apply:"Материал хүлээн авах", c_result:"Тэнцсэн эсэхийг зарлах", c_reg:"Бүртгэлийн хугацаа",
+    round1:"1-р ээлж", round2:"2-р ээлж", before:"дотор",
+    method_desc:"Шалгаруулалт: материалын шалгалт 100% (сурлага, хэлний чадвар, зорилго, зан чанар); шаардлагатай бол ярилцлага.",
+    s_lang:"Хэлний шаардлага (Шинэ элсэгч)", lang_ko_t:"Солонгос хэлний урсгал", lang_ko_r:"TOPIK 3-р түвшин ба түүнээс дээш буюу түүнтэй дүйцэхүйц (Урлаг/Спорт: 2+)",
+    lang_en_t:"Англи хэлний урсгал", lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 ба дээш",
+    s_tuition:"Сургалтын төлбөр ба зардал", t_fee:"Төлбөр (улирал)", t_fee_a:"Хүмүүнлэг·Нийгэм", t_fee_b:"Инженер·Урлаг/Спорт",
+    t_dorm:"Дотуур байр (улирал)", t_dorm_a:"4 / 3 / 2 хүний өрөө", t_meal:"Хоолны зардал (улирал)", t_meal_a:"1 / 2 / 3 удаа",
+    t_sch:"Тэтгэлэг", t_sch_a:"Төлбөрийн 100% чөлөөлөлт", t_sch_b:"40% / 50% чөлөөлөлт",
+    t_ins:"Даатгал: ирсний дараа Улсын Эрүүл Мэндийн Даатгалд заавал хамрагдана. Санхүүгийн баталгааны дүн: 16,000,000 вон.",
+    s_process:"Элсэлтийн журам",
+    steps:["Өргөдөл (материал өгөх)","Эрхийн (материал) шалгалт","Ярилцлага (шаардвал)","Тэнцсэнийг зарлах","Төлбөр төлөх","Албан ёсны элсэлтийн бичиг олгох","Виз мэдүүлэх","Солонгос улс руу нэвтрэх","Шинэ оюутны чиглүүлэг","Хичээл эхлэх"],
+    s_notice:"Анхаарах зүйл",
+    notices:["Өргөдөл гаргагч хоёр ба түүнээс дээш мэргэжилд зэрэг бүртгүүлж болохгүй.","Хуурамч бичиг баримт зэргээр тэнцсэн нь илэрвэл тэнцсэнийг цуцална.","Шинэ элсэгч эхний улиралд чөлөө авах боломжгүй.","Хугацаанд нь төлбөр төлөөгүй бол тэнцсэнийг цуцалж болно.","Солонгосын Улсын Эрүүл Мэндийн Даатгалд заавал хамрагдана.","Төлбөр ба тэтгэлэг нь сургуулийн журмаар тогтоно.","Өгсөн материалыг буцаан олгохгүй."],
+    s_contact:"Холбоо барих", ct_zh:"Хятад", ct_vi:"Вьетнам", ct_en:"Англи", ct_etc:"Монгол ба бусад",
+    foot:"Энэ хуудас нь загвар (prototype) бөгөөд бодит бүртгэл хийгдэхгүй.",
+    backHome:"← Мэдээлэл рүү буцах",
+    appTitle:"Өргөдөл ба материал байршуулах",
+    appDesc:"Өргөдлийн маягтыг татаж, бөглөөд байршуулаад доорх материалуудыг тус тусад нь хавсаргана уу.",
+    progressLabel:"Заавал материалын явц",
+    step1Title:"АЛХАМ 1 · Өргөдлийн маягт", step1Desc:"Өргөдөл, суралцах төлөвлөгөө, өөрийн танилцуулга, санхүүгийн баталгаа багтсан албан ёсны маягт.",
+    downloadBtn:"Маягт татах", uploadFormBtn:"Бөглөсөн маягт байршуулах", noFile:"Файл сонгоогүй",
+    docsTitle:"Бүрдүүлэх материал", finalSubmit:"Эцсийн байдлаар илгээх", notReadyMsg:"Бүх заавал материалыг байршуулсны дараа илгээж болно.",
+    readyMsg:"Бүх заавал материал бэлэн боллоо. Илгээнэ үү.",
+    chooseFile:"Файл сонгох", required:"Заавал", optional:"Хамааралтай бол",
+    successTitle:"Өргөдөл илгээгдлээ", successDesc:"Таны материалыг амжилттай хүлээн авлаа. Тэнцсэнийг зарлах хуваарийг шалгана уу. (Загвар үзүүлбэр)", close:"За",
+    confirmSubmit:"Өргөдлөө эцсийн байдлаар илгээх үү?",
+    docNames:{form:"Өргөдлийн маягт (бөглөсөн)", agree:"Хувийн мэдээлэл цуглуулах·ашиглах зөвшөөрөл", passport:"Гадаад паспортын хуулбар ба 2 хөрөг зураг",
+      id:"Өөрийн болон эцэг эхийн үнэмлэхний хуулбар", family:"Гэр бүлийн байдлын лавлагаа", edu:"Төгссөн сургуулийн диплом ба дүнгийн лавлагаа (апостиль/консулын баталгаатай)",
+      finance:"Санхүүгийн баталгааны материал (16 сая вон)", employ:"Эцэг эхийн ажлын болон орлогын тодорхойлолт",
+      arc:"БНСУ-ын гадаадын иргэний үнэмлэх", topik:"TOPIK онооны гэрчилгээ"}
+  },
+
+  uz:{ native:"Oʻzbek", eng:"UZBEK", flag:"🇺🇿",
+    brand:"GWANGJU UNIVERSITY",
+    heroBadge:"2026 kuzgi xalqaro talabalar uchun maxsus qabul",
+    heroTitle:"Xalqaro Talabalar Qabul Tizimi",
+    heroDesc:"Gwangju Universiteti xalqaro talabalar uchun maxsus qabulning onlayn ariza portali.",
+    apply:"Arizani boshlash",
+    s_schedule:"Qabul jadvali", c_round:"Bosqich", c_apply:"Hujjat qabul qilish", c_result:"Natija eʼloni", c_reg:"Roʻyxatga olish muddati",
+    round1:"1-bosqich", round2:"2-bosqich", before:"gacha",
+    method_desc:"Baholash: 100% hujjat koʻrigi (bilim, til, motivatsiya, xarakter); zarur boʻlsa suhbat.",
+    s_lang:"Til talablari (1-kurs)", lang_ko_t:"Koreys tili yoʻnalishi", lang_ko_r:"TOPIK 3-daraja va undan yuqori yoki teng (Sanʼat/Sport: 2+)",
+    lang_en_t:"Ingliz tili yoʻnalishi", lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 va undan yuqori",
+    s_tuition:"Oʻqish toʻlovi va xarajatlar", t_fee:"Oʻqish toʻlovi (semestr)", t_fee_a:"Gumanitar·Ijtimoiy", t_fee_b:"Muhandislik·Sanʼat/Sport",
+    t_dorm:"Yotoqxona (semestr)", t_dorm_a:"4 / 3 / 2 kishilik xona", t_meal:"Ovqat (semestr)", t_meal_a:"1 / 2 / 3 mahal",
+    t_sch:"Stipendiya", t_sch_a:"Toʻlovdan 100% ozod", t_sch_b:"40% / 50% ozod",
+    t_ins:"Sugʻurta: kelgach Davlat Tibbiy Sugʻurtasiga majburiy aʼzolik. Moliyaviy kafolat depoziti: 16 000 000 KRW.",
+    s_process:"Qabul jarayoni",
+    steps:["Ariza (hujjat topshirish)","Hujjat koʻrigi","Suhbat (zarur boʻlsa)","Natija eʼloni","Oʻqish toʻlovi","Qabul guvohnomasi berilishi","Viza olish","Koreyaga kirish","Talabalar yoʻriqnomasi","Darslar boshlanishi"],
+    s_notice:"Muhim eslatmalar",
+    notices:["Nomzod ikki yoki undan ortiq yoʻnalishga ariza bera olmaydi.","Soxta hujjat yoki firibgarlik bilan qabul qilinsa, qabul bekor qilinadi.","1-kurs talabalari birinchi semestrda akademik taʼtil ololmaydi.","Toʻlov oʻz vaqtida qilinmasa, qabul bekor qilinishi mumkin.","Koreya Davlat Tibbiy Sugʻurtasiga aʼzolik majburiy.","Toʻlov va stipendiya universitet qoidalariga muvofiq.","Topshirilgan hujjatlar qaytarilmaydi."],
+    s_contact:"Aloqa", ct_zh:"Xitoy", ct_vi:"Vyetnam", ct_en:"Ingliz", ct_etc:"Mongoliya va boshqalar",
+    foot:"Bu sahifa dastlabki namuna (prototip); haqiqiy arizalar qayta ishlanmaydi.",
+    backHome:"← Maʼlumotga qaytish",
+    appTitle:"Ariza va hujjatlarni yuklash",
+    appDesc:"Ariza shaklini yuklab oling, toʻldiring va yuklang, soʻng quyidagi hujjatlarni alohida biriktiring.",
+    progressLabel:"Majburiy hujjatlar holati",
+    step1Title:"BOSQICH 1 · Ariza shakli", step1Desc:"Ariza, oʻqish rejasi, oʻzini tanishtirish va moliyaviy kafolatni oʻz ichiga olgan rasmiy shakl.",
+    downloadBtn:"Shaklni yuklab olish", uploadFormBtn:"Toʻldirilgan shaklni yuklash", noFile:"Fayl tanlanmagan",
+    docsTitle:"Topshiriladigan hujjatlar", finalSubmit:"Yakuniy topshirish", notReadyMsg:"Barcha majburiy hujjatlar yuklangach topshirishingiz mumkin.",
+    readyMsg:"Barcha majburiy hujjatlar tayyor. Iltimos, topshiring.",
+    chooseFile:"Fayl tanlash", required:"Majburiy", optional:"Tegishli boʻlsa",
+    successTitle:"Ariza topshirildi", successDesc:"Arizangiz qabul qilindi. Natija eʼloni jadvalini tekshiring. (Namuna)", close:"OK",
+    confirmSubmit:"Arizangizni yakuniy topshirmoqchimisiz?",
+    docNames:{form:"Ariza shakli (toʻldirilgan)", agree:"Shaxsiy maʼlumotlarga rozilik shakli", passport:"Pasport nusxasi va 2 ta surat",
+      id:"Nomzod va ota-ona ID nusxalari", family:"Oila munosabatlari guvohnomasi", edu:"Bitiruv diplomi va transkript (apostil/konsul tasdigʻi bilan)",
+      finance:"Moliyaviy kafolat hujjatlari (16 mln KRW depozit)", employ:"Ota-onaning ish va daromad maʼlumotnomalari",
+      arc:"Koreya chet el fuqarosi guvohnomasi", topik:"TOPIK ball guvohnomasi"}
+  }
+};
+
+/* ================= STATE ================= */
+let LANG = "ko";
+const uploaded = {}; // key -> filename
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const t = () => I18N[LANG];
+
+/* ================= BUILD LANGUAGE GRID ================= */
+const order = ["ko","en","zh","vi","mn","uz"];
+const grid = $("#langGrid");
+order.forEach(code=>{
+  const L = I18N[code];
+  const b = document.createElement("button");
+  b.className="lang-btn";
+  b.innerHTML=`<span class="flag">${L.flag}</span><span class="native">${L.native}</span><span class="eng">${L.eng}</span>`;
+  b.onclick=()=>selectLang(code);
+  grid.appendChild(b);
+});
+
+/* language switch dropdown */
+const sw = $("#langSwitch");
+order.forEach(code=>{
+  const o=document.createElement("option");
+  o.value=code;o.textContent=I18N[code].native;
+  sw.appendChild(o);
+});
+sw.onchange=e=>{LANG=e.target.value;applyLang();};
+
+/* ================= LANG SELECT ================= */
+function selectLang(code){
+  LANG=code;
+  document.documentElement.lang=code;
+  $("#langScreen").classList.add("hidden");
+  $("#homeView").classList.remove("hidden");
+  sw.value=code;
+  applyLang();
+  window.scrollTo(0,0);
+}
+
+/* apply translations to all [data-i] + dynamic lists */
+function applyLang(){
+  const T=t();
+  $$("[data-i]").forEach(el=>{
+    const k=el.getAttribute("data-i");
+    if(T[k]!==undefined) el.textContent=T[k];
+  });
+  // steps
+  const sl=$("#stepsList"); sl.innerHTML="";
+  T.steps.forEach(s=>{const li=document.createElement("li");li.textContent=s;sl.appendChild(li);});
+  // notices
+  const nl=$("#noticeList"); nl.innerHTML="";
+  T.notices.forEach(s=>{const li=document.createElement("li");li.textContent=s;nl.appendChild(li);});
+  // download link
+  const dl=$("#downloadForm");
+  dl.href=encodeURI(FORM_FILE);
+  dl.setAttribute("download",FORM_FILE);
+  // form name
+  $("#formName").textContent = uploaded.form || T.noFile;
+  // doc list
+  renderDocs();
+  updateProgress();
+}
+
+/* ================= DOC LIST ================= */
+function renderDocs(){
+  const T=t();
+  const list=$("#docList"); list.innerHTML="";
+  DOCS.forEach(d=>{
+    const done = !!uploaded[d.k];
+    const card=document.createElement("div");
+    card.className="doc"+(done?" done":"");
+    card.innerHTML=`
+      <div class="dtop">
+        <div class="dicon">${done?"✓":d.ic}</div>
+        <div>
+          <div class="dname">${T.docNames[d.k]}</div>
+          <span class="dtag ${d.req?"req":"opt"}">${d.req?T.required:T.optional}</span>
+        </div>
+      </div>
+      <div class="dbottom">
+        <span class="fname ${done?"":"empty"}">${done?uploaded[d.k]:T.noFile}</span>
+        <button class="upbtn">${done?"✓ "+T.chooseFile:"⬆ "+T.chooseFile}</button>
+      </div>`;
+    const btn=card.querySelector(".upbtn");
+    btn.onclick=()=>pickFile(d.k);
+    list.appendChild(card);
+  });
+}
+
+/* hidden input reused for doc uploads */
+function pickFile(key){
+  const inp=document.createElement("input");
+  inp.type="file";
+  inp.onchange=e=>{
+    const f=e.target.files[0];
+    if(f){ uploaded[key]=f.name; renderDocs(); updateProgress(); }
+  };
+  inp.click();
+}
+
+/* form upload */
+$("#uploadFormBtn").onclick=()=>$("#formInput").click();
+$("#formInput").onchange=e=>{
+  const f=e.target.files[0];
+  if(f){ uploaded.form=f.name; $("#formName").textContent=f.name; $("#formName").classList.remove("empty"); updateProgress(); }
+};
+
+/* ================= PROGRESS ================= */
+function requiredKeys(){ return ["form", ...DOCS.filter(d=>d.req).map(d=>d.k)]; }
+function updateProgress(){
+  const T=t();
+  const req=requiredKeys();
+  const done=req.filter(k=>uploaded[k]).length;
+  $("#pgDone").textContent=done;
+  $("#pgTotal").textContent=req.length;
+  $("#pgBar").style.width=(done/req.length*100)+"%";
+  const ready=done===req.length;
+  const fs=$("#finalSubmit");
+  fs.disabled=!ready;
+  $("#finalNote").textContent = ready ? T.readyMsg : T.notReadyMsg;
+}
+
+/* ================= NAV ================= */
+$("#goApply").onclick=()=>{
+  $("#homeView").classList.add("hidden");
+  $("#appView").classList.remove("hidden");
+  applyLang();
+  window.scrollTo(0,0);
+};
+$("#backHome").onclick=()=>{
+  $("#appView").classList.add("hidden");
+  $("#homeView").classList.remove("hidden");
+  window.scrollTo(0,0);
+};
+
+/* ================= SUBMIT ================= */
+$("#finalSubmit").onclick=()=>{
+  if(confirm(t().confirmSubmit)){
+    $("#modal").classList.remove("hidden");
+  }
+};
+$("#modalClose").onclick=()=>$("#modal").classList.add("hidden");
+
+/* init default download link */
+$("#downloadForm").href=encodeURI(FORM_FILE);
+$("#downloadForm").setAttribute("download",FORM_FILE);
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# 지원자 개인 자료 — 저장소에 올리지 않음 (개인정보 보호)
+BATSAIKHAN TURTOGTOKH MATERIAL .pdf
+
+# 로컬 전용 설정
+.claude/settings.local.json
+
+# OS/편집기 임시 파일
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 개인 신원 관련으로 보이는 이미지 — 제외
+국문,영문,한문.jpg
