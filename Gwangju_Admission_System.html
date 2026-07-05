@@ -36,7 +36,7 @@
   .lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:620px;width:100%}
   .lang-btn{background:#fff;border:2px solid var(--line);border-radius:16px;padding:20px 12px;cursor:pointer;transition:.18s;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:7px}
   .lang-btn:hover{border-color:var(--lime);transform:translateY(-3px)}
-  .lang-btn .flag{font-size:32px}.lang-btn .native{font-size:16px;font-weight:700;color:var(--green)}.lang-btn .eng{font-size:11px;color:var(--muted)}
+  .lang-btn .flag{font-size:32px;line-height:0}.flagimg{width:46px;height:auto;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.18);border:1px solid rgba(0,0,0,.10);display:block}.lang-btn .native{font-size:16px;font-weight:700;color:var(--green)}.lang-btn .eng{font-size:11px;color:var(--muted)}
   @media(max-width:560px){.lang-grid{grid-template-columns:repeat(2,1fr)}}
 
   header.topbar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
@@ -70,6 +70,13 @@
   ul.notice{list-style:none}ul.notice li{position:relative;padding:6px 0 6px 24px;font-size:13.5px;border-bottom:1px dashed var(--line)}ul.notice li:last-child{border-bottom:none}
   ul.notice li::before{content:"!";position:absolute;left:0;top:7px;width:17px;height:17px;background:#fdeceb;color:var(--danger);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
   .contact-box{display:flex;flex-wrap:wrap;gap:9px}.contact-box .c{border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:13px;background:#fafcf9}.contact-box .c b{color:var(--green);display:block}
+  .contact-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:13px}
+  .clink{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:.15s;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .clink:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(0,0,0,.15)}
+  .clink svg{flex-shrink:0}
+  .clink-home{background:#fff;color:var(--green);border:1.5px solid var(--green)}
+  .clink-kakao{background:#FEE500;color:#3B1E1E}
+  .clink-insta{background:linear-gradient(45deg,#feda75,#fa7e1e 28%,#d62976 55%,#962fbf 78%,#4f5bd5);color:#fff}
 
   /* role cards */
   .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:720px;margin:0 auto}@media(max-width:600px){.role-grid{grid-template-columns:1fr}}
@@ -173,6 +180,33 @@
   .dp-foot button{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:12.5px;cursor:pointer;font-weight:600;color:var(--text)}
   .dp-foot .today{color:var(--green);border-color:var(--green)}
 </style>
+<style>
+/* ===== Lighty mascot ===== */
+@keyframes lightyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.lighty-corner{position:fixed;left:18px;bottom:14px;width:clamp(88px,10vw,136px);height:auto;z-index:25;pointer-events:none;filter:drop-shadow(0 8px 12px rgba(20,60,30,.22));animation:lightyFloat 4.2s ease-in-out infinite}
+.hero{overflow:visible}
+.hero .lighty-hero{position:absolute;right:16px;bottom:0;width:clamp(120px,15vw,180px);height:auto;pointer-events:none;filter:drop-shadow(0 8px 14px rgba(0,0,0,.28));animation:lightyFloat 5s ease-in-out infinite}
+.lighty-ok{width:120px;height:auto;display:block;margin:2px auto 8px;filter:drop-shadow(0 6px 10px rgba(20,60,30,.2))}
+@media(max-width:760px){.lighty-corner{width:72px;left:9px;bottom:9px;opacity:.94}.hero .lighty-hero{width:96px;right:4px;opacity:.9}}
+@media(prefers-reduced-motion:reduce){.lighty-corner,.hero .lighty-hero{animation:none}}
+/* ===== nationality / country select ===== */
+.natsel{position:relative}
+.natsel-btn{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;color:#1a2b20;font-family:inherit}
+.natsel-btn.placeholder .natsel-val{color:#9aa6a0;font-weight:400}
+.natsel-btn.err{border-color:#e0575a;background:#fef5f5}
+.natsel-btn:hover{border-color:var(--lime)}
+.natsel-val{display:flex;align-items:center;gap:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:600}
+.natsel-val img{width:22px;height:16px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex-shrink:0}
+.natsel-caret{color:#9aa6a0;font-size:11px;flex-shrink:0}
+.natsel-pop{position:absolute;z-index:55;top:calc(100% + 4px);left:0;width:max-content;min-width:100%;max-width:min(340px,85vw);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(20,50,30,.20);padding:8px;display:flex;flex-direction:column}
+.natsel-search{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;margin-bottom:6px;font-family:inherit}
+.natsel-list{overflow-y:auto;max-height:240px}
+.natsel-opt{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:8px;cursor:pointer;font-size:13.5px}
+.natsel-opt:hover{background:#eef4e8}
+.natsel-opt img{width:22px;height:16px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex-shrink:0}
+.natsel-opt>span:first-of-type{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.natsel-dial{color:#8a968f;font-size:12px;flex-shrink:0}
+</style>
 </head>
 <body>
 
@@ -181,7 +215,7 @@
   <div class="logo"><img src="gwangju-logo.jpg" alt="Gwangju University"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
   <h1>International Admissions</h1>
   <p>Please select your language · 언어를 선택하세요</p>
-  <div class="lang-grid" id="langGrid"></div>
+  <div class="lang-grid" id="langGrid"></div><img class="lighty-corner" src="lighty/welcome.png" alt="">
 </div>
 
 <!-- ============ HOME ============ -->
@@ -197,7 +231,7 @@
     <p data-i="heroDesc"></p>
     <div class="hero-cta">
       <button class="btn btn-lime" id="goStudent" data-i="asStudent"></button>
-      <button class="btn btn-ghost" id="goAdmin" style="background:rgba(255,255,255,.15);color:#fff" data-i="asAdmin"></button>
+      <button class="btn btn-ghost" id="goAdmin" style="background:rgba(255,255,255,.15);color:#fff" data-i="asAdmin"></button><img class="lighty-hero" src="lighty/campus.png" alt="">
     </div>
   </div>
 
@@ -239,6 +273,17 @@
         <div class="c"><b data-i="ct_en"></b>+82-62-670-2288 · global@gwangju.ac.kr</div>
         <div class="c"><b data-i="ct_etc"></b>+82-62-670-2569 · global@gwangju.ac.kr</div>
       </div>
+      <div class="contact-links">
+        <a class="clink clink-home" href="https://ie.gwangju.ac.kr/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+          <span data-i="ct_home"></span></a>
+        <a class="clink clink-kakao" href="https://pf.kakao.com/_wkdpn/chat" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="19" height="19"><path fill="#3B1E1E" d="M12 3.6C6.75 3.6 2.5 6.98 2.5 11.15c0 2.68 1.79 5.03 4.5 6.38-.2.72-.72 2.6-.82 3.02-.12.5.18.5.38.37.16-.1 2.5-1.7 3.52-2.4.78.11 1.6.17 2.42.17 5.25 0 9.5-3.38 9.5-7.54S17.25 3.6 12 3.6z"/></svg>
+          <span data-i="ct_kakao"></span></a>
+        <a class="clink clink-insta" href="https://www.instagram.com/gu_international_affairs_/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#fff" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg>
+          <span data-i="ct_insta"></span></a>
+      </div>
     </section>
   </main>
   <footer>
@@ -261,7 +306,7 @@
       <div class="field"><label id="sl_email_l"></label><input type="email" id="sl_email" placeholder="example@mail.com"></div>
       <div class="field"><label id="sl_pp_l"></label><input type="text" id="sl_pp" placeholder="PE0000000"></div>
       <button class="btn btn-primary" style="width:100%" id="sl_btn" onclick="studentLogin()"></button>
-      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="sl_hint"></p>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="sl_hint"></p><img class="lighty-corner" src="lighty/newstart.png" alt="">
     </div>
   </main>
 </div>
@@ -293,14 +338,14 @@
             <div class="dpwrap"><button type="button" class="datebox empty" id="box_dob" onclick="openDP('dob')"></button><div class="dpop hidden" id="pop_dob"></div></div>
           </div>
           <div class="field"><label id="l_gender"></label><select id="f_gender"><option value="M">Male</option><option value="F">Female</option></select></div>
-          <div class="field"><label id="l_nat"></label><input id="f_nat" placeholder="Mongolia"></div>
+          <div class="field"><label id="l_nat"></label><div class="natsel" id="ns_nat"><button type="button" class="natsel-btn placeholder" id="natbtn_nat" onclick="toggleNat('nat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_nat"><input class="natsel-search" id="natsearch_nat" oninput="filterNat('nat')" placeholder="Search country · 국가 검색"><div class="natsel-list" id="natlist_nat"></div></div><input type="hidden" id="f_nat"></div></div>
         </div>
         <div class="row3">
           <div class="field"><label id="l_ppno"></label><input id="f_ppno"></div>
           <div class="field"><label id="l_ppexp"></label>
             <div class="dpwrap"><button type="button" class="datebox empty" id="box_ppexp" onclick="openDP('ppexp')"></button><div class="dpop hidden" id="pop_ppexp"></div></div>
           </div>
-          <div class="field"><label id="l_phone"></label><input id="f_phone" placeholder="+976..."></div>
+          <div class="field"><label id="l_phone"></label><input id="f_phone" placeholder="+___ · 국적 선택 시 자동 (auto)"></div>
         </div>
       </div>
 
@@ -338,14 +383,14 @@
         <h3 id="p_sec_parent"></h3>
         <div class="row2">
           <div class="field"><label id="l_fname"></label><input id="f_fname"></div>
-          <div class="field"><label id="l_fnat"></label><input id="f_fnat" placeholder="Mongolia"></div>
+          <div class="field"><label id="l_fnat"></label><div class="natsel" id="ns_fnat"><button type="button" class="natsel-btn placeholder" id="natbtn_fnat" onclick="toggleNat('fnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_fnat"><input class="natsel-search" id="natsearch_fnat" oninput="filterNat('fnat')" placeholder="Search country · 국가 검색"><div class="natsel-list" id="natlist_fnat"></div></div><input type="hidden" id="f_fnat"></div></div>
         </div>
         <div class="row2">
           <div class="field"><label id="l_mname"></label><input id="f_mname"></div>
-          <div class="field"><label id="l_mnat"></label><input id="f_mnat" placeholder="Mongolia"></div>
+          <div class="field"><label id="l_mnat"></label><div class="natsel" id="ns_mnat"><button type="button" class="natsel-btn placeholder" id="natbtn_mnat" onclick="toggleNat('mnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_mnat"><input class="natsel-search" id="natsearch_mnat" oninput="filterNat('mnat')" placeholder="Search country · 국가 검색"><div class="natsel-list" id="natlist_mnat"></div></div><input type="hidden" id="f_mnat"></div></div>
         </div>
       </div>
-      <div style="text-align:right"><button class="btn btn-primary" onclick="saveProfile(true)" id="btn_save"></button></div>
+      <div style="text-align:right"><button class="btn btn-primary" onclick="saveProfile(true)" id="btn_save"></button></div><img class="lighty-corner" src="lighty/study.png" alt="">
     </div>
 
     <!-- Tab 1: documents -->
@@ -362,7 +407,7 @@
       </div>
       <h3 style="font-size:16px;color:var(--green);margin:4px 0 12px" id="docs_title"></h3>
       <div class="doc-list" id="docList"></div>
-      <div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="docsNext()" id="docs_next"></button></div>
+      <div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="docsNext()" id="docs_next"></button></div><img class="lighty-corner" src="lighty/review.png" alt="">
     </div>
 
     <!-- Tab 2: review & submit -->
@@ -371,7 +416,7 @@
       <div class="card"><h3 id="rv_docs"></h3><div id="rv_doclist" style="font-size:13.5px"></div></div>
       <div style="text-align:center;margin-top:8px">
         <button class="btn btn-primary" style="font-size:16px;padding:15px 40px" id="finalSubmit" onclick="submitApp()" disabled></button>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:9px" id="finalNote"></p>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:9px" id="finalNote"></p><img class="lighty-corner" src="lighty/ok.png" alt="">
       </div>
     </div>
   </main>
@@ -389,7 +434,7 @@
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="al_desc"></p>
       <div class="field"><label id="al_code_l"></label><input type="password" id="al_code" placeholder="••••••"></div>
       <button class="btn btn-primary" style="width:100%" onclick="adminLogin()" id="al_btn"></button>
-      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p><img class="lighty-corner" src="lighty/guide.png" alt="">
     </div>
   </main>
 </div>
@@ -405,7 +450,7 @@
     <div class="stats" id="adStats"></div>
     <div class="filters" id="adFilters"></div>
     <div style="overflow-x:auto"><table class="adm" id="adTable"></table></div>
-    <p id="ad_empty" style="text-align:center;color:var(--muted);padding:30px;font-size:14px"></p>
+    <p id="ad_empty" style="text-align:center;color:var(--muted);padding:30px;font-size:14px"></p><img class="lighty-corner" src="lighty/notice.png" alt="">
   </main>
 </div>
 
@@ -413,7 +458,7 @@
 <div id="detailModal" class="modal hidden"><div class="box" id="detailBox"></div></div>
 <div id="previewModal" class="modal hidden"><div class="box" id="previewBox"></div></div>
 <div id="emailModal" class="modal hidden"><div class="box" id="emailBox"></div></div>
-<div id="okModal" class="modal hidden"><div class="box sm"><div class="ok">✓</div><h3 id="ok_title"></h3><p id="ok_desc" style="color:var(--muted);font-size:14px;margin-bottom:20px"></p><button class="btn btn-primary" onclick="closeModal('okModal')" id="ok_btn"></button></div></div>
+<div id="okModal" class="modal hidden"><div class="box sm"><img class="lighty-ok" src="lighty/graduate.png" alt=""><div class="ok">✓</div><h3 id="ok_title"></h3><p id="ok_desc" style="color:var(--muted);font-size:14px;margin-bottom:20px"></p><button class="btn btn-primary" onclick="closeModal('okModal')" id="ok_btn"></button></div></div>
 
 <script>
 /* ================= CONFIG ================= */
@@ -512,7 +557,7 @@ function dname(d,track){
 
 /* ================= I18N (public, 6 lang) ================= */
 const I18N={
- ko:{native:"한국어",eng:"KOREAN",flag:"🇰🇷",
+ ko:{native:"한국어",eng:"KOREAN",flag:"<img class='flagimg' src='flags/kr.svg' alt='한국'>",
   heroBadge:"2026 후기 외국인 신·편입생 특별전형",heroTitle:"외국인 유학생 입학지원 시스템",heroDesc:"광주대학교 외국인 신·편입생 특별전형 온라인 지원 포털입니다.",
   asStudent:"유학생 지원하기",asAdmin:"담당자 로그인",
   s_schedule:"전형일정",c_round:"모집시기",c_apply:"원서접수",c_result:"합격자 발표",c_reg:"등록기간",round1:"1차",round2:"2차",before:"이전",
@@ -521,8 +566,8 @@ const I18N={
   s_tuition:"등록금 및 유학경비",t_fee:"등록금(학기)",t_fee_a:"인문·사회",t_fee_b:"이공·예체능",t_dorm:"기숙사(학기)",t_dorm_a:"4/3/2인실",t_meal:"식비(학기)",t_meal_a:"1/2/3식",t_sch:"장학금",t_sch_a:"100% 면제",t_sch_b:"40%/50% 면제",t_ins:"보험료: 입국 후 국민건강보험 자동가입(의무). 재정보증 보증금 1,600만원.",
   s_process:"입학절차",steps:["입학원서(서류제출)","자격(서류)심사","면접심사(필요 시)","합격자 발표","등록금 납부","표준입학허가서 발급","비자 신청","입국","입학생 오리엔테이션","개강"],
   s_notice:"주의사항",notices:["두 개 이상 모집단위 복수지원 불가.","서류 위조 등 부정합격 시 합격취소.","신입생은 첫 학기 휴학 불가.","기간 내 등록금 미납 시 합격취소 가능.","국민건강보험 의무가입.","등록금·장학금은 본교 규정.","제출 서류는 반환되지 않음."],
-  s_contact:"문의",ct_zh:"중국",ct_vi:"베트남",ct_en:"영어",ct_etc:"몽골 및 기타",dl_guide:"모집요강 다운로드",foot:"본 페이지는 초안(prototype)입니다."},
- en:{native:"English",eng:"ENGLISH",flag:"EN",
+  s_contact:"문의",ct_zh:"중국",ct_vi:"베트남",ct_en:"영어",ct_etc:"몽골 및 기타",dl_guide:"모집요강 다운로드",foot:"본 페이지는 초안(prototype)입니다.",ct_home:"국제협력처 홈페이지",ct_kakao:"카카오톡 문의",ct_insta:"인스타그램"},
+ en:{native:"English",eng:"ENGLISH",flag:"<img class='flagimg' src='flags/gb.svg' alt='English'>",
   heroBadge:"2026 Fall International Admission",heroTitle:"International Student Admission Portal",heroDesc:"Online application portal for Gwangju University international admission.",
   asStudent:"Apply as Student",asAdmin:"Staff Login",
   s_schedule:"Schedule",c_round:"Round",c_apply:"Application",c_result:"Result",c_reg:"Enrollment",round1:"Round 1",round2:"Round 2",before:"by",
@@ -531,8 +576,8 @@ const I18N={
   s_tuition:"Tuition & Costs",t_fee:"Tuition(sem.)",t_fee_a:"Humanities/Social",t_fee_b:"Science/Arts",t_dorm:"Dormitory(sem.)",t_dorm_a:"4/3/2-person",t_meal:"Meals(sem.)",t_meal_a:"1/2/3 meals",t_sch:"Scholarship",t_sch_a:"100% waiver",t_sch_b:"40%/50% waiver",t_ins:"Insurance: mandatory National Health Insurance on entry. Guarantee deposit: 16M KRW.",
   s_process:"Procedure",steps:["Application (documents)","Eligibility screening","Interview (if needed)","Result announcement","Tuition payment","Admission certificate","Visa application","Entry to Korea","Orientation","Classes begin"],
   s_notice:"Notes",notices:["No applying to 2+ programs.","Admission cancelled if via forged documents.","Freshmen cannot take leave in 1st semester.","Admission may be cancelled if tuition unpaid on time.","National Health Insurance is mandatory.","Tuition & scholarships follow university rules.","Submitted documents are not returned."],
-  s_contact:"Contact",ct_zh:"China",ct_vi:"Vietnam",ct_en:"English",ct_etc:"Mongolia & Others",dl_guide:"Download Guidelines",foot:"This page is a prototype."},
- zh:{native:"中文",eng:"CHINESE",flag:"🇨🇳",
+  s_contact:"Contact",ct_zh:"China",ct_vi:"Vietnam",ct_en:"English",ct_etc:"Mongolia & Others",dl_guide:"Download Guidelines",foot:"This page is a prototype.",ct_home:"IAO Website",ct_kakao:"KakaoTalk",ct_insta:"Instagram"},
+ zh:{native:"中文",eng:"CHINESE",flag:"<img class='flagimg' src='flags/cn.svg' alt='中文'>",
   heroBadge:"2026学年后期 外国人特别招生",heroTitle:"外国留学生入学申请系统",heroDesc:"光州大学外国人特别招生在线申请门户。",
   asStudent:"留学生申请",asAdmin:"负责人登录",
   s_schedule:"招生日程",c_round:"批次",c_apply:"报名",c_result:"录取公布",c_reg:"注册",round1:"第一批",round2:"第二批",before:"之前",
@@ -541,8 +586,8 @@ const I18N={
   s_tuition:"学费及费用",t_fee:"学费(学期)",t_fee_a:"人文·社会",t_fee_b:"理工·艺体",t_dorm:"宿舍(学期)",t_dorm_a:"4/3/2人间",t_meal:"餐费(学期)",t_meal_a:"1/2/3餐",t_sch:"奖学金",t_sch_a:"全免100%",t_sch_b:"减免40%/50%",t_ins:"保险：入境后自动加入国民健康保险(义务)。财政担保金1,600万韩元。",
   s_process:"入学流程",steps:["入学申请(材料)","资格审核","面试(如需)","录取公布","缴纳学费","签发入学许可","申请签证","入境","新生说明会","开学"],
   s_notice:"注意事项",notices:["不得同时申请两个以上专业。","伪造材料录取将被取消。","新生第一学期不得休学。","逾期未缴学费可能取消录取。","必须加入国民健康保险。","学费及奖学金按本校规定。","提交材料不予退还。"],
-  s_contact:"咨询",ct_zh:"中国",ct_vi:"越南",ct_en:"英语",ct_etc:"蒙古及其他",dl_guide:"下载招生简章",foot:"本页面为初稿。"},
- vi:{native:"Tiếng Việt",eng:"VIETNAMESE",flag:"🇻🇳",
+  s_contact:"咨询",ct_zh:"中国",ct_vi:"越南",ct_en:"英语",ct_etc:"蒙古及其他",dl_guide:"下载招生简章",foot:"本页面为初稿。",ct_home:"官网",ct_kakao:"KakaoTalk 咨询",ct_insta:"Instagram"},
+ vi:{native:"Tiếng Việt",eng:"VIETNAMESE",flag:"<img class='flagimg' src='flags/vn.svg' alt='Tiếng Việt'>",
   heroBadge:"Tuyển sinh quốc tế Kỳ Thu 2026",heroTitle:"Hệ thống Đăng ký Nhập học Quốc tế",heroDesc:"Cổng đăng ký trực tuyến tuyển sinh sinh viên quốc tế Đại học Gwangju.",
   asStudent:"Đăng ký (Sinh viên)",asAdmin:"Đăng nhập Cán bộ",
   s_schedule:"Lịch",c_round:"Đợt",c_apply:"Nộp hồ sơ",c_result:"Kết quả",c_reg:"Nhập học",round1:"Đợt 1",round2:"Đợt 2",before:"trước",
@@ -551,8 +596,8 @@ const I18N={
   s_tuition:"Học phí & Chi phí",t_fee:"Học phí(kỳ)",t_fee_a:"Nhân văn/XH",t_fee_b:"KT/Nghệ thuật",t_dorm:"KTX(kỳ)",t_dorm_a:"Phòng 4/3/2",t_meal:"Ăn(kỳ)",t_meal_a:"1/2/3 bữa",t_sch:"Học bổng",t_sch_a:"Miễn 100%",t_sch_b:"Miễn 40%/50%",t_ins:"Bảo hiểm Y tế Quốc gia bắt buộc khi nhập cảnh. Đặt cọc bảo lãnh: 16 triệu KRW.",
   s_process:"Quy trình",steps:["Nộp hồ sơ","Xét duyệt","Phỏng vấn (nếu cần)","Công bố kết quả","Đóng học phí","Cấp giấy nhập học","Xin visa","Nhập cảnh","Định hướng","Khai giảng"],
   s_notice:"Lưu ý",notices:["Không đăng ký từ 2 ngành trở lên.","Hủy nếu dùng hồ sơ giả.","Tân SV không bảo lưu học kỳ đầu.","Có thể hủy nếu không đóng học phí đúng hạn.","Bắt buộc Bảo hiểm Y tế Quốc gia.","Học phí & học bổng theo quy định.","Hồ sơ đã nộp không hoàn trả."],
-  s_contact:"Liên hệ",ct_zh:"Trung Quốc",ct_vi:"Việt Nam",ct_en:"Tiếng Anh",ct_etc:"Mông Cổ & Khác",dl_guide:"Tải hướng dẫn tuyển sinh",foot:"Trang này là bản nháp."},
- mn:{native:"Монгол",eng:"MONGOLIAN",flag:"🇲🇳",
+  s_contact:"Liên hệ",ct_zh:"Trung Quốc",ct_vi:"Việt Nam",ct_en:"Tiếng Anh",ct_etc:"Mông Cổ & Khác",dl_guide:"Tải hướng dẫn tuyển sinh",foot:"Trang này là bản nháp.",ct_home:"Trang web",ct_kakao:"KakaoTalk",ct_insta:"Instagram"},
+ mn:{native:"Монгол",eng:"MONGOLIAN",flag:"<img class='flagimg' src='flags/mn.svg' alt='Монгол'>",
   heroBadge:"2026 намрын гадаад элсэлт",heroTitle:"Гадаад оюутны элсэлтийн систем",heroDesc:"Кванжү Их Сургуулийн гадаад элсэлтийн онлайн портал.",
   asStudent:"Оюутнаар бүртгүүлэх",asAdmin:"Ажилтан нэвтрэх",
   s_schedule:"Хуваарь",c_round:"Ээлж",c_apply:"Материал авах",c_result:"Дүн",c_reg:"Бүртгэл",round1:"1-р ээлж",round2:"2-р ээлж",before:"дотор",
@@ -561,8 +606,8 @@ const I18N={
   s_tuition:"Төлбөр ба зардал",t_fee:"Төлбөр(улирал)",t_fee_a:"Хүмүүнлэг/Нийгэм",t_fee_b:"Инженер/Урлаг",t_dorm:"Байр(улирал)",t_dorm_a:"4/3/2 хүн",t_meal:"Хоол(улирал)",t_meal_a:"1/2/3 удаа",t_sch:"Тэтгэлэг",t_sch_a:"100% чөлөөлөлт",t_sch_b:"40%/50% чөлөөлөлт",t_ins:"Даатгал: ирсний дараа Улсын Эрүүл Мэндийн Даатгалд заавал. Баталгааны дүн: 16 сая вон.",
   s_process:"Журам",steps:["Өргөдөл (материал)","Эрхийн шалгалт","Ярилцлага (шаардвал)","Дүн зарлах","Төлбөр төлөх","Элсэлтийн бичиг","Виз мэдүүлэх","Нэвтрэх","Чиглүүлэг","Хичээл эхлэх"],
   s_notice:"Анхаар",notices:["2+ мэргэжилд зэрэг бүртгүүлж болохгүй.","Хуурамч бичгээр тэнцвэл цуцлагдана.","Шинэ элсэгч эхний улиралд чөлөө авахгүй.","Хугацаанд төлбөр төлөөгүй бол цуцалж болно.","Улсын Эрүүл Мэндийн Даатгал заавал.","Төлбөр, тэтгэлэг сургуулийн журмаар.","Өгсөн материал буцаагдахгүй."],
-  s_contact:"Холбоо барих",ct_zh:"Хятад",ct_vi:"Вьетнам",ct_en:"Англи",ct_etc:"Монгол ба бусад",dl_guide:"Элсэлтийн журам татах",foot:"Энэ хуудас загвар."},
- uz:{native:"Oʻzbek",eng:"UZBEK",flag:"🇺🇿",
+  s_contact:"Холбоо барих",ct_zh:"Хятад",ct_vi:"Вьетнам",ct_en:"Англи",ct_etc:"Монгол ба бусад",dl_guide:"Элсэлтийн журам татах",foot:"Энэ хуудас загвар.",ct_home:"Вэбсайт",ct_kakao:"KakaoTalk",ct_insta:"Instagram"},
+ uz:{native:"Oʻzbek",eng:"UZBEK",flag:"<img class='flagimg' src='flags/uz.svg' alt='Oʻzbek'>",
   heroBadge:"2026 kuzgi xalqaro qabul",heroTitle:"Xalqaro Talabalar Qabul Tizimi",heroDesc:"Gwangju Universiteti xalqaro qabulning onlayn portali.",
   asStudent:"Talaba sifatida ariza",asAdmin:"Xodim kirishi",
   s_schedule:"Jadval",c_round:"Bosqich",c_apply:"Hujjat",c_result:"Natija",c_reg:"Roʻyxat",round1:"1-bosqich",round2:"2-bosqich",before:"gacha",
@@ -571,7 +616,7 @@ const I18N={
   s_tuition:"Toʻlov va xarajat",t_fee:"Toʻlov(sem.)",t_fee_a:"Gumanitar/Ijtimoiy",t_fee_b:"Muhandislik/Sanʼat",t_dorm:"Yotoqxona(sem.)",t_dorm_a:"4/3/2 kishilik",t_meal:"Ovqat(sem.)",t_meal_a:"1/2/3 mahal",t_sch:"Stipendiya",t_sch_a:"100% ozod",t_sch_b:"40%/50% ozod",t_ins:"Sugʻurta: kelgach Davlat Tibbiy Sugʻurtasi majburiy. Kafolat depoziti: 16 mln KRW.",
   s_process:"Jarayon",steps:["Ariza (hujjat)","Hujjat koʻrigi","Suhbat (zarur boʻlsa)","Natija","Toʻlov","Qabul guvohnomasi","Viza","Kirish","Yoʻriqnoma","Darslar"],
   s_notice:"Eslatma",notices:["2+ yoʻnalishga ariza berilmaydi.","Soxta hujjat qabulni bekor qiladi.","1-kurs 1-semestrda taʼtil ololmaydi.","Toʻlov kechiksa qabul bekor boʻlishi mumkin.","Davlat Tibbiy Sugʻurtasi majburiy.","Toʻlov va stipendiya universitet qoidasi.","Topshirilgan hujjat qaytarilmaydi."],
-  s_contact:"Aloqa",ct_zh:"Xitoy",ct_vi:"Vyetnam",ct_en:"Ingliz",ct_etc:"Mongoliya va boshqalar",dl_guide:"Qabul qoʻllanmasini yuklab olish",foot:"Bu sahifa namuna."}
+  s_contact:"Aloqa",ct_zh:"Xitoy",ct_vi:"Vyetnam",ct_en:"Ingliz",ct_etc:"Mongoliya va boshqalar",dl_guide:"Qabul qoʻllanmasini yuklab olish",foot:"Bu sahifa namuna.",ct_home:"Veb-sayt",ct_kakao:"KakaoTalk",ct_insta:"Instagram"}
 };
 const T=()=>I18N[LANG];
 
@@ -920,6 +965,7 @@ function fillForm(){
   if(a.langTest){set("#f_ltest",a.langTest);buildScore(a.langTest);}
   if(a.langScore)set("#f_lscore",a.langScore);
   set("#f_fname",a.fatherName);set("#f_fnat",a.fatherNationality);set("#f_mname",a.motherName);set("#f_mnat",a.motherNationality);
+  refreshNatDisplays();
 }
 function readProfile(){
   const a=current,g=id=>($(id)?$(id).value.trim():"");
@@ -937,6 +983,7 @@ function validateProfile(){
     ["#f_fname",current.fatherName],["#f_fnat",current.fatherNationality],["#f_mname",current.motherName],["#f_mnat",current.motherNationality]];
   let ok=true;
   marks.forEach(([sel,val])=>{const el=$(sel),good=!!(val&&String(val).trim());if(el)el.classList.toggle("err",!good);if(!good)ok=false;});
+  ["nat","fnat","mnat"].forEach(k=>{const hid=$("#f_"+k),btn=$("#natbtn_"+k);if(hid&&btn)btn.classList.toggle("err",hid.classList.contains("err"));});
   return ok;
 }
 function saveProfile(advance){
@@ -1198,6 +1245,81 @@ function okModal(title,desc){$("#ok_title").textContent=title;$("#ok_desc").text
 
 /* init download link */
 $("#downloadForm").href=encodeURI(FORM_FILE);$("#downloadForm").setAttribute("download",FORM_FILE);
+
+/* ================= NATIONALITY / COUNTRY SELECT ================= */
+const COUNTRIES=[
+{c:"af",n:"Afghanistan",d:"93"},{c:"al",n:"Albania",d:"355"},{c:"dz",n:"Algeria",d:"213"},{c:"ad",n:"Andorra",d:"376"},{c:"ao",n:"Angola",d:"244"},{c:"ag",n:"Antigua and Barbuda",d:"1268"},{c:"ar",n:"Argentina",d:"54"},{c:"am",n:"Armenia",d:"374"},{c:"au",n:"Australia",d:"61"},{c:"at",n:"Austria",d:"43"},{c:"az",n:"Azerbaijan",d:"994"},
+{c:"bs",n:"Bahamas",d:"1242"},{c:"bh",n:"Bahrain",d:"973"},{c:"bd",n:"Bangladesh",d:"880"},{c:"bb",n:"Barbados",d:"1246"},{c:"by",n:"Belarus",d:"375"},{c:"be",n:"Belgium",d:"32"},{c:"bz",n:"Belize",d:"501"},{c:"bj",n:"Benin",d:"229"},{c:"bt",n:"Bhutan",d:"975"},{c:"bo",n:"Bolivia",d:"591"},{c:"ba",n:"Bosnia and Herzegovina",d:"387"},{c:"bw",n:"Botswana",d:"267"},{c:"br",n:"Brazil",d:"55"},{c:"bn",n:"Brunei",d:"673"},{c:"bg",n:"Bulgaria",d:"359"},{c:"bf",n:"Burkina Faso",d:"226"},{c:"bi",n:"Burundi",d:"257"},
+{c:"cv",n:"Cabo Verde",d:"238"},{c:"kh",n:"Cambodia",d:"855"},{c:"cm",n:"Cameroon",d:"237"},{c:"ca",n:"Canada",d:"1"},{c:"cf",n:"Central African Republic",d:"236"},{c:"td",n:"Chad",d:"235"},{c:"cl",n:"Chile",d:"56"},{c:"cn",n:"China",d:"86"},{c:"co",n:"Colombia",d:"57"},{c:"km",n:"Comoros",d:"269"},{c:"cg",n:"Congo (Republic)",d:"242"},{c:"cd",n:"Congo (DR Congo)",d:"243"},{c:"cr",n:"Costa Rica",d:"506"},{c:"ci",n:"Cote d'Ivoire",d:"225"},{c:"hr",n:"Croatia",d:"385"},{c:"cu",n:"Cuba",d:"53"},{c:"cy",n:"Cyprus",d:"357"},{c:"cz",n:"Czechia",d:"420"},
+{c:"dk",n:"Denmark",d:"45"},{c:"dj",n:"Djibouti",d:"253"},{c:"dm",n:"Dominica",d:"1767"},{c:"do",n:"Dominican Republic",d:"1809"},
+{c:"ec",n:"Ecuador",d:"593"},{c:"eg",n:"Egypt",d:"20"},{c:"sv",n:"El Salvador",d:"503"},{c:"gq",n:"Equatorial Guinea",d:"240"},{c:"er",n:"Eritrea",d:"291"},{c:"ee",n:"Estonia",d:"372"},{c:"sz",n:"Eswatini",d:"268"},{c:"et",n:"Ethiopia",d:"251"},
+{c:"fj",n:"Fiji",d:"679"},{c:"fi",n:"Finland",d:"358"},{c:"fr",n:"France",d:"33"},
+{c:"ga",n:"Gabon",d:"241"},{c:"gm",n:"Gambia",d:"220"},{c:"ge",n:"Georgia",d:"995"},{c:"de",n:"Germany",d:"49"},{c:"gh",n:"Ghana",d:"233"},{c:"gr",n:"Greece",d:"30"},{c:"gd",n:"Grenada",d:"1473"},{c:"gt",n:"Guatemala",d:"502"},{c:"gn",n:"Guinea",d:"224"},{c:"gw",n:"Guinea-Bissau",d:"245"},{c:"gy",n:"Guyana",d:"592"},
+{c:"ht",n:"Haiti",d:"509"},{c:"hn",n:"Honduras",d:"504"},{c:"hu",n:"Hungary",d:"36"},
+{c:"is",n:"Iceland",d:"354"},{c:"in",n:"India",d:"91"},{c:"id",n:"Indonesia",d:"62"},{c:"ir",n:"Iran",d:"98"},{c:"iq",n:"Iraq",d:"964"},{c:"ie",n:"Ireland",d:"353"},{c:"il",n:"Israel",d:"972"},{c:"it",n:"Italy",d:"39"},
+{c:"jm",n:"Jamaica",d:"1876"},{c:"jp",n:"Japan",d:"81"},{c:"jo",n:"Jordan",d:"962"},
+{c:"kz",n:"Kazakhstan",d:"7"},{c:"ke",n:"Kenya",d:"254"},{c:"ki",n:"Kiribati",d:"686"},{c:"xk",n:"Kosovo",d:"383"},{c:"kw",n:"Kuwait",d:"965"},{c:"kg",n:"Kyrgyzstan",d:"996"},
+{c:"la",n:"Laos",d:"856"},{c:"lv",n:"Latvia",d:"371"},{c:"lb",n:"Lebanon",d:"961"},{c:"ls",n:"Lesotho",d:"266"},{c:"lr",n:"Liberia",d:"231"},{c:"ly",n:"Libya",d:"218"},{c:"li",n:"Liechtenstein",d:"423"},{c:"lt",n:"Lithuania",d:"370"},{c:"lu",n:"Luxembourg",d:"352"},
+{c:"mg",n:"Madagascar",d:"261"},{c:"mw",n:"Malawi",d:"265"},{c:"my",n:"Malaysia",d:"60"},{c:"mv",n:"Maldives",d:"960"},{c:"ml",n:"Mali",d:"223"},{c:"mt",n:"Malta",d:"356"},{c:"mh",n:"Marshall Islands",d:"692"},{c:"mr",n:"Mauritania",d:"222"},{c:"mu",n:"Mauritius",d:"230"},{c:"mx",n:"Mexico",d:"52"},{c:"fm",n:"Micronesia",d:"691"},{c:"md",n:"Moldova",d:"373"},{c:"mc",n:"Monaco",d:"377"},{c:"mn",n:"Mongolia",d:"976"},{c:"me",n:"Montenegro",d:"382"},{c:"ma",n:"Morocco",d:"212"},{c:"mz",n:"Mozambique",d:"258"},{c:"mm",n:"Myanmar",d:"95"},
+{c:"na",n:"Namibia",d:"264"},{c:"nr",n:"Nauru",d:"674"},{c:"np",n:"Nepal",d:"977"},{c:"nl",n:"Netherlands",d:"31"},{c:"nz",n:"New Zealand",d:"64"},{c:"ni",n:"Nicaragua",d:"505"},{c:"ne",n:"Niger",d:"227"},{c:"ng",n:"Nigeria",d:"234"},{c:"kp",n:"North Korea",d:"850"},{c:"mk",n:"North Macedonia",d:"389"},{c:"no",n:"Norway",d:"47"},
+{c:"om",n:"Oman",d:"968"},
+{c:"pk",n:"Pakistan",d:"92"},{c:"pw",n:"Palau",d:"680"},{c:"ps",n:"Palestine",d:"970"},{c:"pa",n:"Panama",d:"507"},{c:"pg",n:"Papua New Guinea",d:"675"},{c:"py",n:"Paraguay",d:"595"},{c:"pe",n:"Peru",d:"51"},{c:"ph",n:"Philippines",d:"63"},{c:"pl",n:"Poland",d:"48"},{c:"pt",n:"Portugal",d:"351"},
+{c:"qa",n:"Qatar",d:"974"},
+{c:"ro",n:"Romania",d:"40"},{c:"ru",n:"Russia",d:"7"},{c:"rw",n:"Rwanda",d:"250"},
+{c:"kn",n:"Saint Kitts and Nevis",d:"1869"},{c:"lc",n:"Saint Lucia",d:"1758"},{c:"vc",n:"Saint Vincent and the Grenadines",d:"1784"},{c:"ws",n:"Samoa",d:"685"},{c:"sm",n:"San Marino",d:"378"},{c:"st",n:"Sao Tome and Principe",d:"239"},{c:"sa",n:"Saudi Arabia",d:"966"},{c:"sn",n:"Senegal",d:"221"},{c:"rs",n:"Serbia",d:"381"},{c:"sc",n:"Seychelles",d:"248"},{c:"sl",n:"Sierra Leone",d:"232"},{c:"sg",n:"Singapore",d:"65"},{c:"sk",n:"Slovakia",d:"421"},{c:"si",n:"Slovenia",d:"386"},{c:"sb",n:"Solomon Islands",d:"677"},{c:"so",n:"Somalia",d:"252"},{c:"za",n:"South Africa",d:"27"},{c:"kr",n:"South Korea",d:"82"},{c:"ss",n:"South Sudan",d:"211"},{c:"es",n:"Spain",d:"34"},{c:"lk",n:"Sri Lanka",d:"94"},{c:"sd",n:"Sudan",d:"249"},{c:"sr",n:"Suriname",d:"597"},{c:"se",n:"Sweden",d:"46"},{c:"ch",n:"Switzerland",d:"41"},{c:"sy",n:"Syria",d:"963"},
+{c:"tw",n:"Taiwan",d:"886"},{c:"tj",n:"Tajikistan",d:"992"},{c:"tz",n:"Tanzania",d:"255"},{c:"th",n:"Thailand",d:"66"},{c:"tl",n:"Timor-Leste",d:"670"},{c:"tg",n:"Togo",d:"228"},{c:"to",n:"Tonga",d:"676"},{c:"tt",n:"Trinidad and Tobago",d:"1868"},{c:"tn",n:"Tunisia",d:"216"},{c:"tr",n:"Turkey",d:"90"},{c:"tm",n:"Turkmenistan",d:"993"},{c:"tv",n:"Tuvalu",d:"688"},
+{c:"ug",n:"Uganda",d:"256"},{c:"ua",n:"Ukraine",d:"380"},{c:"ae",n:"United Arab Emirates",d:"971"},{c:"gb",n:"United Kingdom",d:"44"},{c:"us",n:"United States",d:"1"},{c:"uy",n:"Uruguay",d:"598"},{c:"uz",n:"Uzbekistan",d:"998"},
+{c:"vu",n:"Vanuatu",d:"678"},{c:"va",n:"Vatican City",d:"379"},{c:"ve",n:"Venezuela",d:"58"},{c:"vn",n:"Vietnam",d:"84"},
+{c:"ye",n:"Yemen",d:"967"},{c:"zm",n:"Zambia",d:"260"},{c:"zw",n:"Zimbabwe",d:"263"}
+].sort((a,b)=>a.n.localeCompare(b.n));
+const NAT_KEYS=["nat","fnat","mnat"];
+function natFlag(c){return "https://flagcdn.com/24x18/"+c+".png";}
+function buildNatList(key){
+  const list=$("#natlist_"+key);if(!list)return;list.innerHTML="";
+  COUNTRIES.forEach(o=>{
+    const row=document.createElement("div");row.className="natsel-opt";row.dataset.name=o.n.toLowerCase();row.dataset.dial=o.d;
+    row.innerHTML='<img loading="lazy" src="'+natFlag(o.c)+'" alt=""><span>'+o.n+'</span><span class="natsel-dial">+'+o.d+'</span>';
+    row.addEventListener("click",function(){selectNat(key,o);});
+    list.appendChild(row);
+  });
+}
+function toggleNat(key){
+  const pop=$("#natpop_"+key);const isOpen=!pop.classList.contains("hidden");
+  document.querySelectorAll(".natsel-pop").forEach(p=>p.classList.add("hidden"));
+  if(!isOpen){pop.classList.remove("hidden");const s=$("#natsearch_"+key);s.value="";filterNat(key);setTimeout(function(){s.focus();},0);}
+}
+function filterNat(key){
+  const q=($("#natsearch_"+key).value||"").trim().toLowerCase().replace(/^\+/,"");
+  document.querySelectorAll("#natlist_"+key+" .natsel-opt").forEach(function(r){
+    const show=!q||r.dataset.name.indexOf(q)>=0||r.dataset.dial.indexOf(q)===0;
+    r.style.display=show?"":"none";
+  });
+}
+function selectNat(key,o){
+  const hid=$("#f_"+key);hid.value=o.n;hid.classList.remove("err");
+  const btn=$("#natbtn_"+key);btn.classList.remove("placeholder","err");
+  btn.querySelector(".natsel-val").innerHTML='<img src="'+natFlag(o.c)+'" alt=""> '+o.n;
+  $("#natpop_"+key).classList.add("hidden");
+  if(key==="nat")applyDialCode(o.d);
+}
+function applyDialCode(d){
+  const ph=$("#f_phone");if(!ph)return;
+  const rest=(ph.value||"").replace(/^\s*\+\d+[\s-]*/,"").trim();
+  ph.value="+"+d+" "+rest;
+  ph.placeholder="+"+d+" 10 1234 5678";
+}
+function refreshNatDisplays(){
+  NAT_KEYS.forEach(function(key){
+    const hid=$("#f_"+key),btn=$("#natbtn_"+key);if(!hid||!btn)return;
+    const v=(hid.value||"").trim(),val=btn.querySelector(".natsel-val");
+    const o=COUNTRIES.find(x=>x.n.toLowerCase()===v.toLowerCase());
+    if(o){btn.classList.remove("placeholder");val.innerHTML='<img src="'+natFlag(o.c)+'" alt=""> '+o.n;}
+    else if(v){btn.classList.remove("placeholder");val.textContent=v;}
+    else{btn.classList.add("placeholder");val.textContent=(typeof L==="function")?L("국가 선택","Select country"):"Select country";}
+  });
+}
+document.addEventListener("click",function(e){if(!e.target.closest(".natsel"))document.querySelectorAll(".natsel-pop").forEach(p=>p.classList.add("hidden"));});
+try{NAT_KEYS.forEach(buildNatList);refreshNatDisplays();}catch(e){}
 </script>
 </body>
 </html>
