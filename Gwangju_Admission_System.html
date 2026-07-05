@@ -183,11 +183,11 @@
 <style>
 /* ===== Lighty mascot ===== */
 @keyframes lightyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.lighty-corner{position:fixed;left:18px;bottom:14px;width:clamp(88px,10vw,136px);height:auto;z-index:25;pointer-events:none;filter:drop-shadow(0 8px 12px rgba(20,60,30,.22));animation:lightyFloat 4.2s ease-in-out infinite}
+.lighty-corner{display:block;width:104px;height:auto;margin:0 2px 6px auto;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(20,60,30,.20))}
 .hero{overflow:visible}
 .hero .lighty-hero{position:absolute;right:16px;bottom:0;width:clamp(120px,15vw,180px);height:auto;pointer-events:none;filter:drop-shadow(0 8px 14px rgba(0,0,0,.28));animation:lightyFloat 5s ease-in-out infinite}
 .lighty-ok{width:120px;height:auto;display:block;margin:2px auto 8px;filter:drop-shadow(0 6px 10px rgba(20,60,30,.2))}
-@media(max-width:760px){.lighty-corner{width:72px;left:9px;bottom:9px;opacity:.94}.hero .lighty-hero{width:96px;right:4px;opacity:.9}}
+@media(max-width:760px){.lighty-corner{width:80px;margin-bottom:2px}.hero .lighty-hero{width:96px;right:4px;opacity:.9}}
 @media(prefers-reduced-motion:reduce){.lighty-corner,.hero .lighty-hero{animation:none}}
 /* ===== nationality / country select ===== */
 .natsel{position:relative}
@@ -206,6 +206,7 @@
 .natsel-opt img{width:22px;height:16px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex-shrink:0}
 .natsel-opt>span:first-of-type{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .natsel-dial{color:#8a968f;font-size:12px;flex-shrink:0}
+.name-en{text-transform:uppercase}.name-en::placeholder{text-transform:none}
 </style>
 </head>
 <body>
@@ -299,14 +300,14 @@
     <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
     <button class="backlink" onclick="show('homeView')">← Home</button>
   </div></header>
-  <main style="max-width:460px">
+  <main style="max-width:460px"><img class="lighty-corner" src="lighty/newstart.png" alt="">
     <div class="card">
       <h3 id="sl_title"></h3>
       <p style="font-size:13px;color:var(--muted);margin-bottom:16px" id="sl_desc"></p>
       <div class="field"><label id="sl_email_l"></label><input type="email" id="sl_email" placeholder="example@mail.com"></div>
       <div class="field"><label id="sl_pp_l"></label><input type="text" id="sl_pp" placeholder="PE0000000"></div>
       <button class="btn btn-primary" style="width:100%" id="sl_btn" onclick="studentLogin()"></button>
-      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="sl_hint"></p><img class="lighty-corner" src="lighty/newstart.png" alt="">
+      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="sl_hint"></p>
     </div>
   </main>
 </div>
@@ -326,26 +327,26 @@
     </div>
 
     <!-- Tab 0: profile -->
-    <div class="tabpane" data-pane="0">
+    <div class="tabpane" data-pane="0"><img class="lighty-corner" src="lighty/study.png" alt="">
       <div class="card">
         <h3 id="p_sec_id"></h3>
         <div class="row2">
-          <div class="field"><label id="l_surname"></label><input id="f_surname"></div>
-          <div class="field"><label id="l_first"></label><input id="f_first"></div>
+          <div class="field"><label id="l_surname"></label><input id="f_surname" class="name-en" autocapitalize="characters" spellcheck="false"></div>
+          <div class="field"><label id="l_first"></label><input id="f_first" class="name-en" autocapitalize="characters" spellcheck="false"></div>
         </div>
         <div class="row3">
           <div class="field"><label id="l_dob"></label>
             <div class="dpwrap"><button type="button" class="datebox empty" id="box_dob" onclick="openDP('dob')"></button><div class="dpop hidden" id="pop_dob"></div></div>
           </div>
           <div class="field"><label id="l_gender"></label><select id="f_gender"><option value="M">Male</option><option value="F">Female</option></select></div>
-          <div class="field"><label id="l_nat"></label><div class="natsel" id="ns_nat"><button type="button" class="natsel-btn placeholder" id="natbtn_nat" onclick="toggleNat('nat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_nat"><input class="natsel-search" id="natsearch_nat" oninput="filterNat('nat')" placeholder="Search country · 국가 검색"><div class="natsel-list" id="natlist_nat"></div></div><input type="hidden" id="f_nat"></div></div>
+          <div class="field"><label id="l_nat"></label><div class="natsel" id="ns_nat"><button type="button" class="natsel-btn placeholder" id="natbtn_nat" onclick="toggleNat('nat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_nat"><input class="natsel-search" id="natsearch_nat" oninput="filterNat('nat')" placeholder="Search country"><div class="natsel-list" id="natlist_nat"></div></div><input type="hidden" id="f_nat"></div></div>
         </div>
         <div class="row3">
           <div class="field"><label id="l_ppno"></label><input id="f_ppno"></div>
           <div class="field"><label id="l_ppexp"></label>
             <div class="dpwrap"><button type="button" class="datebox empty" id="box_ppexp" onclick="openDP('ppexp')"></button><div class="dpop hidden" id="pop_ppexp"></div></div>
           </div>
-          <div class="field"><label id="l_phone"></label><input id="f_phone" placeholder="+___ · 국적 선택 시 자동 (auto)"></div>
+          <div class="field"><label id="l_phone"></label><input id="f_phone" placeholder="+___ · auto-filled from nationality"></div>
         </div>
       </div>
 
@@ -382,19 +383,19 @@
       <div class="card">
         <h3 id="p_sec_parent"></h3>
         <div class="row2">
-          <div class="field"><label id="l_fname"></label><input id="f_fname"></div>
-          <div class="field"><label id="l_fnat"></label><div class="natsel" id="ns_fnat"><button type="button" class="natsel-btn placeholder" id="natbtn_fnat" onclick="toggleNat('fnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_fnat"><input class="natsel-search" id="natsearch_fnat" oninput="filterNat('fnat')" placeholder="Search country · 국가 검색"><div class="natsel-list" id="natlist_fnat"></div></div><input type="hidden" id="f_fnat"></div></div>
+          <div class="field"><label id="l_fname"></label><input id="f_fname" class="name-en" autocapitalize="characters" spellcheck="false"></div>
+          <div class="field"><label id="l_fnat"></label><div class="natsel" id="ns_fnat"><button type="button" class="natsel-btn placeholder" id="natbtn_fnat" onclick="toggleNat('fnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_fnat"><input class="natsel-search" id="natsearch_fnat" oninput="filterNat('fnat')" placeholder="Search country"><div class="natsel-list" id="natlist_fnat"></div></div><input type="hidden" id="f_fnat"></div></div>
         </div>
         <div class="row2">
-          <div class="field"><label id="l_mname"></label><input id="f_mname"></div>
-          <div class="field"><label id="l_mnat"></label><div class="natsel" id="ns_mnat"><button type="button" class="natsel-btn placeholder" id="natbtn_mnat" onclick="toggleNat('mnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_mnat"><input class="natsel-search" id="natsearch_mnat" oninput="filterNat('mnat')" placeholder="Search country · 국가 검색"><div class="natsel-list" id="natlist_mnat"></div></div><input type="hidden" id="f_mnat"></div></div>
+          <div class="field"><label id="l_mname"></label><input id="f_mname" class="name-en" autocapitalize="characters" spellcheck="false"></div>
+          <div class="field"><label id="l_mnat"></label><div class="natsel" id="ns_mnat"><button type="button" class="natsel-btn placeholder" id="natbtn_mnat" onclick="toggleNat('mnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_mnat"><input class="natsel-search" id="natsearch_mnat" oninput="filterNat('mnat')" placeholder="Search country"><div class="natsel-list" id="natlist_mnat"></div></div><input type="hidden" id="f_mnat"></div></div>
         </div>
       </div>
-      <div style="text-align:right"><button class="btn btn-primary" onclick="saveProfile(true)" id="btn_save"></button></div><img class="lighty-corner" src="lighty/study.png" alt="">
+      <div style="text-align:right"><button class="btn btn-primary" onclick="saveProfile(true)" id="btn_save"></button></div>
     </div>
 
     <!-- Tab 1: documents -->
-    <div class="tabpane hidden" data-pane="1">
+    <div class="tabpane hidden" data-pane="1"><img class="lighty-corner" src="lighty/review.png" alt="">
       <div class="progress-wrap">
         <div class="progress-top"><span id="pg_label"></span><span><b id="pgDone">0</b> / <span id="pgTotal">0</span></span></div>
         <div class="bar"><i id="pgBar"></i></div>
@@ -407,16 +408,16 @@
       </div>
       <h3 style="font-size:16px;color:var(--green);margin:4px 0 12px" id="docs_title"></h3>
       <div class="doc-list" id="docList"></div>
-      <div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="docsNext()" id="docs_next"></button></div><img class="lighty-corner" src="lighty/review.png" alt="">
+      <div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="docsNext()" id="docs_next"></button></div>
     </div>
 
     <!-- Tab 2: review & submit -->
-    <div class="tabpane hidden" data-pane="2">
+    <div class="tabpane hidden" data-pane="2"><img class="lighty-corner" src="lighty/ok.png" alt="">
       <div class="card"><h3 id="rv_info"></h3><div class="summary" id="rv_summary"></div></div>
       <div class="card"><h3 id="rv_docs"></h3><div id="rv_doclist" style="font-size:13.5px"></div></div>
       <div style="text-align:center;margin-top:8px">
         <button class="btn btn-primary" style="font-size:16px;padding:15px 40px" id="finalSubmit" onclick="submitApp()" disabled></button>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:9px" id="finalNote"></p><img class="lighty-corner" src="lighty/ok.png" alt="">
+        <p style="font-size:12.5px;color:var(--muted);margin-top:9px" id="finalNote"></p>
       </div>
     </div>
   </main>
@@ -428,13 +429,13 @@
     <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
     <button class="backlink" onclick="show('homeView')">← Home</button>
   </div></header>
-  <main style="max-width:420px">
+  <main style="max-width:420px"><img class="lighty-corner" src="lighty/guide.png" alt="">
     <div class="card">
       <h3 id="al_title"></h3>
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="al_desc"></p>
       <div class="field"><label id="al_code_l"></label><input type="password" id="al_code" placeholder="••••••"></div>
       <button class="btn btn-primary" style="width:100%" onclick="adminLogin()" id="al_btn"></button>
-      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p><img class="lighty-corner" src="lighty/guide.png" alt="">
+      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p>
     </div>
   </main>
 </div>
@@ -446,11 +447,12 @@
     <button class="backlink" onclick="show('homeView')" id="ad_out"></button>
   </div></header>
   <main>
+    <img class="lighty-corner" src="lighty/notice.png" alt="">
     <h2 style="font-size:20px;color:var(--green);margin-bottom:14px" id="ad_title"></h2>
     <div class="stats" id="adStats"></div>
     <div class="filters" id="adFilters"></div>
     <div style="overflow-x:auto"><table class="adm" id="adTable"></table></div>
-    <p id="ad_empty" style="text-align:center;color:var(--muted);padding:30px;font-size:14px"></p><img class="lighty-corner" src="lighty/notice.png" alt="">
+    <p id="ad_empty" style="text-align:center;color:var(--muted);padding:30px;font-size:14px"></p>
   </main>
 </div>
 
@@ -534,25 +536,28 @@ function scoreOptions(test){
 
 /* ------- documents (form is the required first item) ------- */
 const DOCS=[
-  {k:"form",    req:true,  ic:"📄", ko:"입학지원서(작성본)", en:"Application Form (completed)"},
-  {k:"agree",   req:true,  ic:"📝", ko:"개인정보 수집·이용 동의서", en:"Personal Information Consent"},
-  {k:"passport",req:true,  ic:"🛂", ko:"여권 사본 및 여권용 사진 2매", en:"Passport copy & 2 photos"},
-  {k:"id",      req:true,  ic:"🪪", ko:"본인 및 부모 신분증 사본", en:"ID copies (self & parents)"},
-  {k:"family",  req:true,  ic:"👪", ko:"가족관계증명서", en:"Family Relationship Certificate"},
-  {k:"edu",     req:true,  ic:"🎓", ko:"졸업·성적증명서 (아포스티유 포함)", en:"Diploma & transcript (apostille)"},
-  {k:"finance", req:true,  ic:"🏦", ko:"재정보증서류 (보증금 1,600만원)", en:"Financial guarantee (16M KRW)"},
-  {k:"employ",  req:true,  ic:"💼", ko:"부모 재직·수입증명", en:"Parents' employment & income"},
-  {k:"arc",     req:false, ic:"🗂️", ko:"대한민국 외국인등록증", en:"Korean Alien Registration Card"},
-  {k:"lang",    req:false, ic:"📊", ko:"어학성적 증명서", en:"Language proficiency certificate"}
+  {k:"form",    req:true,  ic:"📄", ko:"입학지원서(작성본)", en:"Application Form (completed)", zh:"入学申请表（已填写）", vi:"Đơn xin nhập học (đã điền)", mn:"Элсэлтийн өргөдөл (бөглөсөн)", uz:"Qabul arizasi (toʻldirilgan)"},
+  {k:"agree",   req:true,  ic:"📝", ko:"개인정보 수집·이용 동의서", en:"Personal Information Consent", zh:"个人信息收集·使用同意书", vi:"Đồng ý thu thập·sử dụng thông tin cá nhân", mn:"Хувийн мэдээлэл цуглуулах зөвшөөрөл", uz:"Shaxsiy maʼlumotlarga rozilik"},
+  {k:"passport",req:true,  ic:"🛂", ko:"여권 사본 및 여권용 사진 2매", en:"Passport copy & 2 photos", zh:"护照复印件及护照照片2张", vi:"Bản sao hộ chiếu & 2 ảnh", mn:"Паспортын хуулбар ба 2 зураг", uz:"Pasport nusxasi va 2 dona surat"},
+  {k:"id",      req:true,  ic:"🪪", ko:"본인 및 부모 신분증 사본", en:"ID copies (self & parents)", zh:"本人及父母身份证复印件", vi:"Bản sao CMND/CCCD (bản thân & cha mẹ)", mn:"Өөрийн болон эцэг эхийн үнэмлэхний хуулбар", uz:"Oʻzi va ota-onaning ID nusxasi"},
+  {k:"family",  req:true,  ic:"👪", ko:"가족관계증명서", en:"Family Relationship Certificate", zh:"家庭关系证明（户口簿）", vi:"Giấy chứng nhận quan hệ gia đình", mn:"Гэр бүлийн харилцааны гэрчилгээ", uz:"Oila munosabatlari guvohnomasi"},
+  {k:"edu",     req:true,  ic:"🎓", ko:"졸업·성적증명서 (아포스티유 포함)", en:"Diploma & transcript (apostille)", zh:"毕业·成绩证明（含公证认证）", vi:"Bằng & bảng điểm (có apostille)", mn:"Төгсөлт·дүнгийн гэрчилгээ (апостильтай)", uz:"Diplom va baholar (apostil bilan)"},
+  {k:"finance", req:true,  ic:"🏦", ko:"재정보증서류 (보증금 1,600만원)", en:"Financial guarantee (16M KRW)", zh:"财政担保材料（担保金1,600万韩元）", vi:"Bảo lãnh tài chính (16 triệu KRW)", mn:"Санхүүгийн баталгаа (16 сая вон)", uz:"Moliyaviy kafolat (16 mln KRW)"},
+  {k:"employ",  req:true,  ic:"💼", ko:"부모 재직·수입증명", en:"Parents' employment & income", zh:"父母在职·收入证明", vi:"Chứng minh việc làm·thu nhập của cha mẹ", mn:"Эцэг эхийн ажил·орлогын тодорхойлолт", uz:"Ota-onaning ish va daromadi"},
+  {k:"arc",     req:false, ic:"🗂️", ko:"대한민국 외국인등록증", en:"Korean Alien Registration Card", zh:"韩国外国人登录证", vi:"Thẻ đăng ký người nước ngoài (Hàn Quốc)", mn:"БНСУ-ын гадаад иргэний үнэмлэх", uz:"Koreya chet el fuqarosi guvohnomasi"},
+  {k:"lang",    req:false, ic:"📊", ko:"어학성적증명서", en:"Language Test Score Certificate", zh:"语言成绩证明", vi:"Chứng nhận điểm năng lực ngôn ngữ", mn:"Хэлний оноогийн гэрчилгээ", uz:"Til imtihoni natijasi sertifikati"}
 ];
 /* language-score document name varies by track (per guidelines) */
 function langDocName(track){
-  if(track==="en")return L("영어 공인성적 증명서 (IELTS/TOEFL iBT 등)","English Proficiency Score Certificate (IELTS/TOEFL iBT, etc.)");
-  return L("TOPIK 성적증명서","TOPIK Score Certificate");
+  var isEn=(track==="en");
+  var T=isEn
+    ?{ko:"영어 공인성적 증명서 (IELTS/TOEFL iBT 등)",en:"English Proficiency Score Certificate (IELTS/TOEFL iBT, etc.)",zh:"英语成绩证明（IELTS/TOEFL iBT等）",vi:"Chứng chỉ tiếng Anh (IELTS/TOEFL iBT...)",mn:"Англи хэлний албан оноо (IELTS/TOEFL iBT г.м.)",uz:"Ingliz tili sertifikati (IELTS/TOEFL iBT va h.k.)"}
+    :{ko:"어학성적증명서",en:"Language Test Score Certificate",zh:"语言成绩证明",vi:"Chứng nhận điểm năng lực ngôn ngữ",mn:"Хэлний оноогийн гэрчилгээ",uz:"Til imtihoni natijasi sertifikati"};
+  return T[LANG]||T.en;
 }
 function dname(d,track){
   if(d.k==="lang")return langDocName(track||(current&&current.track)||"ko");
-  return LANG==="ko"?d.ko:d.en;
+  return d[LANG]||d.en;
 }
 
 /* ================= I18N (public, 6 lang) ================= */
@@ -1007,7 +1012,7 @@ function switchTab(n){
 $$(".tab").forEach(t=>t.onclick=()=>switchTab(+t.dataset.tab));
 
 /* ================= DOCUMENTS ================= */
-function requiredKeys(a){const base=DOCS.filter(d=>d.req).map(d=>d.k);if(a&&(a.track==="ko"||a.track==="en"))base.push("lang");return base;}
+function requiredKeys(a){return DOCS.filter(d=>d.req).map(d=>d.k);}
 function pickDoc(key){
   const inp=document.createElement("input");inp.type="file";
   inp.onchange=e=>{const f=e.target.files[0];if(f){current.docs=current.docs||{};current.docs[key]=f.name;FILES[key]=f;DB.upsert(current);renderDocs();renderReview();}};
@@ -1302,24 +1307,28 @@ function selectNat(key,o){
   $("#natpop_"+key).classList.add("hidden");
   if(key==="nat")applyDialCode(o.d);
 }
-function applyDialCode(d){
-  const ph=$("#f_phone");if(!ph)return;
-  const rest=(ph.value||"").replace(/^\s*\+\d+[\s-]*/,"").trim();
-  ph.value="+"+d+" "+rest;
-  ph.placeholder="+"+d+" 10 1234 5678";
-}
+/* 국가별 전화 그룹 규칙: t=선행 0(트렁크) 제거 여부, g=그룹 자릿수 */
+const PHONE_FMT={'82':{t:1,g:[2,4,4]},'86':{t:0,g:[3,4,4]},'84':{t:1,g:[3,3,3]},'976':{t:0,g:[4,4]},'998':{t:0,g:[2,3,2,2]},'81':{t:1,g:[2,4,4]},'1':{t:0,g:[3,3,4]},'44':{t:1,g:[4,6]},'7':{t:0,g:[3,3,2,2]},'63':{t:1,g:[3,3,4]},'95':{t:1,g:[2,3,4]},'977':{t:0,g:[3,3,4]},'91':{t:0,g:[5,5]},'66':{t:1,g:[2,3,4]},'62':{t:1,g:[3,4,4]},'880':{t:1,g:[4,6]},'92':{t:1,g:[3,7]},'234':{t:1,g:[3,3,4]},'20':{t:1,g:[3,3,4]},'855':{t:1,g:[2,3,3]},'856':{t:1,g:[2,3,4]},'93':{t:1,g:[2,3,4]},'994':{t:1,g:[2,3,2,2]},'996':{t:0,g:[3,3,3]},'992':{t:0,g:[2,3,4]},'971':{t:1,g:[2,3,4]},'966':{t:1,g:[2,3,4]},'49':{t:1,g:[3,4,4]},'33':{t:1,g:[1,2,2,2,2]},'34':{t:0,g:[3,3,3]},'39':{t:0,g:[3,3,4]},'90':{t:1,g:[3,3,4]},'380':{t:1,g:[2,3,2,2]}};
+const PHONE_DEF={t:1,g:[3,3,4]};
+let PHONE_DIAL="";
+function phoneRule(d){return PHONE_FMT[d]||PHONE_DEF;}
+function phoneGroup(digits,groups){var out=[],i=0;for(var k=0;k<groups.length&&i<digits.length;k++){out.push(digits.substr(i,groups[k]));i+=groups[k];}if(i<digits.length)out.push(digits.substr(i));return out.filter(function(x){return x.length;}).join("-");}
+function phoneExample(d){var r=phoneRule(d),seed="1234567890123456",i=0,p=[];r.g.forEach(function(n){p.push(seed.substr(i,n));i+=n;});return "+"+d+"-"+p.join("-");}
+function formatPhone(){var ph=$("#f_phone");if(!ph||!PHONE_DIAL)return;var d=PHONE_DIAL,r=phoneRule(d);var all=(ph.value||"").replace(/\D/g,"");if(all.indexOf(d)===0)all=all.slice(d.length);var nat=all;if(r.t&&nat.charAt(0)==="0")nat=nat.slice(1);var g=phoneGroup(nat,r.g);ph.value="+"+d+(g?("-"+g):"");try{ph.setSelectionRange(ph.value.length,ph.value.length);}catch(e){}}
+function applyDialCode(d){var ph=$("#f_phone");if(!ph)return;PHONE_DIAL=d;var rest=(ph.value||"").replace(/^\s*\+\d+[\s-]*/,"");ph.value="+"+d+" "+rest;ph.placeholder=phoneExample(d);formatPhone();}
 function refreshNatDisplays(){
   NAT_KEYS.forEach(function(key){
     const hid=$("#f_"+key),btn=$("#natbtn_"+key);if(!hid||!btn)return;
     const v=(hid.value||"").trim(),val=btn.querySelector(".natsel-val");
     const o=COUNTRIES.find(x=>x.n.toLowerCase()===v.toLowerCase());
-    if(o){btn.classList.remove("placeholder");val.innerHTML='<img src="'+natFlag(o.c)+'" alt=""> '+o.n;}
+    if(o){btn.classList.remove("placeholder");val.innerHTML='<img src="'+natFlag(o.c)+'" alt=""> '+o.n;if(key==="nat")PHONE_DIAL=o.d;}
     else if(v){btn.classList.remove("placeholder");val.textContent=v;}
     else{btn.classList.add("placeholder");val.textContent=(typeof L==="function")?L("국가 선택","Select country"):"Select country";}
   });
 }
 document.addEventListener("click",function(e){if(!e.target.closest(".natsel"))document.querySelectorAll(".natsel-pop").forEach(p=>p.classList.add("hidden"));});
-try{NAT_KEYS.forEach(buildNatList);refreshNatDisplays();}catch(e){}
+function upEn(e){var el=e.target;var v=el.value;var s=v.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Za-z '\-.]/g,"").toUpperCase();if(s!==v){var p=el.selectionStart,d=v.length-s.length;el.value=s;try{el.setSelectionRange(Math.max(0,p-d),Math.max(0,p-d));}catch(_){}}}
+try{NAT_KEYS.forEach(buildNatList);refreshNatDisplays();var _ph=document.querySelector("#f_phone");if(_ph)_ph.addEventListener("input",formatPhone);document.querySelectorAll(".name-en").forEach(function(el){el.addEventListener("input",upEn);});}catch(e){}
 </script>
 </body>
 </html>
