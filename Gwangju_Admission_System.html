@@ -133,6 +133,17 @@
   table.adm tr{cursor:pointer}table.adm tbody tr:hover{background:#f6fbef}
   .vbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:800}
   .v-ok{background:#e5f5ea;color:var(--ok)}.v-warn{background:#fdf0dd;color:var(--warn)}.v-no{background:#fbeaea;color:var(--danger)}.v-draft{background:#eef1ee;color:var(--muted)}
+  /* admin filter bar */
+  .adfbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+  .adfbar .fsel{display:flex;flex-direction:column;gap:3px}
+  .adfbar .fsel label{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.3px;padding-left:2px}
+  .adfbar select,.adfbar input{padding:8px 10px;border:1px solid var(--line);border-radius:9px;font-size:13px;font-family:inherit;background:#fff;color:var(--text)}
+  .adfbar select:focus,.adfbar input:focus{outline:none;border-color:var(--lime)}
+  .adfbar .search{min-width:180px}
+  .adfbar .reset{align-self:flex-end;background:#eef3ec;color:var(--green);border:none;border-radius:9px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;height:36px}
+  .adfbar .reset:hover{background:#e2ebde}
+  .adfbar .xlsx{align-self:flex-end;margin-left:auto;background:#1d6f42;color:#fff;border:none;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;height:36px}
+  .adfbar .xlsx:hover{background:#155531}
 
   .modal{position:fixed;inset:0;background:rgba(20,40,25,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:60;overflow:auto}
   .modal .box{background:#fff;border-radius:18px;max-width:720px;width:100%;padding:26px 28px;box-shadow:0 20px 50px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
@@ -451,6 +462,7 @@
     <img class="lighty-corner" src="lighty/notice.png" alt="">
     <h2 style="font-size:20px;color:var(--green);margin-bottom:14px" id="ad_title"></h2>
     <div class="filters" id="adScopeBar" style="margin-bottom:14px"></div>
+    <div class="adfbar" id="adFilterBar"></div>
     <div class="stats" id="adStats"></div>
     <div class="filters" id="adFilters"></div>
     <div style="overflow-x:auto"><table class="adm" id="adTable"></table></div>
@@ -1239,50 +1251,99 @@ function isMine(app){ if(!currentStaff)return false; if(currentStaff.superAdmin)
 let currentStaff=null;   // 로그인한 담당자
 let adFilter="all";      // 상태/판정 필터
 let adScope="mine";      // "mine"=담당 지원자, "all"=전체 지원자
+let adSel={nat:"",track:"",college:"",type:"",q:""};  // 국적/트랙/모집단위/구분/검색 필터
 
 function adminLogin(){
   const id=$("#al_id").value.trim().toLowerCase();
   const code=$("#al_code").value;
   const st=STAFF.find(s=>s.id===id&&s.code===code);
   if(!st){alert(L("담당자 ID 또는 접속 코드가 올바르지 않습니다.","Invalid staff ID or access code."));return;}
-  currentStaff=st; adScope="mine"; adFilter="all";
+  currentStaff=st; adScope="mine"; adFilter="all"; adSel={nat:"",track:"",college:"",type:"",q:""};
   show("adminDash");renderAdmin();
 }
 function adminLogout(){currentStaff=null;show("homeView");}
 /* Enter 키로 담당자 로그인 */
 ["al_id","al_code"].forEach(id=>{const el=$("#"+id);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();adminLogin();}});});
 
-function renderAdmin(){
-  if(!currentStaff){show("adminLogin");return;}
-  // 로그인 담당자 표시
-  $("#ad_who").textContent=staffName(currentStaff)+" · "+staffScope(currentStaff);
-  // 담당 지원자 / 전체 지원자 탭 (모든 담당자가 두 메뉴 모두 접근 가능)
-  $("#adScopeBar").innerHTML=[["mine",L("담당 지원자","My Applicants")],["all",L("전체 지원자","All Applicants")]]
-    .map(s=>`<div class="f ${adScope===s[0]?"active":""}" data-s="${s[0]}">${s[1]}</div>`).join("");
-  $$("#adScopeBar .f").forEach(f=>f.onclick=()=>{adScope=f.dataset.s;renderAdmin();});
-
+/* 국적/트랙/모집단위/구분/검색 조건 매칭 */
+function matchSel(a){
+  if(adSel.nat && (a.nationality||"")!==adSel.nat) return false;
+  if(adSel.track && a.track!==adSel.track) return false;
+  if(adSel.college && a.college!==adSel.college) return false;
+  if(adSel.type && a.admissionType!==adSel.type) return false;
+  if(adSel.q){const q=adSel.q.trim().toLowerCase();
+    const hay=[a.surname,a.firstName,a.email,a.passportNo,a.nationality,labelDept(a.department)].join(" ").toLowerCase();
+    if(hay.indexOf(q)<0) return false;}
+  return true;
+}
+/* 현재 뷰 계산: scoped(권한범위) → base(드롭다운·검색) → rows(상태/판정 필터) */
+function computeView(){
   const all=DB.all().map(a=>({...a,ev:a.evaluation||evaluate(a)}));
   const scoped=(adScope==="all")?all:all.filter(isMine);
-  const submitted=scoped.filter(a=>a.status==="submitted");
+  const base=scoped.filter(matchSel);
+  let rows=base;
+  if(adFilter==="submitted")rows=base.filter(a=>a.status==="submitted");
+  else if(adFilter==="draft")rows=base.filter(a=>a.status!=="submitted");
+  else if(["적합","보완필요","부적합"].includes(adFilter))rows=base.filter(a=>a.status==="submitted"&&a.ev.verdict===adFilter);
+  return {all,scoped,base,rows};
+}
+
+function renderAdmin(){
+  if(!currentStaff){show("adminLogin");return;}
+  $("#ad_who").textContent=staffName(currentStaff)+" · "+staffScope(currentStaff);
+  // 담당 / 전체 탭
+  $("#adScopeBar").innerHTML=[["mine",L("담당 지원자","My Applicants")],["all",L("전체 지원자","All Applicants")]]
+    .map(s=>`<div class="f ${adScope===s[0]?"active":""}" data-s="${s[0]}">${s[1]}</div>`).join("");
+  $$("#adScopeBar .f").forEach(f=>f.onclick=()=>{adScope=f.dataset.s;adSel={nat:"",track:"",college:"",type:"",q:""};renderAdmin();});
+
+  // 필터 바 (국적·트랙·모집단위·구분 드롭박스 + 검색 + 초기화 + 엑셀)
+  const {scoped}=computeView();
+  const nats=[...new Set(scoped.map(a=>a.nationality).filter(Boolean))].sort((x,y)=>x.localeCompare(y));
+  const opt=(val,label,cur)=>`<option value="${String(val).replace(/"/g,"&quot;")}"${cur===val?" selected":""}>${label}</option>`;
+  const natOpts=[opt("",L("국적 전체","All nationalities"),adSel.nat)].concat(nats.map(n=>opt(n,n,adSel.nat))).join("");
+  const trackOpts=[["",L("트랙 전체","All tracks")],["ko",L("한국어","Korean")],["en",L("영어","English")],["zh",L("중국어","Chinese")]].map(t=>opt(t[0],t[1],adSel.track)).join("");
+  const colOpts=[opt("",L("모집단위 전체","All colleges"),adSel.college)].concat(COLLEGES.map(c=>opt(c.ko,cname(c),adSel.college))).join("");
+  const typeOpts=[["",L("구분 전체","All types")],["new",L("신입학","New")],["transfer",L("편입학","Transfer")]].map(t=>opt(t[0],t[1],adSel.type)).join("");
+  $("#adFilterBar").innerHTML=`
+    <div class="fsel"><label>${L("국적","Nationality")}</label><select id="fx_nat">${natOpts}</select></div>
+    <div class="fsel"><label>${L("트랙","Track")}</label><select id="fx_track">${trackOpts}</select></div>
+    <div class="fsel"><label>${L("모집단위","College")}</label><select id="fx_col">${colOpts}</select></div>
+    <div class="fsel"><label>${L("구분","Type")}</label><select id="fx_type">${typeOpts}</select></div>
+    <div class="fsel"><label>${L("검색","Search")}</label><input class="search" id="fx_q" placeholder="${L("성명·이메일·여권","name·email·passport")}" value="${(adSel.q||"").replace(/"/g,"&quot;")}"></div>
+    <button class="reset" id="fx_reset">${L("초기화","Reset")}</button>
+    <button class="xlsx" id="fx_xlsx">⬇ ${L("엑셀 다운로드","Excel")}</button>`;
+  $("#fx_nat").onchange=e=>{adSel.nat=e.target.value;renderRows();};
+  $("#fx_track").onchange=e=>{adSel.track=e.target.value;renderRows();};
+  $("#fx_col").onchange=e=>{adSel.college=e.target.value;renderRows();};
+  $("#fx_type").onchange=e=>{adSel.type=e.target.value;renderRows();};
+  $("#fx_q").oninput=e=>{adSel.q=e.target.value;renderRows();};
+  $("#fx_reset").onclick=()=>{adSel={nat:"",track:"",college:"",type:"",q:""};adFilter="all";renderAdmin();};
+  $("#fx_xlsx").onclick=()=>exportXlsx();
+
+  // 상태/판정 필터
+  const filters=[["all",L("전체","All")],["submitted",L("제출완료","Submitted")],["draft",L("작성중","Draft")],["적합",L("적합","Eligible")],["보완필요",L("보완필요","Needs")],["부적합",L("부적합","Not")]];
+  $("#adFilters").innerHTML=filters.map(f=>`<div class="f ${adFilter===f[0]?"active":""}" data-f="${f[0]}">${f[1]}</div>`).join("");
+  $$("#adFilters .f").forEach(f=>f.onclick=()=>{adFilter=f.dataset.f;renderRows();});
+
+  renderRows();
+}
+
+/* 통계 + 표만 다시 그림 (필터 바 입력 유지 → 검색 포커스 안 끊김) */
+function renderRows(){
+  $$("#adFilters .f").forEach(f=>f.classList.toggle("active",f.dataset.f===adFilter));
+  const {base,rows}=computeView();
+  const submitted=base.filter(a=>a.status==="submitted");
   const cnt=v=>submitted.filter(a=>a.ev.verdict===v).length;
   $("#adStats").innerHTML=[
-    [scoped.length,L("지원자","Applicants")],
+    [base.length,L("지원자","Applicants")],
     [submitted.length,L("제출 완료","Submitted")],
     [cnt("적합"),L("적합","Eligible")],
     [cnt("보완필요")+cnt("부적합"),L("보완/부적합","Needs/Not")]
   ].map(s=>`<div class="stat"><div class="n">${s[0]}</div><div class="l">${s[1]}</div></div>`).join("");
 
-  const filters=[["all",L("전체","All")],["submitted",L("제출완료","Submitted")],["draft",L("작성중","Draft")],["적합",L("적합","Eligible")],["보완필요",L("보완필요","Needs")],["부적합",L("부적합","Not")]];
-  $("#adFilters").innerHTML=filters.map(f=>`<div class="f ${adFilter===f[0]?"active":""}" data-f="${f[0]}">${f[1]}</div>`).join("");
-  $$("#adFilters .f").forEach(f=>f.onclick=()=>{adFilter=f.dataset.f;renderAdmin();});
-
-  let rows=scoped;
-  if(adFilter==="submitted")rows=scoped.filter(a=>a.status==="submitted");
-  else if(adFilter==="draft")rows=scoped.filter(a=>a.status!=="submitted");
-  else if(["적합","보완필요","부적합"].includes(adFilter))rows=scoped.filter(a=>a.status==="submitted"&&a.ev.verdict===adFilter);
-
   const tb=$("#adTable");
-  if(!rows.length){tb.innerHTML="";$("#ad_empty").textContent=(adScope==="mine")?L("담당 지원자가 아직 없습니다.","No applicants assigned to you yet."):L("표시할 지원자가 없습니다. (유학생 지원 후 이곳에 표시됩니다)","No applicants to show. (Student applications will appear here)");$("#ad_empty").classList.remove("hidden");return;}
+  const noFilter=(adScope==="mine"&&!adSel.nat&&!adSel.track&&!adSel.college&&!adSel.type&&!adSel.q&&adFilter==="all");
+  if(!rows.length){tb.innerHTML="";$("#ad_empty").textContent=noFilter?L("담당 지원자가 아직 없습니다.","No applicants assigned to you yet."):L("조건에 맞는 지원자가 없습니다.","No applicants match the current filters.");$("#ad_empty").classList.remove("hidden");return;}
   $("#ad_empty").classList.add("hidden");
   tb.innerHTML=`<thead><tr>
     <th>${L("성명","Name")}</th><th>${L("국적","Nat.")}</th><th>${L("구분","Type")}</th><th>${L("모집단위","Program")}</th>
@@ -1296,6 +1357,83 @@ function renderAdmin(){
       <td style="font-size:12px;color:var(--muted)">${assigneeNames(a)}</td><td>${st}</td><td>${vb}</td>
       <td style="color:var(--muted);font-size:12px">${a.submittedAt?a.submittedAt.slice(0,10):"-"}</td></tr>`;}).join("")}</tbody>`;
   $$("#adTable tbody tr").forEach(tr=>tr.onclick=()=>openDetail(tr.dataset.id));
+}
+
+/* ================= 엑셀(XLSX) 내보내기 — 현재 필터된 지원자 ================= */
+function exportXlsx(){
+  const {rows}=computeView();
+  const trackLabel=t=>({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[t]||"";
+  const header=[L("성","Surname"),L("이름","Given name"),L("국적","Nationality"),L("성별","Gender"),L("생년월일","DOB"),
+    L("여권번호","Passport No."),L("여권만료","Passport expiry"),L("이메일","Email"),L("연락처","Phone"),
+    L("지원구분","Type"),L("편입학년","Transfer yr"),L("단과대학","College"),L("학부(과)","Department"),
+    L("트랙","Track"),L("어학시험","Lang test"),L("점수","Score"),
+    L("부 성명","Father"),L("부 국적","Father nat."),L("모 성명","Mother"),L("모 국적","Mother nat."),
+    L("담당자","Assignee"),L("상태","Status"),L("AI 판정","Verdict"),L("제출일","Submitted")];
+  const body=rows.map(a=>[
+    a.surname||"",a.firstName||"",a.nationality||"",a.gender==="F"?L("여","F"):L("남","M"),a.dob||"",
+    a.passportNo||"",a.passportExpiry||"",a.email||"",a.phone||"",
+    a.admissionType==="transfer"?L("편입학","Transfer"):L("신입학","New"),a.admissionType==="transfer"?(a.transferYear||""):"",
+    labelCollege(a.college),labelDept(a.department),trackLabel(a.track),a.langTest||"",a.langScore||"",
+    a.fatherName||"",a.fatherNationality||"",a.motherName||"",a.motherNationality||"",
+    assigneeNames(a),a.status==="submitted"?L("제출완료","Submitted"):L("작성중","Draft"),
+    a.status==="submitted"?L(verdictInfo(a.ev.verdict).kr,verdictInfo(a.ev.verdict).en):"",
+    a.submittedAt?a.submittedAt.slice(0,10):""
+  ]);
+  if(!body.length){alert(L("내보낼 지원자가 없습니다.","No applicants to export."));return;}
+  const aoa=[header].concat(body);
+  const now=new Date();const pad=n=>String(n).padStart(2,"0");
+  const fname=`GU_applicants_${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}.xlsx`;
+  const bytes=buildXlsx(aoa,"Applicants");
+  const blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  const url=URL.createObjectURL(blob);const link=document.createElement("a");
+  link.href=url;link.download=fname;document.body.appendChild(link);link.click();
+  document.body.removeChild(link);setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+/* 최소 XLSX 생성기 (외부 라이브러리 없음, 모든 셀 inlineStr) */
+function buildXlsx(aoa,sheetName){
+  const enc=new TextEncoder();
+  const esc=s=>String(s==null?"":s).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const colName=n=>{let s="";n++;while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26);}return s;};
+  let sd="";
+  aoa.forEach((row,r)=>{let cells="";
+    row.forEach((val,c)=>{cells+=`<c r="${colName(c)}${r+1}" t="inlineStr"><is><t xml:space="preserve">${esc(val)}</t></is></c>`;});
+    sd+=`<row r="${r+1}">${cells}</row>`;});
+  const sheetXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${sd}</sheetData></worksheet>`;
+  const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`;
+  const rels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`;
+  const workbook=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="${esc((sheetName||"Sheet1").slice(0,31))}" sheetId="1" r:id="rId1"/></sheets></workbook>`;
+  const wbRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>`;
+  return zipStore([
+    {name:"[Content_Types].xml",data:enc.encode(contentTypes)},
+    {name:"_rels/.rels",data:enc.encode(rels)},
+    {name:"xl/workbook.xml",data:enc.encode(workbook)},
+    {name:"xl/_rels/workbook.xml.rels",data:enc.encode(wbRels)},
+    {name:"xl/worksheets/sheet1.xml",data:enc.encode(sheetXml)}
+  ]);
+}
+const CRC_TABLE=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+function crc32(bytes){let c=0xFFFFFFFF;for(let i=0;i<bytes.length;i++)c=CRC_TABLE[(c^bytes[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+/* 무압축(store) ZIP */
+function zipStore(files){
+  const enc=new TextEncoder();
+  const u16=n=>[n&0xFF,(n>>>8)&0xFF];
+  const u32=n=>[n&0xFF,(n>>>8)&0xFF,(n>>>16)&0xFF,(n>>>24)&0xFF];
+  const chunks=[];const central=[];let offset=0;
+  files.forEach(f=>{
+    const nameBytes=enc.encode(f.name);const data=f.data;const crc=crc32(data);const len=data.length;
+    const local=[].concat(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0),u32(crc),u32(len),u32(len),u16(nameBytes.length),u16(0));
+    chunks.push(new Uint8Array(local),nameBytes,data);
+    const cen=[].concat(u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0),u32(crc),u32(len),u32(len),u16(nameBytes.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset));
+    central.push({head:new Uint8Array(cen),name:nameBytes});
+    offset+=local.length+nameBytes.length+data.length;
+  });
+  const cdStart=offset;let cdSize=0;const cdChunks=[];
+  central.forEach(c=>{cdChunks.push(c.head,c.name);cdSize+=c.head.length+c.name.length;});
+  const eocd=new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(cdSize),u32(cdStart),u16(0)));
+  const parts=chunks.concat(cdChunks,[eocd]);
+  let total=0;parts.forEach(c=>total+=c.length);
+  const out=new Uint8Array(total);let p=0;parts.forEach(c=>{out.set(c,p);p+=c.length;});
+  return out;
 }
 function openDetail(id){
   const a=DB.byId(id);const ev=a.evaluation||evaluate(a);const vi=verdictInfo(ev.verdict);
