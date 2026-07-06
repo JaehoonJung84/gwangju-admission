@@ -466,6 +466,9 @@
 /* ================= CONFIG ================= */
 const FORM_FILE = "Admission Application Form_Gwangju University.docx";
 const ADMIN_CODE = "gu1234";
+/* Neon Data API (PostgREST) endpoint for the `applications` table.
+   On final submit the entire form object is POSTed into the jsonb `payload` column. */
+const API_ENDPOINT = "https://ep-dry-sea-aoqk565q.apirest.c-2.ap-southeast-1.aws.neon.tech/neondb/rest/v1/applications";
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 let LANG="ko";
 /* app/admin translations (zh/vi/mn/uz); keyed by the English string. Fallback: English */
@@ -1110,8 +1113,23 @@ function submitApp(){
   const mail=buildEmail(current);current.confirmationEmail=mail;
   DB.upsert(current);renderReview();
   $("#sa_who").textContent=(current.firstName||current.email)+" · "+L("제출완료","Submitted");
+  postApplication(current);      // persist the full submission to the Neon backend
   sendConfirmationEmail(mail);   // fire the automated no-reply confirmation
   showEmailSent(mail);
+}
+/* Persist the whole application object into the jsonb `payload` column of the
+   Neon `applications` table via the PostgREST Data API. */
+function postApplication(app){
+  try{
+    fetch(API_ENDPOINT,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Prefer":"return=minimal"
+      },
+      body:JSON.stringify({payload:app})
+    }).catch(()=>{});
+  }catch(_){}
 }
 function buildEmail(a){
   const e=EMAIL_I18N[LANG]||EMAIL_I18N.en;
