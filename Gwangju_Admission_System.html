@@ -433,7 +433,7 @@
     <div class="card">
       <h3 id="al_title"></h3>
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="al_desc"></p>
-      <div class="field"><label id="al_id_l"></label><input type="text" id="al_id" placeholder="jjh" autocomplete="username"></div>
+      <div class="field"><label id="al_id_l"></label><input type="text" id="al_id" autocomplete="username"></div>
       <div class="field"><label id="al_code_l"></label><input type="password" id="al_code" placeholder="••••••" autocomplete="current-password"></div>
       <button class="btn btn-primary" style="width:100%" onclick="adminLogin()" id="al_btn"></button>
       <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p>
@@ -836,8 +836,7 @@ function applyAppLabels(){
   $("#al_desc").textContent=L("국제협력처 담당자 전용 페이지입니다. 담당자 ID와 접속 코드로 로그인하세요.","For International Cooperation Office staff only. Log in with your staff ID and access code.");
   $("#al_id_l").textContent=L("담당자 ID","Staff ID");
   $("#al_code_l").textContent=L("접속 코드","Access Code");$("#al_btn").textContent=L("로그인","Login");
-  const demoAccts=STAFF.map(s=>`${LANG==="ko"?s.name:s.en} <b>${s.id}</b> / <b>${s.code}</b>`).join("<br>");
-  $("#al_hint").innerHTML=L("※ 데모 계정 (ID / 접속코드):<br>","※ Demo accounts (ID / code):<br>")+demoAccts;
+  $("#al_hint").textContent=L("※ 국제협력처에서 발급받은 담당자 ID와 접속 코드를 입력하세요.","※ Enter the staff ID and access code issued by the International Cooperation Office.");
   $("#ad_out").textContent=L("← 나가기","← Exit");
   $("#ad_title").textContent=L("입학지원 현황 대시보드","Admissions Dashboard");
   $("#ok_btn").textContent=L("확인","OK");
@@ -1250,6 +1249,8 @@ function adminLogin(){
   show("adminDash");renderAdmin();
 }
 function adminLogout(){currentStaff=null;show("homeView");}
+/* Enter 키로 담당자 로그인 */
+["al_id","al_code"].forEach(id=>{const el=$("#"+id);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();adminLogin();}});});
 
 function renderAdmin(){
   if(!currentStaff){show("adminLogin");return;}
