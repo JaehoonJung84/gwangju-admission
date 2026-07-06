@@ -490,10 +490,20 @@ const FORM_FILE = "Admission Application Form_Gwangju University.docx";
    and the admin dashboard reads this table back. */
 const API_ENDPOINT = "https://ep-dry-sea-aoqk565q.apirest.c-2.ap-southeast-1.aws.neon.tech/neondb/rest/v1/applications";
 /* Neon Data API는 모든 요청에 JWT Bearer 토큰을 요구합니다.
-   아래에 Data API 토큰(anon/publishable JWT)을 넣으면 읽기·쓰기가 활성화됩니다.
-   비어 있으면 Neon 호출은 실패하고 대시보드는 로컬 저장 데이터로 대체 표시됩니다. */
+   토큰을 공개 페이지에 두면 노출되므로, 백엔드 프록시(아래)가 서버에서 토큰을 붙입니다.
+   API_TOKEN은 프록시 없이 직접 호출할 때만 쓰이며 기본은 비워 둡니다(권장: 비움). */
 const API_TOKEN = "";
 function apiHeaders(base){const h=Object.assign({},base||{});if(API_TOKEN)h["Authorization"]="Bearer "+API_TOKEN;return h;}
+/* 백엔드 프록시 URL — 배포 후 여기에 넣으세요 (예: https://gu-admissions-proxy.xxx.workers.dev).
+   프록시가 Neon 토큰을 서버에 보관하고, 담당자 조회(GET)는 서버 키로 보호합니다.
+   비어 있으면 대시보드는 브라우저 로컬 저장 데이터로 동작합니다. */
+const PROXY_ENDPOINT = "";
+/* 담당자 전용 서버 키 (프록시 GET 보호용) — 세션 동안만 브라우저에 보관, 소스에는 없음 */
+function getStaffKey(){try{return sessionStorage.getItem("gu_staff_key")||"";}catch(_){return "";}}
+function setStaffKey(k){try{sessionStorage.setItem("gu_staff_key",k);}catch(_){}}
+function clearStaffKey(){try{sessionStorage.removeItem("gu_staff_key");}catch(_){}}
+function ensureStaffKey(){let k=getStaffKey();if(!k){k=prompt(L("담당자 전용 서버 접속 키를 입력하세요.","Enter the staff server access key."))||"";if(k)setStaffKey(k);}return k;}
+function promptStaffKeyAndReload(){clearStaffKey();const k=prompt(L("담당자 전용 서버 접속 키를 입력하세요.","Enter the staff server access key."))||"";if(k){setStaffKey(k);refreshAndRender();}}
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 let LANG="ko";
 /* app/admin translations (zh/vi/mn/uz); keyed by the English string. Fallback: English */
@@ -1147,14 +1157,10 @@ function submitApp(){
    Neon `applications` table via the PostgREST Data API. */
 function postApplication(app){
   try{
-    fetch(API_ENDPOINT,{
-      method:"POST",
-      headers:apiHeaders({
-        "Content-Type":"application/json",
-        "Prefer":"return=minimal"
-      }),
-      body:JSON.stringify({payload:app})
-    }).catch(()=>{});
+    // 프록시가 설정돼 있으면 서버가 Neon 토큰을 붙여 전달, 아니면 직접 호출(프록시 전 임시)
+    const url=PROXY_ENDPOINT||API_ENDPOINT;
+    const headers=PROXY_ENDPOINT?{"Content-Type":"application/json"}:apiHeaders({"Content-Type":"application/json","Prefer":"return=minimal"});
+    fetch(url,{method:"POST",headers,body:JSON.stringify({payload:app})}).catch(()=>{});
   }catch(_){}
 }
 function buildEmail(a){
@@ -1271,11 +1277,16 @@ let neonError=null;      // 마지막 로드 오류
 /* Neon Data API에서 지원서 목록을 불러온다 (제출 시 payload(jsonb)로 저장됨).
    payload를 언랩하고 동일 id는 최신 것으로 dedupe. */
 async function loadApplications(){
-  const res=await fetch(API_ENDPOINT,{headers:apiHeaders({"Accept":"application/json"})});
-  if(!res.ok) throw new Error("HTTP "+res.status+" "+res.statusText);
+  if(!PROXY_ENDPOINT) throw new Error("NO_PROXY");
+  const key=ensureStaffKey();
+  if(!key) throw new Error("NO_KEY");
+  const res=await fetch(PROXY_ENDPOINT,{headers:{"Accept":"application/json","x-staff-key":key}});
+  if(res.status===401||res.status===403){ clearStaffKey(); throw new Error("BAD_KEY"); }
+  if(!res.ok) throw new Error("HTTP "+res.status);
   const data=await res.json();
+  const rows=Array.isArray(data)?data:[];
   const map=new Map();
-  (Array.isArray(data)?data:[]).forEach(row=>{
+  rows.forEach(row=>{
     const app=(row&&typeof row.payload==="object"&&row.payload)?row.payload:row;
     if(app&&app.id) map.set(app.id, app);
     else if(app) map.set("_row"+map.size, app);
@@ -1334,8 +1345,11 @@ function renderAdmin(){
   $("#ad_who").textContent=staffName(currentStaff)+" · "+staffScope(currentStaff);
   // 로딩/오류 배너 (Neon DB 연결 상태)
   const banner=$("#adError");
-  if(neonLoading){banner.className="adbanner load";banner.textContent=L("Neon DB에서 지원자 데이터를 불러오는 중…","Loading applicants from Neon DB…");}
-  else if(neonError){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("Neon DB 연결 실패","Neon DB connection failed")} — ${L("로컬 저장 데이터로 표시 중","showing local data")}. <span style="opacity:.8">(${String(neonError).replace(/</g,"&lt;")})</span> <button class="reset" onclick="refreshAndRender()">${L("다시 시도","Retry")}</button>`;}
+  if(neonLoading){banner.className="adbanner load";banner.textContent=L("서버에서 지원자 데이터를 불러오는 중…","Loading applicants from server…");}
+  else if(neonError==="NO_PROXY"){banner.className="adbanner load";banner.innerHTML=L("ℹ 백엔드 프록시가 아직 설정되지 않아 이 브라우저의 로컬 저장 데이터를 표시합니다.","ℹ Backend proxy not configured yet — showing this browser's local data.");}
+  else if(neonError==="NO_KEY"){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("담당자 서버 키가 필요합니다","Staff server key required")}. <button class="reset" onclick="promptStaffKeyAndReload()">${L("키 입력","Enter key")}</button>`;}
+  else if(neonError==="BAD_KEY"){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("서버 접속 키가 올바르지 않습니다","Invalid server key")}. <button class="reset" onclick="promptStaffKeyAndReload()">${L("키 다시 입력","Re-enter key")}</button>`;}
+  else if(neonError){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("서버 연결 실패","Server connection failed")} — ${L("로컬 저장 데이터로 표시 중","showing local data")}. <span style="opacity:.8">(${String(neonError).replace(/</g,"&lt;")})</span> <button class="reset" onclick="refreshAndRender()">${L("다시 시도","Retry")}</button>`;}
   else{banner.className="adbanner hidden";banner.textContent="";}
   // 담당 / 전체 탭
   $("#adScopeBar").innerHTML=[["mine",L("담당 지원자","My Applicants")],["all",L("전체 지원자","All Applicants")]]
