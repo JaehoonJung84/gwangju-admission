@@ -433,7 +433,8 @@
     <div class="card">
       <h3 id="al_title"></h3>
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="al_desc"></p>
-      <div class="field"><label id="al_code_l"></label><input type="password" id="al_code" placeholder="••••••"></div>
+      <div class="field"><label id="al_id_l"></label><input type="text" id="al_id" placeholder="jjh" autocomplete="username"></div>
+      <div class="field"><label id="al_code_l"></label><input type="password" id="al_code" placeholder="••••••" autocomplete="current-password"></div>
       <button class="btn btn-primary" style="width:100%" onclick="adminLogin()" id="al_btn"></button>
       <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p>
     </div>
@@ -444,11 +445,12 @@
 <div id="adminDash" class="hidden">
   <header class="topbar"><div class="topbar-in">
     <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY · 국제협력처</span></div></div>
-    <button class="backlink" onclick="show('homeView')" id="ad_out"></button>
+    <div class="top-actions"><span id="ad_who" style="font-size:13px;color:var(--muted)"></span><button class="backlink" onclick="adminLogout()" id="ad_out"></button></div>
   </div></header>
   <main>
     <img class="lighty-corner" src="lighty/notice.png" alt="">
     <h2 style="font-size:20px;color:var(--green);margin-bottom:14px" id="ad_title"></h2>
+    <div class="filters" id="adScopeBar" style="margin-bottom:14px"></div>
     <div class="stats" id="adStats"></div>
     <div class="filters" id="adFilters"></div>
     <div style="overflow-x:auto"><table class="adm" id="adTable"></table></div>
@@ -465,7 +467,6 @@
 <script>
 /* ================= CONFIG ================= */
 const FORM_FILE = "Admission Application Form_Gwangju University.docx";
-const ADMIN_CODE = "gu1234";
 /* Neon Data API (PostgREST) endpoint for the `applications` table.
    On final submit the entire form object is POSTed into the jsonb `payload` column. */
 const API_ENDPOINT = "https://ep-dry-sea-aoqk565q.apirest.c-2.ap-southeast-1.aws.neon.tech/neondb/rest/v1/applications";
@@ -832,9 +833,11 @@ function applyAppLabels(){
   $("#finalSubmit").textContent=L("최종 제출","Final Submit");
   // admin login
   $("#al_title").textContent=L("담당자 로그인","Staff Login");
-  $("#al_desc").textContent=L("국제협력처 담당자 전용 페이지입니다.","For International Cooperation Office staff only.");
+  $("#al_desc").textContent=L("국제협력처 담당자 전용 페이지입니다. 담당자 ID와 접속 코드로 로그인하세요.","For International Cooperation Office staff only. Log in with your staff ID and access code.");
+  $("#al_id_l").textContent=L("담당자 ID","Staff ID");
   $("#al_code_l").textContent=L("접속 코드","Access Code");$("#al_btn").textContent=L("로그인","Login");
-  $("#al_hint").textContent=L("※ 데모 접속 코드: gu1234","※ Demo code: gu1234");
+  const demoAccts=STAFF.map(s=>`${LANG==="ko"?s.name:s.en} <b>${s.id}</b> / <b>${s.code}</b>`).join("<br>");
+  $("#al_hint").innerHTML=L("※ 데모 계정 (ID / 접속코드):<br>","※ Demo accounts (ID / code):<br>")+demoAccts;
   $("#ad_out").textContent=L("← 나가기","← Exit");
   $("#ad_title").textContent=L("입학지원 현황 대시보드","Admissions Dashboard");
   $("#ok_btn").textContent=L("확인","OK");
@@ -1200,39 +1203,96 @@ function evaluate(a){
 const verdictInfo=v=>({"적합":{cls:"ok",kr:"적합",en:"Eligible",ic:"✅"},"보완필요":{cls:"warn",kr:"보완필요",en:"Needs completion",ic:"⚠️"},"부적합":{cls:"no",kr:"부적합",en:"Not eligible",ic:"⛔"}}[v]);
 
 /* ================= ADMIN ================= */
-let adFilter="all";
+/* 담당자 계정. 배정 우선순위: ① 트랙(영어·중국어트랙은 국가 무관 전담)
+   ② 한국어트랙 지원자는 국적별로 분담. 정재훈 = 전체 관리자(superAdmin). */
+const STAFF=[
+ {id:"jjh",code:"jjh2026",name:"정재훈",en:"Jaehoon Jung",superAdmin:true,
+   scopeKo:"전체 관리자 · 영어트랙",scopeEn:"Super Admin · English track"},
+ {id:"kys",code:"kys2026",name:"김유성",en:"Yuseong Kim",superAdmin:false,
+   scopeKo:"영어트랙",scopeEn:"English track"},
+ {id:"ohs",code:"ohs2026",name:"오하선",en:"Haseon Oh",superAdmin:false,
+   scopeKo:"영어트랙 · 한국어트랙(몽골 및 기타국가)",scopeEn:"English track · Korean track (Mongolia & others)"},
+ {id:"khy",code:"khy2026",name:"강향옥",en:"Hyangok Kang",superAdmin:false,
+   scopeKo:"중국어트랙 · 한국어트랙(중국)",scopeEn:"Chinese track · Korean track (China)"},
+ {id:"hjy",code:"hjy2026",name:"황지영",en:"Jiyoung Hwang",superAdmin:false,
+   scopeKo:"한국어트랙(베트남)",scopeEn:"Korean track (Vietnam)"},
+ {id:"hjh",code:"hjh2026",name:"황지향",en:"Jihyang Hwang",superAdmin:false,
+   scopeKo:"한국어트랙(베트남)",scopeEn:"Korean track (Vietnam)"}
+];
+const staffById=id=>STAFF.find(s=>s.id===id);
+const staffName=s=>s?(LANG==="ko"?s.name:s.en):"-";
+const staffScope=s=>s?(LANG==="ko"?s.scopeKo:s.scopeEn):"";
+/* 한국어트랙 국적 라우팅용 매처 (국적은 영문 국가명으로 저장됨) */
+const isChina  =s=>/china|중국|中国|prc\b/i.test(s||"");
+const isVietnam=s=>/viet\s*nam|vietnam|베트남|việt/i.test(s||"");
+/* 해당 지원서를 담당하는 직원 ID 목록 (위 규칙 그대로) */
+function assigneeIds(app){
+  if(app.track==="en") return ["jjh","kys","ohs"];   // 모든 영어트랙
+  if(app.track==="zh") return ["khy"];                // 모든 중국어트랙
+  const nat=app.nationality||"";                       // 한국어트랙 → 국적별
+  if(isChina(nat))   return ["khy"];
+  if(isVietnam(nat)) return ["hjy","hjh"];
+  return ["ohs"];                                      // 몽골 및 그 외 기타국가
+}
+const assigneeNames=app=>assigneeIds(app).map(id=>staffName(staffById(id))).join(", ");
+function isMine(app){ if(!currentStaff)return false; if(currentStaff.superAdmin)return true; return assigneeIds(app).includes(currentStaff.id); }
+
+let currentStaff=null;   // 로그인한 담당자
+let adFilter="all";      // 상태/판정 필터
+let adScope="mine";      // "mine"=담당 지원자, "all"=전체 지원자
+
 function adminLogin(){
-  if($("#al_code").value!==ADMIN_CODE){alert(L("접속 코드가 올바르지 않습니다.","Invalid access code."));return;}
+  const id=$("#al_id").value.trim().toLowerCase();
+  const code=$("#al_code").value;
+  const st=STAFF.find(s=>s.id===id&&s.code===code);
+  if(!st){alert(L("담당자 ID 또는 접속 코드가 올바르지 않습니다.","Invalid staff ID or access code."));return;}
+  currentStaff=st; adScope="mine"; adFilter="all";
   show("adminDash");renderAdmin();
 }
+function adminLogout(){currentStaff=null;show("homeView");}
+
 function renderAdmin(){
-  const apps=DB.all().map(a=>({...a,ev:a.evaluation||evaluate(a)}));
-  const submitted=apps.filter(a=>a.status==="submitted");
+  if(!currentStaff){show("adminLogin");return;}
+  // 로그인 담당자 표시
+  $("#ad_who").textContent=staffName(currentStaff)+" · "+staffScope(currentStaff);
+  // 담당 지원자 / 전체 지원자 탭 (모든 담당자가 두 메뉴 모두 접근 가능)
+  $("#adScopeBar").innerHTML=[["mine",L("담당 지원자","My Applicants")],["all",L("전체 지원자","All Applicants")]]
+    .map(s=>`<div class="f ${adScope===s[0]?"active":""}" data-s="${s[0]}">${s[1]}</div>`).join("");
+  $$("#adScopeBar .f").forEach(f=>f.onclick=()=>{adScope=f.dataset.s;renderAdmin();});
+
+  const all=DB.all().map(a=>({...a,ev:a.evaluation||evaluate(a)}));
+  const scoped=(adScope==="all")?all:all.filter(isMine);
+  const submitted=scoped.filter(a=>a.status==="submitted");
   const cnt=v=>submitted.filter(a=>a.ev.verdict===v).length;
   $("#adStats").innerHTML=[
-    [apps.length,L("총 지원자","Total")],
+    [scoped.length,L("지원자","Applicants")],
     [submitted.length,L("제출 완료","Submitted")],
     [cnt("적합"),L("적합","Eligible")],
     [cnt("보완필요")+cnt("부적합"),L("보완/부적합","Needs/Not")]
   ].map(s=>`<div class="stat"><div class="n">${s[0]}</div><div class="l">${s[1]}</div></div>`).join("");
+
   const filters=[["all",L("전체","All")],["submitted",L("제출완료","Submitted")],["draft",L("작성중","Draft")],["적합",L("적합","Eligible")],["보완필요",L("보완필요","Needs")],["부적합",L("부적합","Not")]];
   $("#adFilters").innerHTML=filters.map(f=>`<div class="f ${adFilter===f[0]?"active":""}" data-f="${f[0]}">${f[1]}</div>`).join("");
   $$("#adFilters .f").forEach(f=>f.onclick=()=>{adFilter=f.dataset.f;renderAdmin();});
-  let rows=apps;
-  if(adFilter==="submitted")rows=apps.filter(a=>a.status==="submitted");
-  else if(adFilter==="draft")rows=apps.filter(a=>a.status!=="submitted");
-  else if(["적합","보완필요","부적합"].includes(adFilter))rows=apps.filter(a=>a.status==="submitted"&&a.ev.verdict===adFilter);
+
+  let rows=scoped;
+  if(adFilter==="submitted")rows=scoped.filter(a=>a.status==="submitted");
+  else if(adFilter==="draft")rows=scoped.filter(a=>a.status!=="submitted");
+  else if(["적합","보완필요","부적합"].includes(adFilter))rows=scoped.filter(a=>a.status==="submitted"&&a.ev.verdict===adFilter);
+
   const tb=$("#adTable");
-  if(!rows.length){tb.innerHTML="";$("#ad_empty").textContent=L("표시할 지원자가 없습니다. (유학생 지원 후 이곳에 표시됩니다)","No applicants to show. (Student applications will appear here)");$("#ad_empty").classList.remove("hidden");return;}
+  if(!rows.length){tb.innerHTML="";$("#ad_empty").textContent=(adScope==="mine")?L("담당 지원자가 아직 없습니다.","No applicants assigned to you yet."):L("표시할 지원자가 없습니다. (유학생 지원 후 이곳에 표시됩니다)","No applicants to show. (Student applications will appear here)");$("#ad_empty").classList.remove("hidden");return;}
   $("#ad_empty").classList.add("hidden");
   tb.innerHTML=`<thead><tr>
     <th>${L("성명","Name")}</th><th>${L("국적","Nat.")}</th><th>${L("구분","Type")}</th><th>${L("모집단위","Program")}</th>
-    <th>${L("트랙","Track")}</th><th>${L("상태","Status")}</th><th>AI ${L("판정","Verdict")}</th><th>${L("제출일","Date")}</th></tr></thead><tbody>${
+    <th>${L("트랙","Track")}</th><th>${L("담당","Assignee")}</th><th>${L("상태","Status")}</th><th>AI ${L("판정","Verdict")}</th><th>${L("제출일","Date")}</th></tr></thead><tbody>${
     rows.map(a=>{const vi=verdictInfo(a.ev.verdict);const st=a.status==="submitted"?`<span class="vbadge v-ok">${L("제출","Sub")}</span>`:`<span class="vbadge v-draft">${L("작성중","Draft")}</span>`;
     const vb=a.status==="submitted"?`<span class="vbadge v-${vi.cls}">${vi.ic} ${L(vi.kr,vi.en)}</span>`:"-";
-    return `<tr data-id="${a.id}"><td><b>${a.surname||"-"} ${a.firstName||""}</b></td><td>${a.nationality||"-"}</td>
+    const mineHi=(adScope==="all"&&isMine(a))?' style="background:#f6fbef"':'';
+    return `<tr data-id="${a.id}"${mineHi}><td><b>${a.surname||"-"} ${a.firstName||""}</b></td><td>${a.nationality||"-"}</td>
       <td>${a.admissionType==="transfer"?L("편입","T")+(a.transferYear||""):L("신입","New")}</td><td>${labelDept(a.department)}</td>
-      <td>${({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[a.track]||"-"}</td><td>${st}</td><td>${vb}</td>
+      <td>${({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[a.track]||"-"}</td>
+      <td style="font-size:12px;color:var(--muted)">${assigneeNames(a)}</td><td>${st}</td><td>${vb}</td>
       <td style="color:var(--muted);font-size:12px">${a.submittedAt?a.submittedAt.slice(0,10):"-"}</td></tr>`;}).join("")}</tbody>`;
   $$("#adTable tbody tr").forEach(tr=>tr.onclick=()=>openDetail(tr.dataset.id));
 }
@@ -1253,6 +1313,7 @@ function openDetail(id){
       ${field(L("지원구분","Type"),a.admissionType==="transfer"?L("편입 ","T ")+a.transferYear:L("신입학","New"))}${field(L("모집단위","Program"),labelCollege(a.college)+" / "+labelDept(a.department))}
       ${field(L("트랙","Track"),({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[a.track])}${field(L("어학","Language"),(a.langTest||"")+" "+scoreDisp(a))}
       ${field(L("부/국적","Father"),(a.fatherName||"")+" / "+(a.fatherNationality||""))}${field(L("모/국적","Mother"),(a.motherName||"")+" / "+(a.motherNationality||""))}
+      ${field(L("담당자","Assignee"),assigneeNames(a))}
     </div>
     <div class="eval-card ${vi.cls}">
       <div class="eval-head"><span style="font-size:26px">${vi.ic}</span><div><div style="font-size:12px;color:var(--muted)">AI ${L("자동 판정 (모집요강 기준)","Auto-evaluation (per guidelines)")}</div><div class="big">${L(vi.kr,vi.en)}</div></div></div>
