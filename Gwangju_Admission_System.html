@@ -144,6 +144,11 @@
   .adfbar .reset:hover{background:#e2ebde}
   .adfbar .xlsx{align-self:flex-end;margin-left:auto;background:#1d6f42;color:#fff;border:none;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;height:36px}
   .adfbar .xlsx:hover{background:#155531}
+  /* Neon DB 로딩/오류 배너 */
+  .adbanner{border-radius:11px;padding:11px 15px;margin-bottom:14px;font-size:13.5px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .adbanner.load{background:#eef6fb;border:1px solid #cfe4f2;color:#2c6b8f}
+  .adbanner.err{background:#fdf0ef;border:1px solid #f0c9c5;color:var(--danger)}
+  .adbanner .reset{margin-left:auto}
 
   .modal{position:fixed;inset:0;background:rgba(20,40,25,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:60;overflow:auto}
   .modal .box{background:#fff;border-radius:18px;max-width:720px;width:100%;padding:26px 28px;box-shadow:0 20px 50px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
@@ -462,6 +467,7 @@
     <img class="lighty-corner" src="lighty/notice.png" alt="">
     <h2 style="font-size:20px;color:var(--green);margin-bottom:14px" id="ad_title"></h2>
     <div class="filters" id="adScopeBar" style="margin-bottom:14px"></div>
+    <div id="adError" class="adbanner hidden"></div>
     <div class="adfbar" id="adFilterBar"></div>
     <div class="stats" id="adStats"></div>
     <div class="filters" id="adFilters"></div>
@@ -480,8 +486,14 @@
 /* ================= CONFIG ================= */
 const FORM_FILE = "Admission Application Form_Gwangju University.docx";
 /* Neon Data API (PostgREST) endpoint for the `applications` table.
-   On final submit the entire form object is POSTed into the jsonb `payload` column. */
+   On final submit the entire form object is POSTed into the jsonb `payload` column,
+   and the admin dashboard reads this table back. */
 const API_ENDPOINT = "https://ep-dry-sea-aoqk565q.apirest.c-2.ap-southeast-1.aws.neon.tech/neondb/rest/v1/applications";
+/* Neon Data API는 모든 요청에 JWT Bearer 토큰을 요구합니다.
+   아래에 Data API 토큰(anon/publishable JWT)을 넣으면 읽기·쓰기가 활성화됩니다.
+   비어 있으면 Neon 호출은 실패하고 대시보드는 로컬 저장 데이터로 대체 표시됩니다. */
+const API_TOKEN = "";
+function apiHeaders(base){const h=Object.assign({},base||{});if(API_TOKEN)h["Authorization"]="Bearer "+API_TOKEN;return h;}
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 let LANG="ko";
 /* app/admin translations (zh/vi/mn/uz); keyed by the English string. Fallback: English */
@@ -1137,10 +1149,10 @@ function postApplication(app){
   try{
     fetch(API_ENDPOINT,{
       method:"POST",
-      headers:{
+      headers:apiHeaders({
         "Content-Type":"application/json",
         "Prefer":"return=minimal"
-      },
+      }),
       body:JSON.stringify({payload:app})
     }).catch(()=>{});
   }catch(_){}
@@ -1252,6 +1264,33 @@ let currentStaff=null;   // 로그인한 담당자
 let adFilter="all";      // 상태/판정 필터
 let adScope="mine";      // "mine"=담당 지원자, "all"=전체 지원자
 let adSel={nat:"",track:"",college:"",type:"",q:""};  // 국적/트랙/모집단위/구분/검색 필터
+let neonApps=null;       // Neon DB에서 불러온 지원서 캐시
+let neonLoading=false;   // 로딩 중 여부
+let neonError=null;      // 마지막 로드 오류
+
+/* Neon Data API에서 지원서 목록을 불러온다 (제출 시 payload(jsonb)로 저장됨).
+   payload를 언랩하고 동일 id는 최신 것으로 dedupe. */
+async function loadApplications(){
+  const res=await fetch(API_ENDPOINT,{headers:apiHeaders({"Accept":"application/json"})});
+  if(!res.ok) throw new Error("HTTP "+res.status+" "+res.statusText);
+  const data=await res.json();
+  const map=new Map();
+  (Array.isArray(data)?data:[]).forEach(row=>{
+    const app=(row&&typeof row.payload==="object"&&row.payload)?row.payload:row;
+    if(app&&app.id) map.set(app.id, app);
+    else if(app) map.set("_row"+map.size, app);
+  });
+  neonApps=[...map.values()];
+  return neonApps;
+}
+/* 불러오기 → 렌더 (로딩/오류 상태 표시) */
+async function refreshAndRender(){
+  if(!currentStaff)return;
+  neonLoading=true; neonError=null; renderAdmin();
+  try{ await loadApplications(); }
+  catch(e){ neonError=(e&&e.message)?e.message:String(e); }
+  neonLoading=false; renderAdmin();
+}
 
 function adminLogin(){
   const id=$("#al_id").value.trim().toLowerCase();
@@ -1259,7 +1298,7 @@ function adminLogin(){
   const st=STAFF.find(s=>s.id===id&&s.code===code);
   if(!st){alert(L("담당자 ID 또는 접속 코드가 올바르지 않습니다.","Invalid staff ID or access code."));return;}
   currentStaff=st; adScope="mine"; adFilter="all"; adSel={nat:"",track:"",college:"",type:"",q:""};
-  show("adminDash");renderAdmin();
+  show("adminDash");refreshAndRender();
 }
 function adminLogout(){currentStaff=null;show("homeView");}
 /* Enter 키로 담당자 로그인 */
@@ -1278,7 +1317,9 @@ function matchSel(a){
 }
 /* 현재 뷰 계산: scoped(권한범위) → base(드롭다운·검색) → rows(상태/판정 필터) */
 function computeView(){
-  const all=DB.all().map(a=>({...a,ev:a.evaluation||evaluate(a)}));
+  // Neon 로드 실패 시 로컬 저장 데이터로 대체
+  const src=neonError?DB.all():(neonApps||[]);
+  const all=src.map(a=>({...a,ev:a.evaluation||evaluate(a)}));
   const scoped=(adScope==="all")?all:all.filter(isMine);
   const base=scoped.filter(matchSel);
   let rows=base;
@@ -1291,6 +1332,11 @@ function computeView(){
 function renderAdmin(){
   if(!currentStaff){show("adminLogin");return;}
   $("#ad_who").textContent=staffName(currentStaff)+" · "+staffScope(currentStaff);
+  // 로딩/오류 배너 (Neon DB 연결 상태)
+  const banner=$("#adError");
+  if(neonLoading){banner.className="adbanner load";banner.textContent=L("Neon DB에서 지원자 데이터를 불러오는 중…","Loading applicants from Neon DB…");}
+  else if(neonError){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("Neon DB 연결 실패","Neon DB connection failed")} — ${L("로컬 저장 데이터로 표시 중","showing local data")}. <span style="opacity:.8">(${String(neonError).replace(/</g,"&lt;")})</span> <button class="reset" onclick="refreshAndRender()">${L("다시 시도","Retry")}</button>`;}
+  else{banner.className="adbanner hidden";banner.textContent="";}
   // 담당 / 전체 탭
   $("#adScopeBar").innerHTML=[["mine",L("담당 지원자","My Applicants")],["all",L("전체 지원자","All Applicants")]]
     .map(s=>`<div class="f ${adScope===s[0]?"active":""}" data-s="${s[0]}">${s[1]}</div>`).join("");
@@ -1311,6 +1357,7 @@ function renderAdmin(){
     <div class="fsel"><label>${L("구분","Type")}</label><select id="fx_type">${typeOpts}</select></div>
     <div class="fsel"><label>${L("검색","Search")}</label><input class="search" id="fx_q" placeholder="${L("성명·이메일·여권","name·email·passport")}" value="${(adSel.q||"").replace(/"/g,"&quot;")}"></div>
     <button class="reset" id="fx_reset">${L("초기화","Reset")}</button>
+    <button class="reset" id="fx_refresh">↻ ${L("새로고침","Refresh")}</button>
     <button class="xlsx" id="fx_xlsx">⬇ ${L("엑셀 다운로드","Excel")}</button>`;
   $("#fx_nat").onchange=e=>{adSel.nat=e.target.value;renderRows();};
   $("#fx_track").onchange=e=>{adSel.track=e.target.value;renderRows();};
@@ -1318,6 +1365,7 @@ function renderAdmin(){
   $("#fx_type").onchange=e=>{adSel.type=e.target.value;renderRows();};
   $("#fx_q").oninput=e=>{adSel.q=e.target.value;renderRows();};
   $("#fx_reset").onclick=()=>{adSel={nat:"",track:"",college:"",type:"",q:""};adFilter="all";renderAdmin();};
+  $("#fx_refresh").onclick=()=>refreshAndRender();
   $("#fx_xlsx").onclick=()=>exportXlsx();
 
   // 상태/판정 필터
@@ -1436,7 +1484,8 @@ function zipStore(files){
   return out;
 }
 function openDetail(id){
-  const a=DB.byId(id);const ev=a.evaluation||evaluate(a);const vi=verdictInfo(ev.verdict);
+  const src=neonError?DB.all():(neonApps||[]);
+  const a=src.find(x=>x.id===id);if(!a)return;const ev=a.evaluation||evaluate(a);const vi=verdictInfo(ev.verdict);
   const field=(l,v)=>`<div class="r"><span>${l}</span><span>${v||"-"}</span></div>`;
   const docsHtml=DOCS.map(d=>{
     const done=a.docs&&a.docs[d.k];return `<div style="padding:5px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;font-size:13px">
