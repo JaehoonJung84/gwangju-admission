@@ -248,7 +248,7 @@
     <p data-i="heroDesc"></p>
     <div class="hero-cta">
       <button class="btn btn-lime" id="goStudent" data-i="asStudent"></button>
-      <button class="btn btn-ghost" id="goAdmin" style="background:rgba(255,255,255,.15);color:#fff" data-i="asAdmin"></button><img class="lighty-hero" src="lighty/campus.png" alt="">
+      <img class="lighty-hero" src="lighty/campus.png" alt="">
     </div>
   </div>
 
@@ -884,7 +884,8 @@ function applyAppLabels(){
 
 /* ================= NAV BUTTONS ================= */
 $("#goStudent").onclick=()=>show("studentLogin");
-$("#goAdmin").onclick=()=>show("adminLogin");
+/* 담당자 로그인 진입 제거: 공개 페이지는 지원서 제출 전용.
+   담당자는 Neon 콘솔에서 직접 명단을 확인합니다(브라우저에 조회 기능/키 없음). */
 
 /* ================= STUDENT LOGIN ================= */
 function studentLogin(){
@@ -1234,20 +1235,9 @@ const verdictInfo=v=>({"적합":{cls:"ok",kr:"적합",en:"Eligible",ic:"✅"},"�
 /* ================= ADMIN ================= */
 /* 담당자 계정. 배정 우선순위: ① 트랙(영어·중국어트랙은 국가 무관 전담)
    ② 한국어트랙 지원자는 국적별로 분담. 정재훈 = 전체 관리자(superAdmin). */
-const STAFF=[
- {id:"jjh",code:"jjh2026",name:"정재훈",en:"Jaehoon Jung",superAdmin:true,
-   scopeKo:"전체 관리자 · 영어트랙",scopeEn:"Super Admin · English track"},
- {id:"kys",code:"kys2026",name:"김유성",en:"Yuseong Kim",superAdmin:false,
-   scopeKo:"영어트랙",scopeEn:"English track"},
- {id:"ohs",code:"ohs2026",name:"오하선",en:"Haseon Oh",superAdmin:false,
-   scopeKo:"영어트랙 · 한국어트랙(몽골 및 기타국가)",scopeEn:"English track · Korean track (Mongolia & others)"},
- {id:"khy",code:"khy2026",name:"강향옥",en:"Hyangok Kang",superAdmin:false,
-   scopeKo:"중국어트랙 · 한국어트랙(중국)",scopeEn:"Chinese track · Korean track (China)"},
- {id:"hjy",code:"hjy2026",name:"황지영",en:"Jiyoung Hwang",superAdmin:false,
-   scopeKo:"한국어트랙(베트남)",scopeEn:"Korean track (Vietnam)"},
- {id:"hjh",code:"hjh2026",name:"황지향",en:"Jihyang Hwang",superAdmin:false,
-   scopeKo:"한국어트랙(베트남)",scopeEn:"Korean track (Vietnam)"}
-];
+/* 담당자 계정 제거: 공개 페이지에서 명단 조회 기능을 없앴으므로 접속코드를
+   공개 소스에 두지 않습니다. 담당자 확인은 Neon 콘솔에서 직접 합니다. */
+const STAFF=[];
 const staffById=id=>STAFF.find(s=>s.id===id);
 const staffName=s=>s?(LANG==="ko"?s.name:s.en):"-";
 const staffScope=s=>s?(LANG==="ko"?s.scopeKo:s.scopeEn):"";
