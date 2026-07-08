@@ -1522,8 +1522,29 @@ function openDetail(id){
       <ul class="checklist">${ev.checks.map(c=>`<li><span class="mk ${c.ok?"y":"n"}">${c.ok?"✔":"✗"}</span><div class="ct">${c.label}<div class="cn">${c.note}</div></div></li>`).join("")}</ul>
       <div class="ai-note">${L("※ 현재 판정은 지원자가 입력한 정보 + 서류 제출 여부 기반의 규칙 엔진입니다. 실제 배포 버전에서는 Claude API가 업로드된 서류(여권·성적표·재정증빙 등) 내용을 직접 판독하여 정밀 판정합니다.","※ This verdict uses a rule engine on entered data + document presence. The production version uses the Claude API to read actual document contents.")}</div>
     </div>
-    <h3 style="font-size:14px">${L("제출 서류","Documents")}</h3>${docsHtml}`;
+    <h3 style="font-size:14px">${L("제출 서류","Documents")}</h3>${docsHtml}
+    <div style="text-align:right;margin-top:16px;border-top:1px solid var(--line);padding-top:12px">
+      <button class="btn" style="background:#fff;border:1px solid #e5484d;color:#e5484d"
+        onclick="deleteApplication(this.dataset.aid)" data-aid="${String(a.id).replace(/"/g,'&quot;')}">🗑 ${L("이 지원서 삭제","Delete this application")}</button>
+    </div>`;
   $("#detailModal").classList.remove("hidden");
+}
+/* 담당자 전용: 지원서 영구 삭제 (프록시 DELETE + 담당자 키). 삭제 후 명단 새로고침. */
+async function deleteApplication(appId){
+  if(!currentStaff||!appId)return;
+  if(!PROXY_ENDPOINT){alert(L("서버가 설정되지 않았습니다.","Server is not configured."));return;}
+  const key=getStaffKey();
+  if(!key){alert(L("담당자 키가 필요합니다. 다시 로그인하세요.","Staff key required. Please log in again."));return;}
+  if(!confirm(L("이 지원서를 영구적으로 삭제할까요? 되돌릴 수 없습니다.","Permanently delete this application? This cannot be undone.")))return;
+  try{
+    const res=await fetch(PROXY_ENDPOINT+"?id="+encodeURIComponent(appId),{method:"DELETE",headers:{"x-staff-key":key}});
+    if(res.status===401||res.status===403){alert(L("권한이 없습니다. 다시 로그인하세요.","Not authorized. Please log in again."));return;}
+    if(!res.ok)throw new Error("HTTP "+res.status);
+    try{if(DB&&DB.remove)DB.remove(appId);}catch(_){}
+    closeModal("detailModal");
+    await refreshAndRender();
+    alert(L("삭제되었습니다.","Deleted."));
+  }catch(e){alert(L("삭제 실패","Delete failed")+": "+(e&&e.message?e.message:e));}
 }
 $("#ad_out"); // noop
 function closeModal(id){$("#"+id).classList.add("hidden");}

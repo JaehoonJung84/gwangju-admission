@@ -11,6 +11,7 @@
  * Endpoints (single URL, method-based):
  *   POST    → INSERT a student submission into `applications` (open; the public form).
  *   GET     → SELECT all applications, ONLY if header `x-staff-key` === STAFF_KEY.
+ *   DELETE  → DELETE one application by its app id (?id=), ONLY if x-staff-key === STAFF_KEY.
  *   OPTIONS → CORS preflight.
  *
  * Request/response contract (matches Gwangju_Admission_System.html):
@@ -61,7 +62,7 @@ export default {
     const origin = env.ALLOW_ORIGIN || "*";
     const cors = {
       "Access-Control-Allow-Origin": origin,
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, x-staff-key",
       "Access-Control-Max-Age": "86400",
       "Vary": "Origin",
@@ -107,6 +108,22 @@ export default {
           []
         );
         return json(Array.isArray(data.rows) ? data.rows : [], 200);
+      }
+
+      // ---- Delete one application (staff only) ----
+      if (request.method === "DELETE") {
+        const key = request.headers.get("x-staff-key") || "";
+        if (!env.STAFF_KEY || key !== env.STAFF_KEY) {
+          return json({ error: "unauthorized" }, 401);
+        }
+        const id = new URL(request.url).searchParams.get("id") || "";
+        if (!id) return json({ error: "bad_request: missing id" }, 400);
+        const r = await neonQuery(
+          env.DATABASE_URL,
+          "delete from applications where payload->>'id' = $1",
+          [id]
+        );
+        return json({ ok: true, deleted: (r && r.rowCount) || 0 }, 200);
       }
 
       return json({ error: "method_not_allowed" }, 405);
