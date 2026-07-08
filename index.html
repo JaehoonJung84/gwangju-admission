@@ -118,8 +118,8 @@
   .upbtn{border:1px solid var(--green);color:var(--green);background:#fff;border-radius:9px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap}.upbtn:hover{background:#f0f7ef}
 
   .summary{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13.5px}@media(max-width:600px){.summary{grid-template-columns:1fr}}
-  .summary .r{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
-  .summary .r span:first-child{color:var(--muted)}.summary .r span:last-child{font-weight:700;text-align:right}
+  .summary .r{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);min-width:0}
+  .summary .r span:first-child{color:var(--muted);flex:none}.summary .r span:last-child{font-weight:700;text-align:right;min-width:0;overflow-wrap:anywhere}
 
   /* admin */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
@@ -1424,7 +1424,7 @@ function renderRows(){
   $("#ad_empty").classList.add("hidden");
   tb.innerHTML=`<thead><tr>
     <th>${L("성명","Name")}</th><th>${L("국적","Nat.")}</th><th>${L("구분","Type")}</th><th>${L("모집단위","Program")}</th>
-    <th>${L("트랙","Track")}</th><th>${L("담당","Assignee")}</th><th>${L("상태","Status")}</th><th>AI ${L("판정","Verdict")}</th><th>${L("제출일","Date")}</th></tr></thead><tbody>${
+    <th>${L("트랙","Track")}</th><th>${L("담당","Assignee")}</th><th>${L("상태","Status")}</th><th>AI ${L("판정","Verdict")}</th><th>${L("제출시각","Submitted")}</th></tr></thead><tbody>${
     rows.map(a=>{const vi=verdictInfo(a.ev.verdict);const st=a.status==="submitted"?`<span class="vbadge v-ok">${L("제출","Sub")}</span>`:`<span class="vbadge v-draft">${L("작성중","Draft")}</span>`;
     const vb=a.status==="submitted"?`<span class="vbadge v-${vi.cls}">${vi.ic} ${L(vi.kr,vi.en)}</span>`:"-";
     const mineHi=(adScope==="all"&&isMine(a))?' style="background:#f6fbef"':'';
@@ -1432,7 +1432,7 @@ function renderRows(){
       <td>${a.admissionType==="transfer"?L("편입","T")+(a.transferYear||""):L("신입","New")}</td><td>${labelDept(a.department)}</td>
       <td>${({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[a.track]||"-"}</td>
       <td style="font-size:12px;color:var(--muted)">${assigneeNames(a)}</td><td>${st}</td><td>${vb}</td>
-      <td style="color:var(--muted);font-size:12px">${a.submittedAt?a.submittedAt.slice(0,10):"-"}</td></tr>`;}).join("")}</tbody>`;
+      <td style="color:var(--muted);font-size:11.5px;white-space:nowrap">${a.submittedAt?fmtTime(a.submittedAt):"-"}</td></tr>`;}).join("")}</tbody>`;
   $$("#adTable tbody tr").forEach(tr=>tr.onclick=()=>openDetail(tr.dataset.id));
 }
 
@@ -1454,7 +1454,7 @@ function exportXlsx(){
     a.fatherName||"",a.fatherNationality||"",a.motherName||"",a.motherNationality||"",
     assigneeNames(a),a.status==="submitted"?L("제출완료","Submitted"):L("작성중","Draft"),
     a.status==="submitted"?L(verdictInfo(a.ev.verdict).kr,verdictInfo(a.ev.verdict).en):"",
-    a.submittedAt?a.submittedAt.slice(0,10):""
+    a.submittedAt?fmtTime(a.submittedAt):""
   ]);
   if(!body.length){alert(L("내보낼 지원자가 없습니다.","No applicants to export."));return;}
   const aoa=[header].concat(body);
@@ -1512,10 +1512,16 @@ function zipStore(files){
   const out=new Uint8Array(total);let p=0;parts.forEach(c=>{out.set(c,p);p+=c.length;});
   return out;
 }
+/* ISO → 'YYYY-MM-DD HH:MM:SS' (로컬 시간, 초 단위). fmtDate는 날짜만. */
+function fmtTime(iso){if(!iso)return "-";const d=new Date(iso);if(isNaN(d.getTime()))return String(iso);const p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());}
+function fmtDate(iso){return iso?String(iso).slice(0,10):"-";}
 function openDetail(id){
   const src=neonError?DB.all():(neonApps||[]);
   const a=src.find(x=>x.id===id);if(!a)return;const ev=a.evaluation||evaluate(a);const vi=verdictInfo(ev.verdict);
   const field=(l,v)=>`<div class="r"><span>${l}</span><span>${v||"-"}</span></div>`;
+  const statusLine=a.status==="submitted"
+    ?`${L("최종 제출 완료","Submitted")} · ${fmtTime(a.submittedAt)}`
+    :L("작성 중 (미제출)","Draft (not submitted)");
   const docsHtml=DOCS.map(d=>{
     const done=a.docs&&a.docs[d.k];return `<div style="padding:5px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;font-size:13px">
       <span>${done?"✅":"⬜"} ${dname(d,a.track)}</span><span style="color:var(--muted);font-size:11.5px">${done?a.docs[d.k]:""}</span></div>`;}).join("");
@@ -1523,7 +1529,8 @@ function openDetail(id){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
       <h3 style="margin:0">${a.surname||""} ${a.firstName||""}</h3>
       <button class="backlink" onclick="closeModal('detailModal')">✕</button></div>
-    <div class="summary" style="margin-bottom:6px">
+    <div style="font-size:12.5px;font-weight:700;margin:2px 0 10px;padding:8px 12px;border-radius:8px;${a.status==="submitted"?"background:#eef8f0;color:var(--green)":"background:#fbf3e6;color:#9a6b00"}">${statusLine}</div>
+    <div class="summary" style="grid-template-columns:1fr;margin-bottom:6px">
       ${field(L("국적","Nationality"),a.nationality)}${field(L("생년월일","DOB"),a.dob)}
       ${field(L("성별","Gender"),a.gender==="F"?L("여","F"):L("남","M"))}${field(L("여권","Passport"),a.passportNo)}
       ${field(L("이메일","Email"),a.email)}${field(L("연락처","Phone"),a.phone)}
