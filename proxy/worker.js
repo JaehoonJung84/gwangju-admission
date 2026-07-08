@@ -10,8 +10,10 @@
  *
  * Endpoints (single URL, method-based):
  *   POST    → INSERT a student submission into `applications` (open; the public form).
- *   GET     → SELECT all applications, ONLY if header `x-staff-key` === STAFF_KEY.
- *   DELETE  → DELETE one application by its app id (?id=), ONLY if x-staff-key === STAFF_KEY.
+ *   GET     → staff read (x-staff-key required): default = active list (no deleted, no docFiles);
+ *             ?id=<appId> = one full application (with docFiles); ?deleted=1 = the archive.
+ *   DELETE  → soft-delete one application by app id (?id=); recoverable. (x-staff-key)
+ *   PATCH   → merge fields into one application ({id, patch}); used for restore & review verdict. (x-staff-key)
  *   OPTIONS → CORS preflight.
  *
  * Request/response contract (matches Gwangju_Admission_System.html):
@@ -62,7 +64,7 @@ export default {
     const origin = env.ALLOW_ORIGIN || "*";
     const cors = {
       "Access-Control-Allow-Origin": origin,
-      "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, x-staff-key",
       "Access-Control-Max-Age": "86400",
       "Vary": "Origin",
@@ -96,21 +98,39 @@ export default {
         return json({ ok: true }, 201);
       }
 
-      // ---- Staff dashboard read (gated by staff key) ----
+      // ---- Staff read (gated by staff key) ----
+      //   ?id=<appId>   → full single application (includes docFiles) for the detail view
+      //   ?deleted=1    → the deleted archive
+      //   (default)     → active list, excluding deleted rows and the heavy docFiles blob
       if (request.method === "GET") {
         const key = request.headers.get("x-staff-key") || "";
         if (!env.STAFF_KEY || key !== env.STAFF_KEY) {
           return json({ error: "unauthorized" }, 401);
         }
-        const data = await neonQuery(
+        const url = new URL(request.url);
+        const id = url.searchParams.get("id");
+        if (id) {
+          const r = await neonQuery(
+            env.DATABASE_URL,
+            "select id, created_at, payload from applications where payload->>'id' = $1 limit 1",
+            [id]
+          );
+          return json(Array.isArray(r.rows) ? r.rows : [], 200);
+        }
+        const deleted = url.searchParams.get("deleted") === "1";
+        const where = deleted
+          ? "coalesce(payload->>'deleted','') = 'true'"
+          : "coalesce(payload->>'deleted','') <> 'true'";
+        const r = await neonQuery(
           env.DATABASE_URL,
-          "select id, created_at, payload from applications order by created_at desc limit 10000",
+          "select id, created_at, (payload - 'docFiles') as payload from applications where " +
+            where + " order by created_at desc limit 10000",
           []
         );
-        return json(Array.isArray(data.rows) ? data.rows : [], 200);
+        return json(Array.isArray(r.rows) ? r.rows : [], 200);
       }
 
-      // ---- Delete one application (staff only) ----
+      // ---- Soft-delete: move to the archive (staff only). Recoverable via PATCH. ----
       if (request.method === "DELETE") {
         const key = request.headers.get("x-staff-key") || "";
         if (!env.STAFF_KEY || key !== env.STAFF_KEY) {
@@ -120,10 +140,32 @@ export default {
         if (!id) return json({ error: "bad_request: missing id" }, 400);
         const r = await neonQuery(
           env.DATABASE_URL,
-          "delete from applications where payload->>'id' = $1",
+          "update applications set payload = payload || jsonb_build_object('deleted', true, 'deletedAt', to_char(now() at time zone 'UTC','YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')) where payload->>'id' = $1",
           [id]
         );
-        return json({ ok: true, deleted: (r && r.rowCount) || 0 }, 200);
+        return json({ ok: true, updated: (r && r.rowCount) || 0 }, 200);
+      }
+
+      // ---- Merge fields into an application (staff only). Used for restore + review verdict. ----
+      //   body: { "id": "<appId>", "patch": { ...fields to merge... } }
+      if (request.method === "PATCH") {
+        const key = request.headers.get("x-staff-key") || "";
+        if (!env.STAFF_KEY || key !== env.STAFF_KEY) {
+          return json({ error: "unauthorized" }, 401);
+        }
+        let body;
+        try { body = await request.json(); } catch (_) { body = null; }
+        const id = body && body.id;
+        const patch = body && body.patch;
+        if (!id || !patch || typeof patch !== "object") {
+          return json({ error: "bad_request: expected {id, patch}" }, 400);
+        }
+        const r = await neonQuery(
+          env.DATABASE_URL,
+          "update applications set payload = payload || $2::jsonb where payload->>'id' = $1",
+          [id, JSON.stringify(patch)]
+        );
+        return json({ ok: true, updated: (r && r.rowCount) || 0 }, 200);
       }
 
       return json({ error: "method_not_allowed" }, 405);

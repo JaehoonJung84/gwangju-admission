@@ -462,7 +462,7 @@
 <div id="adminDash" class="hidden">
   <header class="topbar"><div class="topbar-in">
     <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY · 국제협력처</span></div></div>
-    <div class="top-actions"><span id="ad_who" style="font-size:13px;color:var(--muted)"></span><button class="backlink" onclick="adminLogout()" id="ad_out"></button></div>
+    <div class="top-actions"><span id="ad_who" style="font-size:13px;color:var(--muted)"></span><button class="backlink" onclick="openDeleted()" id="ad_deleted"></button><button class="backlink" onclick="adminLogout()" id="ad_out"></button></div>
   </div></header>
   <main>
     <img class="lighty-corner" src="lighty/notice.png" alt="">
@@ -479,6 +479,7 @@
 
 <!-- modals -->
 <div id="detailModal" class="modal hidden"><div class="box" id="detailBox"></div></div>
+<div id="deletedModal" class="modal hidden"><div class="box" id="deletedBox"></div></div>
 <div id="previewModal" class="modal hidden"><div class="box" id="previewBox"></div></div>
 <div id="emailModal" class="modal hidden"><div class="box" id="emailBox"></div></div>
 <div id="okModal" class="modal hidden"><div class="box sm"><img class="lighty-ok" src="lighty/graduate.png" alt=""><div class="ok">✓</div><h3 id="ok_title"></h3><p id="ok_desc" style="color:var(--muted);font-size:14px;margin-bottom:20px"></p><button class="btn btn-primary" onclick="closeModal('okModal')" id="ok_btn"></button></div></div>
@@ -887,6 +888,7 @@ function applyAppLabels(){
   $("#al_id_l").textContent=L("담당자 ID","Staff ID");
   $("#al_code_l").textContent=L("서버 접속 키","Server Access Key");$("#al_btn").textContent=L("로그인","Login");
   $("#al_hint").textContent=L("※ 접속 키는 국제협력처에서 관리합니다. 로그인하면 전체 지원자 명단을 조회합니다.","※ The access key is managed by the office. Logging in shows the full applicant list.");
+  $("#ad_deleted").textContent=L("🗑 삭제된 지원서","🗑 Deleted");
   $("#ad_out").textContent=L("← 나가기","← Exit");
   $("#ad_title").textContent=L("입학지원 현황 대시보드","Admissions Dashboard");
   $("#ok_btn").textContent=L("확인","OK");
@@ -1551,13 +1553,17 @@ function openDetail(id){
     </div>`;
   $("#detailModal").classList.remove("hidden");
 }
-/* 담당자 전용: 지원서 영구 삭제 (프록시 DELETE + 담당자 키). 삭제 후 명단 새로고침. */
+/* 담당자 전용: 지원서 삭제 = 보관함으로 이동(소프트 삭제). 관리자 비밀번호 재확인 필요.
+   영구 삭제가 아니라 '삭제된 지원서'에서 복원 가능. */
 async function deleteApplication(appId){
   if(!currentStaff||!appId)return;
   if(!PROXY_ENDPOINT){alert(L("서버가 설정되지 않았습니다.","Server is not configured."));return;}
   const key=getStaffKey();
   if(!key){alert(L("담당자 키가 필요합니다. 다시 로그인하세요.","Staff key required. Please log in again."));return;}
-  if(!confirm(L("이 지원서를 영구적으로 삭제할까요? 되돌릴 수 없습니다.","Permanently delete this application? This cannot be undone.")))return;
+  const entered=prompt(L("삭제하려면 관리자 비밀번호를 한 번 더 입력하세요.","Re-enter the admin password to delete."));
+  if(entered==null)return;                 // 취소
+  if(entered.trim()!==key){alert(L("비밀번호가 일치하지 않습니다.","Password does not match."));return;}
+  if(!confirm(L("이 지원서를 '삭제된 지원서'로 옮길까요? 나중에 복원할 수 있습니다.","Move this application to the deleted archive? You can restore it later.")))return;
   try{
     const res=await fetch(PROXY_ENDPOINT+"?id="+encodeURIComponent(appId),{method:"DELETE",headers:{"x-staff-key":key}});
     if(res.status===401||res.status===403){alert(L("권한이 없습니다. 다시 로그인하세요.","Not authorized. Please log in again."));return;}
@@ -1565,8 +1571,60 @@ async function deleteApplication(appId){
     try{if(DB&&DB.remove)DB.remove(appId);}catch(_){}
     closeModal("detailModal");
     await refreshAndRender();
-    alert(L("삭제되었습니다.","Deleted."));
+    alert(L("삭제되었습니다. '삭제된 지원서'에서 확인·복원할 수 있어요.","Deleted. You can review/restore it under '삭제된 지원서'."));
   }catch(e){alert(L("삭제 실패","Delete failed")+": "+(e&&e.message?e.message:e));}
+}
+/* 삭제된 지원서 목록 모달 (제출시각·삭제시각 표시, 복원 가능) */
+async function openDeleted(){
+  if(!currentStaff)return;
+  const key=getStaffKey();
+  if(!PROXY_ENDPOINT||!key){alert(L("서버 연결이 필요합니다.","Server connection required."));return;}
+  $("#deletedBox").innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <h3 style="margin:0">🗑 ${L("삭제된 지원서","Deleted applications")}</h3>
+    <button class="backlink" onclick="closeModal('deletedModal')">✕</button></div>
+    <p style="color:var(--muted);font-size:13px">${L("불러오는 중…","Loading…")}</p>`;
+  $("#deletedModal").classList.remove("hidden");
+  try{
+    const res=await fetch(PROXY_ENDPOINT+"?deleted=1",{headers:{"Accept":"application/json","x-staff-key":key}});
+    if(!res.ok)throw new Error("HTTP "+res.status);
+    const rows=await res.json();
+    const apps=(Array.isArray(rows)?rows:[]).map(r=>(r&&typeof r.payload==="object"&&r.payload)?r.payload:r).filter(Boolean);
+    renderDeleted(apps);
+  }catch(e){
+    $("#deletedBox").querySelector("p").textContent=L("불러오기 실패","Failed to load")+": "+(e&&e.message?e.message:e);
+  }
+}
+function renderDeleted(apps){
+  const head=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <h3 style="margin:0">🗑 ${L("삭제된 지원서","Deleted applications")} (${apps.length})</h3>
+    <button class="backlink" onclick="closeModal('deletedModal')">✕</button></div>`;
+  if(!apps.length){$("#deletedBox").innerHTML=head+`<p style="color:var(--muted);font-size:14px;text-align:center;padding:24px">${L("삭제된 지원서가 없습니다.","No deleted applications.")}</p>`;return;}
+  const rows=apps.map(a=>{
+    const name=`${a.surname||"-"} ${a.firstName||""}`.trim();
+    const aid=String(a.id).replace(/"/g,"&quot;");
+    return `<tr style="border-bottom:1px solid var(--line)">
+      <td style="padding:8px 6px"><b>${name}</b><div style="color:var(--muted);font-size:11.5px">${a.nationality||""}</div></td>
+      <td style="padding:8px 6px;font-size:11.5px;color:var(--muted);white-space:nowrap">${L("제출","Sub")}: ${a.submittedAt?fmtTime(a.submittedAt):"-"}<br>${L("삭제","Del")}: ${fmtTime(a.deletedAt)}</td>
+      <td style="padding:8px 6px;text-align:right"><button class="btn" style="background:#fff;border:1px solid var(--green);color:var(--green);font-size:12px;padding:6px 12px" onclick="restoreApplication(this.dataset.aid)" data-aid="${aid}">↩ ${L("복원","Restore")}</button></td>
+    </tr>`;}).join("");
+  $("#deletedBox").innerHTML=head+`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="border-bottom:2px solid var(--line);text-align:left;color:var(--muted);font-size:12px">
+      <th style="padding:6px">${L("성명","Name")}</th><th style="padding:6px">${L("제출/삭제 시각","Submitted / Deleted")}</th><th style="padding:6px;text-align:right">${L("복원","Restore")}</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+/* 복원 = payload에 deleted:false 병합(PATCH). */
+async function restoreApplication(appId){
+  if(!appId)return;
+  const key=getStaffKey();
+  if(!PROXY_ENDPOINT||!key){alert(L("서버 연결이 필요합니다.","Server connection required."));return;}
+  if(!confirm(L("이 지원서를 복원할까요?","Restore this application?")))return;
+  try{
+    const res=await fetch(PROXY_ENDPOINT,{method:"PATCH",headers:{"Content-Type":"application/json","x-staff-key":key},body:JSON.stringify({id:appId,patch:{deleted:false}})});
+    if(!res.ok)throw new Error("HTTP "+res.status);
+    await openDeleted();        // 목록 갱신
+    await refreshAndRender();    // 본 명단에도 다시 반영
+    alert(L("복원되었습니다.","Restored."));
+  }catch(e){alert(L("복원 실패","Restore failed")+": "+(e&&e.message?e.message:e));}
 }
 $("#ad_out"); // noop
 function closeModal(id){$("#"+id).classList.add("hidden");}
