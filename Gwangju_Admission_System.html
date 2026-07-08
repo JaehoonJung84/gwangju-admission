@@ -248,6 +248,7 @@
     <p data-i="heroDesc"></p>
     <div class="hero-cta">
       <button class="btn btn-lime" id="goStudent" data-i="asStudent"></button>
+      <button class="btn" id="goAdmin" data-i="asAdmin" style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff"></button>
       <img class="lighty-hero" src="lighty/campus.png" alt="">
     </div>
   </div>
@@ -449,7 +450,7 @@
     <div class="card">
       <h3 id="al_title"></h3>
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="al_desc"></p>
-      <div class="field"><label id="al_id_l"></label><input type="text" id="al_id" autocomplete="username"></div>
+      <div class="field" style="display:none"><label id="al_id_l"></label><input type="text" id="al_id" autocomplete="username"></div>
       <div class="field"><label id="al_code_l"></label><input type="password" id="al_code" autocomplete="current-password"></div>
       <button class="btn btn-primary" style="width:100%" onclick="adminLogin()" id="al_btn"></button>
       <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p>
@@ -867,10 +868,10 @@ function applyAppLabels(){
   $("#finalSubmit").textContent=L("최종 제출","Final Submit");
   // admin login
   $("#al_title").textContent=L("담당자 로그인","Staff Login");
-  $("#al_desc").textContent=L("국제협력처 담당자 전용 페이지입니다. 담당자 ID와 접속 코드로 로그인하세요.","For International Cooperation Office staff only. Log in with your staff ID and access code.");
+  $("#al_desc").textContent=L("국제협력처 담당자 전용입니다. 발급받은 서버 접속 키를 입력하세요.","For International Cooperation Office staff only. Enter your server access key.");
   $("#al_id_l").textContent=L("담당자 ID","Staff ID");
-  $("#al_code_l").textContent=L("접속 코드","Access Code");$("#al_btn").textContent=L("로그인","Login");
-  $("#al_hint").textContent=L("※ 국제협력처에서 발급받은 담당자 ID와 접속 코드를 입력하세요.","※ Enter the staff ID and access code issued by the International Cooperation Office.");
+  $("#al_code_l").textContent=L("서버 접속 키","Server Access Key");$("#al_btn").textContent=L("로그인","Login");
+  $("#al_hint").textContent=L("※ 접속 키는 국제협력처에서 관리합니다. 로그인하면 전체 지원자 명단을 조회합니다.","※ The access key is managed by the office. Logging in shows the full applicant list.");
   $("#ad_out").textContent=L("← 나가기","← Exit");
   $("#ad_title").textContent=L("입학지원 현황 대시보드","Admissions Dashboard");
   $("#ok_btn").textContent=L("확인","OK");
@@ -884,8 +885,8 @@ function applyAppLabels(){
 
 /* ================= NAV BUTTONS ================= */
 $("#goStudent").onclick=()=>show("studentLogin");
-/* 담당자 로그인 진입 제거: 공개 페이지는 지원서 제출 전용.
-   담당자는 Neon 콘솔에서 직접 명단을 확인합니다(브라우저에 조회 기능/키 없음). */
+/* 담당자 로그인 진입: 단일 서버 접속 키(STAFF_KEY)로 로그인 → 전체 명단 조회. */
+$("#goAdmin").onclick=()=>{ $("#al_code").value=""; show("adminLogin"); const el=$("#al_code"); if(el)el.focus(); };
 
 /* ================= STUDENT LOGIN ================= */
 function studentLogin(){
@@ -1293,15 +1294,24 @@ async function refreshAndRender(){
   neonLoading=false; renderAdmin();
 }
 
-function adminLogin(){
-  const id=$("#al_id").value.trim().toLowerCase();
-  const code=$("#al_code").value;
-  const st=STAFF.find(s=>s.id===id&&s.code===code);
-  if(!st){alert(L("담당자 ID 또는 접속 코드가 올바르지 않습니다.","Invalid staff ID or access code."));return;}
-  currentStaff=st; adScope="mine"; adFilter="all"; adSel={nat:"",track:"",college:"",type:"",q:""};
-  show("adminDash");refreshAndRender();
+/* 단일 서버 접속 키로 로그인. 키가 맞는지는 프록시 GET(=명단 조회) 성공 여부로 판정.
+   성공하면 전체 열람 권한(superAdmin)으로 대시보드 진입. */
+const ADMIN_STAFF={id:"admin",name:"국제협력처 관리자",en:"IAO Administrator",scopeKo:"전체 지원자",scopeEn:"All applicants",superAdmin:true};
+async function adminLogin(){
+  const key=$("#al_code").value.trim();
+  if(!key){alert(L("서버 접속 키를 입력하세요.","Please enter the server access key."));return;}
+  if(!PROXY_ENDPOINT){alert(L("서버가 설정되지 않았습니다.","Server is not configured."));return;}
+  setStaffKey(key);
+  currentStaff=ADMIN_STAFF; adScope="all"; adFilter="all"; adSel={nat:"",track:"",college:"",type:"",q:""};
+  show("adminDash");
+  await refreshAndRender();
+  if(neonError==="BAD_KEY"||neonError==="NO_KEY"){   // 키 불일치 → 로그인 화면으로 복귀
+    currentStaff=null; clearStaffKey();
+    show("adminLogin");
+    alert(L("서버 접속 키가 올바르지 않습니다.","Invalid server access key."));
+  }
 }
-function adminLogout(){currentStaff=null;show("homeView");}
+function adminLogout(){currentStaff=null;clearStaffKey();show("homeView");}
 /* Enter 키로 담당자 로그인 */
 ["al_id","al_code"].forEach(id=>{const el=$("#"+id);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();adminLogin();}});});
 
