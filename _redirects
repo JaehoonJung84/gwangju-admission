@@ -1,0 +1,4 @@
+# Cloudflare Pages: serve the application at the clean root URL.
+# A 200 "rewrite" keeps the address bar at "/" while serving the app file.
+# (GitHub Pages ignores this file, so its index.html redirect still works there.)
+/    /Gwangju_Admission_System.html    200
