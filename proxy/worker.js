@@ -1,23 +1,60 @@
 /**
- * Gwangju University Admissions — Neon Data API proxy (Cloudflare Worker)
+ * Gwangju University Admissions — Neon proxy (Cloudflare Worker)
  *
  * Why this exists:
- *   The Neon Data API requires a JWT bearer token on EVERY request. Putting that
- *   token in the public GitHub Pages HTML would expose the whole applicants table
- *   (passport numbers, etc.) to anyone. This proxy keeps the token server-side and
- *   protects reads with a staff-only key.
+ *   The Neon Data API requires a JWT bearer token on EVERY request (even anonymous
+ *   access needs a short-lived JWT), so the browser can never POST "token-less".
+ *   Instead of chasing expiring JWTs, this proxy connects straight to Neon Postgres
+ *   over Neon's SQL-over-HTTP endpoint using a connection string kept server-side.
+ *   The connection string never touches the public page; reads are staff-key gated.
  *
  * Endpoints (single URL, method-based):
- *   POST  → forward student submission to Neon (open; the public application form).
- *   GET   → return all applications, but ONLY if header `x-staff-key` matches STAFF_KEY.
+ *   POST    → INSERT a student submission into `applications` (open; the public form).
+ *   GET     → SELECT all applications, ONLY if header `x-staff-key` === STAFF_KEY.
  *   OPTIONS → CORS preflight.
  *
- * Secrets / vars (set in Cloudflare, see README):
- *   NEON_URL      (var)    e.g. https://ep-...neon.tech/neondb/rest/v1/applications
- *   NEON_TOKEN    (secret) the Neon Data API JWT bearer token
- *   STAFF_KEY     (secret) shared secret staff type once to read the dashboard
- *   ALLOW_ORIGIN  (var)    e.g. https://jaehoonjung84.github.io  (or * for any)
+ * Request/response contract (matches Gwangju_Admission_System.html):
+ *   POST body: {"payload": { ...application... }}          → 201 {"ok":true}
+ *   GET  resp: [ {"id":.., "created_at":.., "payload":{..}}, ... ]
+ *
+ * Secrets / vars (set in the Cloudflare dashboard → Settings → Variables):
+ *   DATABASE_URL  (secret)  Neon connection string, e.g.
+ *                           postgresql://USER:PASS@ep-xxx-pooler.<region>.aws.neon.tech/neondb?sslmode=require
+ *   STAFF_KEY     (secret)  shared secret staff type once to read the dashboard
+ *   ALLOW_ORIGIN  (var)     e.g. https://jaehoonjung84.github.io  (or * for any origin)
+ *
+ * Table (create once in Neon SQL Editor if missing):
+ *   create table if not exists applications (
+ *     id         bigint generated always as identity primary key,
+ *     payload    jsonb not null,
+ *     created_at timestamptz not null default now()
+ *   );
  */
+
+/* Run one SQL statement against Neon over HTTP (no driver/library needed).
+   Protocol mirrors @neondatabase/serverless httpQuery: POST https://{host}/sql
+   with the connection string in a header and {query, params} as the body.
+   Omitting Neon-Raw-Text-Output / Neon-Array-Mode makes the endpoint return
+   typed JSON row objects (jsonb → object, timestamptz → ISO string). */
+async function neonQuery(connectionString, query, params) {
+  const host = new URL(connectionString).host; // e.g. ep-xxx-pooler.<region>.aws.neon.tech
+  const res = await fetch(`https://${host}/sql`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Neon-Connection-String": connectionString,
+    },
+    body: JSON.stringify({ query, params: params || [] }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const msg = (data && (data.message || data.error)) || ("neon_http_" + res.status);
+    const err = new Error(msg);
+    err.status = res.status;
+    throw err;
+  }
+  return data; // { command, rowCount, rows, fields, ... }
+}
 
 export default {
   async fetch(request, env) {
@@ -37,22 +74,24 @@ export default {
 
     if (request.method === "OPTIONS") return new Response(null, { headers: cors });
 
-    const neonUrl = env.NEON_URL;
-    if (!neonUrl || !env.NEON_TOKEN) {
-      return json({ error: "proxy_misconfigured: set NEON_URL and NEON_TOKEN" }, 500);
+    if (!env.DATABASE_URL) {
+      return json({ error: "proxy_misconfigured: set DATABASE_URL secret" }, 500);
     }
-    const auth = { Authorization: "Bearer " + env.NEON_TOKEN };
 
     try {
       // ---- Student submission (open) ----
       if (request.method === "POST") {
-        const body = await request.text();
-        const r = await fetch(neonUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Prefer: "return=minimal", ...auth },
-          body,
-        });
-        if (!r.ok) return json({ error: "neon_post_failed", status: r.status, detail: await r.text() }, r.status);
+        let body;
+        try { body = await request.json(); } catch (_) { body = null; }
+        const payload = body && body.payload !== undefined ? body.payload : body;
+        if (!payload || typeof payload !== "object") {
+          return json({ error: "bad_request: expected {\"payload\": {...}}" }, 400);
+        }
+        await neonQuery(
+          env.DATABASE_URL,
+          "insert into applications (payload) values ($1::jsonb)",
+          [JSON.stringify(payload)]
+        );
         return json({ ok: true }, 201);
       }
 
@@ -62,19 +101,17 @@ export default {
         if (!env.STAFF_KEY || key !== env.STAFF_KEY) {
           return json({ error: "unauthorized" }, 401);
         }
-        // pull newest first if the table has a created_at column; harmless if it doesn't
-        const url = neonUrl + (neonUrl.includes("?") ? "&" : "?") + "limit=10000";
-        const r = await fetch(url, { headers: { Accept: "application/json", ...auth } });
-        const text = await r.text();
-        return new Response(text, {
-          status: r.status,
-          headers: { ...cors, "Content-Type": "application/json; charset=utf-8" },
-        });
+        const data = await neonQuery(
+          env.DATABASE_URL,
+          "select id, created_at, payload from applications order by created_at desc limit 10000",
+          []
+        );
+        return json(Array.isArray(data.rows) ? data.rows : [], 200);
       }
 
       return json({ error: "method_not_allowed" }, 405);
     } catch (e) {
-      return json({ error: "proxy_exception", detail: String(e) }, 502);
+      return json({ error: "proxy_exception", detail: String(e && e.message || e) }, e && e.status ? e.status : 502);
     }
   },
 };

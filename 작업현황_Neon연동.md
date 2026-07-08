@@ -1,74 +1,54 @@
 # 광주대 입학지원 페이지 — Neon DB 연동 작업 현황
 
-> 다른 PC/집에서 이어서 작업하기 위한 진행상황 문서.
-> 최종 업데이트: **2026-07-08 저녁** (현재 디버깅 중 — 아래 "지금 막힌 지점" 참고)
+> 최종 업데이트: **2026-07-08 밤** — ✅ **연동 완료 (Cloudflare Worker 프록시 방식)**
 
 - 라이브 페이지: https://jaehoonjung84.github.io/gwangju-admission/Gwangju_Admission_System.html
 - 저장소: https://github.com/JaehoonJung84/gwangju-admission
-- Neon 프로젝트: `red-sun-47673800` / 브랜치 `production (br-hidden-sky-aoc3g23y)`
-- Data API 주소: `https://ep-dry-sea-aoqk565q.apirest.c-2.ap-southeast-1.aws.neon.tech/neondb/rest/v1`
+- Neon 프로젝트: `red-sun-47673800` / 브랜치 `production`
+- 프록시(Worker): `https://gu-admission-proxy.hubertjung84.workers.dev`
 
 ---
 
 ## 🎯 목표
 전 세계 어디서 지원서를 제출하든 그 정보가 **Neon DB 한 곳에 쌓이도록** 실제 연동을 완성한다.
 
-## 🧩 방식 (확정)
-별도 서버(프록시) 없이 **브라우저에서 Neon Data API로 직접 저장**.
-- Neon "익명 역할(anonymous)"에 **INSERT(넣기)만 허용, SELECT(읽기)는 금지**.
-- 페이지에 비밀 토큰 없음. 노출돼도 아무도 데이터를 못 읽고, 넣기만 가능.
-- 담당자 명단 확인 = Neon 콘솔에서 직접 (CSV 내보내기는 맨 아래 참고).
-- ✅ 문서로 확인: Neon Data API는 "헤더 없이 요청 → anonymous 역할" 방식이 맞음(공개키 개념 없음).
+## ✅ 최종 방식 (동작 확인됨)
+브라우저 → **Cloudflare Worker(심부름꾼)** → **Neon Postgres 직접 INSERT**.
+- Worker가 **Neon 연결 문자열**(`DATABASE_URL`)을 서버 시크릿으로 보관 → 공개 페이지 소스에 비밀 없음.
+- 학생 제출(POST)은 공개, 담당자 조회(GET)는 `STAFF_KEY`로 보호.
+- Worker는 Neon **SQL-over-HTTP**(`https://{host}/sql`)로 직접 호출 → JWT 만료 문제 없음.
+- 실측: 무토큰 `POST → HTTP 201 {"ok":true}` 확인. 실제 지원서가 `applications`에 저장됨.
 
-## ✅ 완료된 것
-- **페이지 코드 (커밋 `ad7721f`, push 완료)**:
-  - 홈의 "담당자 로그인" 진입 버튼 + JS 제거 → 공개 페이지는 제출 전용.
-  - 직원 접속코드 삭제 (`const STAFF=[];`).
-  - 제출 코드(`postApplication`)는 토큰 없이 Neon에 직접 POST (그대로 동작).
-  - `PROXY_ENDPOINT`/`API_TOKEN` 은 계속 빈 값 유지.
-- **실측 확인**:
-  - Data API 엔드포인트 살아있음, 주소 정확함(위 주소).
-  - **CORS 완전 개방**(`allow-origin: *`, POST/`Prefer` 헤더 허용) → 브라우저 직접 전송 OK.
-  - DB에 역할 `anonymous`, `authenticated`, `authenticator` **모두 존재**.
-- **Neon 콘솔에서 한 것**:
-  - SQL: `applications` 표 생성 + `grant usage/insert ... to anonymous`.
-  - Data API → Settings → Advanced → **Anonymous role = `anonymous`** 입력 후 Save("updated successfully" 확인).
+## ❌ 폐기된 이전 방식 (왜 안 됐나)
+"Neon 익명 역할에 INSERT 허용 → 브라우저가 헤더 없이 직접 POST" 방식은 **원천적으로 불가능**.
+- Neon Data API는 익명 접근조차 **JWT Bearer 토큰을 필수**로 요구(문서 확인).
+- 그래서 헤더 없는 POST는 항상 `400 missing authentication credentials ...` 발생.
+- Neon 콘솔의 "Enable Data API / Anonymous role" 은 **이제 건드릴 필요 없음**.
 
-## 🐞 지금 막힌 지점 (여기서부터 이어서)
-설정은 다 맞는데도, **토큰 없는 테스트 제출이 계속 실패**함:
-```
-HTTP 400 — "missing authentication credentials: required authorization bearer token in JWT format"
-```
-이 오류는 PostgREST가 **익명 역할(db-anon-role)이 실행 중인 서버에 적용 안 됨** 상태일 때 내는 문구.
-→ 즉 저장은 됐는데 **실행 중인 Data API가 그 설정을 아직 안 읽은** 것으로 추정.
-(참고: 지금까지 제출은 전부 거부됐으므로 DB에 테스트 쓰레기 데이터 없음 — 깨끗함.)
+## 🧩 구성 요소
+- **`proxy/worker.js`** — 의존성 없는 Cloudflare Worker. `POST`=INSERT, `GET`(x-staff-key 게이트)=SELECT, CORS 처리.
+- **`proxy/README.md`** — 브라우저만으로(Node 불필요) Cloudflare 대시보드 배포 절차.
+- **Cloudflare Worker 시크릿/변수**:
+  - `DATABASE_URL` (secret) — Neon 연결 문자열. ✅ 설정됨.
+  - `STAFF_KEY` (secret) — 담당자 조회용 공유 키. ⚠️ 아직 미설정/불일치 (GET 401). 담당자 조회 쓸 때 설정.
+  - `ALLOW_ORIGIN` (var) — `https://jaehoonjung84.github.io`.
+- **`Gwangju_Admission_System.html`** — `const PROXY_ENDPOINT = "https://gu-admission-proxy.hubertjung84.workers.dev";` 설정됨.
 
-## ▶️ 집에서 할 다음 단계 (순서대로)
-Claude에게 "작업현황 보고 이어서 하자"라고 한 뒤, 아래를 진행:
-
-**1단계 — 설정 리로드 신호 보내기** (Neon SQL Editor에서 실행):
-```sql
-notify pgrst, 'reload config';
-notify pgrst, 'reload schema';
-```
-→ Claude에게 "했어" → Claude가 무토큰 POST로 재테스트 (기대: **HTTP 201**).
-
-**2단계 — 1단계로 안 되면, Anonymous role 값 재입력**:
-Data API → Settings → Advanced settings → **Anonymous role** 칸을
-전부 지우고 `anonymous`를 **직접 타이핑**(연회색 예시가 아니라 검은 글씨) → **Save**.
-→ Claude 재테스트.
-
-**3단계 — 그래도 안 되면, 별도 인증 설정 점검**:
-Data API 메인 탭에 **Authentication / JWT provider** 설정이 있는지 확인해서
-익명 접근을 막고 있진 않은지 Claude와 함께 점검. (필요시 Neon 지원 문서/문의)
-
-**성공(201) 이후**: 라이브 페이지에서 실제 지원서 1건 제출 → Neon에서
-`select count(*) from applications;` 로 확인 → 끝.
+## 🧹 남은 정리 (선택)
+1. **테스트 데이터 삭제** — Claude 검증용 더미 2건. Neon SQL Editor에서:
+   ```sql
+   delete from applications where payload->>'email' = 'CLAUDE_TEST_DELETE';
+   ```
+2. **담당자 조회 켜려면** — Cloudflare Worker → Settings → Variables and Secrets에서
+   `STAFF_KEY`(secret) 등록. (현재 공개 페이지에는 담당자 로그인 UI가 없어, 명단 확인은
+   아래 Neon 콘솔 CSV로도 가능.)
+3. **최종 확인** — 라이브 페이지에서 실제 지원서 1건 제출 →
+   Neon `select count(*) from applications;` 로 증가 확인.
 
 ---
 
 ## 📊 담당자 명단 & CSV(엑셀) 내보내기 — Neon 콘솔
-Neon 콘솔 → **SQL Editor** → 아래 실행 → 결과창 **다운로드/Export 아이콘**으로 **CSV** 저장:
+Neon 콘솔 → **SQL Editor** → 아래 실행 → 결과창 **Export/다운로드**로 **CSV** 저장:
 
 ```sql
 select
@@ -101,11 +81,7 @@ order by created_at desc;
 
 ---
 
-## 🗂 변경된 파일
-- `Gwangju_Admission_System.html` — 제출 전용화 (위 "완료" 참고).
-- `proxy/` — 이번 방식에선 미사용(참고용 보관).
-- `작업현황_Neon연동.md` — 이 문서.
-
 ## 🔒 보안 요약
-- 페이지/소스에 토큰·비밀번호 없음. 익명 역할은 INSERT만 → 읽기/수정/삭제 불가.
-- 지원자 개인정보 열람은 Neon 콘솔 로그인(관리자 계정)으로만 가능.
+- 공개 페이지/소스에 DB 비밀·토큰 없음. 연결 문자열은 Cloudflare Worker 시크릿에만 존재.
+- 학생 제출은 INSERT만. 담당자 조회는 `STAFF_KEY` 필요.
+- 지원자 개인정보 열람은 Neon 콘솔 로그인 또는 STAFF_KEY 보유자만 가능.

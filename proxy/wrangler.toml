@@ -2,11 +2,15 @@ name = "gu-admissions-proxy"
 main = "worker.js"
 compatibility_date = "2024-11-01"
 
-# Non-secret vars (safe to keep here):
+# Non-secret var (safe to keep here):
 [vars]
-NEON_URL = "https://ep-dry-sea-aoqk565q.apirest.c-2.ap-southeast-1.aws.neon.tech/neondb/rest/v1/applications"
 ALLOW_ORIGIN = "https://jaehoonjung84.github.io"
 
-# Secrets are NOT stored here. Set them with:
-#   npx wrangler secret put NEON_TOKEN
-#   npx wrangler secret put STAFF_KEY
+# Secrets are NOT stored here. Set them in the Cloudflare dashboard
+# (Worker → Settings → Variables and Secrets), or via CLI:
+#   npx wrangler secret put DATABASE_URL   # Neon connection string
+#   npx wrangler secret put STAFF_KEY      # staff dashboard shared key
+#
+# This file is only needed for CLI (wrangler) deploys. The recommended path
+# (no Node.js required) is pasting worker.js into the Cloudflare dashboard —
+# see README.md.
