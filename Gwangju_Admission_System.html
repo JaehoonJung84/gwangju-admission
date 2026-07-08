@@ -797,7 +797,21 @@ Ushbu xat faqat joʻnatuvchi manzildan avtomatik yuborilgan, iltimos javob yozma
 
 /* ================= VIEW ROUTER ================= */
 const VIEWS=["langScreen","homeView","studentLogin","studentApp","adminLogin","adminDash"];
-function show(id){VIEWS.forEach(v=>$("#"+v).classList.toggle("hidden",v!==id));window.scrollTo(0,0);}
+function _renderView(id){VIEWS.forEach(v=>$("#"+v).classList.toggle("hidden",v!==id));window.scrollTo(0,0);}
+let _curView="langScreen";
+/* 화면 전환 + 브라우저 히스토리 기록(폰 뒤로가기 대응). opts.pop=true면 뒤로가기로 인한 전환이라 push 안 함. */
+function show(id,opts){
+  _curView=id; _renderView(id);
+  try{sessionStorage.setItem("gu_view",id);}catch(_){}
+  if(!(opts&&opts.pop)){ try{history.pushState({view:id},"");}catch(_){} }
+}
+/* 폰 하드웨어 뒤로가기: 열린 모달이 있으면 먼저 닫고, 없으면 이전 화면으로 이동(사이트 이탈 대신). */
+window.addEventListener("popstate",function(ev){
+  var m=document.querySelector(".modal:not(.hidden)");
+  if(m){ m.classList.add("hidden"); try{history.pushState({view:_curView},"");}catch(_){} return; }
+  var v=(ev.state&&ev.state.view)||"homeView";
+  show(v,{pop:true});
+});
 
 /* ================= STORAGE ================= */
 const DB={
@@ -821,6 +835,7 @@ sw.onchange=e=>{LANG=e.target.value;applyLang();};
 function selectLang(c){LANG=c;document.documentElement.lang=c;sw.value=c;applyLang();show("homeView");}
 
 function applyLang(){
+  try{localStorage.setItem("gu_lang",LANG);}catch(_){}
   const t=T();
   $$("[data-i]").forEach(el=>{const k=el.getAttribute("data-i");if(t[k]!==undefined)el.textContent=t[k];});
   const sl=$("#stepsList");sl.innerHTML="";t.steps.forEach(s=>{const li=document.createElement("li");li.textContent=s;sl.appendChild(li);});
@@ -1631,6 +1646,24 @@ function refreshNatDisplays(){
 document.addEventListener("click",function(e){if(!e.target.closest(".natsel"))document.querySelectorAll(".natsel-pop").forEach(p=>p.classList.add("hidden"));});
 function upEn(e){var el=e.target;var v=el.value;var s=v.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Za-z '\-.]/g,"").toUpperCase();if(s!==v){var p=el.selectionStart,d=v.length-s.length;el.value=s;try{el.setSelectionRange(Math.max(0,p-d),Math.max(0,p-d));}catch(_){}}}
 try{NAT_KEYS.forEach(buildNatList);refreshNatDisplays();var _ph=document.querySelector("#f_phone");if(_ph)_ph.addEventListener("input",formatPhone);document.querySelectorAll(".name-en").forEach(function(el){el.addEventListener("input",upEn);});}catch(e){}
+
+/* ===== 부팅: 새로고침(F5) 시 언어·화면·로그인 상태 복원 =====
+   같은 세션(=새로고침)이면 마지막 화면으로, 첫 방문이면 언어 선택부터. */
+(function boot(){
+  try{var lang=localStorage.getItem("gu_lang");if(lang&&I18N[lang]){LANG=lang;document.documentElement.lang=lang;if(sw)sw.value=lang;}}catch(_){}
+  var view=null;try{view=sessionStorage.getItem("gu_view");}catch(_){}
+  applyLang();
+  if(!view){ show("langScreen"); return; }               // 첫 방문 → 언어 선택
+  var key=(typeof getStaffKey==="function")?getStaffKey():"";
+  if(view==="adminDash"){                                  // 담당자: 세션 키 있으면 로그인 유지
+    if(key){currentStaff=ADMIN_STAFF;adScope="all";adFilter="all";adSel={nat:"",track:"",college:"",type:"",q:""};show("adminDash");refreshAndRender();}
+    else{show("adminLogin");}
+    return;
+  }
+  if(view==="studentApp"||view==="studentLogin"){ show("homeView"); return; } // 작성 중 데이터는 새로고침 시 사라지므로 홈으로
+  if(VIEWS.indexOf(view)>=0){ show(view); return; }
+  show("homeView");
+})();
 </script>
 </body>
 </html>
