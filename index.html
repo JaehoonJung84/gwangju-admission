@@ -2,14 +2,1668 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=Gwangju_Admission_System.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>광주대학교 외국인 입학지원 시스템 | Gwangju University International Admissions</title>
 <style>
-  body{font-family:"Malgun Gothic",system-ui,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;background:#f4f7f3;color:#1e6b3a}
-  a{color:#1e6b3a;font-weight:700}
+  :root{
+    --green:#1e6b3a;--green-2:#2e8b57;--lime:#9bc53d;--lime-d:#7fae2c;
+    --sky:#5bb8e6;--bg:#f4f7f3;--card:#fff;--line:#e3e8e0;--text:#20261f;
+    --muted:#6b7568;--danger:#c0392b;--warn:#e08a00;--ok:#2e8b57;
+    --shadow:0 6px 24px rgba(30,107,58,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI","Malgun Gothic",Roboto,"Noto Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  img{max-width:100%}
+  .hidden{display:none!important}
+  .logo{display:flex;align-items:center;gap:11px}
+  .logo img{height:42px;width:auto;display:block}
+  .logo .wm{display:flex;flex-direction:column;line-height:1.05}
+  .logo .wm b{color:var(--green);font-size:16px;font-weight:800}
+  .logo .wm span{color:var(--muted);font-size:10px;letter-spacing:1.2px}
+
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+  .btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:#17542d}
+  .btn-lime{background:var(--lime);color:#213d0a}.btn-lime:hover{background:var(--lime-d)}
+  .btn-ghost{background:#eef3ec;color:var(--green)}.btn-ghost:hover{background:#e2ebde}
+  .btn-out{background:#fff;border:1px solid var(--green);color:var(--green)}.btn-out:hover{background:#f0f7ef}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+
+  /* language screen */
+  #langScreen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;background:linear-gradient(160deg,#eaf3ea,#f4f7f3 45%,#e7f0f6)}
+  #langScreen .logo{margin-bottom:24px;transform:scale(1.25)}
+  #langScreen h1{font-size:25px;color:var(--green);margin-bottom:6px}
+  #langScreen p{color:var(--muted);margin-bottom:30px}
+  .lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:620px;width:100%}
+  .lang-btn{background:#fff;border:2px solid var(--line);border-radius:16px;padding:20px 12px;cursor:pointer;transition:.18s;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lang-btn:hover{border-color:var(--lime);transform:translateY(-3px)}
+  .lang-btn .flag{font-size:32px;line-height:0}.flagimg{width:46px;height:auto;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.18);border:1px solid rgba(0,0,0,.10);display:block}.lang-btn .native{font-size:16px;font-weight:700;color:var(--green)}.lang-btn .eng{font-size:11px;color:var(--muted)}
+  @media(max-width:560px){.lang-grid{grid-template-columns:repeat(2,1fr)}}
+
+  header.topbar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+  .topbar-in{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .top-actions{display:flex;align-items:center;gap:9px}
+  .lang-switch{background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:13px;cursor:pointer}
+
+  .hero{background:linear-gradient(135deg,var(--green),#25834a 60%,#3a9b5c);color:#fff;padding:50px 20px;text-align:center;position:relative;overflow:hidden}
+  .hero h1{font-size:28px;margin-bottom:10px}.hero p{font-size:15px;opacity:.92;max-width:640px;margin:0 auto 22px}
+  .badge-round{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:5px 14px;border-radius:999px;font-size:13px;margin-bottom:16px}
+  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .hero .btn{font-size:15px;padding:14px 26px}
+
+  main{max-width:1120px;margin:0 auto;padding:32px 20px 60px}
+  section.block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:20px;box-shadow:var(--shadow)}
+  .block h2{font-size:18px;color:var(--green);display:flex;align-items:center;gap:9px;margin-bottom:14px}
+  .block h2 .ic{width:26px;height:26px;background:#eaf4ea;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+  table.sched{width:100%;border-collapse:collapse;font-size:14px}
+  table.sched th,table.sched td{border:1px solid var(--line);padding:10px;text-align:center}
+  table.sched th{background:#f0f6ef;color:var(--green);font-weight:700}
+  table.sched td.round{background:#fafcf9;font-weight:700;color:var(--green-2)}
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}@media(max-width:720px){.info-grid{grid-template-columns:1fr}}
+  .mini{border:1px solid var(--line);border-radius:12px;padding:13px 15px;background:#fafcf9}
+  .mini h4{font-size:14px;color:var(--green);margin-bottom:5px}.mini ul{list-style:none;font-size:13px}
+  .mini li{padding:2px 0;display:flex;justify-content:space-between;gap:8px}.mini li span:last-child{color:var(--muted);text-align:right}
+  .track{display:flex;gap:12px;flex-wrap:wrap}.track .t{flex:1;min-width:220px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .track .t .th{background:var(--green);color:#fff;padding:8px 13px;font-weight:700;font-size:14px}.track .t .tb{padding:11px 13px;font-size:13px}
+  ol.steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(2,1fr);gap:9px}@media(max-width:720px){ol.steps{grid-template-columns:1fr}}
+  ol.steps li{counter-increment:s;position:relative;padding:10px 12px 10px 42px;border:1px solid var(--line);border-radius:10px;background:#fafcf9;font-size:13px}
+  ol.steps li::before{content:counter(s);position:absolute;left:9px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:var(--lime);color:#213d0a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+  ul.notice{list-style:none}ul.notice li{position:relative;padding:6px 0 6px 24px;font-size:13.5px;border-bottom:1px dashed var(--line)}ul.notice li:last-child{border-bottom:none}
+  ul.notice li::before{content:"!";position:absolute;left:0;top:7px;width:17px;height:17px;background:#fdeceb;color:var(--danger);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+  .contact-box{display:flex;flex-wrap:wrap;gap:9px}.contact-box .c{border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:13px;background:#fafcf9}.contact-box .c b{color:var(--green);display:block}
+  .contact-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:13px}
+  .clink{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:.15s;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .clink:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(0,0,0,.15)}
+  .clink svg{flex-shrink:0}
+  .clink-home{background:#fff;color:var(--green);border:1.5px solid var(--green)}
+  .clink-kakao{background:#FEE500;color:#3B1E1E}
+  .clink-insta{background:linear-gradient(45deg,#feda75,#fa7e1e 28%,#d62976 55%,#962fbf 78%,#4f5bd5);color:#fff}
+
+  /* role cards */
+  .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:720px;margin:0 auto}@media(max-width:600px){.role-grid{grid-template-columns:1fr}}
+  .role{border:2px solid var(--line);border-radius:16px;padding:26px 22px;text-align:center;cursor:pointer;transition:.18s;background:#fff;box-shadow:var(--shadow)}
+  .role:hover{border-color:var(--lime);transform:translateY(-3px)}
+  .role .ic{font-size:40px;margin-bottom:10px}.role h3{color:var(--green);font-size:18px;margin-bottom:5px}.role p{font-size:13px;color:var(--muted)}
+
+  /* forms */
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:18px;box-shadow:var(--shadow)}
+  .card h3{color:var(--green);font-size:16px;margin-bottom:14px}
+  .field{margin-bottom:14px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px;color:#3a4238}
+  .field label .req{color:var(--danger);margin-left:3px}
+  .field input,.field select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;background:#fff}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--lime)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  @media(max-width:600px){.row2,.row3{grid-template-columns:1fr}}
+  .radio-group{display:flex;gap:10px;flex-wrap:wrap}
+  .radio-group label{flex:1;min-width:120px;border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;cursor:pointer;font-weight:600;font-size:13.5px}
+  .radio-group input{display:none}.radio-group input:checked+span{color:var(--green);font-weight:800}
+  .radio-group label:has(input:checked){border-color:var(--lime);background:#f6fbef}
+
+  /* tabs */
+  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  .tab{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:700;font-size:13.5px;color:var(--muted)}
+  .tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+  .progress-wrap{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:18px;box-shadow:var(--shadow)}
+  .progress-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;color:var(--muted)}.progress-top b{color:var(--green)}
+  .bar{height:9px;background:#eef3ec;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--green-2));transition:width .35s}
+
+  .step1{background:linear-gradient(135deg,#f0f7ef,#eaf2f6);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .step1 .txt{flex:1;min-width:220px}.step1 .txt h4{color:var(--green);font-size:15px}.step1 .txt p{font-size:12.5px;color:var(--muted)}.step1 .acts{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .doc-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:720px){.doc-list{grid-template-columns:1fr}}
+  .doc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px}
+  .doc.done{border-color:var(--lime);background:#f6fcf3}
+  .doc .dtop{display:flex;gap:10px}.doc .dicon{width:32px;height:32px;flex:none;background:#eaf4ea;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}.doc.done .dicon{background:var(--lime)}
+  .doc .dname{font-size:14px;font-weight:700;line-height:1.3}.dtag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:99px;margin-top:3px}.dtag.req{background:#fbeaea;color:var(--danger)}.dtag.opt{background:#eef3ec;color:var(--muted)}
+  .doc .dbottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.doc .fname{font-size:12px;color:var(--green-2);word-break:break-all;flex:1}.doc .fname.empty{color:var(--muted)}
+  .upbtn{border:1px solid var(--green);color:var(--green);background:#fff;border-radius:9px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap}.upbtn:hover{background:#f0f7ef}
+
+  .summary{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13.5px}@media(max-width:600px){.summary{grid-template-columns:1fr}}
+  .summary .r{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .summary .r span:first-child{color:var(--muted)}.summary .r span:last-child{font-weight:700;text-align:right}
+
+  /* admin */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+  .stat .n{font-size:26px;font-weight:800;color:var(--green)}.stat .l{font-size:12.5px;color:var(--muted)}
+  .filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .filters .f{padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:13px;font-weight:600}.filters .f.active{background:var(--green);color:#fff;border-color:var(--green)}
+  table.adm{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  table.adm th,table.adm td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  table.adm th{background:#f0f6ef;color:var(--green);font-weight:700;font-size:12.5px}
+  table.adm tr{cursor:pointer}table.adm tbody tr:hover{background:#f6fbef}
+  .vbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:800}
+  .v-ok{background:#e5f5ea;color:var(--ok)}.v-warn{background:#fdf0dd;color:var(--warn)}.v-no{background:#fbeaea;color:var(--danger)}.v-draft{background:#eef1ee;color:var(--muted)}
+  /* admin filter bar */
+  .adfbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+  .adfbar .fsel{display:flex;flex-direction:column;gap:3px}
+  .adfbar .fsel label{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.3px;padding-left:2px}
+  .adfbar select,.adfbar input{padding:8px 10px;border:1px solid var(--line);border-radius:9px;font-size:13px;font-family:inherit;background:#fff;color:var(--text)}
+  .adfbar select:focus,.adfbar input:focus{outline:none;border-color:var(--lime)}
+  .adfbar .search{min-width:180px}
+  .adfbar .reset{align-self:flex-end;background:#eef3ec;color:var(--green);border:none;border-radius:9px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;height:36px}
+  .adfbar .reset:hover{background:#e2ebde}
+  .adfbar .xlsx{align-self:flex-end;margin-left:auto;background:#1d6f42;color:#fff;border:none;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;height:36px}
+  .adfbar .xlsx:hover{background:#155531}
+  /* Neon DB 로딩/오류 배너 */
+  .adbanner{border-radius:11px;padding:11px 15px;margin-bottom:14px;font-size:13.5px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .adbanner.load{background:#eef6fb;border:1px solid #cfe4f2;color:#2c6b8f}
+  .adbanner.err{background:#fdf0ef;border:1px solid #f0c9c5;color:var(--danger)}
+  .adbanner .reset{margin-left:auto}
+
+  .modal{position:fixed;inset:0;background:rgba(20,40,25,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:60;overflow:auto}
+  .modal .box{background:#fff;border-radius:18px;max-width:720px;width:100%;padding:26px 28px;box-shadow:0 20px 50px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
+  .modal .box.sm{max-width:420px;text-align:center}
+  .modal .ok{width:64px;height:64px;margin:0 auto 14px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff}
+  .modal h3{color:var(--green);font-size:19px;margin-bottom:10px}
+  .eval-card{border-radius:14px;padding:16px 18px;margin:14px 0;border:2px solid}
+  .eval-card.ok{border-color:#bfe6cb;background:#f2fbf5}.eval-card.warn{border-color:#f3dcae;background:#fdf7ec}.eval-card.no{border-color:#f0c9c5;background:#fdf0ef}
+  .eval-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}.eval-head .big{font-size:22px;font-weight:800}
+  .checklist{list-style:none;font-size:13.5px}.checklist li{padding:7px 0;border-bottom:1px dashed var(--line);display:flex;gap:9px;align-items:flex-start}
+  .checklist li:last-child{border-bottom:none}.checklist .mk{flex:none;font-weight:800}.checklist .mk.y{color:var(--ok)}.checklist .mk.n{color:var(--danger)}
+  .checklist .ct{flex:1}.checklist .cn{color:var(--muted);font-size:12px}
+  .ai-note{font-size:11.5px;color:var(--muted);background:#f5f7f4;border-radius:8px;padding:8px 10px;margin-top:8px}
+
+  footer{background:#14351f;color:#cfe3d4;font-size:12.5px;text-align:center;padding:22px 20px}
+  footer .logo{justify-content:center;margin-bottom:8px}footer .logo .wm b{color:#fff}footer .logo .wm span{color:#9fc3aa}
+  .backlink{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;cursor:pointer;color:var(--green);font-weight:700}
+
+  /* validation */
+  .field input.err,.field select.err,.datebox.err{border-color:var(--danger);background:#fdf3f2}
+
+  /* guideline download */
+  .guide-bar{max-width:1120px;margin:14px auto 0;padding:0 20px}
+  .guide-dl{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#213d0a;border:none;border-radius:10px;padding:10px 16px;font-size:13.5px;font-weight:700;cursor:pointer;text-decoration:none}
+  .guide-dl:hover{background:var(--lime-d)}
+
+  /* custom date picker */
+  .dpwrap{position:relative}
+  .datebox{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;background:#fff;cursor:pointer;text-align:left}
+  .datebox:focus{outline:none;border-color:var(--lime)}
+  .datebox.empty{color:var(--muted)}
+  .dpop{position:absolute;z-index:50;top:calc(100% + 4px);left:0;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 34px rgba(20,50,30,.18);padding:12px;width:272px}
+  .dpop.hidden{display:none}
+  .dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:6px}
+  .dp-nav{background:#eef3ec;border:none;border-radius:8px;width:28px;height:28px;flex:none;cursor:pointer;font-size:16px;color:var(--green);line-height:1}
+  .dp-sel{display:flex;gap:6px;flex:1;justify-content:center}
+  .dp-sel select{padding:4px 6px;border:1px solid var(--line);border-radius:7px;font-size:12.5px;font-family:inherit;background:#fff}
+  .dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+  .dp-grid .wd{font-size:11px;color:var(--muted);text-align:center;padding:4px 0;font-weight:700}
+  .dp-grid .dcell{text-align:center;padding:6px 0;font-size:12.5px;border-radius:7px;cursor:pointer}
+  .dp-grid .dcell:hover{background:#eef7ea}
+  .dp-grid .dcell.sel{background:var(--green);color:#fff;font-weight:700}
+  .dp-grid .dcell.empty{cursor:default}
+  .dp-foot{display:flex;justify-content:space-between;margin-top:8px}
+  .dp-foot button{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:12.5px;cursor:pointer;font-weight:600;color:var(--text)}
+  .dp-foot .today{color:var(--green);border-color:var(--green)}
+</style>
+<style>
+/* ===== Lighty mascot ===== */
+@keyframes lightyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.lighty-corner{display:block;width:104px;height:auto;margin:0 2px 6px auto;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(20,60,30,.20))}
+.hero{overflow:visible}
+.hero .lighty-hero{position:absolute;right:16px;bottom:0;width:clamp(120px,15vw,180px);height:auto;pointer-events:none;filter:drop-shadow(0 8px 14px rgba(0,0,0,.28));animation:lightyFloat 5s ease-in-out infinite}
+.lighty-ok{width:120px;height:auto;display:block;margin:2px auto 8px;filter:drop-shadow(0 6px 10px rgba(20,60,30,.2))}
+@media(max-width:760px){.lighty-corner{width:80px;margin-bottom:2px}.hero .lighty-hero{width:96px;right:4px;opacity:.9}}
+@media(prefers-reduced-motion:reduce){.lighty-corner,.hero .lighty-hero{animation:none}}
+/* ===== nationality / country select ===== */
+.natsel{position:relative}
+.natsel-btn{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;color:#1a2b20;font-family:inherit}
+.natsel-btn.placeholder .natsel-val{color:#9aa6a0;font-weight:400}
+.natsel-btn.err{border-color:#e0575a;background:#fef5f5}
+.natsel-btn:hover{border-color:var(--lime)}
+.natsel-val{display:flex;align-items:center;gap:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:600}
+.natsel-val img{width:22px;height:16px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex-shrink:0}
+.natsel-caret{color:#9aa6a0;font-size:11px;flex-shrink:0}
+.natsel-pop{position:absolute;z-index:55;top:calc(100% + 4px);left:0;width:max-content;min-width:100%;max-width:min(340px,85vw);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(20,50,30,.20);padding:8px;display:flex;flex-direction:column}
+.natsel-search{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;margin-bottom:6px;font-family:inherit}
+.natsel-list{overflow-y:auto;max-height:240px}
+.natsel-opt{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:8px;cursor:pointer;font-size:13.5px}
+.natsel-opt:hover{background:#eef4e8}
+.natsel-opt img{width:22px;height:16px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex-shrink:0}
+.natsel-opt>span:first-of-type{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.natsel-dial{color:#8a968f;font-size:12px;flex-shrink:0}
+.name-en{text-transform:uppercase}.name-en::placeholder{text-transform:none}
 </style>
 </head>
 <body>
-<p>입학지원 시스템으로 이동 중입니다… 자동으로 넘어가지 않으면 <a href="Gwangju_Admission_System.html">여기를 클릭</a>하세요.</p>
+
+<!-- ============ LANGUAGE ============ -->
+<div id="langScreen">
+  <div class="logo"><img src="gwangju-logo.jpg" alt="Gwangju University"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
+  <h1>International Admissions</h1>
+  <p>Please select your language · 언어를 선택하세요</p>
+  <div class="lang-grid" id="langGrid"></div><img class="lighty-corner" src="lighty/welcome.png" alt="">
+</div>
+
+<!-- ============ HOME ============ -->
+<div id="homeView" class="hidden">
+  <header class="topbar"><div class="topbar-in">
+    <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
+    <div class="top-actions"><select class="lang-switch" id="langSwitch"></select></div>
+  </div></header>
+
+  <div class="hero">
+    <span class="badge-round" data-i="heroBadge"></span>
+    <h1 data-i="heroTitle"></h1>
+    <p data-i="heroDesc"></p>
+    <div class="hero-cta">
+      <button class="btn btn-lime" id="goStudent" data-i="asStudent"></button>
+      <button class="btn" id="goAdmin" data-i="asAdmin" style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff"></button>
+      <img class="lighty-hero" src="lighty/campus.png" alt="">
+    </div>
+  </div>
+
+  <div class="guide-bar"><a class="guide-dl guideDL" download>⬇ <span data-i="dl_guide"></span></a></div>
+
+  <main>
+    <section class="block"><h2><span class="ic">📅</span><span data-i="s_schedule"></span></h2>
+      <table class="sched"><thead><tr><th data-i="c_round"></th><th data-i="c_apply"></th><th data-i="c_result"></th><th data-i="c_reg"></th></tr></thead>
+      <tbody>
+        <tr><td class="round" data-i="round1"></td><td>2026.06.01 ~ 06.10</td><td><span data-i="before"></span> 2026.06.24</td><td>2026.07.20 ~ 07.24</td></tr>
+        <tr><td class="round" data-i="round2"></td><td>2026.06.22 ~ 07.01</td><td><span data-i="before"></span> 2026.07.15</td><td>2026.07.20 ~ 07.24</td></tr>
+      </tbody></table>
+      <p style="font-size:13px;color:var(--muted);margin-top:11px" data-i="method_desc"></p>
+    </section>
+
+    <section class="block"><h2><span class="ic">🗣️</span><span data-i="s_lang"></span></h2>
+      <div class="track">
+        <div class="t"><div class="th" data-i="lang_ko_t"></div><div class="tb" data-i="lang_ko_r"></div></div>
+        <div class="t"><div class="th" data-i="lang_en_t"></div><div class="tb" data-i="lang_en_r"></div></div>
+      </div>
+    </section>
+
+    <section class="block"><h2><span class="ic">💳</span><span data-i="s_tuition"></span></h2>
+      <div class="info-grid">
+        <div class="mini"><h4 data-i="t_fee"></h4><ul><li><span data-i="t_fee_a"></span><span>3,167,000₩</span></li><li><span data-i="t_fee_b"></span><span>3,744,000₩</span></li></ul></div>
+        <div class="mini"><h4 data-i="t_dorm"></h4><ul><li><span data-i="t_dorm_a"></span><span>889,200~1,269,000₩</span></li></ul></div>
+        <div class="mini"><h4 data-i="t_meal"></h4><ul><li><span data-i="t_meal_a"></span><span>550,200~1,650,600₩</span></li></ul></div>
+        <div class="mini"><h4 data-i="t_sch"></h4><ul><li><span>TOPIK 4~6</span><span data-i="t_sch_a"></span></li><li><span>TOPIK 3 / IELTS 5.5</span><span data-i="t_sch_b"></span></li></ul></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:11px" data-i="t_ins"></p>
+    </section>
+
+    <section class="block"><h2><span class="ic">🧭</span><span data-i="s_process"></span></h2><ol class="steps" id="stepsList"></ol></section>
+    <section class="block"><h2><span class="ic">⚠️</span><span data-i="s_notice"></span></h2><ul class="notice" id="noticeList"></ul></section>
+    <section class="block"><h2><span class="ic">☎️</span><span data-i="s_contact"></span></h2>
+      <div class="contact-box">
+        <div class="c"><b data-i="ct_zh"></b>+82-62-670-2855 · china@gwangju.ac.kr</div>
+        <div class="c"><b data-i="ct_vi"></b>+82-62-670-2779 · vietnam@gwangju.ac.kr</div>
+        <div class="c"><b data-i="ct_en"></b>+82-62-670-2288 · global@gwangju.ac.kr</div>
+        <div class="c"><b data-i="ct_etc"></b>+82-62-670-2569 · global@gwangju.ac.kr</div>
+      </div>
+      <div class="contact-links">
+        <a class="clink clink-home" href="https://ie.gwangju.ac.kr/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+          <span data-i="ct_home"></span></a>
+        <a class="clink clink-kakao" href="https://pf.kakao.com/_wkdpn/chat" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="19" height="19"><path fill="#3B1E1E" d="M12 3.6C6.75 3.6 2.5 6.98 2.5 11.15c0 2.68 1.79 5.03 4.5 6.38-.2.72-.72 2.6-.82 3.02-.12.5.18.5.38.37.16-.1 2.5-1.7 3.52-2.4.78.11 1.6.17 2.42.17 5.25 0 9.5-3.38 9.5-7.54S17.25 3.6 12 3.6z"/></svg>
+          <span data-i="ct_kakao"></span></a>
+        <a class="clink clink-insta" href="https://www.instagram.com/gu_international_affairs_/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#fff" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg>
+          <span data-i="ct_insta"></span></a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="logo"><img src="gwangju-logo.jpg" alt="GU" style="height:32px"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
+    <div>277 Hyodeok-ro, Nam-gu, Gwangju, Korea 61743</div>
+    <div style="margin-top:5px;opacity:.7" data-i="foot"></div>
+  </footer>
+</div>
+
+<!-- ============ STUDENT LOGIN ============ -->
+<div id="studentLogin" class="hidden">
+  <header class="topbar"><div class="topbar-in">
+    <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
+    <button class="backlink" onclick="show('homeView')">← Home</button>
+  </div></header>
+  <main style="max-width:460px"><img class="lighty-corner" src="lighty/newstart.png" alt="">
+    <div class="card">
+      <h3 id="sl_title"></h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px" id="sl_desc"></p>
+      <div class="field"><label id="sl_email_l"></label><input type="email" id="sl_email" placeholder="example@mail.com"></div>
+      <div class="field"><label id="sl_pp_l"></label><input type="text" id="sl_pp" placeholder="PE0000000"></div>
+      <button class="btn btn-primary" style="width:100%" id="sl_btn" onclick="studentLogin()"></button>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="sl_hint"></p>
+    </div>
+  </main>
+</div>
+
+<!-- ============ STUDENT APP ============ -->
+<div id="studentApp" class="hidden">
+  <header class="topbar"><div class="topbar-in">
+    <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
+    <div class="top-actions"><span id="sa_who" style="font-size:13px;color:var(--muted)"></span><button class="backlink" onclick="studentLogout()" id="sa_out"></button></div>
+  </div></header>
+  <main>
+    <div style="margin-bottom:14px"><a class="guide-dl guideDL" download>⬇ <span data-i="dl_guide"></span></a></div>
+    <div class="tabs">
+      <div class="tab active" data-tab="0" id="tab0"></div>
+      <div class="tab" data-tab="1" id="tab1"></div>
+      <div class="tab" data-tab="2" id="tab2"></div>
+    </div>
+
+    <!-- Tab 0: profile -->
+    <div class="tabpane" data-pane="0"><img class="lighty-corner" src="lighty/study.png" alt="">
+      <div class="card">
+        <h3 id="p_sec_id"></h3>
+        <div class="row2">
+          <div class="field"><label id="l_surname"></label><input id="f_surname" class="name-en" autocapitalize="characters" spellcheck="false"></div>
+          <div class="field"><label id="l_first"></label><input id="f_first" class="name-en" autocapitalize="characters" spellcheck="false"></div>
+        </div>
+        <div class="row3">
+          <div class="field"><label id="l_dob"></label>
+            <div class="dpwrap"><button type="button" class="datebox empty" id="box_dob" onclick="openDP('dob')"></button><div class="dpop hidden" id="pop_dob"></div></div>
+          </div>
+          <div class="field"><label id="l_gender"></label><select id="f_gender"><option value="M">Male</option><option value="F">Female</option></select></div>
+          <div class="field"><label id="l_nat"></label><div class="natsel" id="ns_nat"><button type="button" class="natsel-btn placeholder" id="natbtn_nat" onclick="toggleNat('nat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_nat"><input class="natsel-search" id="natsearch_nat" oninput="filterNat('nat')" placeholder="Search country"><div class="natsel-list" id="natlist_nat"></div></div><input type="hidden" id="f_nat"></div></div>
+        </div>
+        <div class="row3">
+          <div class="field"><label id="l_ppno"></label><input id="f_ppno"></div>
+          <div class="field"><label id="l_ppexp"></label>
+            <div class="dpwrap"><button type="button" class="datebox empty" id="box_ppexp" onclick="openDP('ppexp')"></button><div class="dpop hidden" id="pop_ppexp"></div></div>
+          </div>
+          <div class="field"><label id="l_phone"></label><input id="f_phone" placeholder="+___ · auto-filled from nationality"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 id="p_sec_app"></h3>
+        <div class="field"><label id="l_type"></label>
+          <div class="radio-group" id="rg_type">
+            <label><input type="radio" name="atype" value="new" checked><span id="l_new"></span></label>
+            <label><input type="radio" name="atype" value="transfer"><span id="l_transfer"></span></label>
+          </div>
+        </div>
+        <div class="field hidden" id="year_field"><label id="l_year"></label>
+          <select id="f_year"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+        </div>
+        <div class="row2">
+          <div class="field"><label id="l_college"></label><select id="f_college"></select></div>
+          <div class="field"><label id="l_dept"></label><select id="f_dept"></select></div>
+        </div>
+        <div class="field"><label id="l_track"></label>
+          <div class="radio-group" id="rg_track">
+            <label><input type="radio" name="track" value="ko" checked><span id="l_track_ko"></span></label>
+            <label><input type="radio" name="track" value="en"><span id="l_track_en"></span></label>
+            <label><input type="radio" name="track" value="zh"><span id="l_track_zh"></span></label>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field" id="ltest_field"><label id="l_ltest"></label>
+            <select id="f_ltest"></select>
+          </div>
+          <div class="field"><label id="l_lscore"></label><select id="f_lscore"><option value="">-</option></select></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 id="p_sec_parent"></h3>
+        <div class="row2">
+          <div class="field"><label id="l_fname"></label><input id="f_fname" class="name-en" autocapitalize="characters" spellcheck="false"></div>
+          <div class="field"><label id="l_fnat"></label><div class="natsel" id="ns_fnat"><button type="button" class="natsel-btn placeholder" id="natbtn_fnat" onclick="toggleNat('fnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_fnat"><input class="natsel-search" id="natsearch_fnat" oninput="filterNat('fnat')" placeholder="Search country"><div class="natsel-list" id="natlist_fnat"></div></div><input type="hidden" id="f_fnat"></div></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label id="l_mname"></label><input id="f_mname" class="name-en" autocapitalize="characters" spellcheck="false"></div>
+          <div class="field"><label id="l_mnat"></label><div class="natsel" id="ns_mnat"><button type="button" class="natsel-btn placeholder" id="natbtn_mnat" onclick="toggleNat('mnat')"><span class="natsel-val">Select country</span><span class="natsel-caret">▾</span></button><div class="natsel-pop hidden" id="natpop_mnat"><input class="natsel-search" id="natsearch_mnat" oninput="filterNat('mnat')" placeholder="Search country"><div class="natsel-list" id="natlist_mnat"></div></div><input type="hidden" id="f_mnat"></div></div>
+        </div>
+      </div>
+      <div style="text-align:right"><button class="btn btn-primary" onclick="saveProfile(true)" id="btn_save"></button></div>
+    </div>
+
+    <!-- Tab 1: documents -->
+    <div class="tabpane hidden" data-pane="1"><img class="lighty-corner" src="lighty/review.png" alt="">
+      <div class="progress-wrap">
+        <div class="progress-top"><span id="pg_label"></span><span><b id="pgDone">0</b> / <span id="pgTotal">0</span></span></div>
+        <div class="bar"><i id="pgBar"></i></div>
+      </div>
+      <div class="step1">
+        <div class="txt"><h4 id="s1_title"></h4><p id="s1_desc"></p></div>
+        <div class="acts">
+          <a class="btn btn-primary" id="downloadForm" download><span>⬇</span><span id="s1_dl"></span></a>
+        </div>
+      </div>
+      <h3 style="font-size:16px;color:var(--green);margin:4px 0 12px" id="docs_title"></h3>
+      <div class="doc-list" id="docList"></div>
+      <div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="docsNext()" id="docs_next"></button></div>
+    </div>
+
+    <!-- Tab 2: review & submit -->
+    <div class="tabpane hidden" data-pane="2"><img class="lighty-corner" src="lighty/ok.png" alt="">
+      <div class="card"><h3 id="rv_info"></h3><div class="summary" id="rv_summary"></div></div>
+      <div class="card"><h3 id="rv_docs"></h3><div id="rv_doclist" style="font-size:13.5px"></div></div>
+      <div style="text-align:center;margin-top:8px">
+        <button class="btn btn-primary" style="font-size:16px;padding:15px 40px" id="finalSubmit" onclick="submitApp()" disabled></button>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:9px" id="finalNote"></p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ ADMIN LOGIN ============ -->
+<div id="adminLogin" class="hidden">
+  <header class="topbar"><div class="topbar-in">
+    <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY</span></div></div>
+    <button class="backlink" onclick="show('homeView')">← Home</button>
+  </div></header>
+  <main style="max-width:420px"><img class="lighty-corner" src="lighty/guide.png" alt="">
+    <div class="card">
+      <h3 id="al_title"></h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="al_desc"></p>
+      <div class="field" style="display:none"><label id="al_id_l"></label><input type="text" id="al_id" autocomplete="username"></div>
+      <div class="field"><label id="al_code_l"></label><input type="password" id="al_code" autocomplete="current-password"></div>
+      <button class="btn btn-primary" style="width:100%" onclick="adminLogin()" id="al_btn"></button>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:10px" id="al_hint"></p>
+    </div>
+  </main>
+</div>
+
+<!-- ============ ADMIN DASHBOARD ============ -->
+<div id="adminDash" class="hidden">
+  <header class="topbar"><div class="topbar-in">
+    <div class="logo"><img src="gwangju-logo.jpg" alt="GU"><div class="wm"><b>광주대학교</b><span>GWANGJU UNIVERSITY · 국제협력처</span></div></div>
+    <div class="top-actions"><span id="ad_who" style="font-size:13px;color:var(--muted)"></span><button class="backlink" onclick="adminLogout()" id="ad_out"></button></div>
+  </div></header>
+  <main>
+    <img class="lighty-corner" src="lighty/notice.png" alt="">
+    <h2 style="font-size:20px;color:var(--green);margin-bottom:14px" id="ad_title"></h2>
+    <div class="filters" id="adScopeBar" style="margin-bottom:14px"></div>
+    <div id="adError" class="adbanner hidden"></div>
+    <div class="adfbar" id="adFilterBar"></div>
+    <div class="stats" id="adStats"></div>
+    <div class="filters" id="adFilters"></div>
+    <div style="overflow-x:auto"><table class="adm" id="adTable"></table></div>
+    <p id="ad_empty" style="text-align:center;color:var(--muted);padding:30px;font-size:14px"></p>
+  </main>
+</div>
+
+<!-- modals -->
+<div id="detailModal" class="modal hidden"><div class="box" id="detailBox"></div></div>
+<div id="previewModal" class="modal hidden"><div class="box" id="previewBox"></div></div>
+<div id="emailModal" class="modal hidden"><div class="box" id="emailBox"></div></div>
+<div id="okModal" class="modal hidden"><div class="box sm"><img class="lighty-ok" src="lighty/graduate.png" alt=""><div class="ok">✓</div><h3 id="ok_title"></h3><p id="ok_desc" style="color:var(--muted);font-size:14px;margin-bottom:20px"></p><button class="btn btn-primary" onclick="closeModal('okModal')" id="ok_btn"></button></div></div>
+
+<script>
+/* ================= CONFIG ================= */
+const FORM_FILE = "Admission Application Form_Gwangju University.docx";
+/* Neon Data API (PostgREST) endpoint for the `applications` table.
+   On final submit the entire form object is POSTed into the jsonb `payload` column,
+   and the admin dashboard reads this table back. */
+const API_ENDPOINT = "https://ep-dry-sea-aoqk565q.apirest.c-2.ap-southeast-1.aws.neon.tech/neondb/rest/v1/applications";
+/* Neon Data API는 모든 요청에 JWT Bearer 토큰을 요구합니다.
+   토큰을 공개 페이지에 두면 노출되므로, 백엔드 프록시(아래)가 서버에서 토큰을 붙입니다.
+   API_TOKEN은 프록시 없이 직접 호출할 때만 쓰이며 기본은 비워 둡니다(권장: 비움). */
+const API_TOKEN = "";
+function apiHeaders(base){const h=Object.assign({},base||{});if(API_TOKEN)h["Authorization"]="Bearer "+API_TOKEN;return h;}
+/* 백엔드 프록시 URL (Cloudflare Worker). 프록시가 Neon 연결 문자열을 서버에 보관하고
+   Postgres에 직접 INSERT/SELECT 합니다. 학생 제출(POST)은 공개, 담당자 조회(GET)는 서버 키로 보호.
+   비어 있으면 저장이 동작하지 않습니다. 설정/배포: proxy/README.md */
+const PROXY_ENDPOINT = "https://gu-admission-proxy.hubertjung84.workers.dev";
+/* 담당자 전용 서버 키 (프록시 GET 보호용) — 세션 동안만 브라우저에 보관, 소스에는 없음 */
+function getStaffKey(){try{return sessionStorage.getItem("gu_staff_key")||"";}catch(_){return "";}}
+function setStaffKey(k){try{sessionStorage.setItem("gu_staff_key",k);}catch(_){}}
+function clearStaffKey(){try{sessionStorage.removeItem("gu_staff_key");}catch(_){}}
+function ensureStaffKey(){let k=getStaffKey();if(!k){k=prompt(L("담당자 전용 서버 접속 키를 입력하세요.","Enter the staff server access key."))||"";if(k)setStaffKey(k);}return k;}
+function promptStaffKeyAndReload(){clearStaffKey();const k=prompt(L("담당자 전용 서버 접속 키를 입력하세요.","Enter the staff server access key."))||"";if(k){setStaffKey(k);refreshAndRender();}}
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let LANG="ko";
+/* app/admin translations (zh/vi/mn/uz); keyed by the English string. Fallback: English */
+const APP_TR={
+ zh:{"Student Login (Guest)":"留学生登录(游客)","Email":"邮箱","Passport No.":"护照号","Start / Resume":"开始/继续","1. Profile":"1. 基本信息","2. Documents":"2. 提交材料","3. Review & Submit":"3. 确认·提交","Logout":"退出","Personal Info (as in passport)":"本人信息(护照)","Surname":"姓(Surname)","Given Name":"名(Given Name)","Date of Birth":"出生日期","Gender":"性别","Nationality":"国籍","Passport Expiry":"护照有效期","Phone":"联系电话","Application Info":"申请信息","Admission Type":"申请类型","New":"新生","Transfer":"插班","Transfer Year":"插班年级","College":"学院","Department":"学部(系)","Track":"轨道","Korean":"韩语","English":"英语","Chinese":"中文","Language Test":"语言考试","Score/Level":"分数/等级","Parents' Info":"父母信息","Father's Name":"父亲姓名","Father Nationality":"父亲国籍","Mother's Name":"母亲姓名","Mother Nationality":"母亲国籍","💾 Save":"💾 保存","Required documents":"必需材料","STEP 1 · Application Form":"STEP 1 · 入学申请表","Download Form":"下载申请表","Upload Completed":"上传已填写","Required Documents":"提交材料","Review Information":"确认信息","Document Status":"材料状态","Final Submit":"最终提交","Staff Login":"负责人登录","Access Code":"接入码","Login":"登录","← Exit":"← 退出","Admissions Dashboard":"入学申请仪表盘","OK":"确定","Required":"必需","If applicable":"适用者","No file":"无文件","Change":"更改","Upload":"上传","View":"查看","Name":"姓名","DOB":"出生日期","Passport":"护照","Type":"类型","Program":"招生单位","Language":"语言","Male":"男","Female":"女","M":"男","F":"女","Submitted":"已提交","Saved":"已保存","Draft":"草稿","Sub":"提交","T":"插","Eligible":"合格","Needs completion":"需补充","Not eligible":"不合格","Total":"总数","Needs/Not":"补充/不合格","All":"全部","Needs":"需补充","Not":"不合格","Status":"状态","Verdict":"判定","Date":"日期","Nat.":"国籍","Both parents foreign nationals":"父母均为外国国籍","Language requirement met":"符合语言要求","All required documents":"必需材料齐全","Profile complete":"基本信息完整","Passport valid":"护照有效","Documents":"提交材料","Auto-evaluation (per guidelines)":"自动判定(依招生简章)","Application Submitted":"申请已提交","Everything is ready. Please submit.":"所有项目已就绪，请提交。","Est. scholarship":"预计奖学金","off":"减免"},
+ vi:{"Student Login (Guest)":"Đăng nhập (Khách)","Email":"Email","Passport No.":"Số hộ chiếu","Start / Resume":"Bắt đầu / Tiếp tục","1. Profile":"1. Thông tin","2. Documents":"2. Hồ sơ","3. Review & Submit":"3. Kiểm tra & Nộp","Logout":"Đăng xuất","Personal Info (as in passport)":"Thông tin cá nhân (theo hộ chiếu)","Surname":"Họ (Surname)","Given Name":"Tên (Given Name)","Date of Birth":"Ngày sinh","Gender":"Giới tính","Nationality":"Quốc tịch","Passport Expiry":"Hạn hộ chiếu","Phone":"Điện thoại","Application Info":"Thông tin đăng ký","Admission Type":"Loại nhập học","New":"Tân SV","Transfer":"Chuyển tiếp","Transfer Year":"Năm chuyển tiếp","College":"Khoa","Department":"Ngành","Track":"Hệ","Korean":"Tiếng Hàn","English":"Tiếng Anh","Chinese":"Tiếng Trung","Language Test":"Kỳ thi ngôn ngữ","Score/Level":"Điểm/Cấp","Parents' Info":"Thông tin cha mẹ","Father's Name":"Tên cha","Father Nationality":"Quốc tịch cha","Mother's Name":"Tên mẹ","Mother Nationality":"Quốc tịch mẹ","💾 Save":"💾 Lưu","Required documents":"Hồ sơ bắt buộc","STEP 1 · Application Form":"BƯỚC 1 · Đơn đăng ký","Download Form":"Tải đơn","Upload Completed":"Tải đơn đã điền","Required Documents":"Hồ sơ nộp","Review Information":"Kiểm tra thông tin","Document Status":"Trạng thái hồ sơ","Final Submit":"Nộp cuối cùng","Staff Login":"Đăng nhập cán bộ","Access Code":"Mã truy cập","Login":"Đăng nhập","← Exit":"← Thoát","Admissions Dashboard":"Bảng điều khiển tuyển sinh","OK":"OK","Required":"Bắt buộc","If applicable":"Nếu có","No file":"Chưa có tệp","Change":"Đổi","Upload":"Tải lên","View":"Xem","Name":"Họ tên","DOB":"Ngày sinh","Passport":"Hộ chiếu","Type":"Loại","Program":"Ngành","Language":"Ngôn ngữ","Male":"Nam","Female":"Nữ","M":"Nam","F":"Nữ","Submitted":"Đã nộp","Saved":"Đã lưu","Draft":"Nháp","Sub":"Nộp","T":"CT","Eligible":"Đạt","Needs completion":"Cần bổ sung","Not eligible":"Không đạt","Total":"Tổng","Needs/Not":"Bổ sung/Không đạt","All":"Tất cả","Needs":"Cần bổ sung","Not":"Không đạt","Status":"Trạng thái","Verdict":"Kết quả","Date":"Ngày","Nat.":"Quốc tịch","Both parents foreign nationals":"Cả cha mẹ đều là người nước ngoài","Language requirement met":"Đạt yêu cầu ngôn ngữ","All required documents":"Đủ hồ sơ bắt buộc","Profile complete":"Thông tin đầy đủ","Passport valid":"Hộ chiếu hợp lệ","Documents":"Hồ sơ","Auto-evaluation (per guidelines)":"Tự động đánh giá (theo quy chế)","Application Submitted":"Đã nộp hồ sơ","Everything is ready. Please submit.":"Đã sẵn sàng. Vui lòng nộp.","Est. scholarship":"Học bổng dự kiến","off":"giảm"},
+ mn:{"Student Login (Guest)":"Оюутны нэвтрэлт (Зочин)","Email":"И-мэйл","Passport No.":"Паспортын дугаар","Start / Resume":"Эхлэх / Үргэлжлүүлэх","1. Profile":"1. Мэдээлэл","2. Documents":"2. Материал","3. Review & Submit":"3. Шалгах & Илгээх","Logout":"Гарах","Personal Info (as in passport)":"Хувийн мэдээлэл (паспортоор)","Surname":"Овог (Surname)","Given Name":"Нэр (Given Name)","Date of Birth":"Төрсөн огноо","Gender":"Хүйс","Nationality":"Иргэншил","Passport Expiry":"Паспортын хугацаа","Phone":"Утас","Application Info":"Бүртгэлийн мэдээлэл","Admission Type":"Элсэлтийн төрөл","New":"Шинэ","Transfer":"Шилжилт","Transfer Year":"Шилжих курс","College":"Коллеж","Department":"Тэнхим","Track":"Урсгал","Korean":"Солонгос","English":"Англи","Chinese":"Хятад","Language Test":"Хэлний шалгалт","Score/Level":"Оноо/Түвшин","Parents' Info":"Эцэг эхийн мэдээлэл","Father's Name":"Эцгийн нэр","Father Nationality":"Эцгийн иргэншил","Mother's Name":"Эхийн нэр","Mother Nationality":"Эхийн иргэншил","💾 Save":"💾 Хадгалах","Required documents":"Шаардлагатай материал","STEP 1 · Application Form":"АЛХАМ 1 · Өргөдлийн маягт","Download Form":"Маягт татах","Upload Completed":"Бөглөсөн маягт байршуулах","Required Documents":"Бүрдүүлэх материал","Review Information":"Мэдээлэл шалгах","Document Status":"Материалын байдал","Final Submit":"Эцсийн илгээлт","Staff Login":"Ажилтны нэвтрэлт","Access Code":"Нэвтрэх код","Login":"Нэвтрэх","← Exit":"← Гарах","Admissions Dashboard":"Элсэлтийн хяналтын самбар","OK":"За","Required":"Заавал","If applicable":"Хамааралтай бол","No file":"Файл байхгүй","Change":"Солих","Upload":"Байршуулах","View":"Үзэх","Name":"Нэр","DOB":"Төрсөн огноо","Passport":"Паспорт","Type":"Төрөл","Program":"Мэргэжил","Language":"Хэл","Male":"Эр","Female":"Эм","M":"Эр","F":"Эм","Submitted":"Илгээсэн","Saved":"Хадгалсан","Draft":"Ноорог","Sub":"Илгээв","T":"Ш","Eligible":"Тэнцсэн","Needs completion":"Нөхөх шаардлагатай","Not eligible":"Тэнцээгүй","Total":"Нийт","Needs/Not":"Нөхөх/Тэнцээгүй","All":"Бүгд","Needs":"Нөхөх","Not":"Тэнцээгүй","Status":"Төлөв","Verdict":"Дүгнэлт","Date":"Огноо","Nat.":"Иргэншил","Both parents foreign nationals":"Эцэг эх хоёулаа гадаад иргэн","Language requirement met":"Хэлний шаардлага хангасан","All required documents":"Бүх материал бүрдсэн","Profile complete":"Мэдээлэл бүрэн","Passport valid":"Паспорт хүчинтэй","Documents":"Материал","Auto-evaluation (per guidelines)":"Автомат дүгнэлт (журмаар)","Application Submitted":"Өргөдөл илгээгдлээ","Everything is ready. Please submit.":"Бүгд бэлэн боллоо. Илгээнэ үү.","Est. scholarship":"Тооцоолсон тэтгэлэг","off":"чөлөөлөлт"},
+ uz:{"Student Login (Guest)":"Talaba kirishi (Mehmon)","Email":"Email","Passport No.":"Pasport raqami","Start / Resume":"Boshlash / Davom ettirish","1. Profile":"1. Maʼlumot","2. Documents":"2. Hujjatlar","3. Review & Submit":"3. Tekshirish & Topshirish","Logout":"Chiqish","Personal Info (as in passport)":"Shaxsiy maʼlumot (pasport boʻyicha)","Surname":"Familiya (Surname)","Given Name":"Ism (Given Name)","Date of Birth":"Tugʻilgan sana","Gender":"Jinsi","Nationality":"Fuqarolik","Passport Expiry":"Pasport muddati","Phone":"Telefon","Application Info":"Ariza maʼlumoti","Admission Type":"Qabul turi","New":"Yangi","Transfer":"Koʻchirish","Transfer Year":"Koʻchirish kursi","College":"Kollej","Department":"Boʻlim","Track":"Yoʻnalish","Korean":"Koreys","English":"Ingliz","Chinese":"Xitoy","Language Test":"Til imtihoni","Score/Level":"Ball/Daraja","Parents' Info":"Ota-ona maʼlumoti","Father's Name":"Ota ismi","Father Nationality":"Ota fuqaroligi","Mother's Name":"Ona ismi","Mother Nationality":"Ona fuqaroligi","💾 Save":"💾 Saqlash","Required documents":"Majburiy hujjatlar","STEP 1 · Application Form":"BOSQICH 1 · Ariza shakli","Download Form":"Shaklni yuklab olish","Upload Completed":"Toʻldirilganini yuklash","Required Documents":"Topshiriladigan hujjatlar","Review Information":"Maʼlumotni tekshirish","Document Status":"Hujjat holati","Final Submit":"Yakuniy topshirish","Staff Login":"Xodim kirishi","Access Code":"Kirish kodi","Login":"Kirish","← Exit":"← Chiqish","Admissions Dashboard":"Qabul boshqaruv paneli","OK":"OK","Required":"Majburiy","If applicable":"Tegishli boʻlsa","No file":"Fayl yoʻq","Change":"Oʻzgartirish","Upload":"Yuklash","View":"Koʻrish","Name":"Ism","DOB":"Tugʻilgan sana","Passport":"Pasport","Type":"Turi","Program":"Yoʻnalish","Language":"Til","Male":"Erkak","Female":"Ayol","M":"Erkak","F":"Ayol","Submitted":"Topshirilgan","Saved":"Saqlandi","Draft":"Qoralama","Sub":"Topshir.","T":"K","Eligible":"Mos","Needs completion":"Toʻldirish kerak","Not eligible":"Mos emas","Total":"Jami","Needs/Not":"Toʻldirish/Mos emas","All":"Barchasi","Needs":"Toʻldirish","Not":"Mos emas","Status":"Holat","Verdict":"Xulosa","Date":"Sana","Nat.":"Fuqarolik","Both parents foreign nationals":"Ikkala ota-ona chet el fuqarosi","Language requirement met":"Til talabi bajarildi","All required documents":"Barcha majburiy hujjatlar","Profile complete":"Maʼlumot toʻliq","Passport valid":"Pasport amal qiladi","Documents":"Hujjatlar","Auto-evaluation (per guidelines)":"Avtomatik baholash (qoidalar boʻyicha)","Application Submitted":"Ariza topshirildi","Everything is ready. Please submit.":"Hammasi tayyor. Topshiring.","Est. scholarship":"Taxminiy stipendiya","off":"chegirma"}
+};
+function L(ko,en){ if(LANG==="ko")return ko; if(LANG==="en")return en; return (APP_TR[LANG]&&APP_TR[LANG][en])||en; }
+
+/* ------- colleges / departments (신입학, 영문모집요강 기준) ------- */
+const COLLEGES=[
+ {ko:"보건복지대학",en:"College of Health Welfare",depts:[
+   {ko:"보건행정학과",en:"Health Administration"},
+   {ko:"사회복지학부",en:"Social Welfare"},
+   {ko:"식품영양학과",en:"Food Science & Nutrition"},
+   {ko:"반려동물보건산업학과",en:"Pet Health Industry"}]},
+ {ko:"문화산업대학",en:"College of Cultural Industry",depts:[
+   {ko:"스포츠과학부",en:"Sports Science"},
+   {ko:"태권도학과",en:"Taekwondo"},
+   {ko:"시각영상디자인학과",en:"Visual & Media Design"},
+   {ko:"산업디자인학과",en:"Industrial Design"},
+   {ko:"인테리어디자인학과",en:"Interior Design"},
+   {ko:"패션주얼리디자인학과",en:"Fashion & Jewelry"},
+   {ko:"뷰티미용학과",en:"Beauty Science"},
+   {ko:"사진영상미디어학과",en:"Photography, Image & Media"},
+   {ko:"문예창작과",en:"Creative Writing"},
+   {ko:"항공서비스학과",en:"Airline Service"},
+   {ko:"호텔조리제과제빵학과",en:"Hotel Culinary & Baking Arts"}]},
+ {ko:"인문사회과학대학",en:"College of Humanities & Social Sciences",depts:[
+   {ko:"청소년상담·평생교육학과",en:"Youth Counseling·Lifelong Education"},
+   {ko:"심리학과",en:"Psychology"},
+   {ko:"경찰행정학과",en:"Police Administration"},
+   {ko:"소방행정학과",en:"Fire Administration"},
+   {ko:"문헌정보학과",en:"Library & Information Sciences"},
+   {ko:"경영학과",en:"Business Administration"},
+   {ko:"회계세무학과",en:"Accounting & Tax"},
+   {ko:"무역유통학과",en:"Trade & Distribution"},
+   {ko:"도시·부동산학과",en:"Urban·Real Estate"}]},
+ {ko:"공과대학",en:"College of Engineering",depts:[
+   {ko:"건축학과(5년제)",en:"Architecture (5-year program)"},
+   {ko:"건축공학과",en:"Architectural Engineering (4-year program)"},
+   {ko:"컴퓨터공학과",en:"Computer Engineering"},
+   {ko:"전기공학과",en:"Electrical Engineering"},
+   {ko:"토목공학과",en:"Civil Engineering"},
+   {ko:"기계자동차공학과",en:"Mechanical & Automotive Engineering"}]},
+ {ko:"AI앙트십대학",en:"College of Entrepreneurship",depts:[
+   {ko:"글로벌콘텐츠학부",en:"Global Contents"}]}
+];
+const cname=x=>LANG==="ko"?x.ko:(x.en||x.ko);
+function labelCollege(ko){const c=COLLEGES.find(x=>x.ko===ko);return c?cname(c):(ko||"-");}
+function labelDept(ko){for(const c of COLLEGES){const d=c.depts.find(x=>x.ko===ko);if(d)return cname(d);}return ko||"-";}
+/* ------- language score dropdown data ------- */
+const firstNum=s=>{const m=(s||"").match(/[0-9]+(\.[0-9]+)?/);return m?parseFloat(m[0]):NaN;};
+const EN_TESTS=["IELTS","TOEFL iBT","CEFR","TEPS","NEW TEPS"];
+function scoreOptions(test){
+  switch(test){
+    case"TOPIK":return["1","2","3","4","5","6"];
+    case"IELTS":return["4.0","4.5","5.0","5.5","6.0","6.5","7.0","7.5","8.0","8.5","9.0"];
+    case"TOEFL iBT":return["40-58","59-69","70-79","80-89","90-99","100-109","110-120"];
+    case"CEFR":return["A1","A2","B1","B2","C1","C2"];
+    case"TEPS":return["300-599","600-699","700-799","800-900"];
+    case"NEW TEPS":return["100-201","202-300","301-400","401-500","501-600"];
+    default:return[];
+  }
+}
+
+/* ------- documents (form is the required first item) ------- */
+const DOCS=[
+  {k:"form",    req:true,  ic:"📄", ko:"입학지원서(작성본)", en:"Application Form (completed)", zh:"入学申请表（已填写）", vi:"Đơn xin nhập học (đã điền)", mn:"Элсэлтийн өргөдөл (бөглөсөн)", uz:"Qabul arizasi (toʻldirilgan)"},
+  {k:"agree",   req:true,  ic:"📝", ko:"개인정보 수집·이용 동의서", en:"Personal Information Consent", zh:"个人信息收集·使用同意书", vi:"Đồng ý thu thập·sử dụng thông tin cá nhân", mn:"Хувийн мэдээлэл цуглуулах зөвшөөрөл", uz:"Shaxsiy maʼlumotlarga rozilik"},
+  {k:"passport",req:true,  ic:"🛂", ko:"여권 사본 및 여권용 사진 2매", en:"Passport copy & 2 photos", zh:"护照复印件及护照照片2张", vi:"Bản sao hộ chiếu & 2 ảnh", mn:"Паспортын хуулбар ба 2 зураг", uz:"Pasport nusxasi va 2 dona surat"},
+  {k:"id",      req:true,  ic:"🪪", ko:"본인 및 부모 신분증 사본", en:"ID copies (self & parents)", zh:"本人及父母身份证复印件", vi:"Bản sao CMND/CCCD (bản thân & cha mẹ)", mn:"Өөрийн болон эцэг эхийн үнэмлэхний хуулбар", uz:"Oʻzi va ota-onaning ID nusxasi"},
+  {k:"family",  req:true,  ic:"👪", ko:"가족관계증명서", en:"Family Relationship Certificate", zh:"家庭关系证明（户口簿）", vi:"Giấy chứng nhận quan hệ gia đình", mn:"Гэр бүлийн харилцааны гэрчилгээ", uz:"Oila munosabatlari guvohnomasi"},
+  {k:"edu",     req:true,  ic:"🎓", ko:"졸업·성적증명서 (아포스티유 포함)", en:"Diploma & transcript (apostille)", zh:"毕业·成绩证明（含公证认证）", vi:"Bằng & bảng điểm (có apostille)", mn:"Төгсөлт·дүнгийн гэрчилгээ (апостильтай)", uz:"Diplom va baholar (apostil bilan)"},
+  {k:"finance", req:true,  ic:"🏦", ko:"재정보증서류 (보증금 1,600만원)", en:"Financial guarantee (16M KRW)", zh:"财政担保材料（担保金1,600万韩元）", vi:"Bảo lãnh tài chính (16 triệu KRW)", mn:"Санхүүгийн баталгаа (16 сая вон)", uz:"Moliyaviy kafolat (16 mln KRW)"},
+  {k:"employ",  req:true,  ic:"💼", ko:"부모 재직·수입증명", en:"Parents' employment & income", zh:"父母在职·收入证明", vi:"Chứng minh việc làm·thu nhập của cha mẹ", mn:"Эцэг эхийн ажил·орлогын тодорхойлолт", uz:"Ota-onaning ish va daromadi"},
+  {k:"arc",     req:false, ic:"🗂️", ko:"대한민국 외국인등록증", en:"Korean Alien Registration Card", zh:"韩国外国人登录证", vi:"Thẻ đăng ký người nước ngoài (Hàn Quốc)", mn:"БНСУ-ын гадаад иргэний үнэмлэх", uz:"Koreya chet el fuqarosi guvohnomasi"},
+  {k:"lang",    req:false, ic:"📊", ko:"어학성적증명서", en:"Language Test Score Certificate", zh:"语言成绩证明", vi:"Chứng nhận điểm năng lực ngôn ngữ", mn:"Хэлний оноогийн гэрчилгээ", uz:"Til imtihoni natijasi sertifikati"}
+];
+/* language-score document name varies by track (per guidelines) */
+function langDocName(track){
+  var isEn=(track==="en");
+  var T=isEn
+    ?{ko:"영어 공인성적 증명서 (IELTS/TOEFL iBT 등)",en:"English Proficiency Score Certificate (IELTS/TOEFL iBT, etc.)",zh:"英语成绩证明（IELTS/TOEFL iBT等）",vi:"Chứng chỉ tiếng Anh (IELTS/TOEFL iBT...)",mn:"Англи хэлний албан оноо (IELTS/TOEFL iBT г.м.)",uz:"Ingliz tili sertifikati (IELTS/TOEFL iBT va h.k.)"}
+    :{ko:"어학성적증명서",en:"Language Test Score Certificate",zh:"语言成绩证明",vi:"Chứng nhận điểm năng lực ngôn ngữ",mn:"Хэлний оноогийн гэрчилгээ",uz:"Til imtihoni natijasi sertifikati"};
+  return T[LANG]||T.en;
+}
+function dname(d,track){
+  if(d.k==="lang")return langDocName(track||(current&&current.track)||"ko");
+  return d[LANG]||d.en;
+}
+
+/* ================= I18N (public, 6 lang) ================= */
+const I18N={
+ ko:{native:"한국어",eng:"KOREAN",flag:"<img class='flagimg' src='flags/kr.svg' alt='한국'>",
+  heroBadge:"2026 후기 외국인 신·편입생 특별전형",heroTitle:"외국인 유학생 입학지원 시스템",heroDesc:"광주대학교 외국인 신·편입생 특별전형 온라인 지원 포털입니다.",
+  asStudent:"유학생 지원하기",asAdmin:"담당자 로그인",
+  s_schedule:"전형일정",c_round:"모집시기",c_apply:"원서접수",c_result:"합격자 발표",c_reg:"등록기간",round1:"1차",round2:"2차",before:"이전",
+  method_desc:"전형방법: 서류전형 100% (학업·어학·지원동기·인성 종합평가, 필요 시 면접).",
+  s_lang:"언어능력 요건 (신입학)",lang_ko_t:"한국어트랙",lang_ko_r:"TOPIK 3급 이상 또는 동등 자격 (예체능 2급 이상)",lang_en_t:"영어트랙",lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 이상",
+  s_tuition:"등록금 및 유학경비",t_fee:"등록금(학기)",t_fee_a:"인문·사회",t_fee_b:"이공·예체능",t_dorm:"기숙사(학기)",t_dorm_a:"4/3/2인실",t_meal:"식비(학기)",t_meal_a:"1/2/3식",t_sch:"장학금",t_sch_a:"100% 면제",t_sch_b:"40%/50% 면제",t_ins:"보험료: 입국 후 국민건강보험 자동가입(의무). 재정보증 보증금 1,600만원.",
+  s_process:"입학절차",steps:["입학원서(서류제출)","자격(서류)심사","면접심사(필요 시)","합격자 발표","등록금 납부","표준입학허가서 발급","비자 신청","입국","입학생 오리엔테이션","개강"],
+  s_notice:"주의사항",notices:["두 개 이상 모집단위 복수지원 불가.","서류 위조 등 부정합격 시 합격취소.","신입생은 첫 학기 휴학 불가.","기간 내 등록금 미납 시 합격취소 가능.","국민건강보험 의무가입.","등록금·장학금은 본교 규정.","제출 서류는 반환되지 않음."],
+  s_contact:"문의",ct_zh:"중국",ct_vi:"베트남",ct_en:"영어",ct_etc:"몽골 및 기타",dl_guide:"모집요강 다운로드",foot:"본 페이지는 초안(prototype)입니다.",ct_home:"국제협력처 홈페이지",ct_kakao:"카카오톡 문의",ct_insta:"인스타그램"},
+ en:{native:"English",eng:"ENGLISH",flag:"<img class='flagimg' src='flags/gb.svg' alt='English'>",
+  heroBadge:"2026 Fall International Admission",heroTitle:"International Student Admission Portal",heroDesc:"Online application portal for Gwangju University international admission.",
+  asStudent:"Apply as Student",asAdmin:"Staff Login",
+  s_schedule:"Schedule",c_round:"Round",c_apply:"Application",c_result:"Result",c_reg:"Enrollment",round1:"Round 1",round2:"Round 2",before:"by",
+  method_desc:"Evaluation: 100% document screening (academics, language, motivation, character); interview if needed.",
+  s_lang:"Language Requirements (Freshman)",lang_ko_t:"Korean Track",lang_ko_r:"TOPIK Level 3+ or equivalent",lang_en_t:"English Track",lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202+",
+  s_tuition:"Tuition & Costs",t_fee:"Tuition(sem.)",t_fee_a:"Humanities/Social",t_fee_b:"Science/Arts",t_dorm:"Dormitory(sem.)",t_dorm_a:"4/3/2-person",t_meal:"Meals(sem.)",t_meal_a:"1/2/3 meals",t_sch:"Scholarship",t_sch_a:"100% waiver",t_sch_b:"40%/50% waiver",t_ins:"Insurance: mandatory National Health Insurance on entry. Guarantee deposit: 16M KRW.",
+  s_process:"Procedure",steps:["Application (documents)","Eligibility screening","Interview (if needed)","Result announcement","Tuition payment","Admission certificate","Visa application","Entry to Korea","Orientation","Classes begin"],
+  s_notice:"Notes",notices:["No applying to 2+ programs.","Admission cancelled if via forged documents.","Freshmen cannot take leave in 1st semester.","Admission may be cancelled if tuition unpaid on time.","National Health Insurance is mandatory.","Tuition & scholarships follow university rules.","Submitted documents are not returned."],
+  s_contact:"Contact",ct_zh:"China",ct_vi:"Vietnam",ct_en:"English",ct_etc:"Mongolia & Others",dl_guide:"Download Guidelines",foot:"This page is a prototype.",ct_home:"IAO Website",ct_kakao:"KakaoTalk",ct_insta:"Instagram"},
+ zh:{native:"中文",eng:"CHINESE",flag:"<img class='flagimg' src='flags/cn.svg' alt='中文'>",
+  heroBadge:"2026学年后期 外国人特别招生",heroTitle:"外国留学生入学申请系统",heroDesc:"光州大学外国人特别招生在线申请门户。",
+  asStudent:"留学生申请",asAdmin:"负责人登录",
+  s_schedule:"招生日程",c_round:"批次",c_apply:"报名",c_result:"录取公布",c_reg:"注册",round1:"第一批",round2:"第二批",before:"之前",
+  method_desc:"选拔方式：材料审核100%（学业·语言·动机·品德综合评价），必要时面试。",
+  s_lang:"语言能力要求（新生）",lang_ko_t:"韩语轨道",lang_ko_r:"TOPIK 3级以上或同等资格",lang_en_t:"英语轨道",lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202 以上",
+  s_tuition:"学费及费用",t_fee:"学费(学期)",t_fee_a:"人文·社会",t_fee_b:"理工·艺体",t_dorm:"宿舍(学期)",t_dorm_a:"4/3/2人间",t_meal:"餐费(学期)",t_meal_a:"1/2/3餐",t_sch:"奖学金",t_sch_a:"全免100%",t_sch_b:"减免40%/50%",t_ins:"保险：入境后自动加入国民健康保险(义务)。财政担保金1,600万韩元。",
+  s_process:"入学流程",steps:["入学申请(材料)","资格审核","面试(如需)","录取公布","缴纳学费","签发入学许可","申请签证","入境","新生说明会","开学"],
+  s_notice:"注意事项",notices:["不得同时申请两个以上专业。","伪造材料录取将被取消。","新生第一学期不得休学。","逾期未缴学费可能取消录取。","必须加入国民健康保险。","学费及奖学金按本校规定。","提交材料不予退还。"],
+  s_contact:"咨询",ct_zh:"中国",ct_vi:"越南",ct_en:"英语",ct_etc:"蒙古及其他",dl_guide:"下载招生简章",foot:"本页面为初稿。",ct_home:"官网",ct_kakao:"KakaoTalk 咨询",ct_insta:"Instagram"},
+ vi:{native:"Tiếng Việt",eng:"VIETNAMESE",flag:"<img class='flagimg' src='flags/vn.svg' alt='Tiếng Việt'>",
+  heroBadge:"Tuyển sinh quốc tế Kỳ Thu 2026",heroTitle:"Hệ thống Đăng ký Nhập học Quốc tế",heroDesc:"Cổng đăng ký trực tuyến tuyển sinh sinh viên quốc tế Đại học Gwangju.",
+  asStudent:"Đăng ký (Sinh viên)",asAdmin:"Đăng nhập Cán bộ",
+  s_schedule:"Lịch",c_round:"Đợt",c_apply:"Nộp hồ sơ",c_result:"Kết quả",c_reg:"Nhập học",round1:"Đợt 1",round2:"Đợt 2",before:"trước",
+  method_desc:"Xét hồ sơ 100% (học lực, ngoại ngữ, động cơ, nhân cách); phỏng vấn nếu cần.",
+  s_lang:"Yêu cầu ngôn ngữ (Tân SV)",lang_ko_t:"Hệ tiếng Hàn",lang_ko_r:"TOPIK cấp 3 trở lên hoặc tương đương",lang_en_t:"Hệ tiếng Anh",lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202+",
+  s_tuition:"Học phí & Chi phí",t_fee:"Học phí(kỳ)",t_fee_a:"Nhân văn/XH",t_fee_b:"KT/Nghệ thuật",t_dorm:"KTX(kỳ)",t_dorm_a:"Phòng 4/3/2",t_meal:"Ăn(kỳ)",t_meal_a:"1/2/3 bữa",t_sch:"Học bổng",t_sch_a:"Miễn 100%",t_sch_b:"Miễn 40%/50%",t_ins:"Bảo hiểm Y tế Quốc gia bắt buộc khi nhập cảnh. Đặt cọc bảo lãnh: 16 triệu KRW.",
+  s_process:"Quy trình",steps:["Nộp hồ sơ","Xét duyệt","Phỏng vấn (nếu cần)","Công bố kết quả","Đóng học phí","Cấp giấy nhập học","Xin visa","Nhập cảnh","Định hướng","Khai giảng"],
+  s_notice:"Lưu ý",notices:["Không đăng ký từ 2 ngành trở lên.","Hủy nếu dùng hồ sơ giả.","Tân SV không bảo lưu học kỳ đầu.","Có thể hủy nếu không đóng học phí đúng hạn.","Bắt buộc Bảo hiểm Y tế Quốc gia.","Học phí & học bổng theo quy định.","Hồ sơ đã nộp không hoàn trả."],
+  s_contact:"Liên hệ",ct_zh:"Trung Quốc",ct_vi:"Việt Nam",ct_en:"Tiếng Anh",ct_etc:"Mông Cổ & Khác",dl_guide:"Tải hướng dẫn tuyển sinh",foot:"Trang này là bản nháp.",ct_home:"Trang web",ct_kakao:"KakaoTalk",ct_insta:"Instagram"},
+ mn:{native:"Монгол",eng:"MONGOLIAN",flag:"<img class='flagimg' src='flags/mn.svg' alt='Монгол'>",
+  heroBadge:"2026 намрын гадаад элсэлт",heroTitle:"Гадаад оюутны элсэлтийн систем",heroDesc:"Кванжү Их Сургуулийн гадаад элсэлтийн онлайн портал.",
+  asStudent:"Оюутнаар бүртгүүлэх",asAdmin:"Ажилтан нэвтрэх",
+  s_schedule:"Хуваарь",c_round:"Ээлж",c_apply:"Материал авах",c_result:"Дүн",c_reg:"Бүртгэл",round1:"1-р ээлж",round2:"2-р ээлж",before:"дотор",
+  method_desc:"Материалын шалгалт 100% (сурлага, хэл, зорилго, зан чанар); шаардвал ярилцлага.",
+  s_lang:"Хэлний шаардлага",lang_ko_t:"Солонгос урсгал",lang_ko_r:"TOPIK 3-р түвшнээс дээш буюу дүйцэхүйц",lang_en_t:"Англи урсгал",lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202+",
+  s_tuition:"Төлбөр ба зардал",t_fee:"Төлбөр(улирал)",t_fee_a:"Хүмүүнлэг/Нийгэм",t_fee_b:"Инженер/Урлаг",t_dorm:"Байр(улирал)",t_dorm_a:"4/3/2 хүн",t_meal:"Хоол(улирал)",t_meal_a:"1/2/3 удаа",t_sch:"Тэтгэлэг",t_sch_a:"100% чөлөөлөлт",t_sch_b:"40%/50% чөлөөлөлт",t_ins:"Даатгал: ирсний дараа Улсын Эрүүл Мэндийн Даатгалд заавал. Баталгааны дүн: 16 сая вон.",
+  s_process:"Журам",steps:["Өргөдөл (материал)","Эрхийн шалгалт","Ярилцлага (шаардвал)","Дүн зарлах","Төлбөр төлөх","Элсэлтийн бичиг","Виз мэдүүлэх","Нэвтрэх","Чиглүүлэг","Хичээл эхлэх"],
+  s_notice:"Анхаар",notices:["2+ мэргэжилд зэрэг бүртгүүлж болохгүй.","Хуурамч бичгээр тэнцвэл цуцлагдана.","Шинэ элсэгч эхний улиралд чөлөө авахгүй.","Хугацаанд төлбөр төлөөгүй бол цуцалж болно.","Улсын Эрүүл Мэндийн Даатгал заавал.","Төлбөр, тэтгэлэг сургуулийн журмаар.","Өгсөн материал буцаагдахгүй."],
+  s_contact:"Холбоо барих",ct_zh:"Хятад",ct_vi:"Вьетнам",ct_en:"Англи",ct_etc:"Монгол ба бусад",dl_guide:"Элсэлтийн журам татах",foot:"Энэ хуудас загвар.",ct_home:"Вэбсайт",ct_kakao:"KakaoTalk",ct_insta:"Instagram"},
+ uz:{native:"Oʻzbek",eng:"UZBEK",flag:"<img class='flagimg' src='flags/uz.svg' alt='Oʻzbek'>",
+  heroBadge:"2026 kuzgi xalqaro qabul",heroTitle:"Xalqaro Talabalar Qabul Tizimi",heroDesc:"Gwangju Universiteti xalqaro qabulning onlayn portali.",
+  asStudent:"Talaba sifatida ariza",asAdmin:"Xodim kirishi",
+  s_schedule:"Jadval",c_round:"Bosqich",c_apply:"Hujjat",c_result:"Natija",c_reg:"Roʻyxat",round1:"1-bosqich",round2:"2-bosqich",before:"gacha",
+  method_desc:"Hujjat koʻrigi 100% (bilim, til, motivatsiya, xarakter); zarur boʻlsa suhbat.",
+  s_lang:"Til talablari",lang_ko_t:"Koreys yoʻnalishi",lang_ko_r:"TOPIK 3-daraja va undan yuqori yoki teng",lang_en_t:"Ingliz yoʻnalishi",lang_en_r:"TOEFL iBT 59 / IELTS 5.5 / CEFR B2 / TEPS 600 / NEW TEPS 202+",
+  s_tuition:"Toʻlov va xarajat",t_fee:"Toʻlov(sem.)",t_fee_a:"Gumanitar/Ijtimoiy",t_fee_b:"Muhandislik/Sanʼat",t_dorm:"Yotoqxona(sem.)",t_dorm_a:"4/3/2 kishilik",t_meal:"Ovqat(sem.)",t_meal_a:"1/2/3 mahal",t_sch:"Stipendiya",t_sch_a:"100% ozod",t_sch_b:"40%/50% ozod",t_ins:"Sugʻurta: kelgach Davlat Tibbiy Sugʻurtasi majburiy. Kafolat depoziti: 16 mln KRW.",
+  s_process:"Jarayon",steps:["Ariza (hujjat)","Hujjat koʻrigi","Suhbat (zarur boʻlsa)","Natija","Toʻlov","Qabul guvohnomasi","Viza","Kirish","Yoʻriqnoma","Darslar"],
+  s_notice:"Eslatma",notices:["2+ yoʻnalishga ariza berilmaydi.","Soxta hujjat qabulni bekor qiladi.","1-kurs 1-semestrda taʼtil ololmaydi.","Toʻlov kechiksa qabul bekor boʻlishi mumkin.","Davlat Tibbiy Sugʻurtasi majburiy.","Toʻlov va stipendiya universitet qoidasi.","Topshirilgan hujjat qaytarilmaydi."],
+  s_contact:"Aloqa",ct_zh:"Xitoy",ct_vi:"Vyetnam",ct_en:"Ingliz",ct_etc:"Mongoliya va boshqalar",dl_guide:"Qabul qoʻllanmasini yuklab olish",foot:"Bu sahifa namuna.",ct_home:"Veb-sayt",ct_kakao:"KakaoTalk",ct_insta:"Instagram"}
+};
+const T=()=>I18N[LANG];
+
+/* ======= guideline PDF per language (EN/KO official, others translated) ======= */
+const GUIDE_FILES={ko:"Guidelines_KO.pdf",en:"Guidelines_EN.pdf",zh:"Guidelines_ZH.pdf",vi:"Guidelines_VI.pdf",mn:"Guidelines_MN.pdf",uz:"Guidelines_UZ.pdf"};
+
+/* ======= localized calendar (custom date picker) ======= */
+const DATE_I18N={
+ ko:{months:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],wd:["일","월","화","수","목","금","토"],today:"오늘",clear:"삭제"},
+ en:{months:["January","February","March","April","May","June","July","August","September","October","November","December"],wd:["Su","Mo","Tu","We","Th","Fr","Sa"],today:"Today",clear:"Clear"},
+ zh:{months:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],wd:["日","一","二","三","四","五","六"],today:"今天",clear:"清除"},
+ vi:{months:["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"],wd:["CN","T2","T3","T4","T5","T6","T7"],today:"Hôm nay",clear:"Xóa"},
+ mn:{months:["1-р сар","2-р сар","3-р сар","4-р сар","5-р сар","6-р сар","7-р сар","8-р сар","9-р сар","10-р сар","11-р сар","12-р сар"],wd:["Ня","Да","Мя","Лх","Пү","Ба","Бя"],today:"Өнөөдөр",clear:"Арилгах"},
+ uz:{months:["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"],wd:["Ya","Du","Se","Ch","Pa","Ju","Sh"],today:"Bugun",clear:"Tozalash"}
+};
+
+/* ======= confirmation email content per language ======= */
+const EMAIL_I18N={
+ ko:{subject:"[광주대학교] 입학지원서가 정상 접수되었습니다",body:`{name} 님, 안녕하십니까.
+
+광주대학교 외국인 특별전형에 지원해 주셔서 감사합니다.
+
+귀하의 입학지원서가 정상적으로 제출·접수되었습니다. 제출하신 내용의 사본이 본 이메일({email})로 발송되었습니다.
+
+▶ 향후 절차
+• 국제협력처에서 제출 서류를 검토합니다.
+• 합격자 발표는 공식 전형일정에 따라 진행됩니다. 모집요강의 발표 일정을 확인해 주세요.
+• 추가 서류가 필요한 경우 별도로 안내드립니다.
+
+접수번호: {id}
+지원학과: {program}
+제출일: {date}
+
+본 메일은 발신 전용 주소에서 자동 발송되었습니다. 회신하실 수 없습니다. 문의는 국제협력처로 연락 주시기 바랍니다.
+
+— 광주대학교 국제협력처
+광주광역시 남구 효덕로 277 (61743)`},
+ en:{subject:"[Gwangju University] Your Application Has Been Received",body:`Dear {name},
+
+Thank you for applying to Gwangju University's Special Admission for International Students.
+
+Your application has been successfully submitted and received. A copy of the information you submitted has been sent to this email address ({email}) for your records.
+
+▶ What happens next
+• The Office of International Affairs will review your documents.
+• Admission results will be announced according to the official schedule. Please check the announcement dates in the admission guidelines.
+• If additional documents are required, we will contact you separately.
+
+Application No.: {id}
+Program: {program}
+Submitted: {date}
+
+This message was sent automatically from an unmonitored mailbox. Please do not reply. For inquiries, contact the Office of International Affairs.
+
+— Office of International Affairs, Gwangju University
+277 Hyodeok-ro, Nam-gu, Gwangju, Republic of Korea 61743`},
+ zh:{subject:"[光州大学] 您的入学申请已成功受理",body:`{name} 您好，
+
+感谢您申请光州大学外国人特别招生。
+
+您的入学申请已成功提交并受理。您所提交内容的副本已发送至本邮箱（{email}）。
+
+▶ 后续流程
+• 国际交流处将审核您提交的材料。
+• 录取结果将按照正式招生日程公布，请查阅招生简章中的公布日期。
+• 如需补充材料，我们将另行通知。
+
+受理编号：{id}
+申请专业：{program}
+提交日期：{date}
+
+本邮件由仅发送地址自动发出，恕不接受回复。如有咨询，请联系国际交流处。
+
+— 光州大学 国际交流处
+韩国光州广域市南区孝德路277号 (61743)`},
+ vi:{subject:"[Đại học Gwangju] Hồ sơ đăng ký của bạn đã được tiếp nhận",body:`Kính gửi {name},
+
+Cảm ơn bạn đã đăng ký xét tuyển đặc biệt dành cho sinh viên quốc tế của Đại học Gwangju.
+
+Hồ sơ đăng ký của bạn đã được nộp và tiếp nhận thành công. Bản sao thông tin bạn đã nộp được gửi tới địa chỉ email này ({email}).
+
+▶ Các bước tiếp theo
+• Văn phòng Hợp tác Quốc tế sẽ xét duyệt hồ sơ của bạn.
+• Kết quả trúng tuyển sẽ được công bố theo lịch tuyển sinh chính thức. Vui lòng xem lịch công bố trong hướng dẫn tuyển sinh.
+• Nếu cần bổ sung giấy tờ, chúng tôi sẽ liên hệ riêng.
+
+Mã hồ sơ: {id}
+Ngành đăng ký: {program}
+Ngày nộp: {date}
+
+Email này được gửi tự động từ địa chỉ chỉ gửi, vui lòng không trả lời. Mọi thắc mắc xin liên hệ Văn phòng Hợp tác Quốc tế.
+
+— Văn phòng Hợp tác Quốc tế, Đại học Gwangju
+277 Hyodeok-ro, Nam-gu, Gwangju, Hàn Quốc 61743`},
+ mn:{subject:"[Кванжү Их Сургууль] Таны өргөдөл хүлээн авагдлаа",body:`Эрхэм {name},
+
+Кванжү Их Сургуулийн гадаад оюутны тусгай элсэлтэд өргөдөл гаргасанд баярлалаа.
+
+Таны элсэлтийн өргөдөл амжилттай илгээгдэж, хүлээн авагдлаа. Таны илгээсэн мэдээллийн хуулбарыг энэ и-мэйл хаяг ({email}) руу илгээв.
+
+▶ Дараагийн алхам
+• Олон улсын хамтын ажиллагааны алба таны материалыг хянана.
+• Тэнцсэн эсэх дүнг албан ёсны хуваарийн дагуу зарлана. Элсэлтийн журам дахь зарлах огноог шалгана уу.
+• Нэмэлт материал шаардлагатай бол тусад нь мэдэгдэнэ.
+
+Бүртгэлийн дугаар: {id}
+Мэргэжил: {program}
+Илгээсэн огноо: {date}
+
+Энэ и-мэйл нь зөвхөн илгээх хаягаас автоматаар илгээгдсэн тул хариу бичих боломжгүй. Асуувал Олон улсын хамтын ажиллагааны албанд хандана уу.
+
+— Кванжү Их Сургууль, Олон улсын хамтын ажиллагааны алба
+277 Hyodeok-ro, Nam-gu, Gwangju, Өмнөд Солонгос 61743`},
+ uz:{subject:"[Gwangju Universiteti] Arizangiz qabul qilindi",body:`Hurmatli {name},
+
+Gwangju Universitetining xalqaro talabalar uchun maxsus qabuliga ariza berganingiz uchun rahmat.
+
+Sizning arizangiz muvaffaqiyatli topshirildi va qabul qilindi. Siz topshirgan maʼlumot nusxasi ushbu email manzilingizga ({email}) yuborildi.
+
+▶ Keyingi bosqichlar
+• Xalqaro hamkorlik boshqarmasi hujjatlaringizni koʻrib chiqadi.
+• Qabul natijalari rasmiy jadval boʻyicha eʼlon qilinadi. Qabul qoʻllanmasidagi eʼlon sanalarini tekshiring.
+• Qoʻshimcha hujjat kerak boʻlsa, siz bilan alohida bogʻlanamiz.
+
+Ariza raqami: {id}
+Yoʻnalish: {program}
+Topshirilgan sana: {date}
+
+Ushbu xat faqat joʻnatuvchi manzildan avtomatik yuborilgan, iltimos javob yozmang. Savollar uchun Xalqaro hamkorlik boshqarmasiga murojaat qiling.
+
+— Gwangju Universiteti, Xalqaro hamkorlik boshqarmasi
+277 Hyodeok-ro, Nam-gu, Gwangju, Janubiy Koreya 61743`}
+};
+
+/* ================= VIEW ROUTER ================= */
+const VIEWS=["langScreen","homeView","studentLogin","studentApp","adminLogin","adminDash"];
+function _renderView(id){VIEWS.forEach(v=>$("#"+v).classList.toggle("hidden",v!==id));window.scrollTo(0,0);}
+let _curView="langScreen";
+/* 화면 전환 + 브라우저 히스토리 기록(폰 뒤로가기 대응). opts.pop=true면 뒤로가기로 인한 전환이라 push 안 함. */
+function show(id,opts){
+  _curView=id; _renderView(id);
+  try{sessionStorage.setItem("gu_view",id);}catch(_){}
+  if(!(opts&&opts.pop)){ try{history.pushState({view:id},"");}catch(_){} }
+}
+/* 폰 하드웨어 뒤로가기: 열린 모달이 있으면 먼저 닫고, 없으면 이전 화면으로 이동(사이트 이탈 대신). */
+window.addEventListener("popstate",function(ev){
+  var m=document.querySelector(".modal:not(.hidden)");
+  if(m){ m.classList.add("hidden"); try{history.pushState({view:_curView},"");}catch(_){} return; }
+  var v=(ev.state&&ev.state.view)||"homeView";
+  show(v,{pop:true});
+});
+
+/* ================= STORAGE ================= */
+const DB={
+  all:()=>JSON.parse(localStorage.getItem("gu_apps")||"[]"),
+  save:list=>localStorage.setItem("gu_apps",JSON.stringify(list)),
+  upsert:app=>{const l=DB.all();const i=l.findIndex(x=>x.id===app.id);if(i>=0)l[i]=app;else l.push(app);DB.save(l);},
+  byId:id=>DB.all().find(x=>x.id===id),
+  byEmail:e=>DB.all().find(x=>x.email&&x.email.toLowerCase()===e.toLowerCase())
+};
+let current=null; // current student's application object
+const FILES={};  // runtime File objects for in-session preview
+
+/* ================= LANGUAGE SELECT ================= */
+const order=["ko","en","zh","vi","mn","uz"];
+const grid=$("#langGrid");
+order.forEach(c=>{const Lg=I18N[c];const b=document.createElement("button");b.className="lang-btn";
+  b.innerHTML=`<span class="flag">${Lg.flag}</span><span class="native">${Lg.native}</span><span class="eng">${Lg.eng}</span>`;
+  b.onclick=()=>selectLang(c);grid.appendChild(b);});
+const sw=$("#langSwitch");order.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=I18N[c].native;sw.appendChild(o);});
+sw.onchange=e=>{LANG=e.target.value;applyLang();};
+function selectLang(c){LANG=c;document.documentElement.lang=c;sw.value=c;applyLang();show("homeView");}
+
+function applyLang(){
+  try{localStorage.setItem("gu_lang",LANG);}catch(_){}
+  const t=T();
+  $$("[data-i]").forEach(el=>{const k=el.getAttribute("data-i");if(t[k]!==undefined)el.textContent=t[k];});
+  const sl=$("#stepsList");sl.innerHTML="";t.steps.forEach(s=>{const li=document.createElement("li");li.textContent=s;sl.appendChild(li);});
+  const nl=$("#noticeList");nl.innerHTML="";t.notices.forEach(s=>{const li=document.createElement("li");li.textContent=s;nl.appendChild(li);});
+  applyAppLabels();
+}
+
+/* ================= APP/ADMIN LABELS (ko/en) ================= */
+function applyAppLabels(){
+  // student login
+  $("#sl_title").textContent=L("유학생 로그인 (게스트)","Student Login (Guest)");
+  $("#sl_desc").textContent=L("이메일과 여권번호로 지원서를 시작하거나 이어서 작성할 수 있습니다.","Start or resume your application with your email and passport number.");
+  $("#sl_email_l").textContent=L("이메일","Email");$("#sl_pp_l").textContent=L("여권번호","Passport No.");
+  $("#sl_btn").textContent=L("시작 / 이어서 작성","Start / Resume");
+  $("#sl_hint").textContent=L("※ 회원가입 없이 진행됩니다. 동일 이메일로 다시 로그인하면 저장된 내용이 불러와집니다.","※ No sign-up needed. Logging in with the same email restores your saved data.");
+  // student app tabs
+  $("#tab0").textContent=L("1. 기본정보","1. Profile");$("#tab1").textContent=L("2. 제출서류","2. Documents");$("#tab2").textContent=L("3. 검토·제출","3. Review & Submit");
+  $("#sa_out").textContent=L("로그아웃","Logout");
+  const REQ=' <span class="req">*</span>';
+  $("#p_sec_id").textContent=L("본인 정보 (여권 기준)","Personal Info (as in passport)");
+  $("#l_surname").innerHTML=L("성 (Surname)","Surname")+REQ;
+  $("#l_first").innerHTML=L("이름 (Given Name)","Given Name")+REQ;
+  $("#l_dob").innerHTML=L("생년월일","Date of Birth")+REQ;
+  $("#l_gender").innerHTML=L("성별","Gender")+REQ;$("#l_nat").innerHTML=L("국적","Nationality")+REQ;
+  $("#l_ppno").innerHTML=L("여권번호","Passport No.")+REQ;$("#l_ppexp").innerHTML=L("여권 만료일","Passport Expiry")+REQ;$("#l_phone").innerHTML=L("연락처","Phone")+REQ;
+  $("#p_sec_app").textContent=L("지원 정보","Application Info");
+  $("#l_type").innerHTML=L("지원 구분","Admission Type")+REQ;$("#l_new").textContent=L("신입학","New");$("#l_transfer").textContent=L("편입학","Transfer");
+  $("#l_year").textContent=L("편입 학년","Transfer Year");
+  $("#l_college").innerHTML=L("단과대학","College")+REQ;$("#l_dept").innerHTML=L("학부(과)","Department")+REQ;
+  $("#l_track").innerHTML=L("트랙","Track")+REQ;$("#l_track_ko").textContent=L("한국어","Korean");$("#l_track_en").textContent=L("영어","English");$("#l_track_zh").textContent=L("중국어","Chinese");
+  $("#l_ltest").innerHTML=L("어학시험","Language Test")+REQ;
+  $("#p_sec_parent").textContent=L("부모 정보","Parents' Info");
+  $("#l_fname").innerHTML=L("부(父) 성명","Father's Name")+REQ;$("#l_fnat").innerHTML=L("부 국적","Father Nationality")+REQ;
+  $("#l_mname").innerHTML=L("모(母) 성명","Mother's Name")+REQ;$("#l_mnat").innerHTML=L("모 국적","Mother Nationality")+REQ;
+  $("#btn_save").textContent=L("💾 저장","💾 Save");
+  // documents
+  $("#pg_label").textContent=L("필수 서류 제출 현황","Required documents");
+  $("#s1_title").textContent=L("STEP 1 · 입학지원서 양식","STEP 1 · Application Form");
+  $("#s1_desc").textContent=L("지원서·유학계획서·자기소개서·유학경비부담서약서 포함 공식 양식.","Official form (application, study plan, self-intro, financial pledge).");
+  $("#s1_dl").textContent=L("지원서 다운로드","Download Form");
+  $("#docs_title").textContent=L("제출서류","Required Documents");
+  $("#docs_next").textContent=L("저장하고 계속 →","Save & Continue →");
+  // review
+  $("#rv_info").textContent=L("입력 정보 확인","Review Information");$("#rv_docs").textContent=L("서류 제출 현황","Document Status");
+  $("#finalSubmit").textContent=L("최종 제출","Final Submit");
+  // admin login
+  $("#al_title").textContent=L("담당자 로그인","Staff Login");
+  $("#al_desc").textContent=L("국제협력처 담당자 전용입니다. 발급받은 서버 접속 키를 입력하세요.","For International Cooperation Office staff only. Enter your server access key.");
+  $("#al_id_l").textContent=L("담당자 ID","Staff ID");
+  $("#al_code_l").textContent=L("서버 접속 키","Server Access Key");$("#al_btn").textContent=L("로그인","Login");
+  $("#al_hint").textContent=L("※ 접속 키는 국제협력처에서 관리합니다. 로그인하면 전체 지원자 명단을 조회합니다.","※ The access key is managed by the office. Logging in shows the full applicant list.");
+  $("#ad_out").textContent=L("← 나가기","← Exit");
+  $("#ad_title").textContent=L("입학지원 현황 대시보드","Admissions Dashboard");
+  $("#ok_btn").textContent=L("확인","OK");
+  // guideline download link per language
+  const gf=GUIDE_FILES[LANG]||GUIDE_FILES.en;
+  $$(".guideDL").forEach(a=>{a.href=encodeURI(gf);a.setAttribute("download",gf);});
+  // dynamic panes (relocalize form fields/selects/date boxes)
+  if(current){fillForm();renderDocs();renderReview();}
+  const dl=$("#downloadForm");dl.href=encodeURI(FORM_FILE);dl.setAttribute("download",FORM_FILE);
+}
+
+/* ================= NAV BUTTONS ================= */
+$("#goStudent").onclick=()=>show("studentLogin");
+/* 담당자 로그인 진입: 단일 서버 접속 키(STAFF_KEY)로 로그인 → 전체 명단 조회. */
+$("#goAdmin").onclick=()=>{ $("#al_code").value=""; show("adminLogin"); const el=$("#al_code"); if(el)el.focus(); };
+
+/* ================= STUDENT LOGIN ================= */
+function studentLogin(){
+  const email=$("#sl_email").value.trim(), pp=$("#sl_pp").value.trim();
+  if(!email){alert(L("이메일을 입력하세요.","Please enter your email."));return;}
+  let app=DB.byEmail(email);
+  if(!app){
+    app={id:"GU"+Date.now(),createdAt:new Date().toISOString(),status:"draft",
+      email,passportNo:pp,surname:"",firstName:"",dob:"",gender:"M",nationality:"",passportExpiry:"",phone:"",
+      admissionType:"new",transferYear:"",college:"",department:"",track:"ko",langTest:"",langScore:"",
+      fatherName:"",fatherNationality:"",motherName:"",motherNationality:"",docs:{}};
+    DB.upsert(app);
+  }
+  current=app;
+  openStudentApp();
+}
+function studentLogout(){current=null;show("homeView");}
+function openStudentApp(){
+  show("studentApp");
+  $("#sa_who").textContent=(current.firstName||current.email)+(current.status==="submitted"?" · "+L("제출완료","Submitted"):"");
+  buildColleges();fillForm();switchTab(0);renderDocs();renderReview();
+}
+
+/* ================= PROFILE FORM ================= */
+function buildColleges(){
+  const cs=$("#f_college");cs.innerHTML='<option value="">-</option>';
+  COLLEGES.forEach(c=>{const o=document.createElement("option");o.value=c.ko;o.textContent=cname(c);cs.appendChild(o);});
+}
+function buildDepts(colKo){
+  const ds=$("#f_dept");ds.innerHTML='<option value="">-</option>';
+  const col=COLLEGES.find(c=>c.ko===colKo);
+  (col?col.depts:[]).forEach(d=>{const o=document.createElement("option");o.value=d.ko;o.textContent=cname(d);ds.appendChild(o);});
+}
+$("#f_college").addEventListener("change",e=>{buildDepts(e.target.value);});
+$$('input[name="atype"]').forEach(r=>r.addEventListener("change",e=>{$("#year_field").classList.toggle("hidden",e.target.value!=="transfer");}));
+$$('input[name="track"]').forEach(r=>r.addEventListener("change",refreshLangUI));
+$("#f_ltest").addEventListener("change",e=>buildScore(e.target.value));
+
+/* ---- language test/score by track (한국어·중국어 → TOPIK만, 영어 → 영어점수) ---- */
+function currentTrack(){const r=document.querySelector('input[name="track"]:checked');return r?r.value:"ko";}
+function refreshLangUI(){
+  const track=currentTrack(),test=$("#f_ltest");
+  if(track==="ko"||track==="zh"){
+    $("#ltest_field").classList.add("hidden");
+    test.innerHTML='<option value="TOPIK">TOPIK</option>';test.value="TOPIK";
+    $("#l_lscore").innerHTML=L("TOPIK 등급","TOPIK Level")+' <span class="req">*</span>';
+    buildScore("TOPIK");
+  }else{
+    $("#ltest_field").classList.remove("hidden");
+    const cur=test.value;
+    test.innerHTML='<option value="">-</option>'+EN_TESTS.map(t=>`<option>${t}</option>`).join("");
+    test.value=EN_TESTS.includes(cur)?cur:"";
+    $("#l_lscore").innerHTML=L("점수/급수","Score/Level")+' <span class="req">*</span>';
+    buildScore(test.value);
+  }
+}
+function buildScore(test){
+  const sel=$("#f_lscore"),prev=sel.value,vals=scoreOptions(test);
+  sel.innerHTML='<option value="">-</option>'+vals.map(v=>{
+    const lbl=(test==="TOPIK")?L(v+"급","Level "+v):v;return `<option value="${v}">${lbl}</option>`;
+  }).join("");
+  if(vals.includes(prev))sel.value=prev;
+}
+
+/* ---- custom localized date picker (DOB / passport expiry) ---- */
+const pad=n=>String(n).padStart(2,"0");
+const DPV={dob:{},ppexp:{}};
+function dpVal(f){return f==="dob"?current.dob:current.passportExpiry;}
+function updateDateBox(f){
+  const val=dpVal(f)||"",box=$("#box_"+f);if(!box)return;
+  const ph=f==="dob"?L("생년월일 선택","Select date of birth"):L("여권 만료일 선택","Select passport expiry");
+  box.textContent=val||ph;box.classList.toggle("empty",!val);
+}
+function openDP(f){
+  const pop=$("#pop_"+f),isOpen=!pop.classList.contains("hidden");
+  $$(".dpop").forEach(p=>p.classList.add("hidden"));
+  if(isOpen)return;
+  const val=dpVal(f);
+  if(val){const d=val.split("-");DPV[f]={y:+d[0],m:+d[1]-1};}
+  else DPV[f]={y:f==="dob"?2005:new Date().getFullYear()+5,m:0};
+  renderDP(f);pop.classList.remove("hidden");
+}
+function renderDP(f){
+  const di=DATE_I18N[LANG]||DATE_I18N.en,st=DPV[f],y=st.y,m=st.m;
+  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),val=dpVal(f)||"";
+  const yFrom=f==="dob"?1950:new Date().getFullYear(),yTo=f==="dob"?new Date().getFullYear():new Date().getFullYear()+15;
+  let yOpts="";for(let yy=yTo;yy>=yFrom;yy--)yOpts+=`<option ${yy===y?"selected":""}>${yy}</option>`;
+  const mOpts=di.months.map((mn,i)=>`<option value="${i}" ${i===m?"selected":""}>${mn}</option>`).join("");
+  let cells=di.wd.map(w=>`<div class="wd">${w}</div>`).join("");
+  for(let i=0;i<first;i++)cells+='<div class="dcell empty"></div>';
+  for(let d=1;d<=days;d++){const iso=`${y}-${pad(m+1)}-${pad(d)}`;cells+=`<div class="dcell${val===iso?" sel":""}" onclick="pickDate('${f}','${iso}')">${d}</div>`;}
+  $("#pop_"+f).innerHTML=`
+    <div class="dp-head">
+      <button type="button" class="dp-nav" onclick="dpNav('${f}',-1)">‹</button>
+      <div class="dp-sel"><select onchange="dpSet('${f}','m',this.value)">${mOpts}</select><select onchange="dpSet('${f}','y',this.value)">${yOpts}</select></div>
+      <button type="button" class="dp-nav" onclick="dpNav('${f}',1)">›</button>
+    </div>
+    <div class="dp-grid">${cells}</div>
+    <div class="dp-foot"><button type="button" onclick="pickDate('${f}','')">${di.clear}</button><button type="button" class="today" onclick="dpToday('${f}')">${di.today}</button></div>`;
+}
+function dpNav(f,dir){let{y,m}=DPV[f];m+=dir;if(m<0){m=11;y--;}if(m>11){m=0;y++;}DPV[f]={y,m};renderDP(f);}
+function dpSet(f,k,v){DPV[f][k]=+v;renderDP(f);}
+function dpToday(f){const d=new Date();pickDate(f,`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`);}
+function pickDate(f,iso){
+  if(f==="dob")current.dob=iso;else current.passportExpiry=iso;
+  updateDateBox(f);$("#box_"+f).classList.remove("err");$("#pop_"+f).classList.add("hidden");
+  DB.upsert(current);renderReview();
+}
+document.addEventListener("click",e=>{if(!e.target.closest(".dpwrap"))$$(".dpop").forEach(p=>p.classList.add("hidden"));});
+
+function renderProfileLabels(){} // labels handled in applyAppLabels
+function fillForm(){
+  const a=current,set=(id,v)=>{const el=$(id);if(el)el.value=v||"";};
+  set("#f_surname",a.surname);set("#f_first",a.firstName);set("#f_gender",a.gender);set("#f_nat",a.nationality);
+  set("#f_ppno",a.passportNo);set("#f_phone",a.phone);
+  updateDateBox("dob");updateDateBox("ppexp");
+  document.querySelector(`input[name="atype"][value="${a.admissionType||"new"}"]`).checked=true;
+  $("#year_field").classList.toggle("hidden",a.admissionType!=="transfer");set("#f_year",a.transferYear||"2");
+  buildColleges();set("#f_college",a.college);buildDepts(a.college);set("#f_dept",a.department);
+  document.querySelector(`input[name="track"][value="${a.track||"ko"}"]`).checked=true;
+  refreshLangUI();
+  if(a.langTest){set("#f_ltest",a.langTest);buildScore(a.langTest);}
+  if(a.langScore)set("#f_lscore",a.langScore);
+  set("#f_fname",a.fatherName);set("#f_fnat",a.fatherNationality);set("#f_mname",a.motherName);set("#f_mnat",a.motherNationality);
+  refreshNatDisplays();
+}
+function readProfile(){
+  const a=current,g=id=>($(id)?$(id).value.trim():"");
+  a.surname=g("#f_surname");a.firstName=g("#f_first");a.gender=$("#f_gender").value;a.nationality=g("#f_nat");
+  a.passportNo=g("#f_ppno");a.phone=g("#f_phone"); // dob & passportExpiry set via picker
+  a.admissionType=document.querySelector('input[name="atype"]:checked').value;a.transferYear=$("#f_year").value;
+  a.college=$("#f_college").value;a.department=$("#f_dept").value;a.track=document.querySelector('input[name="track"]:checked').value;
+  a.langTest=$("#f_ltest").value;a.langScore=$("#f_lscore").value;
+  a.fatherName=g("#f_fname");a.fatherNationality=g("#f_fnat");a.motherName=g("#f_mname");a.motherNationality=g("#f_mnat");
+}
+function validateProfile(){
+  const marks=[["#f_surname",current.surname],["#f_first",current.firstName],["#box_dob",current.dob],
+    ["#f_nat",current.nationality],["#f_ppno",current.passportNo],["#box_ppexp",current.passportExpiry],["#f_phone",current.phone],
+    ["#f_college",current.college],["#f_dept",current.department],["#f_ltest",current.langTest],["#f_lscore",current.langScore],
+    ["#f_fname",current.fatherName],["#f_fnat",current.fatherNationality],["#f_mname",current.motherName],["#f_mnat",current.motherNationality]];
+  let ok=true;
+  marks.forEach(([sel,val])=>{const el=$(sel),good=!!(val&&String(val).trim());if(el)el.classList.toggle("err",!good);if(!good)ok=false;});
+  ["nat","fnat","mnat"].forEach(k=>{const hid=$("#f_"+k),btn=$("#natbtn_"+k);if(hid&&btn)btn.classList.toggle("err",hid.classList.contains("err"));});
+  return ok;
+}
+function saveProfile(advance){
+  readProfile();current.updatedAt=new Date().toISOString();DB.upsert(current);
+  $("#sa_who").textContent=(current.firstName||current.email)+(current.status==="submitted"?" · "+L("제출완료","Submitted"):"");
+  renderReview();
+  if(advance){
+    if(!validateProfile()){window.scrollTo({top:0,behavior:"smooth"});alert(L("빨간색으로 표시된 필수 항목을 모두 입력해 주세요.","Please complete all required fields highlighted in red."));return;}
+    switchTab(1);
+  }
+}
+function docsNext(){switchTab(2);}
+
+/* ================= TABS ================= */
+function switchTab(n){
+  $$(".tab").forEach(t=>t.classList.toggle("active",+t.dataset.tab===n));
+  $$(".tabpane").forEach(p=>p.classList.toggle("hidden",+p.dataset.pane!==n));
+  if(n!==0)saveProfile(false);
+  if(n===1)renderDocs();if(n===2)renderReview();
+}
+$$(".tab").forEach(t=>t.onclick=()=>switchTab(+t.dataset.tab));
+
+/* ================= DOCUMENTS ================= */
+function requiredKeys(a){return DOCS.filter(d=>d.req).map(d=>d.k);}
+function pickDoc(key){
+  const inp=document.createElement("input");inp.type="file";
+  inp.onchange=e=>{const f=e.target.files[0];if(f){current.docs=current.docs||{};current.docs[key]=f.name;FILES[key]=f;DB.upsert(current);renderDocs();renderReview();}};
+  inp.click();
+}
+function openPreview(key){
+  const f=FILES[key];if(!f)return;const url=URL.createObjectURL(f);const type=f.type||"";
+  let inner;
+  if(type.startsWith("image/"))inner=`<img src="${url}" style="max-width:100%;border-radius:10px">`;
+  else if(type==="application/pdf")inner=`<iframe src="${url}" style="width:100%;height:70vh;border:none;border-radius:10px"></iframe>`;
+  else inner=`<p style="padding:24px;text-align:center;color:var(--muted)">${L("이 형식은 미리보기를 지원하지 않습니다.","Preview is not supported for this file type.")}<br><br><a href="${url}" download="${f.name}" class="btn btn-out">⬇ ${f.name}</a></p>`;
+  $("#previewBox").innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h3 style="margin:0;font-size:15px;word-break:break-all">${f.name}</h3><button class="backlink" onclick="closeModal('previewModal')">✕</button></div>${inner}`;
+  $("#previewModal").classList.remove("hidden");
+}
+function renderDocs(){
+  if(!current)return;
+  const list=$("#docList");list.innerHTML="";
+  const reqKeys=requiredKeys(current);
+  DOCS.forEach(d=>{
+    const done=current.docs&&current.docs[d.k];
+    const card=document.createElement("div");card.className="doc"+(done?" done":"");
+    const isReq=reqKeys.includes(d.k);
+    const viewBtn=FILES[d.k]?`<button class="upbtn viewbtn" style="border-color:var(--muted);color:var(--muted)">👁 ${L("보기","View")}</button>`:"";
+    card.innerHTML=`<div class="dtop"><div class="dicon">${done?"✓":d.ic}</div><div>
+      <div class="dname">${dname(d,current.track)}</div><span class="dtag ${isReq?"req":"opt"}">${isReq?L("필수","Required"):L("해당자","If applicable")}</span></div></div>
+      <div class="dbottom"><span class="fname ${done?"":"empty"}">${done?current.docs[d.k]:L("파일 없음","No file")}</span>
+      <div style="display:flex;gap:6px">${viewBtn}<button class="upbtn upload">${done?"✓ "+L("변경","Change"):"⬆ "+L("업로드","Upload")}</button></div></div>`;
+    card.querySelector(".upload").onclick=()=>pickDoc(d.k);
+    const vb=card.querySelector(".viewbtn");if(vb)vb.onclick=()=>openPreview(d.k);
+    list.appendChild(card);
+  });
+  // progress
+  const req=requiredKeys(current);const done=req.filter(k=>k==="form"?current.docs&&current.docs.form:current.docs&&current.docs[k]).length;
+  $("#pgDone").textContent=done;$("#pgTotal").textContent=req.length;$("#pgBar").style.width=(done/req.length*100)+"%";
+}
+function scholarship(a){
+  const sc=firstNum(a.langScore);
+  const w=p=>p+"% "+L("면제","off");
+  if(/topik/i.test(a.langTest)){if(sc>=4)return w(100);if(sc>=3)return w(40);}
+  else if(a.track==="en"){
+    if(/ielts/i.test(a.langTest)&&sc>=5.5)return w(50);
+    if(/ibt/i.test(a.langTest)&&sc>=80)return w(50);
+    if(/teps/i.test(a.langTest)&&sc>=600)return w(50);
+    if(/cefr/i.test(a.langTest)&&/b2|c1|c2/i.test(a.langScore))return w(50);
+  }
+  return "-";
+}
+
+/* ================= REVIEW ================= */
+function scoreDisp(a){
+  if(!a.langScore)return "";
+  if(a.langTest==="TOPIK")return L(a.langScore+"급","Level "+a.langScore);
+  return a.langScore;
+}
+function renderReview(){
+  if(!current)return;const a=current;
+  const rows=[
+    [L("성명","Name"),`${a.surname||"-"} ${a.firstName||""}`],
+    [L("생년월일","DOB"),a.dob||"-"],[L("성별","Gender"),a.gender==="F"?L("여","Female"):L("남","Male")],
+    [L("국적","Nationality"),a.nationality||"-"],[L("여권번호","Passport"),a.passportNo||"-"],
+    [L("지원구분","Type"),(a.admissionType==="transfer"?L("편입 ","Transfer ")+a.transferYear+L("학년","yr"):L("신입학","New"))],
+    [L("모집단위","Program"),`${labelCollege(a.college)} / ${labelDept(a.department)}`],
+    [L("트랙","Track"),({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[a.track]],
+    [L("어학","Language"),`${a.langTest||"-"} ${scoreDisp(a)}`],
+    [L("예상 장학금","Est. scholarship"),scholarship(a)],
+    [L("부 / 국적","Father/Nat."),`${a.fatherName||"-"} / ${a.fatherNationality||"-"}`],
+    [L("모 / 국적","Mother/Nat."),`${a.motherName||"-"} / ${a.motherNationality||"-"}`]
+  ];
+  $("#rv_summary").innerHTML=rows.map(r=>`<div class="r"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("");
+  // docs
+  const req=requiredKeys(a);
+  $("#rv_doclist").innerHTML=DOCS.map(d=>{
+    const done=a.docs&&a.docs[d.k];const isReq=req.includes(d.k);
+    return `<div style="padding:6px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between">
+      <span>${done?"✅":(isReq?"⬜":"➖")} ${dname(d,a.track)} ${isReq?'<span style="color:var(--danger);font-size:11px">'+L("필수","req")+'</span>':""}</span>
+      <span style="color:var(--muted);font-size:12px">${done?a.docs[d.k]:""}</span></div>`;
+  }).join("");
+  // readiness — all profile fields required
+  const missing=req.filter(k=>!(a.docs&&a.docs[k]));
+  const infoOk=a.surname&&a.firstName&&a.dob&&a.nationality&&a.passportNo&&a.passportExpiry&&a.phone&&a.college&&a.department&&a.langTest&&a.langScore&&a.fatherName&&a.fatherNationality&&a.motherName&&a.motherNationality;
+  const ready=missing.length===0&&infoOk&&a.status!=="submitted";
+  $("#finalSubmit").disabled=!ready;
+  $("#finalNote").textContent=a.status==="submitted"?L("이미 제출되었습니다. 담당자 검토 후 결과가 발표됩니다.","Already submitted. Results will be announced after review.")
+    :(!infoOk?L("기본정보(필수 항목)를 먼저 완성해 주세요.","Please complete required profile fields first.")
+    :missing.length?L(`필수 서류 ${missing.length}건이 남았습니다.`,`${missing.length} required document(s) remaining.`)
+    :L("모든 항목이 준비되었습니다. 최종 제출해 주세요.","Everything is ready. Please submit."));
+}
+
+/* ================= SUBMIT ================= */
+function submitApp(){
+  if(!confirm(L("입학지원서를 최종 제출하시겠습니까? 제출 후에는 담당자 검토가 시작됩니다.","Submit your application? Review will begin after submission.")))return;
+  saveProfile(false);
+  current.status="submitted";current.submittedAt=new Date().toISOString();
+  current.evaluation=evaluate(current);
+  const mail=buildEmail(current);current.confirmationEmail=mail;
+  DB.upsert(current);renderReview();
+  $("#sa_who").textContent=(current.firstName||current.email)+" · "+L("제출완료","Submitted");
+  postApplication(current);      // persist the full submission to the Neon backend
+  sendConfirmationEmail(mail);   // fire the automated no-reply confirmation
+  showEmailSent(mail);
+}
+/* Persist the whole application object into the jsonb `payload` column of the
+   Neon `applications` table via the PostgREST Data API. */
+function postApplication(app){
+  try{
+    // 프록시가 설정돼 있으면 서버가 Neon 토큰을 붙여 전달, 아니면 직접 호출(프록시 전 임시)
+    const url=PROXY_ENDPOINT||API_ENDPOINT;
+    const headers=PROXY_ENDPOINT?{"Content-Type":"application/json"}:apiHeaders({"Content-Type":"application/json","Prefer":"return=minimal"});
+    fetch(url,{method:"POST",headers,body:JSON.stringify({payload:app})}).catch(()=>{});
+  }catch(_){}
+}
+function buildEmail(a){
+  const e=EMAIL_I18N[LANG]||EMAIL_I18N.en;
+  const name=`${a.surname||""} ${a.firstName||""}`.trim()||a.email;
+  const program=`${labelCollege(a.college)} / ${labelDept(a.department)}`;
+  const body=e.body.replace(/{name}/g,name).replace(/{email}/g,a.email).replace(/{id}/g,a.id)
+    .replace(/{program}/g,program).replace(/{date}/g,(a.submittedAt||"").slice(0,10));
+  return {from:"no-reply@gwangju.ac.kr",to:a.email,subject:e.subject,body,sentAt:new Date().toISOString()};
+}
+/* Client build has no mail server; deliver via backend in production.
+   BACKEND HOOK: POST {from,to,subject,body} to the university mail relay so the
+   no-reply@gwangju.ac.kr message is actually delivered to the applicant. */
+function sendConfirmationEmail(mail){
+  try{
+    if(window.MAIL_ENDPOINT){
+      fetch(window.MAIL_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(mail)}).catch(()=>{});
+    }
+  }catch(_){}
+}
+function showEmailSent(mail){
+  $("#emailBox").innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <h3 style="margin:0;color:var(--green)">✉ ${L("확인 메일 발송 완료","Confirmation Email Sent")}</h3>
+      <button class="backlink" onclick="closeModal('emailModal')">✕</button></div>
+    <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px">${L("지원서가 최종 제출되었습니다. 아래 확인 메일이 지원자 이메일로 자동 발송되었습니다.","Your application has been submitted. The confirmation email below was automatically sent to the applicant's address.")}</p>
+    <div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px">
+      <div style="background:#f0f6ef;padding:10px 14px;border-bottom:1px solid var(--line);line-height:1.7">
+        <div><b>From:</b> ${mail.from}</div><div><b>To:</b> ${mail.to}</div><div><b>Subject:</b> ${mail.subject}</div></div>
+      <pre style="padding:14px;white-space:pre-wrap;font-family:inherit;line-height:1.6;margin:0">${mail.body.replace(/</g,"&lt;")}</pre>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px">${L("※ no-reply 발신 전용 주소로 발송되어 수신자는 회신할 수 없습니다.","※ Sent from a no-reply address; recipients cannot reply.")}</p>
+    <div style="text-align:right;margin-top:14px"><button class="btn btn-primary" onclick="closeModal('emailModal')">${L("확인","OK")}</button></div>`;
+  $("#emailModal").classList.remove("hidden");
+}
+
+/* ================= AI / RULE EVALUATION (모집요강 기준) ================= */
+function evaluate(a){
+  const checks=[];
+  const isKR=s=>/korea|한국|대한민국|republic of korea|kr\b/i.test(s||"");
+  // 1) both parents foreign + single nationality
+  const parentsOk=a.fatherNationality&&a.motherNationality&&!isKR(a.fatherNationality)&&!isKR(a.motherNationality)&&!isKR(a.nationality);
+  checks.push({ok:parentsOk,label:L("부모 모두 외국인 국적","Both parents foreign nationals"),note:`${L("부","F")}: ${a.fatherNationality||"-"} / ${L("모","M")}: ${a.motherNationality||"-"}`});
+  // 2) language requirement by track
+  let langOk=false,note="";
+  const sc=firstNum(a.langScore);
+  if(a.track==="zh"){langOk=true;note=L("중국어트랙: 어학 기준 없음(입학 후 한국어 연수)","Chinese track: no language requirement");}
+  else if(a.track==="ko"){const lv=/topik/i.test(a.langTest)?sc:0;langOk=lv>=3;note=`${L("한국어트랙","Korean")}: ${a.langTest||"-"} ${a.langScore||"-"} (기준 TOPIK 3급)`;}
+  else{ // en
+    const need={IELTS:5.5,"TOEFL IBT":59,"TOEFL iBT":59,TEPS:600,"NEW TEPS":202};
+    if(/cefr/i.test(a.langTest))langOk=/b2|c1|c2/i.test(a.langScore);
+    else{const req=need[a.langTest];langOk=req?sc>=req:false;}
+    note=`${L("영어트랙","English")}: ${a.langTest||"-"} ${a.langScore||"-"} (${L("기준","min")} IELTS5.5/iBT59/B2)`;
+  }
+  checks.push({ok:langOk,label:L("어학 요건 충족","Language requirement met"),note});
+  // 3) required documents
+  const req=requiredKeys(a);const missing=req.filter(k=>!(a.docs&&a.docs[k]));
+  checks.push({ok:missing.length===0,label:L("필수 서류 완비","All required documents"),note:missing.length?L(`미제출 ${missing.length}건`,`${missing.length} missing`):L("모두 제출","complete")});
+  // 4) profile completeness
+  const infoOk=a.surname&&a.firstName&&a.dob&&a.nationality&&a.passportNo;
+  checks.push({ok:!!infoOk,label:L("기본정보 완성","Profile complete"),note:infoOk?"OK":L("누락 항목 있음","missing fields")});
+  // 5) passport validity (optional info)
+  if(a.passportExpiry){const ok=new Date(a.passportExpiry)>new Date();checks.push({ok,label:L("여권 유효","Passport valid"),note:a.passportExpiry});}
+  // verdict
+  const hard=parentsOk&&langOk;const docsOk=missing.length===0&&infoOk;
+  let verdict;if(hard&&docsOk)verdict="적합";else if(hard&&!docsOk)verdict="보완필요";else verdict="부적합";
+  return{verdict,checks,at:new Date().toISOString()};
+}
+const verdictInfo=v=>({"적합":{cls:"ok",kr:"적합",en:"Eligible",ic:"✅"},"보완필요":{cls:"warn",kr:"보완필요",en:"Needs completion",ic:"⚠️"},"부적합":{cls:"no",kr:"부적합",en:"Not eligible",ic:"⛔"}}[v]);
+
+/* ================= ADMIN ================= */
+/* 담당자 계정. 배정 우선순위: ① 트랙(영어·중국어트랙은 국가 무관 전담)
+   ② 한국어트랙 지원자는 국적별로 분담. 정재훈 = 전체 관리자(superAdmin). */
+/* 담당자 계정 제거: 공개 페이지에서 명단 조회 기능을 없앴으므로 접속코드를
+   공개 소스에 두지 않습니다. 담당자 확인은 Neon 콘솔에서 직접 합니다. */
+const STAFF=[];
+const staffById=id=>STAFF.find(s=>s.id===id);
+const staffName=s=>s?(LANG==="ko"?s.name:s.en):"-";
+const staffScope=s=>s?(LANG==="ko"?s.scopeKo:s.scopeEn):"";
+/* 한국어트랙 국적 라우팅용 매처 (국적은 영문 국가명으로 저장됨) */
+const isChina  =s=>/china|중국|中国|prc\b/i.test(s||"");
+const isVietnam=s=>/viet\s*nam|vietnam|베트남|việt/i.test(s||"");
+/* 해당 지원서를 담당하는 직원 ID 목록 (위 규칙 그대로) */
+function assigneeIds(app){
+  if(app.track==="en") return ["jjh","kys","ohs"];   // 모든 영어트랙
+  if(app.track==="zh") return ["khy"];                // 모든 중국어트랙
+  const nat=app.nationality||"";                       // 한국어트랙 → 국적별
+  if(isChina(nat))   return ["khy"];
+  if(isVietnam(nat)) return ["hjy","hjh"];
+  return ["ohs"];                                      // 몽골 및 그 외 기타국가
+}
+const assigneeNames=app=>assigneeIds(app).map(id=>staffName(staffById(id))).join(", ");
+function isMine(app){ if(!currentStaff)return false; if(currentStaff.superAdmin)return true; return assigneeIds(app).includes(currentStaff.id); }
+
+let currentStaff=null;   // 로그인한 담당자
+let adFilter="all";      // 상태/판정 필터
+let adScope="mine";      // "mine"=담당 지원자, "all"=전체 지원자
+let adSel={nat:"",track:"",college:"",type:"",q:""};  // 국적/트랙/모집단위/구분/검색 필터
+let neonApps=null;       // Neon DB에서 불러온 지원서 캐시
+let neonLoading=false;   // 로딩 중 여부
+let neonError=null;      // 마지막 로드 오류
+
+/* Neon Data API에서 지원서 목록을 불러온다 (제출 시 payload(jsonb)로 저장됨).
+   payload를 언랩하고 동일 id는 최신 것으로 dedupe. */
+async function loadApplications(){
+  if(!PROXY_ENDPOINT) throw new Error("NO_PROXY");
+  const key=ensureStaffKey();
+  if(!key) throw new Error("NO_KEY");
+  const res=await fetch(PROXY_ENDPOINT,{headers:{"Accept":"application/json","x-staff-key":key}});
+  if(res.status===401||res.status===403){ clearStaffKey(); throw new Error("BAD_KEY"); }
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  const data=await res.json();
+  const rows=Array.isArray(data)?data:[];
+  const map=new Map();
+  rows.forEach(row=>{
+    const app=(row&&typeof row.payload==="object"&&row.payload)?row.payload:row;
+    if(app&&app.id) map.set(app.id, app);
+    else if(app) map.set("_row"+map.size, app);
+  });
+  neonApps=[...map.values()];
+  return neonApps;
+}
+/* 불러오기 → 렌더 (로딩/오류 상태 표시) */
+async function refreshAndRender(){
+  if(!currentStaff)return;
+  neonLoading=true; neonError=null; renderAdmin();
+  try{ await loadApplications(); }
+  catch(e){ neonError=(e&&e.message)?e.message:String(e); }
+  neonLoading=false; renderAdmin();
+}
+
+/* 단일 서버 접속 키로 로그인. 키가 맞는지는 프록시 GET(=명단 조회) 성공 여부로 판정.
+   성공하면 전체 열람 권한(superAdmin)으로 대시보드 진입. */
+const ADMIN_STAFF={id:"admin",name:"국제협력처 관리자",en:"IAO Administrator",scopeKo:"전체 지원자",scopeEn:"All applicants",superAdmin:true};
+async function adminLogin(){
+  const key=$("#al_code").value.trim();
+  if(!key){alert(L("서버 접속 키를 입력하세요.","Please enter the server access key."));return;}
+  if(!PROXY_ENDPOINT){alert(L("서버가 설정되지 않았습니다.","Server is not configured."));return;}
+  setStaffKey(key);
+  currentStaff=ADMIN_STAFF; adScope="all"; adFilter="all"; adSel={nat:"",track:"",college:"",type:"",q:""};
+  show("adminDash");
+  await refreshAndRender();
+  if(neonError==="BAD_KEY"||neonError==="NO_KEY"){   // 키 불일치 → 로그인 화면으로 복귀
+    currentStaff=null; clearStaffKey();
+    show("adminLogin");
+    alert(L("서버 접속 키가 올바르지 않습니다.","Invalid server access key."));
+  }
+}
+function adminLogout(){currentStaff=null;clearStaffKey();show("homeView");}
+/* Enter 키로 담당자 로그인 */
+["al_id","al_code"].forEach(id=>{const el=$("#"+id);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();adminLogin();}});});
+
+/* 국적/트랙/모집단위/구분/검색 조건 매칭 */
+function matchSel(a){
+  if(adSel.nat && (a.nationality||"")!==adSel.nat) return false;
+  if(adSel.track && a.track!==adSel.track) return false;
+  if(adSel.college && a.college!==adSel.college) return false;
+  if(adSel.type && a.admissionType!==adSel.type) return false;
+  if(adSel.q){const q=adSel.q.trim().toLowerCase();
+    const hay=[a.surname,a.firstName,a.email,a.passportNo,a.nationality,labelDept(a.department)].join(" ").toLowerCase();
+    if(hay.indexOf(q)<0) return false;}
+  return true;
+}
+/* 현재 뷰 계산: scoped(권한범위) → base(드롭다운·검색) → rows(상태/판정 필터) */
+function computeView(){
+  // Neon 로드 실패 시 로컬 저장 데이터로 대체
+  const src=neonError?DB.all():(neonApps||[]);
+  const all=src.map(a=>({...a,ev:a.evaluation||evaluate(a)}));
+  const scoped=(adScope==="all")?all:all.filter(isMine);
+  const base=scoped.filter(matchSel);
+  let rows=base;
+  if(adFilter==="submitted")rows=base.filter(a=>a.status==="submitted");
+  else if(adFilter==="draft")rows=base.filter(a=>a.status!=="submitted");
+  else if(["적합","보완필요","부적합"].includes(adFilter))rows=base.filter(a=>a.status==="submitted"&&a.ev.verdict===adFilter);
+  return {all,scoped,base,rows};
+}
+
+function renderAdmin(){
+  if(!currentStaff){show("adminLogin");return;}
+  $("#ad_who").textContent=staffName(currentStaff)+" · "+staffScope(currentStaff);
+  // 로딩/오류 배너 (Neon DB 연결 상태)
+  const banner=$("#adError");
+  if(neonLoading){banner.className="adbanner load";banner.textContent=L("서버에서 지원자 데이터를 불러오는 중…","Loading applicants from server…");}
+  else if(neonError==="NO_PROXY"){banner.className="adbanner load";banner.innerHTML=L("ℹ 백엔드 프록시가 아직 설정되지 않아 이 브라우저의 로컬 저장 데이터를 표시합니다.","ℹ Backend proxy not configured yet — showing this browser's local data.");}
+  else if(neonError==="NO_KEY"){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("담당자 서버 키가 필요합니다","Staff server key required")}. <button class="reset" onclick="promptStaffKeyAndReload()">${L("키 입력","Enter key")}</button>`;}
+  else if(neonError==="BAD_KEY"){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("서버 접속 키가 올바르지 않습니다","Invalid server key")}. <button class="reset" onclick="promptStaffKeyAndReload()">${L("키 다시 입력","Re-enter key")}</button>`;}
+  else if(neonError){banner.className="adbanner err";banner.innerHTML=`⚠ ${L("서버 연결 실패","Server connection failed")} — ${L("로컬 저장 데이터로 표시 중","showing local data")}. <span style="opacity:.8">(${String(neonError).replace(/</g,"&lt;")})</span> <button class="reset" onclick="refreshAndRender()">${L("다시 시도","Retry")}</button>`;}
+  else{banner.className="adbanner hidden";banner.textContent="";}
+  // 담당 / 전체 탭
+  $("#adScopeBar").innerHTML=[["mine",L("담당 지원자","My Applicants")],["all",L("전체 지원자","All Applicants")]]
+    .map(s=>`<div class="f ${adScope===s[0]?"active":""}" data-s="${s[0]}">${s[1]}</div>`).join("");
+  $$("#adScopeBar .f").forEach(f=>f.onclick=()=>{adScope=f.dataset.s;adSel={nat:"",track:"",college:"",type:"",q:""};renderAdmin();});
+
+  // 필터 바 (국적·트랙·모집단위·구분 드롭박스 + 검색 + 초기화 + 엑셀)
+  const {scoped}=computeView();
+  const nats=[...new Set(scoped.map(a=>a.nationality).filter(Boolean))].sort((x,y)=>x.localeCompare(y));
+  const opt=(val,label,cur)=>`<option value="${String(val).replace(/"/g,"&quot;")}"${cur===val?" selected":""}>${label}</option>`;
+  const natOpts=[opt("",L("국적 전체","All nationalities"),adSel.nat)].concat(nats.map(n=>opt(n,n,adSel.nat))).join("");
+  const trackOpts=[["",L("트랙 전체","All tracks")],["ko",L("한국어","Korean")],["en",L("영어","English")],["zh",L("중국어","Chinese")]].map(t=>opt(t[0],t[1],adSel.track)).join("");
+  const colOpts=[opt("",L("모집단위 전체","All colleges"),adSel.college)].concat(COLLEGES.map(c=>opt(c.ko,cname(c),adSel.college))).join("");
+  const typeOpts=[["",L("구분 전체","All types")],["new",L("신입학","New")],["transfer",L("편입학","Transfer")]].map(t=>opt(t[0],t[1],adSel.type)).join("");
+  $("#adFilterBar").innerHTML=`
+    <div class="fsel"><label>${L("국적","Nationality")}</label><select id="fx_nat">${natOpts}</select></div>
+    <div class="fsel"><label>${L("트랙","Track")}</label><select id="fx_track">${trackOpts}</select></div>
+    <div class="fsel"><label>${L("모집단위","College")}</label><select id="fx_col">${colOpts}</select></div>
+    <div class="fsel"><label>${L("구분","Type")}</label><select id="fx_type">${typeOpts}</select></div>
+    <div class="fsel"><label>${L("검색","Search")}</label><input class="search" id="fx_q" placeholder="${L("성명·이메일·여권","name·email·passport")}" value="${(adSel.q||"").replace(/"/g,"&quot;")}"></div>
+    <button class="reset" id="fx_reset">${L("초기화","Reset")}</button>
+    <button class="reset" id="fx_refresh">↻ ${L("새로고침","Refresh")}</button>
+    <button class="xlsx" id="fx_xlsx">⬇ ${L("엑셀 다운로드","Excel")}</button>`;
+  $("#fx_nat").onchange=e=>{adSel.nat=e.target.value;renderRows();};
+  $("#fx_track").onchange=e=>{adSel.track=e.target.value;renderRows();};
+  $("#fx_col").onchange=e=>{adSel.college=e.target.value;renderRows();};
+  $("#fx_type").onchange=e=>{adSel.type=e.target.value;renderRows();};
+  $("#fx_q").oninput=e=>{adSel.q=e.target.value;renderRows();};
+  $("#fx_reset").onclick=()=>{adSel={nat:"",track:"",college:"",type:"",q:""};adFilter="all";renderAdmin();};
+  $("#fx_refresh").onclick=()=>refreshAndRender();
+  $("#fx_xlsx").onclick=()=>exportXlsx();
+
+  // 상태/판정 필터
+  const filters=[["all",L("전체","All")],["submitted",L("제출완료","Submitted")],["draft",L("작성중","Draft")],["적합",L("적합","Eligible")],["보완필요",L("보완필요","Needs")],["부적합",L("부적합","Not")]];
+  $("#adFilters").innerHTML=filters.map(f=>`<div class="f ${adFilter===f[0]?"active":""}" data-f="${f[0]}">${f[1]}</div>`).join("");
+  $$("#adFilters .f").forEach(f=>f.onclick=()=>{adFilter=f.dataset.f;renderRows();});
+
+  renderRows();
+}
+
+/* 통계 + 표만 다시 그림 (필터 바 입력 유지 → 검색 포커스 안 끊김) */
+function renderRows(){
+  $$("#adFilters .f").forEach(f=>f.classList.toggle("active",f.dataset.f===adFilter));
+  const {base,rows}=computeView();
+  const submitted=base.filter(a=>a.status==="submitted");
+  const cnt=v=>submitted.filter(a=>a.ev.verdict===v).length;
+  $("#adStats").innerHTML=[
+    [base.length,L("지원자","Applicants")],
+    [submitted.length,L("제출 완료","Submitted")],
+    [cnt("적합"),L("적합","Eligible")],
+    [cnt("보완필요")+cnt("부적합"),L("보완/부적합","Needs/Not")]
+  ].map(s=>`<div class="stat"><div class="n">${s[0]}</div><div class="l">${s[1]}</div></div>`).join("");
+
+  const tb=$("#adTable");
+  const noFilter=(adScope==="mine"&&!adSel.nat&&!adSel.track&&!adSel.college&&!adSel.type&&!adSel.q&&adFilter==="all");
+  if(!rows.length){tb.innerHTML="";$("#ad_empty").textContent=noFilter?L("담당 지원자가 아직 없습니다.","No applicants assigned to you yet."):L("조건에 맞는 지원자가 없습니다.","No applicants match the current filters.");$("#ad_empty").classList.remove("hidden");return;}
+  $("#ad_empty").classList.add("hidden");
+  tb.innerHTML=`<thead><tr>
+    <th>${L("성명","Name")}</th><th>${L("국적","Nat.")}</th><th>${L("구분","Type")}</th><th>${L("모집단위","Program")}</th>
+    <th>${L("트랙","Track")}</th><th>${L("담당","Assignee")}</th><th>${L("상태","Status")}</th><th>AI ${L("판정","Verdict")}</th><th>${L("제출일","Date")}</th></tr></thead><tbody>${
+    rows.map(a=>{const vi=verdictInfo(a.ev.verdict);const st=a.status==="submitted"?`<span class="vbadge v-ok">${L("제출","Sub")}</span>`:`<span class="vbadge v-draft">${L("작성중","Draft")}</span>`;
+    const vb=a.status==="submitted"?`<span class="vbadge v-${vi.cls}">${vi.ic} ${L(vi.kr,vi.en)}</span>`:"-";
+    const mineHi=(adScope==="all"&&isMine(a))?' style="background:#f6fbef"':'';
+    return `<tr data-id="${a.id}"${mineHi}><td><b>${a.surname||"-"} ${a.firstName||""}</b></td><td>${a.nationality||"-"}</td>
+      <td>${a.admissionType==="transfer"?L("편입","T")+(a.transferYear||""):L("신입","New")}</td><td>${labelDept(a.department)}</td>
+      <td>${({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[a.track]||"-"}</td>
+      <td style="font-size:12px;color:var(--muted)">${assigneeNames(a)}</td><td>${st}</td><td>${vb}</td>
+      <td style="color:var(--muted);font-size:12px">${a.submittedAt?a.submittedAt.slice(0,10):"-"}</td></tr>`;}).join("")}</tbody>`;
+  $$("#adTable tbody tr").forEach(tr=>tr.onclick=()=>openDetail(tr.dataset.id));
+}
+
+/* ================= 엑셀(XLSX) 내보내기 — 현재 필터된 지원자 ================= */
+function exportXlsx(){
+  const {rows}=computeView();
+  const trackLabel=t=>({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[t]||"";
+  const header=[L("성","Surname"),L("이름","Given name"),L("국적","Nationality"),L("성별","Gender"),L("생년월일","DOB"),
+    L("여권번호","Passport No."),L("여권만료","Passport expiry"),L("이메일","Email"),L("연락처","Phone"),
+    L("지원구분","Type"),L("편입학년","Transfer yr"),L("단과대학","College"),L("학부(과)","Department"),
+    L("트랙","Track"),L("어학시험","Lang test"),L("점수","Score"),
+    L("부 성명","Father"),L("부 국적","Father nat."),L("모 성명","Mother"),L("모 국적","Mother nat."),
+    L("담당자","Assignee"),L("상태","Status"),L("AI 판정","Verdict"),L("제출일","Submitted")];
+  const body=rows.map(a=>[
+    a.surname||"",a.firstName||"",a.nationality||"",a.gender==="F"?L("여","F"):L("남","M"),a.dob||"",
+    a.passportNo||"",a.passportExpiry||"",a.email||"",a.phone||"",
+    a.admissionType==="transfer"?L("편입학","Transfer"):L("신입학","New"),a.admissionType==="transfer"?(a.transferYear||""):"",
+    labelCollege(a.college),labelDept(a.department),trackLabel(a.track),a.langTest||"",a.langScore||"",
+    a.fatherName||"",a.fatherNationality||"",a.motherName||"",a.motherNationality||"",
+    assigneeNames(a),a.status==="submitted"?L("제출완료","Submitted"):L("작성중","Draft"),
+    a.status==="submitted"?L(verdictInfo(a.ev.verdict).kr,verdictInfo(a.ev.verdict).en):"",
+    a.submittedAt?a.submittedAt.slice(0,10):""
+  ]);
+  if(!body.length){alert(L("내보낼 지원자가 없습니다.","No applicants to export."));return;}
+  const aoa=[header].concat(body);
+  const now=new Date();const pad=n=>String(n).padStart(2,"0");
+  const fname=`GU_applicants_${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}.xlsx`;
+  const bytes=buildXlsx(aoa,"Applicants");
+  const blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  const url=URL.createObjectURL(blob);const link=document.createElement("a");
+  link.href=url;link.download=fname;document.body.appendChild(link);link.click();
+  document.body.removeChild(link);setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+/* 최소 XLSX 생성기 (외부 라이브러리 없음, 모든 셀 inlineStr) */
+function buildXlsx(aoa,sheetName){
+  const enc=new TextEncoder();
+  const esc=s=>String(s==null?"":s).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const colName=n=>{let s="";n++;while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26);}return s;};
+  let sd="";
+  aoa.forEach((row,r)=>{let cells="";
+    row.forEach((val,c)=>{cells+=`<c r="${colName(c)}${r+1}" t="inlineStr"><is><t xml:space="preserve">${esc(val)}</t></is></c>`;});
+    sd+=`<row r="${r+1}">${cells}</row>`;});
+  const sheetXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${sd}</sheetData></worksheet>`;
+  const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`;
+  const rels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`;
+  const workbook=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="${esc((sheetName||"Sheet1").slice(0,31))}" sheetId="1" r:id="rId1"/></sheets></workbook>`;
+  const wbRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>`;
+  return zipStore([
+    {name:"[Content_Types].xml",data:enc.encode(contentTypes)},
+    {name:"_rels/.rels",data:enc.encode(rels)},
+    {name:"xl/workbook.xml",data:enc.encode(workbook)},
+    {name:"xl/_rels/workbook.xml.rels",data:enc.encode(wbRels)},
+    {name:"xl/worksheets/sheet1.xml",data:enc.encode(sheetXml)}
+  ]);
+}
+const CRC_TABLE=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+function crc32(bytes){let c=0xFFFFFFFF;for(let i=0;i<bytes.length;i++)c=CRC_TABLE[(c^bytes[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+/* 무압축(store) ZIP */
+function zipStore(files){
+  const enc=new TextEncoder();
+  const u16=n=>[n&0xFF,(n>>>8)&0xFF];
+  const u32=n=>[n&0xFF,(n>>>8)&0xFF,(n>>>16)&0xFF,(n>>>24)&0xFF];
+  const chunks=[];const central=[];let offset=0;
+  files.forEach(f=>{
+    const nameBytes=enc.encode(f.name);const data=f.data;const crc=crc32(data);const len=data.length;
+    const local=[].concat(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0),u32(crc),u32(len),u32(len),u16(nameBytes.length),u16(0));
+    chunks.push(new Uint8Array(local),nameBytes,data);
+    const cen=[].concat(u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0),u32(crc),u32(len),u32(len),u16(nameBytes.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset));
+    central.push({head:new Uint8Array(cen),name:nameBytes});
+    offset+=local.length+nameBytes.length+data.length;
+  });
+  const cdStart=offset;let cdSize=0;const cdChunks=[];
+  central.forEach(c=>{cdChunks.push(c.head,c.name);cdSize+=c.head.length+c.name.length;});
+  const eocd=new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(cdSize),u32(cdStart),u16(0)));
+  const parts=chunks.concat(cdChunks,[eocd]);
+  let total=0;parts.forEach(c=>total+=c.length);
+  const out=new Uint8Array(total);let p=0;parts.forEach(c=>{out.set(c,p);p+=c.length;});
+  return out;
+}
+function openDetail(id){
+  const src=neonError?DB.all():(neonApps||[]);
+  const a=src.find(x=>x.id===id);if(!a)return;const ev=a.evaluation||evaluate(a);const vi=verdictInfo(ev.verdict);
+  const field=(l,v)=>`<div class="r"><span>${l}</span><span>${v||"-"}</span></div>`;
+  const docsHtml=DOCS.map(d=>{
+    const done=a.docs&&a.docs[d.k];return `<div style="padding:5px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;font-size:13px">
+      <span>${done?"✅":"⬜"} ${dname(d,a.track)}</span><span style="color:var(--muted);font-size:11.5px">${done?a.docs[d.k]:""}</span></div>`;}).join("");
+  $("#detailBox").innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <h3 style="margin:0">${a.surname||""} ${a.firstName||""}</h3>
+      <button class="backlink" onclick="closeModal('detailModal')">✕</button></div>
+    <div class="summary" style="margin-bottom:6px">
+      ${field(L("국적","Nationality"),a.nationality)}${field(L("생년월일","DOB"),a.dob)}
+      ${field(L("성별","Gender"),a.gender==="F"?L("여","F"):L("남","M"))}${field(L("여권","Passport"),a.passportNo)}
+      ${field(L("이메일","Email"),a.email)}${field(L("연락처","Phone"),a.phone)}
+      ${field(L("지원구분","Type"),a.admissionType==="transfer"?L("편입 ","T ")+a.transferYear:L("신입학","New"))}${field(L("모집단위","Program"),labelCollege(a.college)+" / "+labelDept(a.department))}
+      ${field(L("트랙","Track"),({ko:L("한국어","Korean"),en:L("영어","English"),zh:L("중국어","Chinese")})[a.track])}${field(L("어학","Language"),(a.langTest||"")+" "+scoreDisp(a))}
+      ${field(L("부/국적","Father"),(a.fatherName||"")+" / "+(a.fatherNationality||""))}${field(L("모/국적","Mother"),(a.motherName||"")+" / "+(a.motherNationality||""))}
+      ${field(L("담당자","Assignee"),assigneeNames(a))}
+    </div>
+    <div class="eval-card ${vi.cls}">
+      <div class="eval-head"><span style="font-size:26px">${vi.ic}</span><div><div style="font-size:12px;color:var(--muted)">AI ${L("자동 판정 (모집요강 기준)","Auto-evaluation (per guidelines)")}</div><div class="big">${L(vi.kr,vi.en)}</div></div></div>
+      <ul class="checklist">${ev.checks.map(c=>`<li><span class="mk ${c.ok?"y":"n"}">${c.ok?"✔":"✗"}</span><div class="ct">${c.label}<div class="cn">${c.note}</div></div></li>`).join("")}</ul>
+      <div class="ai-note">${L("※ 현재 판정은 지원자가 입력한 정보 + 서류 제출 여부 기반의 규칙 엔진입니다. 실제 배포 버전에서는 Claude API가 업로드된 서류(여권·성적표·재정증빙 등) 내용을 직접 판독하여 정밀 판정합니다.","※ This verdict uses a rule engine on entered data + document presence. The production version uses the Claude API to read actual document contents.")}</div>
+    </div>
+    <h3 style="font-size:14px">${L("제출 서류","Documents")}</h3>${docsHtml}
+    <div style="text-align:right;margin-top:16px;border-top:1px solid var(--line);padding-top:12px">
+      <button class="btn" style="background:#fff;border:1px solid #e5484d;color:#e5484d"
+        onclick="deleteApplication(this.dataset.aid)" data-aid="${String(a.id).replace(/"/g,'&quot;')}">🗑 ${L("이 지원서 삭제","Delete this application")}</button>
+    </div>`;
+  $("#detailModal").classList.remove("hidden");
+}
+/* 담당자 전용: 지원서 영구 삭제 (프록시 DELETE + 담당자 키). 삭제 후 명단 새로고침. */
+async function deleteApplication(appId){
+  if(!currentStaff||!appId)return;
+  if(!PROXY_ENDPOINT){alert(L("서버가 설정되지 않았습니다.","Server is not configured."));return;}
+  const key=getStaffKey();
+  if(!key){alert(L("담당자 키가 필요합니다. 다시 로그인하세요.","Staff key required. Please log in again."));return;}
+  if(!confirm(L("이 지원서를 영구적으로 삭제할까요? 되돌릴 수 없습니다.","Permanently delete this application? This cannot be undone.")))return;
+  try{
+    const res=await fetch(PROXY_ENDPOINT+"?id="+encodeURIComponent(appId),{method:"DELETE",headers:{"x-staff-key":key}});
+    if(res.status===401||res.status===403){alert(L("권한이 없습니다. 다시 로그인하세요.","Not authorized. Please log in again."));return;}
+    if(!res.ok)throw new Error("HTTP "+res.status);
+    try{if(DB&&DB.remove)DB.remove(appId);}catch(_){}
+    closeModal("detailModal");
+    await refreshAndRender();
+    alert(L("삭제되었습니다.","Deleted."));
+  }catch(e){alert(L("삭제 실패","Delete failed")+": "+(e&&e.message?e.message:e));}
+}
+$("#ad_out"); // noop
+function closeModal(id){$("#"+id).classList.add("hidden");}
+function okModal(title,desc){$("#ok_title").textContent=title;$("#ok_desc").textContent=desc;$("#okModal").classList.remove("hidden");}
+
+/* init download link */
+$("#downloadForm").href=encodeURI(FORM_FILE);$("#downloadForm").setAttribute("download",FORM_FILE);
+
+/* ================= NATIONALITY / COUNTRY SELECT ================= */
+const COUNTRIES=[
+{c:"af",n:"Afghanistan",d:"93"},{c:"al",n:"Albania",d:"355"},{c:"dz",n:"Algeria",d:"213"},{c:"ad",n:"Andorra",d:"376"},{c:"ao",n:"Angola",d:"244"},{c:"ag",n:"Antigua and Barbuda",d:"1268"},{c:"ar",n:"Argentina",d:"54"},{c:"am",n:"Armenia",d:"374"},{c:"au",n:"Australia",d:"61"},{c:"at",n:"Austria",d:"43"},{c:"az",n:"Azerbaijan",d:"994"},
+{c:"bs",n:"Bahamas",d:"1242"},{c:"bh",n:"Bahrain",d:"973"},{c:"bd",n:"Bangladesh",d:"880"},{c:"bb",n:"Barbados",d:"1246"},{c:"by",n:"Belarus",d:"375"},{c:"be",n:"Belgium",d:"32"},{c:"bz",n:"Belize",d:"501"},{c:"bj",n:"Benin",d:"229"},{c:"bt",n:"Bhutan",d:"975"},{c:"bo",n:"Bolivia",d:"591"},{c:"ba",n:"Bosnia and Herzegovina",d:"387"},{c:"bw",n:"Botswana",d:"267"},{c:"br",n:"Brazil",d:"55"},{c:"bn",n:"Brunei",d:"673"},{c:"bg",n:"Bulgaria",d:"359"},{c:"bf",n:"Burkina Faso",d:"226"},{c:"bi",n:"Burundi",d:"257"},
+{c:"cv",n:"Cabo Verde",d:"238"},{c:"kh",n:"Cambodia",d:"855"},{c:"cm",n:"Cameroon",d:"237"},{c:"ca",n:"Canada",d:"1"},{c:"cf",n:"Central African Republic",d:"236"},{c:"td",n:"Chad",d:"235"},{c:"cl",n:"Chile",d:"56"},{c:"cn",n:"China",d:"86"},{c:"co",n:"Colombia",d:"57"},{c:"km",n:"Comoros",d:"269"},{c:"cg",n:"Congo (Republic)",d:"242"},{c:"cd",n:"Congo (DR Congo)",d:"243"},{c:"cr",n:"Costa Rica",d:"506"},{c:"ci",n:"Cote d'Ivoire",d:"225"},{c:"hr",n:"Croatia",d:"385"},{c:"cu",n:"Cuba",d:"53"},{c:"cy",n:"Cyprus",d:"357"},{c:"cz",n:"Czechia",d:"420"},
+{c:"dk",n:"Denmark",d:"45"},{c:"dj",n:"Djibouti",d:"253"},{c:"dm",n:"Dominica",d:"1767"},{c:"do",n:"Dominican Republic",d:"1809"},
+{c:"ec",n:"Ecuador",d:"593"},{c:"eg",n:"Egypt",d:"20"},{c:"sv",n:"El Salvador",d:"503"},{c:"gq",n:"Equatorial Guinea",d:"240"},{c:"er",n:"Eritrea",d:"291"},{c:"ee",n:"Estonia",d:"372"},{c:"sz",n:"Eswatini",d:"268"},{c:"et",n:"Ethiopia",d:"251"},
+{c:"fj",n:"Fiji",d:"679"},{c:"fi",n:"Finland",d:"358"},{c:"fr",n:"France",d:"33"},
+{c:"ga",n:"Gabon",d:"241"},{c:"gm",n:"Gambia",d:"220"},{c:"ge",n:"Georgia",d:"995"},{c:"de",n:"Germany",d:"49"},{c:"gh",n:"Ghana",d:"233"},{c:"gr",n:"Greece",d:"30"},{c:"gd",n:"Grenada",d:"1473"},{c:"gt",n:"Guatemala",d:"502"},{c:"gn",n:"Guinea",d:"224"},{c:"gw",n:"Guinea-Bissau",d:"245"},{c:"gy",n:"Guyana",d:"592"},
+{c:"ht",n:"Haiti",d:"509"},{c:"hn",n:"Honduras",d:"504"},{c:"hu",n:"Hungary",d:"36"},
+{c:"is",n:"Iceland",d:"354"},{c:"in",n:"India",d:"91"},{c:"id",n:"Indonesia",d:"62"},{c:"ir",n:"Iran",d:"98"},{c:"iq",n:"Iraq",d:"964"},{c:"ie",n:"Ireland",d:"353"},{c:"il",n:"Israel",d:"972"},{c:"it",n:"Italy",d:"39"},
+{c:"jm",n:"Jamaica",d:"1876"},{c:"jp",n:"Japan",d:"81"},{c:"jo",n:"Jordan",d:"962"},
+{c:"kz",n:"Kazakhstan",d:"7"},{c:"ke",n:"Kenya",d:"254"},{c:"ki",n:"Kiribati",d:"686"},{c:"xk",n:"Kosovo",d:"383"},{c:"kw",n:"Kuwait",d:"965"},{c:"kg",n:"Kyrgyzstan",d:"996"},
+{c:"la",n:"Laos",d:"856"},{c:"lv",n:"Latvia",d:"371"},{c:"lb",n:"Lebanon",d:"961"},{c:"ls",n:"Lesotho",d:"266"},{c:"lr",n:"Liberia",d:"231"},{c:"ly",n:"Libya",d:"218"},{c:"li",n:"Liechtenstein",d:"423"},{c:"lt",n:"Lithuania",d:"370"},{c:"lu",n:"Luxembourg",d:"352"},
+{c:"mg",n:"Madagascar",d:"261"},{c:"mw",n:"Malawi",d:"265"},{c:"my",n:"Malaysia",d:"60"},{c:"mv",n:"Maldives",d:"960"},{c:"ml",n:"Mali",d:"223"},{c:"mt",n:"Malta",d:"356"},{c:"mh",n:"Marshall Islands",d:"692"},{c:"mr",n:"Mauritania",d:"222"},{c:"mu",n:"Mauritius",d:"230"},{c:"mx",n:"Mexico",d:"52"},{c:"fm",n:"Micronesia",d:"691"},{c:"md",n:"Moldova",d:"373"},{c:"mc",n:"Monaco",d:"377"},{c:"mn",n:"Mongolia",d:"976"},{c:"me",n:"Montenegro",d:"382"},{c:"ma",n:"Morocco",d:"212"},{c:"mz",n:"Mozambique",d:"258"},{c:"mm",n:"Myanmar",d:"95"},
+{c:"na",n:"Namibia",d:"264"},{c:"nr",n:"Nauru",d:"674"},{c:"np",n:"Nepal",d:"977"},{c:"nl",n:"Netherlands",d:"31"},{c:"nz",n:"New Zealand",d:"64"},{c:"ni",n:"Nicaragua",d:"505"},{c:"ne",n:"Niger",d:"227"},{c:"ng",n:"Nigeria",d:"234"},{c:"kp",n:"North Korea",d:"850"},{c:"mk",n:"North Macedonia",d:"389"},{c:"no",n:"Norway",d:"47"},
+{c:"om",n:"Oman",d:"968"},
+{c:"pk",n:"Pakistan",d:"92"},{c:"pw",n:"Palau",d:"680"},{c:"ps",n:"Palestine",d:"970"},{c:"pa",n:"Panama",d:"507"},{c:"pg",n:"Papua New Guinea",d:"675"},{c:"py",n:"Paraguay",d:"595"},{c:"pe",n:"Peru",d:"51"},{c:"ph",n:"Philippines",d:"63"},{c:"pl",n:"Poland",d:"48"},{c:"pt",n:"Portugal",d:"351"},
+{c:"qa",n:"Qatar",d:"974"},
+{c:"ro",n:"Romania",d:"40"},{c:"ru",n:"Russia",d:"7"},{c:"rw",n:"Rwanda",d:"250"},
+{c:"kn",n:"Saint Kitts and Nevis",d:"1869"},{c:"lc",n:"Saint Lucia",d:"1758"},{c:"vc",n:"Saint Vincent and the Grenadines",d:"1784"},{c:"ws",n:"Samoa",d:"685"},{c:"sm",n:"San Marino",d:"378"},{c:"st",n:"Sao Tome and Principe",d:"239"},{c:"sa",n:"Saudi Arabia",d:"966"},{c:"sn",n:"Senegal",d:"221"},{c:"rs",n:"Serbia",d:"381"},{c:"sc",n:"Seychelles",d:"248"},{c:"sl",n:"Sierra Leone",d:"232"},{c:"sg",n:"Singapore",d:"65"},{c:"sk",n:"Slovakia",d:"421"},{c:"si",n:"Slovenia",d:"386"},{c:"sb",n:"Solomon Islands",d:"677"},{c:"so",n:"Somalia",d:"252"},{c:"za",n:"South Africa",d:"27"},{c:"kr",n:"South Korea",d:"82"},{c:"ss",n:"South Sudan",d:"211"},{c:"es",n:"Spain",d:"34"},{c:"lk",n:"Sri Lanka",d:"94"},{c:"sd",n:"Sudan",d:"249"},{c:"sr",n:"Suriname",d:"597"},{c:"se",n:"Sweden",d:"46"},{c:"ch",n:"Switzerland",d:"41"},{c:"sy",n:"Syria",d:"963"},
+{c:"tw",n:"Taiwan",d:"886"},{c:"tj",n:"Tajikistan",d:"992"},{c:"tz",n:"Tanzania",d:"255"},{c:"th",n:"Thailand",d:"66"},{c:"tl",n:"Timor-Leste",d:"670"},{c:"tg",n:"Togo",d:"228"},{c:"to",n:"Tonga",d:"676"},{c:"tt",n:"Trinidad and Tobago",d:"1868"},{c:"tn",n:"Tunisia",d:"216"},{c:"tr",n:"Turkey",d:"90"},{c:"tm",n:"Turkmenistan",d:"993"},{c:"tv",n:"Tuvalu",d:"688"},
+{c:"ug",n:"Uganda",d:"256"},{c:"ua",n:"Ukraine",d:"380"},{c:"ae",n:"United Arab Emirates",d:"971"},{c:"gb",n:"United Kingdom",d:"44"},{c:"us",n:"United States",d:"1"},{c:"uy",n:"Uruguay",d:"598"},{c:"uz",n:"Uzbekistan",d:"998"},
+{c:"vu",n:"Vanuatu",d:"678"},{c:"va",n:"Vatican City",d:"379"},{c:"ve",n:"Venezuela",d:"58"},{c:"vn",n:"Vietnam",d:"84"},
+{c:"ye",n:"Yemen",d:"967"},{c:"zm",n:"Zambia",d:"260"},{c:"zw",n:"Zimbabwe",d:"263"}
+].sort((a,b)=>a.n.localeCompare(b.n));
+const NAT_KEYS=["nat","fnat","mnat"];
+function natFlag(c){return "https://flagcdn.com/24x18/"+c+".png";}
+function buildNatList(key){
+  const list=$("#natlist_"+key);if(!list)return;list.innerHTML="";
+  COUNTRIES.forEach(o=>{
+    const row=document.createElement("div");row.className="natsel-opt";row.dataset.name=o.n.toLowerCase();row.dataset.dial=o.d;
+    row.innerHTML='<img loading="lazy" src="'+natFlag(o.c)+'" alt=""><span>'+o.n+'</span><span class="natsel-dial">+'+o.d+'</span>';
+    row.addEventListener("click",function(){selectNat(key,o);});
+    list.appendChild(row);
+  });
+}
+function toggleNat(key){
+  const pop=$("#natpop_"+key);const isOpen=!pop.classList.contains("hidden");
+  document.querySelectorAll(".natsel-pop").forEach(p=>p.classList.add("hidden"));
+  if(!isOpen){pop.classList.remove("hidden");const s=$("#natsearch_"+key);s.value="";filterNat(key);setTimeout(function(){s.focus();},0);}
+}
+function filterNat(key){
+  const q=($("#natsearch_"+key).value||"").trim().toLowerCase().replace(/^\+/,"");
+  document.querySelectorAll("#natlist_"+key+" .natsel-opt").forEach(function(r){
+    const show=!q||r.dataset.name.indexOf(q)>=0||r.dataset.dial.indexOf(q)===0;
+    r.style.display=show?"":"none";
+  });
+}
+function selectNat(key,o){
+  const hid=$("#f_"+key);hid.value=o.n;hid.classList.remove("err");
+  const btn=$("#natbtn_"+key);btn.classList.remove("placeholder","err");
+  btn.querySelector(".natsel-val").innerHTML='<img src="'+natFlag(o.c)+'" alt=""> '+o.n;
+  $("#natpop_"+key).classList.add("hidden");
+  if(key==="nat")applyDialCode(o.d);
+}
+/* 국가별 전화 그룹 규칙: t=선행 0(트렁크) 제거 여부, g=그룹 자릿수 */
+const PHONE_FMT={'82':{t:1,g:[2,4,4]},'86':{t:0,g:[3,4,4]},'84':{t:1,g:[3,3,3]},'976':{t:0,g:[4,4]},'998':{t:0,g:[2,3,2,2]},'81':{t:1,g:[2,4,4]},'1':{t:0,g:[3,3,4]},'44':{t:1,g:[4,6]},'7':{t:0,g:[3,3,2,2]},'63':{t:1,g:[3,3,4]},'95':{t:1,g:[2,3,4]},'977':{t:0,g:[3,3,4]},'91':{t:0,g:[5,5]},'66':{t:1,g:[2,3,4]},'62':{t:1,g:[3,4,4]},'880':{t:1,g:[4,6]},'92':{t:1,g:[3,7]},'234':{t:1,g:[3,3,4]},'20':{t:1,g:[3,3,4]},'855':{t:1,g:[2,3,3]},'856':{t:1,g:[2,3,4]},'93':{t:1,g:[2,3,4]},'994':{t:1,g:[2,3,2,2]},'996':{t:0,g:[3,3,3]},'992':{t:0,g:[2,3,4]},'971':{t:1,g:[2,3,4]},'966':{t:1,g:[2,3,4]},'49':{t:1,g:[3,4,4]},'33':{t:1,g:[1,2,2,2,2]},'34':{t:0,g:[3,3,3]},'39':{t:0,g:[3,3,4]},'90':{t:1,g:[3,3,4]},'380':{t:1,g:[2,3,2,2]}};
+const PHONE_DEF={t:1,g:[3,3,4]};
+let PHONE_DIAL="";
+function phoneRule(d){return PHONE_FMT[d]||PHONE_DEF;}
+function phoneGroup(digits,groups){var out=[],i=0;for(var k=0;k<groups.length&&i<digits.length;k++){out.push(digits.substr(i,groups[k]));i+=groups[k];}if(i<digits.length)out.push(digits.substr(i));return out.filter(function(x){return x.length;}).join("-");}
+function phoneExample(d){var r=phoneRule(d),seed="1234567890123456",i=0,p=[];r.g.forEach(function(n){p.push(seed.substr(i,n));i+=n;});return "+"+d+"-"+p.join("-");}
+function formatPhone(){var ph=$("#f_phone");if(!ph||!PHONE_DIAL)return;var d=PHONE_DIAL,r=phoneRule(d);var all=(ph.value||"").replace(/\D/g,"");if(all.indexOf(d)===0)all=all.slice(d.length);var nat=all;if(r.t&&nat.charAt(0)==="0")nat=nat.slice(1);var g=phoneGroup(nat,r.g);ph.value="+"+d+(g?("-"+g):"");try{ph.setSelectionRange(ph.value.length,ph.value.length);}catch(e){}}
+function applyDialCode(d){var ph=$("#f_phone");if(!ph)return;PHONE_DIAL=d;var rest=(ph.value||"").replace(/^\s*\+\d+[\s-]*/,"");ph.value="+"+d+" "+rest;ph.placeholder=phoneExample(d);formatPhone();}
+function refreshNatDisplays(){
+  NAT_KEYS.forEach(function(key){
+    const hid=$("#f_"+key),btn=$("#natbtn_"+key);if(!hid||!btn)return;
+    const v=(hid.value||"").trim(),val=btn.querySelector(".natsel-val");
+    const o=COUNTRIES.find(x=>x.n.toLowerCase()===v.toLowerCase());
+    if(o){btn.classList.remove("placeholder");val.innerHTML='<img src="'+natFlag(o.c)+'" alt=""> '+o.n;if(key==="nat")PHONE_DIAL=o.d;}
+    else if(v){btn.classList.remove("placeholder");val.textContent=v;}
+    else{btn.classList.add("placeholder");val.textContent=(typeof L==="function")?L("국가 선택","Select country"):"Select country";}
+  });
+}
+document.addEventListener("click",function(e){if(!e.target.closest(".natsel"))document.querySelectorAll(".natsel-pop").forEach(p=>p.classList.add("hidden"));});
+function upEn(e){var el=e.target;var v=el.value;var s=v.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Za-z '\-.]/g,"").toUpperCase();if(s!==v){var p=el.selectionStart,d=v.length-s.length;el.value=s;try{el.setSelectionRange(Math.max(0,p-d),Math.max(0,p-d));}catch(_){}}}
+try{NAT_KEYS.forEach(buildNatList);refreshNatDisplays();var _ph=document.querySelector("#f_phone");if(_ph)_ph.addEventListener("input",formatPhone);document.querySelectorAll(".name-en").forEach(function(el){el.addEventListener("input",upEn);});}catch(e){}
+
+/* ===== 부팅: 새로고침(F5) 시 언어·화면·로그인 상태 복원 =====
+   같은 세션(=새로고침)이면 마지막 화면으로, 첫 방문이면 언어 선택부터. */
+(function boot(){
+  try{var lang=localStorage.getItem("gu_lang");if(lang&&I18N[lang]){LANG=lang;document.documentElement.lang=lang;if(sw)sw.value=lang;}}catch(_){}
+  var view=null;try{view=sessionStorage.getItem("gu_view");}catch(_){}
+  applyLang();
+  if(!view){ show("langScreen"); return; }               // 첫 방문 → 언어 선택
+  var key=(typeof getStaffKey==="function")?getStaffKey():"";
+  if(view==="adminDash"){                                  // 담당자: 세션 키 있으면 로그인 유지
+    if(key){currentStaff=ADMIN_STAFF;adScope="all";adFilter="all";adSel={nat:"",track:"",college:"",type:"",q:""};show("adminDash");refreshAndRender();}
+    else{show("adminLogin");}
+    return;
+  }
+  if(view==="studentApp"||view==="studentLogin"){ show("homeView"); return; } // 작성 중 데이터는 새로고침 시 사라지므로 홈으로
+  if(VIEWS.indexOf(view)>=0){ show(view); return; }
+  show("homeView");
+})();
+</script>
 </body>
 </html>

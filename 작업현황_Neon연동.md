@@ -2,7 +2,7 @@
 
 > 최종 업데이트: **2026-07-08 밤** — ✅ **연동 완료 (Cloudflare Worker 프록시 방식)**
 
-- 라이브 페이지: https://jaehoonjung84.github.io/gwangju-admission/Gwangju_Admission_System.html
+- 라이브 페이지: https://gwangju-admission.pages.dev (Cloudflare Pages, 메인) / https://jaehoonjung84.github.io/gwangju-admission/ (GitHub Pages)
 - 저장소: https://github.com/JaehoonJung84/gwangju-admission
 - Neon 프로젝트: `red-sun-47673800` / 브랜치 `production`
 - 프록시(Worker): `https://gu-admission-proxy.hubertjung84.workers.dev`
@@ -32,7 +32,7 @@
   - `DATABASE_URL` (secret) — Neon 연결 문자열. ✅ 설정됨.
   - `STAFF_KEY` (secret) — 담당자 조회용 공유 키. ⚠️ 아직 미설정/불일치 (GET 401). 담당자 조회 쓸 때 설정.
   - `ALLOW_ORIGIN` (var) — `https://jaehoonjung84.github.io`.
-- **`Gwangju_Admission_System.html`** — `const PROXY_ENDPOINT = "https://gu-admission-proxy.hubertjung84.workers.dev";` 설정됨.
+- **`index.html`** — 메인 앱(원래 `Gwangju_Admission_System.html`에서 승격). `const PROXY_ENDPOINT = "https://gu-admission-proxy.hubertjung84.workers.dev";` 설정됨. 옛 파일명은 리다이렉트 스텁으로 유지.
 
 ## 🧹 남은 정리 (선택)
 1. **테스트 데이터 삭제** — Claude 검증용 더미 2건. Neon SQL Editor에서:
