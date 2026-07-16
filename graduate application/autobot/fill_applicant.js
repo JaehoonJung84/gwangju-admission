@@ -10,6 +10,9 @@ const fs = require('fs');
   const doSubmit = args.includes('submit');
   const doLoad = args.includes('--load'); // 기존 지원자 검색해 수정모드로 불러온 뒤 채움
   const doReset = args.includes('--reset'); // 신규: 입시원서입력 메뉴 클릭해 빈 폼으로 초기화 후 채움
+  // 차수(chasu2_2). 신규 등록(INSERT) 시에만 반영된다 — 수정(UPDATE)은 차수를 바꾸지 않음.
+  // 폼 기본값이 3이므로 우리 차수(2)를 쓰려면 반드시 지정할 것.
+  const chasuArg = (args.find(a => a.startsWith('--chasu=')) || '').split('=')[1] || null;
   if (!dataPath) { console.log('사용법: node fill_applicant.js <데이터.json> [submit] [--load]'); process.exit(1); }
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
@@ -17,15 +20,17 @@ const fs = require('fs');
   let page = null, frame = null;
   for (const ctx of browser.contexts()) {
     for (const p of ctx.pages()) {
+      if (p.url().includes('ipsi_index')) page = p;
       for (const f of p.frames()) { try { if (await f.$('#koNm')) { frame = f; page = p; break; } } catch (e) {} }
       if (frame) break;
     }
     if (frame) break;
   }
-  if (!frame) { console.log('❌ 입력 폼(#koNm)을 못 찾음 (입시원서입력 신규 폼을 여세요)'); await browser.close(); process.exit(1); }
+  if (!page) { console.log('❌ 입시관리 페이지 없음'); await browser.close(); process.exit(1); }
   console.log('페이지:', page.url());
 
   // 신규 빈 폼 리셋: 좌측 '입시원서입력' 메뉴 클릭
+  // (삭제/명부 화면을 거친 뒤엔 #koNm 이 없으므로, 리셋은 폼 유무와 무관하게 먼저 수행한다)
   if (doReset) {
     const left = page.frames().find(f => f.name() === 'left_menu');
     if (left) {
@@ -38,6 +43,7 @@ const fs = require('fs');
       console.log('폼 리셋 완료 (신규 빈 폼, koNm="' + kn + '")');
     }
   }
+  if (!frame) { console.log('❌ 입력 폼(#koNm)을 못 찾음 (입시원서입력 신규 폼을 여세요)'); await browser.close(); process.exit(1); }
 
   // 기존 지원자 불러오기(수정모드): 이름 검색 → 재탐색
   if (doLoad) {
@@ -99,12 +105,18 @@ const fs = require('fs');
       if (e.pect) selVal(p + 'PectScoCd', e.pect);
       if (e.deg) text(p + 'DegNo', e.deg);
     }
+    // 차수 지정 (신규 등록 시 이 값으로 차수가 정해진다)
+    if (d._chasu) {
+      const ch = document.getElementsByName('chasu2_2')[0];
+      if (ch) { setNative(ch, d._chasu); fire(ch); log.push('OK   chasu2_2 = ' + d._chasu); }
+      else log.push('MISS chasu2_2');
+    }
     // 최종 read-back (실제 저장될 핵심 값 확인)
     const rb = {};
-    ['gdhlEtexScrnGbCd', 'gdhlGbCd', 'gdhlDegCosCd', 'gdhlDeptCd', 'gdhlEtshGbCd', 'labEflnYN', 'topik', 'topik_date', 'ssn1'].forEach(n => { const e = document.getElementsByName(n)[0]; rb[n] = e ? e.value : '(none)'; });
+    ['year2', 'sems2', 'chasu2_2', 'gdhlEtexScrnGbCd', 'gdhlGbCd', 'gdhlDegCosCd', 'gdhlDeptCd', 'gdhlEtshGbCd', 'labEflnYN', 'topik', 'topik_date', 'ssn1'].forEach(n => { const e = document.getElementsByName(n)[0]; rb[n] = e ? e.value : '(none)'; });
     rb.ssn2 = (document.querySelector('input[name="ssn2"]') || {}).value;
     return { log, rb };
-  }, data);
+  }, { ...data, _chasu: chasuArg });
   console.log('\n=== 입력 결과 (' + (data.name_kr || '') + ') ===');
   console.log(result.log.join('\n'));
   console.log('\n=== 저장 직전 read-back ===');
