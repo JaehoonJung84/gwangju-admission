@@ -14,6 +14,7 @@ desktop.ini
 
 # 별도 프로젝트 (독립 git 저장소) — 입학지원 저장소에는 포함하지 않음
 mulchukje-qr/
+topik-manager/
 
 # 대학원 입시원서 자동입력(autobot) — 개인정보/대용량/실명 포함 파일 제외
 graduate application/*.pdf

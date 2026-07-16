@@ -8,9 +8,15 @@
 param(
   [string]$InputFile = "C:\projects\admission\2_데이터\★2026-2학기 재학생 장학반영 고지서 생성_자동계산.xlsx",
   [string]$OutDir    = "C:\projects\admission\4_고지서출력",
-  [string]$SealImage = "",          # 직인 이미지 (png/jpg). 없으면 (직인) 자리표시
+  [string]$SealImage = "",          # 직인 이미지 (png/jpg). 미지정 시 스크립트 옆 기본 직인 사용
+  [string]$LogoImage = "",          # 대학 로고 (png/jpg). 미지정 시 스크립트 옆 기본 로고 사용
   [int]$Limit        = 0            # 0 = 전체, N = 앞에서 N명만
 )
+
+# 기본 자산 경로 (scripts\ 상위 폴더의 이미지)
+$AssetDir = Split-Path $PSScriptRoot -Parent
+if ($SealImage -eq '') { $p = Join-Path $AssetDir '국제협력처장직인.png'; if (Test-Path $p) { $SealImage = $p } }
+if ($LogoImage -eq '') { $p = Join-Path $AssetDir '로고_국영문.png';     if (Test-Path $p) { $LogoImage = $p } }
 
 $EdgePaths = @("$env:ProgramFiles\Microsoft\Edge\Application\msedge.exe","${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe")
 $Edge = $EdgePaths | Where-Object { Test-Path $_ } | Select-Object -First 1
@@ -41,16 +47,23 @@ function Romanize([string]$name){
 # ---------- 금액 포맷 ----------
 function Won($n){ if($null -eq $n){return ''}; return ('{0:N0}' -f [double]$n) + '원' }
 
-# ---------- 직인 base64 ----------
-$SealTag = ''
-if ($SealImage -ne '' -and (Test-Path $SealImage)) {
-  $ext = ([System.IO.Path]::GetExtension($SealImage)).TrimStart('.').ToLower()
+# ---------- 이미지 -> data URI ----------
+function DataUri([string]$path){
+  if($path -eq '' -or -not (Test-Path $path)){ return '' }
+  $ext = ([System.IO.Path]::GetExtension($path)).TrimStart('.').ToLower()
   if($ext -eq 'jpg'){$ext='jpeg'}
-  $b64 = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($SealImage))
-  $SealTag = "<img class='seal' src='data:image/$ext;base64,$b64' alt='직인'/>"
-} else {
-  $SealTag = "<span class='seal-ph'>(직인)</span>"
+  $b64 = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($path))
+  return "data:image/$ext;base64,$b64"
 }
+
+# ---------- 직인 ----------
+$SealUri = DataUri $SealImage
+if ($SealUri -ne '') { $SealTag = "<img class='seal' src='$SealUri' alt='직인'/>" }
+else { $SealTag = "<span class='seal-ph'>(직인)</span>" }
+
+# ---------- 로고 ----------
+$LogoUri = DataUri $LogoImage
+$LogoTag = if ($LogoUri -ne '') { "<img class='logo' src='$LogoUri' alt='광주대학교'/>" } else { '' }
 
 # ---------- HTML 템플릿 ----------
 function Build-Html($rec){
@@ -69,35 +82,37 @@ function Build-Html($rec){
 <style>
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  html,body { margin:0; padding:0; font-family:'Malgun Gothic','맑은 고딕',sans-serif; color:#1a1a2e; }
+  html,body { margin:0; padding:0; font-family:'Malgun Gothic','맑은 고딕',sans-serif; color:#152a1c; }
   .page { width:210mm; height:297mm; padding:22mm 20mm; position:relative; }
-  .frame { border:2.5px solid #1b3a6b; border-radius:6px; height:100%; padding:14mm 13mm; position:relative; }
-  .uni { text-align:center; color:#1b3a6b; letter-spacing:2px; font-size:15px; font-weight:700; }
-  .uni .en { display:block; font-size:10px; letter-spacing:1px; color:#5a6b8c; font-weight:600; margin-top:2px; }
-  h1 { text-align:center; font-size:30px; letter-spacing:14px; margin:16px 0 2px; color:#12233f; }
-  .sub { text-align:center; font-size:12px; letter-spacing:3px; color:#7a869c; margin-bottom:26px; }
-  .rule { height:3px; background:linear-gradient(90deg,#1b3a6b,#4a79c9); margin:0 0 22px; border-radius:2px; }
+  .frame { border:2.5px solid #1b6b3a; border-radius:6px; height:100%; padding:14mm 13mm; position:relative; }
+  .logo { display:block; margin:0 auto 8px; height:44px; object-fit:contain; }
+  .uni { text-align:center; color:#1b6b3a; letter-spacing:2px; font-size:15px; font-weight:700; }
+  .uni .en { display:block; font-size:10px; letter-spacing:1px; color:#5a7a63; font-weight:600; margin-top:2px; }
+  h1 { text-align:center; font-size:30px; letter-spacing:14px; margin:16px 0 2px; color:#143d24; }
+  .sub { text-align:center; font-size:12px; letter-spacing:3px; color:#7d947f; margin-bottom:26px; }
+  .rule { height:3px; background:linear-gradient(90deg,#1b6b3a,#4aa96e); margin:0 0 22px; border-radius:2px; }
   table { width:100%; border-collapse:collapse; }
-  .info td { padding:9px 12px; font-size:13.5px; border:1px solid #d3dae8; }
-  .info .k { background:#eef3fb; color:#33456b; width:32%; font-weight:700; }
-  .info .en2 { color:#8a94a8; font-size:10.5px; font-weight:600; }
+  .info td { padding:9px 12px; font-size:13.5px; border:1px solid #cfe2d5; }
+  .info .k { background:#eaf4ec; color:#2c5a3c; width:32%; font-weight:700; }
+  .info .en2 { color:#8aa091; font-size:10.5px; font-weight:600; }
   .money { margin-top:24px; }
-  .money caption { text-align:left; font-size:13px; font-weight:700; color:#1b3a6b; padding:0 0 8px; letter-spacing:1px; }
-  .money td { padding:11px 14px; font-size:14px; border-bottom:1px solid #e3e8f0; }
-  .money .lbl { color:#33456b; }
+  .money caption { text-align:left; font-size:13px; font-weight:700; color:#1b6b3a; padding:0 0 8px; letter-spacing:1px; }
+  .money td { padding:11px 14px; font-size:14px; border-bottom:1px solid #e0ebe3; }
+  .money .lbl { color:#2c5a3c; }
   .money .amt { text-align:right; font-variant-numeric:tabular-nums; }
   .money .tuition td { font-weight:700; }
   .money .minus { color:#b03a3a; }
-  .money .total td { border-top:2.5px solid #1b3a6b; border-bottom:none; padding-top:14px; font-size:18px; font-weight:800; color:#12233f; }
-  .money .total .amt { color:#1b3a6b; }
-  .note { margin-top:20px; font-size:11px; color:#8a94a8; line-height:1.7; }
+  .money .total td { border-top:2.5px solid #1b6b3a; border-bottom:none; padding-top:14px; font-size:18px; font-weight:800; color:#143d24; }
+  .money .total .amt { color:#1b6b3a; }
+  .note { margin-top:20px; font-size:11px; color:#8aa091; line-height:1.7; }
   .foot { position:absolute; left:0; right:0; bottom:6mm; text-align:center; }
-  .foot .date { font-size:13px; color:#33456b; margin-bottom:12px; letter-spacing:2px; }
-  .foot .sign { font-size:19px; font-weight:800; letter-spacing:6px; color:#12233f; position:relative; display:inline-block; }
+  .foot .date { font-size:13px; color:#2c5a3c; margin-bottom:12px; letter-spacing:2px; }
+  .foot .sign { font-size:19px; font-weight:800; letter-spacing:6px; color:#143d24; position:relative; display:inline-block; }
   .seal { position:absolute; right:-70px; top:50%; transform:translateY(-50%); width:74px; height:74px; object-fit:contain; }
   .seal-ph { position:absolute; right:-64px; top:50%; transform:translateY(-50%); width:58px; height:58px; border:2px dashed #c46; border-radius:50%; color:#c46; font-size:11px; display:flex; align-items:center; justify-content:center; }
 </style></head>
 <body><div class='page'><div class='frame'>
+  $LogoTag
   <div class='uni'>광주대학교 국제협력처<span class='en'>OFFICE OF INTERNATIONAL AFFAIRS, GWANGJU UNIVERSITY</span></div>
   <h1>등록금 고지서</h1>
   <div class='sub'>TUITION PAYMENT NOTICE</div>
