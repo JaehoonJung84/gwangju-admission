@@ -11,7 +11,9 @@ param(
   [string]$OutDir    = "C:\Users\user\Desktop\★국제협력처\1. 학부\2026-2학기\합격자 발표\OFFER LETTER",
   [string]$SealImage = "",
   [string]$LogoImage = "",
-  [int]$Limit        = 0
+  [int]$Limit        = 0,
+  [string]$Only         = "",   # 수험번호 또는 한글명 일부로 1명만 발급
+  [string]$DeptOverride = ""    # -Only와 함께 사용: 학과를 엑셀 값 대신 지정값으로
 )
 
 # 기본 자산 경로 (scripts\ 상위 폴더의 이미지)
@@ -186,6 +188,8 @@ for($r=2;$r -le $last;$r++){
 $wb.Close($false); $xl.Quit()
 [System.Runtime.InteropServices.Marshal]::ReleaseComObject($xl)|Out-Null; [GC]::Collect(); [GC]::WaitForPendingFinalizers()
 
+if($Only -ne ''){ $rows = @($rows | Where-Object { $_.ExNo -eq $Only -or $_.KoName -match [regex]::Escape($Only) }) }
+if($DeptOverride -ne ''){ foreach($x in $rows){ $x.Dept = $DeptOverride; $x.DegEn = (DegEn $DeptOverride) } }
 if($Limit -gt 0){ $rows = @($rows | Select-Object -First $Limit) }
 Write-Host ("대상 합격자: {0}명 (직인: {1})" -f $rows.Count, $(if($SealTag -match 'img'){'있음'}else{'없음-자리표시'})) -ForegroundColor Cyan
 
