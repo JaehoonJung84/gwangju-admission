@@ -29,3 +29,8 @@ graduate application/autobot/yeongbu_check2.js
 
 # 별도 프로젝트 (독립 git 저장소) — 집↔사무실 메모
 work-notes/
+
+# 자동 저장 도구 — 토큰·로그·플래그는 커밋 금지
+tools/autosave-config.json
+tools/autosave.log
+tools/*.flag
