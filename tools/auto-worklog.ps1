@@ -28,16 +28,15 @@ foreach($repo in $Repos){
 }
 
 # ---------- 1.5) 작업일지 md 자동 업로드 (설정 파일 있을 때만) ----------
+# 변경 감지는 notion_upload.py 가 한다 (해시 같으면 SKIP, 바뀌면 기존 페이지 교체).
 $CfgPath0 = 'C:\projects\tools\autosave-config.json'
 if(Test-Path $CfgPath0){
   $mdFiles = Get-ChildItem 'C:\Users\user\Desktop\★국제협력처\작업일지_Claude_*.md' -ErrorAction SilentlyContinue
   foreach($md in $mdFiles){
-    $flag = "C:\projects\tools\notion_md_" + $md.BaseName + ".flag"
-    if(-not (Test-Path $flag)){
-      $r = & python 'C:\projects\tools\notion_upload.py' $md.FullName 2>&1
-      if("$r" -match '^OK'){ New-Item -ItemType File -Path $flag -Force | Out-Null; Log "작업일지 Notion 업로드: $($md.Name)" }
-      else { Log "작업일지 업로드 실패: $($md.Name) - $r" }
-    }
+    $r = & python 'C:\projects\tools\notion_upload.py' $md.FullName 2>&1
+    if("$r" -match '^OK'){ Log "작업일지 Notion 업로드(갱신): $($md.Name)" }
+    elseif("$r" -match '^SKIP'){ }
+    else { Log "작업일지 업로드 실패: $($md.Name) - $r" }
   }
 }
 
