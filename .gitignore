@@ -26,3 +26,6 @@ graduate application/autobot/data/
 graduate application/autobot/output_check.js
 graduate application/autobot/yeongbu_check.js
 graduate application/autobot/yeongbu_check2.js
+
+# 별도 프로젝트 (독립 git 저장소) — 집↔사무실 메모
+work-notes/
