@@ -157,9 +157,24 @@ def main():
         archive(token, pid)
 
     blocks = md_to_blocks(md)
-    body = {"parent": {"page_id": parent},
-            "properties": {"title": {"title": rich(title)}},
-            "children": blocks[:100]}
+    dbid = cfg.get("notionDatabaseId")
+    if dbid:
+        # DB 행으로 업로드: 작업이력 첫 화면에 바로 보이도록 속성 채움
+        props = {"이름": {"title": rich(title)},
+                 "분류": {"select": {"name": "일지"}},
+                 "상태": {"select": {"name": "완료"}}}
+        m = re.search(r"(\d{4})(\d{2})(\d{2})(?:-(\d{2})(\d{2}))?", key)
+        if m:
+            d = {"start": f"{m.group(1)}-{m.group(2)}-{m.group(3)}"}
+            if m.group(4):
+                d["end"] = f"{m.group(1)}-{m.group(4)}-{m.group(5)}"
+            props["날짜"] = {"date": d}
+        body = {"parent": {"database_id": dbid}, "properties": props,
+                "children": blocks[:100]}
+    else:
+        body = {"parent": {"page_id": parent},
+                "properties": {"title": {"title": rich(title)}},
+                "children": blocks[:100]}
     try:
         res = _req("POST", "/pages", token, body)
         page_id = res["id"]
