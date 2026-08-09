@@ -1,0 +1,43 @@
+{
+  "name_kr": "장화명",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "9"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "법학",
+  "text": {
+    "koNm": "장화명",
+    "enNm": "ZHANG HEMING",
+    "ssn1": "000408",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "7999999"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "uni": {
+      "schl": "(외국)러시아사범대학교",
+      "dept": "경영학",
+      "dt": "20250701",
+      "gb": "1",
+      "sco": "78",
+      "pect": "4",
+      "deg": ""
+    }
+  }
+}

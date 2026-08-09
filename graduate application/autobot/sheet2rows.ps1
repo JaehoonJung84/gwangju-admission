@@ -1,5 +1,6 @@
-# Sheet2(대학원 지원자)를 셀 배열 JSON으로 덤프. 엑셀이 열려 있어도 되도록 사본을 뜬다.
-param([string]$Path, [string]$Out)
+# 지정 시트를 셀 배열 JSON으로 덤프. 엑셀이 열려 있어도 되도록 사본을 뜬다.
+# -SheetXml 로 시트 지정 (기본 sheet2.xml — 2026-07 중국 명단용. 2차 명단은 sheet1.xml)
+param([string]$Path, [string]$Out, [string]$SheetXml = 'xl/worksheets/sheet2.xml')
 $tmp = [System.IO.Path]::GetTempFileName() + '.xlsx'
 Copy-Item -LiteralPath $Path -Destination $tmp -Force
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -19,7 +20,7 @@ function ColToIdx([string]$ref) {
 $shared = New-Object System.Collections.ArrayList
 $ssTxt = ReadEntry 'xl/sharedStrings.xml'
 if ($ssTxt) { [xml]$ss = $ssTxt; foreach ($si in $ss.sst.si) { [void]$shared.Add([string]$si.InnerText) } }
-[xml]$sheet = ReadEntry 'xl/worksheets/sheet2.xml'
+[xml]$sheet = ReadEntry $SheetXml
 $rows = New-Object System.Collections.ArrayList
 foreach ($row in $sheet.worksheet.sheetData.row) {
   $cells = @{}; [int]$maxc = 0

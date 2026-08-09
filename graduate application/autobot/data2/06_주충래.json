@@ -1,0 +1,43 @@
+{
+  "name_kr": "주충래",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "9"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "법학",
+  "text": {
+    "koNm": "주충래",
+    "enNm": "ZHOU ZHONGLAI",
+    "ssn1": "031203",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "7999999"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "uni": {
+      "schl": "(외국)노동대학",
+      "dept": "사회체육지도와 관리",
+      "dt": "20260612",
+      "gb": "1",
+      "sco": "3.1",
+      "pect": "1",
+      "deg": "10451120-2605004191"
+    }
+  }
+}

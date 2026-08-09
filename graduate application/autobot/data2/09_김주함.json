@@ -1,0 +1,43 @@
+{
+  "name_kr": "김주함",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "9"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "임상상담",
+  "text": {
+    "koNm": "김주함",
+    "enNm": "JIN SHUHAN",
+    "ssn1": "041215",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "8999999"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "uni": {
+      "schl": "(외국)Fort Hays State University (FHSU)",
+      "dept": "금융학",
+      "dt": "20260630",
+      "gb": "1",
+      "sco": "2.61",
+      "pect": "1",
+      "deg": "320260-009925"
+    }
+  }
+}

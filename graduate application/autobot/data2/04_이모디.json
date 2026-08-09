@@ -1,0 +1,52 @@
+{
+  "name_kr": "이모디",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "2",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "4"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "컴퓨터",
+  "text": {
+    "koNm": "이모디",
+    "enNm": "LI MODI",
+    "ssn1": "980419",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "6220021"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "uni": {
+      "schl": "(외국)북화이공대학",
+      "dept": "정보관리와 정보시스템",
+      "dt": "20210617",
+      "gb": "1",
+      "sco": "2.64",
+      "pect": "1",
+      "deg": "10081420-21003180"
+    },
+    "ma": {
+      "schl": "전남대학교",
+      "dept": "디지털미래융합서비스협동과정",
+      "dt": "20250826",
+      "gb": "1",
+      "sco": "4.06",
+      "pect": "1",
+      "deg": ""
+    }
+  }
+}

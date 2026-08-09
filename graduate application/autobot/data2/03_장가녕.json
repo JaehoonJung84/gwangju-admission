@@ -1,0 +1,43 @@
+{
+  "name_kr": "장가녕",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "4"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "컴퓨터",
+  "text": {
+    "koNm": "장가녕",
+    "enNm": "ZHANG JIANING",
+    "ssn1": "040828",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "7999999"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "uni": {
+      "schl": "(외국)염성공학원",
+      "dept": "전기공정과 자동화",
+      "dt": "20260615",
+      "gb": "1",
+      "sco": "78.41",
+      "pect": "4",
+      "deg": ""
+    }
+  }
+}

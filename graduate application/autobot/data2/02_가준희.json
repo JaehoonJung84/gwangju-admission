@@ -1,0 +1,52 @@
+{
+  "name_kr": "가준희",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "N",
+    "gdhlGbCd": "9"
+  },
+  "select_late": {
+    "topik": "3"
+  },
+  "dept_substring": "간호",
+  "text": {
+    "koNm": "가준희",
+    "enNm": "JIA JUNXI",
+    "ssn1": "020531",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "7999999"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "col": {
+      "schl": "(외국)하택의학전문대학",
+      "dept": "Nursing",
+      "dt": "20240629",
+      "gb": "1",
+      "sco": "70.44",
+      "pect": "4",
+      "deg": ""
+    },
+    "uni": {
+      "schl": "경운대학교",
+      "dept": "Nursing",
+      "dt": "20260211",
+      "gb": "1",
+      "sco": "78",
+      "pect": "4",
+      "deg": "경운대2025(학)-0410"
+    }
+  }
+}

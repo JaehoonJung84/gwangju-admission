@@ -1,0 +1,52 @@
+{
+  "name_kr": "응웬반밍",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "N",
+    "gdhlGbCd": "4"
+  },
+  "select_late": {
+    "topik": "4"
+  },
+  "dept_substring": "미래융합",
+  "text": {
+    "koNm": "응웬반밍",
+    "enNm": "NGUYEN VAN MINH",
+    "ssn1": "950206",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "5220020"
+  },
+  "select_by_text": {
+    "ntiCd": "베트남"
+  },
+  "edu": {
+    "uni": {
+      "schl": "광주대학교",
+      "dept": "한국어교육",
+      "dt": "20210223",
+      "gb": "1",
+      "sco": "2.96",
+      "pect": "1",
+      "deg": "광주대2020(학)1032"
+    },
+    "ma": {
+      "schl": "광주대학교",
+      "dept": "한국어교육과",
+      "dt": "20250221",
+      "gb": "1",
+      "sco": "4.25",
+      "pect": "1",
+      "deg": "광주대2024(석)123"
+    }
+  }
+}

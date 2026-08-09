@@ -1,0 +1,52 @@
+{
+  "name_kr": "호효연",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "9"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "임상상담",
+  "text": {
+    "koNm": "호효연",
+    "enNm": "HU XIAOJUAN",
+    "ssn1": "910910",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "6999999"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "col": {
+      "schl": "(외국)정주대학",
+      "dept": "응용한국어",
+      "dt": "20140701",
+      "gb": "1",
+      "sco": "2.3",
+      "pect": "1",
+      "deg": ""
+    },
+    "uni": {
+      "schl": "디지털서울문화예술대학교",
+      "dept": "한국어교육",
+      "dt": "20260814",
+      "gb": "3",
+      "sco": "2.19",
+      "pect": "1",
+      "deg": ""
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name_kr": "호서",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "40",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "4"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "디자인",
+  "text": {
+    "koNm": "호서",
+    "enNm": "HU RUI",
+    "ssn1": "000923",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "8220051"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "uni": {
+      "schl": "(외국)상구대학",
+      "dept": "애니메이션",
+      "dt": "20220701",
+      "gb": "1",
+      "sco": "86.33",
+      "pect": "4",
+      "deg": "14003420-22012209"
+    }
+  }
+}

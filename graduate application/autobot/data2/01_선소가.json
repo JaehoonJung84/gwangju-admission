@@ -1,0 +1,61 @@
+{
+  "name_kr": "선소가",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "41",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "4"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "간호",
+  "text": {
+    "koNm": "선소가",
+    "enNm": "XIAN ZHAOKE",
+    "ssn1": "020827",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "8880013"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "col": {
+      "schl": "(외국)절강수인대학",
+      "dept": "간호",
+      "dt": "20230616",
+      "gb": "1",
+      "sco": "79.29",
+      "pect": "4",
+      "deg": ""
+    },
+    "uni": {
+      "schl": "경운대학교",
+      "dept": "간호학과",
+      "dt": "20260623",
+      "gb": "1",
+      "sco": "3.67",
+      "pect": "1",
+      "deg": "경운대2023(학)-0956"
+    },
+    "ma": {
+      "schl": "경운대학교",
+      "dept": "간호학과",
+      "dt": "20260831",
+      "gb": "3",
+      "sco": "4.14",
+      "pect": "1",
+      "deg": ""
+    }
+  }
+}
