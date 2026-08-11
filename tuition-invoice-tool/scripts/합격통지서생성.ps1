@@ -66,7 +66,7 @@ function GubunEn([string]$g){ if($g -match '교환'){return 'Exchange Student'};
 function TrackKo([string]$t){ switch -Regex ($t) { '영어'{'영어트랙'} '한국어'{'한국어트랙'} '중국어'{'중국어트랙'} default{if($t -eq ''){'-'}else{$t}} } }
 function TrackEn([string]$t){ switch -Regex ($t) { '영어'{'English Track'} '한국어'{'Korean Track'} '중국어'{'Chinese Track'} default{'-'} } }
 # 수업연한: 신입=4년, 편입(3학년)=2년 (2026학년도 2학기 = 2026.9 입학)
-function Duration([string]$g){ if($g -match '교환'){ if($g -match '1년'){ return 'Sep. 2026 – Aug. 2027' } else { return 'Sep. 2026 – Feb. 2027' } }; if($g -match '편입'){ return 'Sep. 2026 – Aug. 2028' } else { return 'Sep. 2026 – Aug. 2030' } }
+function Duration([string]$g){ if($g -match '교환'){ if($g -match '1년'){ return 'Sep. 2026 – Aug. 2027' } else { return 'Sep. 2026 – Feb. 2027' } }; if($g -match '편입'){ if($g -match '4'){ return 'Sep. 2026 – Aug. 2027' } else { return 'Sep. 2026 – Aug. 2028' } } else { return 'Sep. 2026 – Aug. 2030' } }
 
 # ---------- HTML 템플릿 ----------
 function Build-Html($rec){
