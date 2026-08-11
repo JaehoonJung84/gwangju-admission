@@ -47,6 +47,8 @@ $DEG = @{
   '뷰티미용학과'       = 'Bachelor of Beauty and Cosmetics';
   '기계자동차공학부'   = 'Bachelor of Mechanical and Automotive Engineering';
   '시각영상디자인학과' = 'Bachelor of Visual Media Design';
+  '호텔외식조리학과' = 'Bachelor of Hotel Culinary Arts'; '스포츠과학부' = 'Bachelor of Sport Science';
+  '회계세무학과' = 'Bachelor of Accounting and Taxation';
 }
 function DegEn([string]$ko){ if($DEG.ContainsKey($ko)){ return $DEG[$ko] } else { return $ko } }
 
@@ -59,12 +61,12 @@ $CTRY = @{
 function CtryEn([string]$ko){ if($CTRY.ContainsKey($ko)){ return $CTRY[$ko] } else { return $ko } }
 
 # ---------- 라벨 매핑 ----------
-function GubunLabel([string]$g){ if($g -match '편입'){return '편입학'}; if($g -match '신입'){return '신입학'}; return $g }
-function GubunEn([string]$g){ if($g -match '편입'){return 'Transfer'}; return 'Freshman' }
+function GubunLabel([string]$g){ if($g -match '교환'){ if($g -match '1년'){return '교환학생(1년)'}; if($g -match '6개월'){return '교환학생(6개월)'}; return '교환학생' }; if($g -match '편입'){return '편입학'}; if($g -match '신입'){return '신입학'}; return $g }
+function GubunEn([string]$g){ if($g -match '교환'){return 'Exchange Student'}; if($g -match '편입'){return 'Transfer'}; return 'Freshman' }
 function TrackKo([string]$t){ switch -Regex ($t) { '영어'{'영어트랙'} '한국어'{'한국어트랙'} '중국어'{'중국어트랙'} default{if($t -eq ''){'-'}else{$t}} } }
 function TrackEn([string]$t){ switch -Regex ($t) { '영어'{'English Track'} '한국어'{'Korean Track'} '중국어'{'Chinese Track'} default{'-'} } }
 # 수업연한: 신입=4년, 편입(3학년)=2년 (2026학년도 2학기 = 2026.9 입학)
-function Duration([string]$g){ if($g -match '편입'){ return 'Sep. 2026 – Aug. 2028' } else { return 'Sep. 2026 – Aug. 2030' } }
+function Duration([string]$g){ if($g -match '교환'){ if($g -match '1년'){ return 'Sep. 2026 – Aug. 2027' } else { return 'Sep. 2026 – Feb. 2027' } }; if($g -match '편입'){ return 'Sep. 2026 – Aug. 2028' } else { return 'Sep. 2026 – Aug. 2030' } }
 
 # ---------- HTML 템플릿 ----------
 function Build-Html($rec){

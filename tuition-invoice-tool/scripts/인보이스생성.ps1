@@ -16,7 +16,9 @@ param(
   [int]$AcctCol      = 0,           # 가상계좌번호 엑셀 열번호 (0 = 미지정→자리표시)
   [int]$Limit        = 0,
   [string]$Only         = "",   # 수험번호 또는 한글명 일부로 1명만 발급
-  [string]$DeptOverride = ""    # -Only와 함께 사용: 학과를 엑셀 값 대신 지정값으로
+  [string]$DeptOverride = "",   # -Only와 함께 사용: 학과를 엑셀 값 대신 지정값으로
+  [string]$PayPeriodEn  = "July 20 – 24, 2026",      # 납부기간(영문)
+  [string]$PayPeriodKo  = "2026. 7. 20. ~ 7. 24."     # 납부기간(국문)
 )
 
 $AssetDir = Split-Path $PSScriptRoot -Parent
@@ -46,12 +48,14 @@ $DEG = @{
   '무역유통학과'='Bachelor of International Trade and Distribution'; '경영학과'='Bachelor of Business Administration';
   '뷰티미용학과'='Bachelor of Beauty and Cosmetics'; '기계자동차공학부'='Bachelor of Mechanical and Automotive Engineering';
   '시각영상디자인학과'='Bachelor of Visual Media Design';
+  '호텔외식조리학과'='Bachelor of Hotel Culinary Arts'; '스포츠과학부'='Bachelor of Sport Science';
+  '회계세무학과'='Bachelor of Accounting and Taxation';
 }
 function DegEn([string]$ko){ if($DEG.ContainsKey($ko)){ return $DEG[$ko] } else { return $ko } }
 $CTRY = @{ '베트남'='Vietnam';'중국'='China';'몽골'='Mongolia';'파키스탄'='Pakistan';'우즈베키스탄'='Uzbekistan';'라오스'='Laos';'방글라데시'='Bangladesh';'키르기즈'='Kyrgyzstan';'네팔'='Nepal';'키르기스스탄'='Kyrgyzstan'; }
 function CtryEn([string]$ko){ if($CTRY.ContainsKey($ko)){ return $CTRY[$ko] } else { return $ko } }
-function GubunKo([string]$g){ if($g -match '편입'){return '편입학'}; if($g -match '신입'){return '신입학'}; return $g }
-function GubunEn([string]$g){ if($g -match '편입'){return 'Transfer'}; return 'Freshman' }
+function GubunKo([string]$g){ if($g -match '교환'){ if($g -match '1년'){return '교환학생(1년)'}; if($g -match '6개월'){return '교환학생(6개월)'}; return '교환학생' }; if($g -match '편입'){return '편입학'}; if($g -match '신입'){return '신입학'}; return $g }
+function GubunEn([string]$g){ if($g -match '교환'){return 'Exchange Student'}; if($g -match '편입'){return 'Transfer'}; return 'Freshman' }
 function GenderEn([string]$s){ if($s -match '여|F'){return 'Female'}; if($s -match '남|M'){return 'Male'}; return $s }
 function TrackKo([string]$t){ switch -Regex ($t) { '영어'{'영어트랙'} '한국어'{'한국어트랙'} '중국어'{'중국어트랙'} default{if($t -eq ''){'-'}else{$t}} } }
 function TrackEn([string]$t){ switch -Regex ($t) { '영어'{'English Track'} '한국어'{'Korean Track'} '중국어'{'Chinese Track'} default{'-'} } }
@@ -164,7 +168,7 @@ function Build-Html($rec){
     <tr><td class='k'>Bank Address <span class='en2'>은행 주소</span></td><td>Jinwol-dong branch of Kwangju bank, 665, Seomun-daero, Nam-gu, Gwangju, Republic of Korea</td></tr>
     <tr><td class='k'>Remittee <span class='en2'>예금주</span></td><td>Gwangju University (Office of International Affairs)<br>광주대학교(국제협력처)</td></tr>
     <tr><td class='k'>Account No. <span class='en2'>계좌번호</span></td><td class='todo'>$($rec.Acct)</td></tr>
-    <tr><td class='k'>Payment Period <span class='en2'>납부기간</span></td><td>July 20 – 24, 2026 &nbsp;<span style='color:#6b7d70'>(2026. 7. 20. ~ 7. 24.)</span></td></tr>
+    <tr><td class='k'>Payment Period <span class='en2'>납부기간</span></td><td>$PayPeriodEn &nbsp;<span style='color:#6b7d70'>($PayPeriodKo)</span></td></tr>
   </table>
 
   <div class='foot'>
