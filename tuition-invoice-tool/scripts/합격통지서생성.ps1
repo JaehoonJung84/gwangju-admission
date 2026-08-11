@@ -54,6 +54,7 @@ function DegEn([string]$ko){ if($DEG.ContainsKey($ko)){ return $DEG[$ko] } else 
 $CTRY = @{
   '베트남'='Vietnam'; '중국'='China'; '몽골'='Mongolia'; '파키스탄'='Pakistan';
   '우즈베키스탄'='Uzbekistan'; '라오스'='Laos'; '방글라데시'='Bangladesh'; '키르기즈'='Kyrgyzstan';
+  '네팔'='Nepal'; '키르기스스탄'='Kyrgyzstan';
 }
 function CtryEn([string]$ko){ if($CTRY.ContainsKey($ko)){ return $CTRY[$ko] } else { return $ko } }
 
