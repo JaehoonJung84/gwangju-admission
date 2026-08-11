@@ -1,0 +1,122 @@
+﻿AggregatorHost                 7056     
+ALCapture                      4204     C:\Program Files (x86)\ESTsoft\ALCapture\ALCapture.exe
+ALCaptureEditor                23848    C:\Program Files (x86)\ESTsoft\ALCapture\ALCaptureEditor.exe
+alnotify                       9180     C:\Program Files (x86)\ESTsoft\ALToolsManager\alnotify.exe
+ALZip                          53612    C:\Program Files (x86)\ESTsoft\ALZip\ALZip.exe
+AnySign4PC                     6980     C:\Program Files (x86)\SoftForum\XecureWeb\AnySign\dll\AnySign4PC.exe
+AnySign4PCLauncher             3760     
+ApplicationFrameHost           4656     C:\Windows\system32\ApplicationFrameHost.exe
+ASDSvc                         22720    
+AYRTSrv.aye                    3640     
+AYUpdSrv.aye                   3628     
+AYWSSrv.aye                    3716     
+backgroundTaskHost             50392    C:\Windows\system32\backgroundTaskHost.exe
+CalculatorApp                  48996    C:\Program Files\WindowsApps\Microsoft.WindowsCalculator_11.2605.9.0_x64__8wekyb3d8bbwe\CalculatorApp.exe
+CCDaemon                       20008    C:\Program Files (x86)\Crosscert\UniSignCRSV3\CCDaemon.exe
+chrome                         21836    C:\Program Files\Google\Chrome\Application\chrome.exe
+claude                         51856    C:\Program Files\WindowsApps\Claude_1.26832.0.0_x64__pzs8sxrjxfjjc\app\claude.exe
+conhost                        55820    C:\Windows\system32\conhost.exe
+cowork-svc                     35980    
+crashpad_handler               24412    C:\Program Files (x86)\ESTsoft\ALCapture\crashpad_handler.exe
+CrossDeviceResume              9368     C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\CrossDeviceResume.exe
+CrossDeviceService             18568    C:\Program Files\WindowsApps\MicrosoftWindows.CrossDevice_1.26052.99.0_x64__cw5n1h2txyewy\CrossDeviceService.exe
+CrossEXService                 16832    
+csrss                          2964     
+ctfmon                         12808    
+CubeU                          1768     
+CubeU64                        8860     
+DataExchangeHost               21084    C:\Windows\System32\DataExchangeHost.exe
+delfino                        16596    C:\program files (x86)\wizvera\delfino-g3\delfino.exe
+dllhost                        23672    C:\Windows\system32\DllHost.exe
+dwm                            11092    
+eausvc                         3684     
+EXCEL                          20508    C:\Program Files\Microsoft Office\Root\Office16\EXCEL.EXE
+explorer                       34972    C:\Windows\explorer.exe
+FileCoAuth                     57460    C:\Program Files\Microsoft OneDrive\26.134.0713.0007\FileCoAuth.exe
+fontdrvhost                    9980     
+GameInputRedistService         18872    C:\Program Files\Microsoft GameInput\x64\GameInputRedistService.exe
+GameInputSvc                   18044    
+gamingservices                 6820     
+gamingservicesnet              6812     
+HimTrayIcon                    288      C:\Program Files (x86)\Hnc\Office 2022\HOffice120\bin\HimTrayIcon.exe
+HncUpdateService               3844     
+HncUpdateTray                  5812     C:\Program Files (x86)\Hnc\Office 2022\HncUtils\Service\HncUpdateTray.exe
+Hwp                            17688    C:\Program Files (x86)\Hnc\Office 2022\HOffice120\bin\Hwp.exe
+I3GMainSvc                     3432     
+I3GProc                        12100    C:\Program Files (x86)\IPinside_LWS\I3GProc.exe
+Idle                           0        
+IMGSF50Svc                     3768     
+IniClientSvc_x64               3784     
+INISAFEAdminUtil               1476     
+INISAFECrossWebEXSvc           9020     
+IntelCpHDCPSvc                 1104     
+IntelGraphicsSoftware.Service  6640     
+jhi_service                    3904     
+KakaoTalk                      56136    C:\Program Files (x86)\Kakao\KakaoTalk\KakaoTalk.exe
+KCaseAgent                     3948     
+LockApp                        29472    C:\Windows\SystemApps\Microsoft.LockApp_cw5n1h2txyewy\LockApp.exe
+lsass                          1360     
+MagicLine4NX                   10232    C:\Program Files (x86)\DreamSecurity\MagicLine4NX\MagicLine4NX.exe
+MagicLine4NXServices           3936     
+MagicLineNPIZ                  1576     C:\Program Files (x86)\DreamSecurity\MagicLine4NPIZ\MagicLineNPIZ.exe
+McCHSvc                        33748    
+McUpdaterModule                10632    
+Memory Compression             2552     
+msedgewebview2                 52340    C:\Program Files (x86)\Microsoft\EdgeWebView\Application\151.0.4129.72\msedgewebview2.exe
+nosstarter.npe                 18608    
+nossvc                         3884     
+Notepad                        6716     C:\Program Files\WindowsApps\Microsoft.WindowsNotepad_11.2605.34.0_x64__8wekyb3d8bbwe\Notepad\Notepad.exe
+Notion                         13232    C:\Users\user\AppData\Local\Programs\Notion\Notion.exe
+NsCatCom                       19248    C:\Program Files (x86)\Kyocera\FileUtility\NsCatCom.exe
+ObCrossEXService               3704     
+OfficeClickToRun               3776     
+OneDrive                       46824    C:\Program Files\Microsoft OneDrive\OneDrive.exe
+OneDrive.Sync.Service          56672    C:\Program Files\Microsoft OneDrive\26.134.0713.0007\OneDrive.Sync.Service.exe
+OpenConsole                    23340    C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\OpenConsole.exe
+PhoneExperienceHost            27728    C:\Program Files\WindowsApps\Microsoft.YourPhone_1.26061.128.0_x64__8wekyb3d8bbwe\PhoneExperienceHost.exe
+Photos                         38032    C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2026.11060.2004.0_x64__8wekyb3d8bbwe\Photos.exe
+powershell                     33788    C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+PresentMonService              8716     
+PWSLocalServer                 3976     
+Registry                       320      
+remoting_host                  31396    
+REPORTXSvc                     14968    C:\ProgramData\DAMON\REPORTX\REPORTXSvc.exe
+RtkAudUService64               11488    C:\Windows\System32\DriverStore\FileRepository\realtekservice.inf_amd64_c2fa179f72a88c18\RtkAudUService64.exe
+RuntimeBroker                  28296    C:\Windows\System32\RuntimeBroker.exe
+SearchHost                     7644     C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe
+SearchIndexer                  15812    
+SecurityHealthService          15036    
+SecurityHealthSystray          18016    C:\Windows\System32\SecurityHealthSystray.exe
+services                       1320     
+SFUSVC                         3876     
+ShadowBackup4(x64)             12360    C:\ShadowBackup4\ShadowBackup4(x64).exe
+ShellExperienceHost            11608    C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe
+ShellHost                      10336    C:\Windows\System32\ShellHost.exe
+sihost                         8548     C:\Windows\system32\sihost.exe
+smss                           852      
+splwow64                       6056     C:\Windows\splwow64.exe
+spoolsv                        3224     
+SSScheduler                    18656    
+StartMenuExperienceHost        16648    C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe
+StSess                         28164    
+StSess32                       1672     
+svchost                        10400    
+System                         4        
+TabTip                         15224    
+taskhostw                      36788    
+TextInputHost                  10476    C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe
+TUCTLSystem                    3988     
+UniCRSLocalServer              1420     C:\Program Files (x86)\Crosscert\UniSignCRSV3\UniCRSLocalServer.exe
+UniCRSNotiCenter               20128    C:\Program Files (x86)\Crosscert\UniSignCRSV3\UniCRSNotiCenter.exe
+veraport-x64                   6780     C:\program files\wizvera\veraport20\veraport-x64.exe
+WehagoAgent                    6756     
+WehagoAgentManagerService      3964     
+WhatsApp.Root                  17956    C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2627.101.0_x64__cv1g1gvanyjgm\WhatsApp.Root.exe
+WindowsTerminal                23412    C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\WindowsTerminal.exe
+wininit                        1188     
+winlogon                       11520    
+WmiPrvSE                       38064    
+WMIRegistrationService         4100     
+wpmsvc                         3996     
+WUDFHost                       12448    
+전화검색_프린터_검색_URL                24180    C:\Users\user\Desktop\전화검색_프린터_검색_URL.exe
