@@ -1,0 +1,178 @@
+# ---------- 결합(2페이지) HTML ----------
+function Build-Combined($rec){
+  $issueEn = (Get-Date).ToString('MMMM d, yyyy', [System.Globalization.CultureInfo]::GetCultureInfo('en-US'))
+@"
+<!doctype html><html lang='ko'><head><meta charset='utf-8'>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html,body { margin:0; padding:0; font-family:'Malgun Gothic','맑은 고딕',sans-serif; color:#1c1c1c; }
+  .page { width:210mm; height:297mm; padding:20mm 18mm; position:relative; }
+  .p1 { page-break-after: always; }
+  /* 공통 레터헤드 */
+  .head { display:flex; align-items:center; gap:14px; border-bottom:2px solid #1b6b3a; padding-bottom:10px; }
+  .head .logo { width:66px; height:auto; flex:0 0 auto; align-self:center; }
+  .head .org { flex:1; }
+  .head .org .ko { font-size:15px; font-weight:800; color:#1b6b3a; letter-spacing:0.5px; }
+  .head .org .en { font-size:12.5px; font-weight:700; color:#20402b; margin-top:1px; }
+  .head .org .addr { font-size:9.5px; color:#5a6b60; margin-top:4px; line-height:1.5; }
+
+  /* ===== OFFER LETTER (.ol) ===== */
+  .ol .frame { border:2px solid #1b6b3a; height:100%; padding:11mm 12mm 10mm; position:relative; }
+  .ol .title { text-align:center; margin:26px 0 4px; }
+  .ol .title .en { font-size:31px; font-weight:800; letter-spacing:10px; color:#12331f; }
+  .ol .title .ko { font-size:14px; font-weight:700; letter-spacing:8px; color:#7d947f; margin-top:4px; }
+  .ol .fields { margin:8px 4px 0; }
+  .ol .fields .row { display:flex; padding:11px 0; border-bottom:1px dotted #cdd9d0; }
+  .ol .fields .row:last-child { border-bottom:none; }
+  .ol .fields .lab { flex:0 0 40%; font-size:13px; font-weight:700; color:#20402b; }
+  .ol .fields .lab .ko2 { display:block; font-size:10px; color:#8aa091; font-weight:600; margin-top:1px; }
+  .ol .fields .val { flex:1; font-size:13.5px; color:#1c1c1c; align-self:center; }
+  .ol .fields .val .ko2 { display:block; color:#6b7d70; font-size:11px; margin-top:2px; }
+  .ol .fields .val .dur { display:block; font-size:11px; color:#7d8d80; margin-top:4px; }
+  .ol .fields .val .dur .ko2 { display:inline; }
+  .ol .certify { text-align:center; margin:34px 8px 0; }
+  .ol .certify .ko { font-size:14.5px; color:#183a24; line-height:1.9; }
+  .ol .certify .ko b { color:#1b6b3a; }
+  .ol .certify .en { font-size:12px; color:#55685c; line-height:1.8; margin-top:8px; }
+  .ol .foot { position:absolute; left:0; right:0; bottom:13mm; text-align:center; }
+  .ol .foot .date2 { font-size:13.5px; color:#33463a; letter-spacing:1px; margin-bottom:18px; }
+  .ol .foot .sign-ko { font-size:26px; font-weight:800; letter-spacing:6px; color:#12331f; display:inline-block; }
+  .ol .foot .sign-en { font-size:15px; font-weight:700; color:#33463a; letter-spacing:1px; margin-top:16px; }
+  .ol .sealwrap { position:relative; letter-spacing:0; }
+  .ol .seal { position:absolute; left:52%; top:46%; transform:translate(-50%,-50%); width:57px; height:57px; object-fit:contain; opacity:0.92; }
+  .ol .seal-ph { position:absolute; left:52%; top:46%; transform:translate(-50%,-50%); width:52px; height:52px; border:2px dashed #c46; border-radius:50%; color:#c46; font-size:9px; display:flex; align-items:center; justify-content:center; }
+
+  /* ===== TUITION INVOICE (.inv) ===== */
+  .inv .frame { border:2px solid #1b6b3a; height:100%; padding:11mm 12mm 10mm; position:relative; display:flex; flex-direction:column; }
+  .inv .title { text-align:center; margin:4px 0 2px; }
+  .inv .title .en { font-size:30px; font-weight:800; letter-spacing:10px; color:#12331f; }
+  .inv .title .ko { font-size:13.5px; font-weight:700; letter-spacing:8px; color:#7d947f; margin-top:3px; }
+  .inv .sec { font-size:13px; font-weight:800; color:#1b6b3a; margin:7px 2px 4px; }
+  .inv .sec .en2 { color:#8aa091; font-weight:700; font-size:11px; }
+  .inv table { width:100%; border-collapse:collapse; }
+  .inv .grid td, .inv .grid th { border:1px solid #cfe2d5; padding:5px 8px; font-size:12px; text-align:center; }
+  .inv .grid th { background:#eaf4ec; color:#2c5a3c; font-weight:700; }
+  .inv .grid th .en2 { display:block; color:#8aa091; font-size:9.5px; font-weight:600; margin-top:1px; }
+  .inv .amt td { padding:5px 12px; font-size:13px; border:1px solid #cfe2d5; }
+  .inv .amt .k { background:#eaf4ec; color:#2c5a3c; font-weight:700; width:50%; text-align:left; white-space:nowrap; }
+  .inv .amt .k .en2 { color:#8aa091; font-size:10px; font-weight:600; }
+  .inv .amt .v { text-align:right; font-variant-numeric:tabular-nums; }
+  .inv .amt .minus { color:#b03a3a; }
+  .inv .amt .total .k, .inv .amt .total .v { border-top:2px solid #1b6b3a; font-weight:800; font-size:15px; color:#12331f; }
+  .inv .amt .total .v { color:#1b6b3a; }
+  .inv .pay td { padding:5px 11px; font-size:12px; border:1px solid #cfe2d5; }
+  .inv .pay .k { background:#eaf4ec; color:#2c5a3c; font-weight:700; width:28%; text-align:left; }
+  .inv .pay .k .en2 { display:block; color:#8aa091; font-size:9.5px; font-weight:600; margin-top:1px; }
+  .inv .pay .todo { color:#b06a1a; font-weight:700; }
+  .inv .foot { margin-top:auto; padding-top:8px; text-align:center; }
+  .inv .foot .date2 { font-size:13.5px; color:#33463a; letter-spacing:1px; margin-bottom:14px; }
+  .inv .foot .sign-ko { font-size:26px; font-weight:800; letter-spacing:6px; color:#12331f; display:inline-block; }
+  .inv .foot .sign-en { font-size:15px; font-weight:700; color:#33463a; letter-spacing:1px; margin-top:16px; }
+  .inv .sealwrap { position:relative; letter-spacing:0; }
+  .inv .seal { position:absolute; left:52%; top:46%; transform:translate(-50%,-50%); width:57px; height:57px; object-fit:contain; opacity:0.92; }
+  .inv .seal-ph { position:absolute; left:52%; top:46%; transform:translate(-50%,-50%); width:52px; height:52px; border:2px dashed #c46; border-radius:50%; color:#c46; font-size:9px; display:flex; align-items:center; justify-content:center; }
+</style></head>
+<body>
+
+<!-- PAGE 1 : OFFER LETTER -->
+<div class='page p1 ol'><div class='frame'>
+  <div class='head'>
+    $LogoTag
+    <div class='org'>
+      <div class='ko'>광주대학교 국제협력처</div>
+      <div class='en'>Office of International Affairs, Gwangju University</div>
+      <div class='addr'>(61743) 전남광주통합특별시 남구 효덕로 277 · 277, Hyodeok-ro, Nam-gu, Gwangju, Rep. of Korea<br>
+        Tel. +82-62-670-2288 &nbsp; Fax. +82-62-670-2733 &nbsp; E-mail. jhjung@gwangju.ac.kr &nbsp; ie.gwangju.ac.kr</div>
+    </div>
+  </div>
+  <div class='title'><div class='en'>OFFER LETTER</div><div class='ko'>합 격 통 지 서</div></div>
+  <div class='fields'>
+    <div class='row'><div class='lab'>Name<span class='ko2'>성명</span></div>
+      <div class='val'>$($rec.EnName) &nbsp;<span class='ko2'>($($rec.KoName))</span></div></div>
+    <div class='row'><div class='lab'>Date of Birth<span class='ko2'>생년월일</span></div>
+      <div class='val'>$($rec.Birth)</div></div>
+    <div class='row'><div class='lab'>Nationality<span class='ko2'>국적</span></div>
+      <div class='val'>$($rec.CountryEn) &nbsp;<span class='ko2'>($($rec.CountryKo))</span></div></div>
+    <div class='row'><div class='lab'>Course<span class='ko2'>지원학과 · 학위과정</span></div>
+      <div class='val'>$($rec.CourseEn) &nbsp;<span class='ko2'>($($rec.Dept) · $($rec.DegKo))</span>
+        <span class='dur'>Duration : $($rec.Duration) &nbsp;<span class='ko2'>(수업연한 $($rec.DurationYr))</span></span></div></div>
+    <div class='row'><div class='lab'>Admission Type<span class='ko2'>전형 · 구분</span></div>
+      <div class='val'>Foreign Special Admission · Freshman &nbsp;<span class='ko2'>(외국인 특별전형 · 신입학)</span></div></div>
+    <div class='row'><div class='lab'>Track<span class='ko2'>과정 (트랙)</span></div>
+      <div class='val'>$($rec.TrackEn) &nbsp;<span class='ko2'>($($rec.TrackKo))</span></div></div>
+    <div class='row'><div class='lab'>Entrance Semester<span class='ko2'>입학학기</span></div>
+      <div class='val'>September 2026 &nbsp;<span class='ko2'>(2026학년도 후기)</span></div></div>
+  </div>
+  <div class='certify'>
+    <div class='ko'>위 사람은 <b>광주대학교 2026학년도 후기 외국인 특별전형</b>에<br>합격하였음을 증명합니다.</div>
+    <div class='en'>This is to certify that the above-mentioned person has been admitted<br>to Gwangju University for the Fall Semester of 2026.</div>
+  </div>
+  <div class='foot'>
+    <div class='date2'>$issueEn</div>
+    <div class='sign-ko'>광주대학교 국제협력처<span class='sealwrap'>장$SealTag</span></div>
+    <div class='sign-en'>Director of International Affairs, Gwangju University</div>
+  </div>
+</div></div>
+
+<!-- PAGE 2 : TUITION INVOICE -->
+<div class='page inv'><div class='frame'>
+  <div class='head'>
+    $LogoTag
+    <div class='org'>
+      <div class='ko'>광주대학교 국제협력처</div>
+      <div class='en'>Office of International Affairs, Gwangju University</div>
+      <div class='addr'>(61743) 전남광주통합특별시 남구 효덕로 277 · 277, Hyodeok-ro, Nam-gu, Gwangju, Rep. of Korea<br>
+        Tel. +82-62-670-2288 &nbsp; Fax. +82-62-670-2733 &nbsp; E-mail. jhjung@gwangju.ac.kr &nbsp; ie.gwangju.ac.kr</div>
+    </div>
+  </div>
+  <div class='title'><div class='en'>TUITION INVOICE</div><div class='ko'>등 록 금 고 지 서</div></div>
+
+  <div class='sec'>■ Applicant's Information <span class='en2'>지원자 정보</span></div>
+  <table class='grid'>
+    <tr><th>Name<span class='en2'>성명</span></th><th>Date of Birth<span class='en2'>생년월일</span></th><th>Nationality<span class='en2'>국적</span></th><th>Gender<span class='en2'>성별</span></th><th>Semester<span class='en2'>입학학기</span></th></tr>
+    <tr>
+      <td>$($rec.EnName)<br><span style='color:#6b7d70;font-size:10.5px'>$($rec.KoName)</span></td>
+      <td>$($rec.Birth)</td>
+      <td>$($rec.CountryEn)<br><span style='color:#6b7d70;font-size:10.5px'>$($rec.CountryKo)</span></td>
+      <td>$($rec.GenderEn)<br><span style='color:#6b7d70;font-size:10.5px'>$($rec.GenderKo)</span></td>
+      <td style='white-space:nowrap'>2026 Fall<br><span style='color:#6b7d70;font-size:10.5px'>2026학년도 후기</span></td>
+    </tr>
+  </table>
+  <table class='grid' style='margin-top:8px'>
+    <tr><th style='width:52%'>Course<span class='en2'>지원학과 · 학위과정</span></th><th>Type<span class='en2'>구분</span></th><th>Track<span class='en2'>과정(트랙)</span></th></tr>
+    <tr>
+      <td>$($rec.CourseEn)<br><span style='color:#6b7d70;font-size:10.5px'>$($rec.Dept) · $($rec.DegKo)</span></td>
+      <td>Freshman<br><span style='color:#6b7d70;font-size:10.5px'>신입학</span></td>
+      <td>$($rec.TrackEn)<br><span style='color:#6b7d70;font-size:10.5px'>$($rec.TrackKo)</span></td>
+    </tr>
+  </table>
+
+  <div class='sec'>■ Amount Due <span class='en2'>납부 내역</span></div>
+  <table class='amt'>
+    <tr><td class='k'>Admission Fee (A) <span class='en2'>입학금</span></td><td class='v'>$($rec.ATxt)</td></tr>
+    <tr><td class='k'>Tuition (B) <span class='en2'>수업료</span></td><td class='v'>$($rec.BTxt)</td></tr>
+    <tr><td class='k'>Scholarship (C)$($rec.RateTxt) <span class='en2'>장학금</span></td><td class='v minus'>- $($rec.CTxt)</td></tr>
+    <tr class='total'><td class='k'>Amount Due (A+B-C) <span class='en2'>실 납부액</span></td><td class='v'>$($rec.DTxt)</td></tr>
+  </table>
+
+  <div class='sec'>■ Payment Information <span class='en2'>납부 정보</span></div>
+  <table class='pay'>
+    <tr><td class='k'>Bank <span class='en2'>은행</span></td><td>Kwangju Bank 광주은행 &nbsp;(Swift. KWABKRSE)</td></tr>
+    <tr><td class='k'>Bank Address <span class='en2'>은행 주소</span></td><td>Jinwol-dong branch of Kwangju bank, 665, Seomun-daero, Nam-gu, Gwangju, Republic of Korea</td></tr>
+    <tr><td class='k'>Remittee <span class='en2'>예금주</span></td><td>Gwangju University (Office of International Affairs)<br>광주대학교(국제협력처)</td></tr>
+    <tr><td class='k'>Account No. <span class='en2'>계좌번호</span></td><td class='todo'>$($rec.Acct)</td></tr>
+    <tr><td class='k'>Payment Period <span class='en2'>납부기간</span></td><td>July 22 – 24, 2026 &nbsp;<span style='color:#6b7d70'>(2026. 7. 22. ~ 7. 24.)</span></td></tr>
+  </table>
+
+  <div class='foot'>
+    <div class='date2'>$issueEn</div>
+    <div class='sign-ko'>광주대학교 국제협력처<span class='sealwrap'>장$SealTag</span></div>
+    <div class='sign-en'>Director of International Affairs, Gwangju University</div>
+  </div>
+</div></div>
+
+</body></html>
+"@
+}
+
