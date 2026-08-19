@@ -1,0 +1,52 @@
+{
+  "name_kr": "서욱",
+  "select_by_value": {
+    "gdhlEtexScrnGbCd": "3",
+    "gdhlDegCosCd": "41",
+    "gdhlEtshGbCd": "1",
+    "LAB_EFLN_YN": "Y",
+    "gdhlGbCd": "4"
+  },
+  "select_late": {
+    "topik": "9"
+  },
+  "dept_substring": "간호",
+  "text": {
+    "koNm": "서욱",
+    "enNm": "XU XU",
+    "ssn1": "891203",
+    "topik_date": "",
+    "mobpNo1": "062",
+    "mobpNo2": "670",
+    "mobpNo3": "2855",
+    "sample6_postcode": "61743",
+    "sample6_address": "전남광주통합특별시 남구 효덕로 277 광주대학교",
+    "sample6_address2": "호심관 6층 국제협력처"
+  },
+  "text_by_name": {
+    "ssn2": "5999999"
+  },
+  "select_by_text": {
+    "ntiCd": "중국"
+  },
+  "edu": {
+    "uni": {
+      "schl": "(외국)대련의과대학",
+      "dept": "간호학",
+      "dt": "20130710",
+      "gb": "1",
+      "sco": "3.02",
+      "pect": "1",
+      "deg": "10161420-13100069"
+    },
+    "ma": {
+      "schl": "(외국)상해이공대학",
+      "dept": "공공관리",
+      "dt": "20260630",
+      "gb": "3",
+      "sco": "89.34",
+      "pect": "4",
+      "deg": ""
+    }
+  }
+}
