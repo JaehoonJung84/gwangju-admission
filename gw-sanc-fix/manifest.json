@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "광주대 전자결재 SetSize 오류 방지",
+  "version": "1.0.0",
+  "description": "전자결재 미리보기에서 [WordController.SetSize] : 최소사이즈 범위를 벗어 났습니다 경고가 반복되는 문제를 막습니다.",
+  "content_scripts": [
+    {
+      "matches": ["*://gw.gwangju.ac.kr/*"],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_start",
+      "world": "MAIN",
+      "js": ["fix.js"]
+    }
+  ]
+}
