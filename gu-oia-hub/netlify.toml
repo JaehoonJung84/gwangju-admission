@@ -1,0 +1,13 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+# 링크 목록은 publish 폴더 안에 정적으로 두지 않는다.
+# netlify/functions/links.mjs 가 접속코드 확인 후에만 주소 모음을 돌려준다.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"

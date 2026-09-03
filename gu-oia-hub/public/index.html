@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>국제협력처 자료 허브 · 광주대학교</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#EEF2F9">
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="apple-touch-icon" href="logo.png">
+<style>
+:root{
+  --navy:#0F2F5E; --navy2:#1B4B8F; --gold:#C9962E;
+  --paper:#EEF2F9; --card:#FFFFFF; --fill:#F5F8FD; --fill2:#E8EFFA;
+  --line:#D8E1EE; --line2:#C3D2E6;
+  --ink:#16233A; --ink2:#3C4A61; --muted:#5F6E85; --faint:#8B98AC;
+  --red:#C0392B;
+  --r:14px; --r2:10px;
+  --shadow:0 1px 2px rgba(16,40,80,.06),0 6px 22px rgba(16,40,80,.07);
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0C1220; --card:#151D2C; --fill:#1A2434; --fill2:#1E2B40;
+  --line:#27334A; --line2:#33415C;
+  --ink:#E6ECF7; --ink2:#C2CCDC; --muted:#93A2B9; --faint:#6E7C93;
+  --red:#E4685A; --gold:#E0B45C;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 22px rgba(0,0,0,.3);
+}}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,"Malgun Gothic","Noto Sans KR",sans-serif;
+  font-size:15px;line-height:1.55;-webkit-text-size-adjust:100%;
+  display:flex;flex-direction:column;overflow:hidden}
+button,input{font-family:inherit;font-size:inherit}
+[hidden]{display:none!important}
+a{color:inherit}
+
+/* 접속코드 */
+#gate{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px;overflow:auto}
+.gbox{width:100%;max-width:360px;text-align:center}
+.gbox img{height:96px;width:auto;margin:0 auto 18px;display:block}
+@media (prefers-color-scheme:dark){.gbox img,.t1 img{filter:brightness(1.14) saturate(1.06)}}
+.gbox h1{margin:0 0 4px;font-size:19px;font-weight:840;letter-spacing:-.025em}
+.gbox p{margin:0 0 20px;font-size:12.5px;color:var(--muted);font-weight:700}
+.gform{display:flex;gap:7px}
+.gform input{flex:1;min-width:0;border:1px solid var(--line2);background:var(--card);color:var(--ink);
+  border-radius:var(--r2);padding:11px 13px;font-weight:700;letter-spacing:.04em;text-align:center}
+.gform input:focus{outline:2px solid var(--navy2);outline-offset:-1px}
+.gform button{border:0;background:var(--navy);color:#fff;border-radius:var(--r2);
+  padding:11px 18px;font-weight:820;cursor:pointer;white-space:nowrap}
+.gform button:active{transform:scale(.97)}
+.gerr{margin:11px 0 0;font-size:12.5px;color:var(--red);font-weight:750;min-height:18px}
+
+/* 상단 */
+.top{flex:none;background:var(--paper);border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top)}
+.t1{max-width:1240px;margin:0 auto;padding:10px 14px 7px;display:flex;align-items:center;gap:12px}
+.t1 img{height:42px;width:auto;display:block;flex:none}
+.tt{flex:1;min-width:0}
+.tt h1{margin:0;font-size:16.5px;font-weight:840;letter-spacing:-.025em;line-height:1.2}
+.tt p{margin:1px 0 0;font-size:11.5px;color:var(--muted);font-weight:700}
+.who{flex:none;font-size:11.5px;color:var(--ink2);background:var(--fill2);border:1px solid var(--line);
+  border-radius:999px;padding:6px 12px;cursor:pointer;white-space:nowrap;font-weight:780}
+.who:hover{background:var(--fill)}
+.t2{max-width:1240px;margin:0 auto;padding:0 12px 9px;display:flex;gap:7px}
+.seg{display:flex;background:var(--fill2);border:1px solid var(--line);border-radius:10px;padding:3px;
+  gap:2px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.seg::-webkit-scrollbar{display:none}
+.seg button{border:0;background:transparent;color:var(--muted);font-weight:800;font-size:13px;
+  padding:7px 13px;border-radius:7px;cursor:pointer;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,transform .1s}
+.seg button:hover{color:var(--ink)}
+.seg button:active{transform:scale(.95)}
+.seg button[aria-current="true"]{background:var(--navy);color:#fff;
+  box-shadow:0 2px 7px rgba(15,47,94,.32)}
+.seg button[aria-current="true"]:hover{color:#fff}
+
+/* 코드 안내 */
+.codenote{max-width:1240px;margin:0 auto 9px;padding:0 12px}
+.codenote > div{background:var(--fill2);border:1px solid var(--line);border-radius:var(--r2);
+  padding:9px 13px;font-size:12.5px;color:var(--ink2);font-weight:700;
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.codenote b{font-size:14px;letter-spacing:.08em;color:var(--navy2);
+  background:var(--card);border:1px solid var(--line2);border-radius:7px;padding:2px 10px;
+  font-variant-numeric:tabular-nums}
+@media (prefers-color-scheme:dark){.codenote b{color:#9CC0F5}}
+
+/* 본문 */
+main{flex:1;min-height:0;display:flex}
+.panel{flex:1;min-width:0;display:flex;flex-direction:column}
+.panel[hidden]{display:none!important}
+.scroller{flex:1;min-height:0;overflow:auto;
+  padding:18px 12px calc(28px + env(safe-area-inset-bottom))}
+.inner{max-width:1240px;margin:0 auto}
+
+/* 홈 */
+.lead{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:15px 17px;margin-bottom:18px}
+.lead h2{margin:0 0 5px;font-size:15.5px;font-weight:840;letter-spacing:-.02em}
+.lead p{margin:0;font-size:13px;color:var(--muted);font-weight:650;line-height:1.6}
+h3.sec{margin:0 0 10px;font-size:12px;font-weight:850;letter-spacing:.06em;color:var(--muted);
+  display:flex;align-items:center;gap:8px}
+h3.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:12px;margin-bottom:22px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+  padding:15px 16px 13px;display:flex;flex-direction:column;gap:9px;text-align:left;
+  cursor:pointer;font:inherit;color:inherit;
+  transition:transform .12s,box-shadow .12s,border-color .12s}
+.c:hover{transform:translateY(-2px);border-color:var(--line2);
+  box-shadow:0 2px 4px rgba(16,40,80,.07),0 12px 28px rgba(16,40,80,.11)}
+.c:active{transform:translateY(0)}
+.chead{display:flex;align-items:flex-start;gap:10px}
+.ico{flex:none;width:36px;height:36px;border-radius:10px;background:var(--fill2);
+  display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1}
+.cttl{flex:1;min-width:0}
+.cttl b{display:block;font-size:14.5px;font-weight:840;letter-spacing:-.02em;line-height:1.3}
+.cttl span{display:inline-block;margin-top:4px;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  color:var(--muted);background:var(--fill);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.c p{margin:0;font-size:12.5px;color:var(--muted);font-weight:650;line-height:1.55;flex:1}
+.cfoot{display:flex;align-items:center;gap:7px;padding-top:2px}
+.cfoot span{font-size:11.5px;font-weight:800;color:var(--navy2)}
+@media (prefers-color-scheme:dark){.cfoot span{color:#9CC0F5}}
+.cfoot a{margin-left:auto;font-size:11.5px;font-weight:780;color:var(--muted);text-decoration:none;
+  border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--fill)}
+.cfoot a:hover{color:var(--ink);border-color:var(--line2)}
+
+/* 끼워넣기 탭 */
+.bar{flex:none;display:flex;align-items:center;gap:8px;padding:8px 14px;
+  background:var(--fill);border-bottom:1px solid var(--line)}
+.bar b{font-size:12.5px;font-weight:840;letter-spacing:-.01em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:none}
+.bar em{font-style:normal;font-size:11.5px;color:var(--faint);font-weight:700;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.bar .acts{margin-left:auto;display:flex;gap:6px;flex:none}
+.bar button,.bar a{border:1px solid var(--line2);background:var(--card);color:var(--ink2);
+  border-radius:8px;padding:5px 11px;font-size:12px;font-weight:780;cursor:pointer;
+  text-decoration:none;line-height:1.5;white-space:nowrap}
+.bar button:hover,.bar a:hover{background:var(--fill2);color:var(--ink)}
+.bar a.go{background:var(--navy);border-color:var(--navy);color:#fff}
+.bar a.go:hover{background:var(--navy2);color:#fff}
+iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
+
+/* 끼울 수 없는 항목 */
+.away{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px;overflow:auto}
+.awaybox{max-width:420px;text-align:center;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);padding:26px 24px}
+.awaybox .ico{width:48px;height:48px;font-size:24px;margin:0 auto 13px}
+.awaybox b{display:block;font-size:16px;font-weight:840;letter-spacing:-.02em}
+.awaybox p{margin:8px 0 18px;font-size:12.5px;color:var(--muted);font-weight:650;line-height:1.6}
+.awaybox a{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;
+  border-radius:var(--r2);padding:11px 22px;font-weight:820;font-size:13.5px}
+.awaybox a:hover{background:var(--navy2)}
+
+.foot{margin-top:6px;font-size:11.5px;color:var(--faint);font-weight:650;line-height:1.7}
+
+@media (max-width:560px){
+  .t1{padding:8px 12px 6px;gap:10px}
+  .t1 img{height:34px}
+  .tt h1{font-size:14.5px}
+  .tt p{display:none}
+  .bar em{display:none}
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gbox">
+    <img src="logo.png" alt="광주대학교">
+    <h1>국제협력처 자료 허브</h1>
+    <p>부서 접속코드를 입력하세요</p>
+    <form class="gform" id="gform" autocomplete="off">
+      <input id="gcode" type="password" placeholder="접속코드" aria-label="접속코드" autocomplete="off">
+      <button type="submit">열기</button>
+    </form>
+    <p class="gerr" id="gerr" role="status"></p>
+  </div>
+</div>
+
+<header class="top" id="top" hidden>
+  <div class="t1">
+    <img src="logo.png" alt="광주대학교">
+    <div class="tt">
+      <h1>국제협력처 자료 허브</h1>
+      <p>광주대학교 국제협력처 · Office of International Affairs</p>
+    </div>
+    <button class="who" id="whoBtn" type="button">접속코드</button>
+  </div>
+  <nav class="t2"><div class="seg" id="tabs" role="tablist"></div></nav>
+  <div class="codenote" id="codenote" hidden>
+    <div>
+      <span>각 사이트가 코드를 다시 물으면 같은 코드를 넣으세요</span>
+      <b id="codeval"></b>
+      <button class="who" id="forget" type="button" style="margin-left:auto">이 기기에서 잠그기</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" hidden></main>
+
+<script>
+(function(){
+  var KEY='gu-oia-hub-code';
+  var gate=document.getElementById('gate'), gform=document.getElementById('gform'),
+      gcode=document.getElementById('gcode'), gerr=document.getElementById('gerr'),
+      topbar=document.getElementById('top'), main=document.getElementById('main'),
+      tabs=document.getElementById('tabs'), codenote=document.getElementById('codenote'),
+      codeval=document.getElementById('codeval');
+  var LINKS=[], CODE='', panels={}, current='';
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function host(u){try{return new URL(u).host;}catch(e){return u;}}
+  function byKey(k){for(var i=0;i<LINKS.length;i++){if(LINKS[i].key===k)return LINKS[i];}return null;}
+
+  /* 접속 */
+  function unlock(code,quiet){
+    return fetch('/api/links?code='+encodeURIComponent(code))
+      .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function(d){
+        if(!d.ok) throw new Error('bad');
+        try{ localStorage.setItem(KEY,code); }catch(e){}
+        LINKS=d.links; CODE=d.code; codeval.textContent=CODE;
+        gate.hidden=true; topbar.hidden=false; main.hidden=false;
+        build();
+        return true;
+      })
+      .catch(function(){
+        if(!quiet){ gerr.textContent='접속코드가 맞지 않습니다.'; gcode.select(); }
+        try{ localStorage.removeItem(KEY); }catch(e){}
+        return false;
+      });
+  }
+  gform.addEventListener('submit',function(e){
+    e.preventDefault(); gerr.textContent='';
+    var v=gcode.value.trim(); if(!v) return;
+    unlock(v,false);
+  });
+  document.getElementById('whoBtn').addEventListener('click',function(){
+    codenote.hidden=!codenote.hidden;
+  });
+  document.getElementById('forget').addEventListener('click',function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    location.hash=''; location.reload();
+  });
+
+  /* 화면 구성 */
+  function build(){
+    var defs=[{key:'home',tab:'홈'}].concat(LINKS);
+    tabs.innerHTML='';
+    defs.forEach(function(d){
+      var b=document.createElement('button');
+      b.type='button'; b.textContent=d.tab; b.dataset.key=d.key; b.setAttribute('role','tab');
+      b.addEventListener('click',function(){ show(d.key,true); });
+      tabs.appendChild(b);
+    });
+    main.appendChild(homePanel());
+    var start=(location.hash||'').replace('#','');
+    show(defs.some(function(d){return d.key===start;})?start:'home',false);
+  }
+
+  function homePanel(){
+    var p=document.createElement('div'); p.className='panel'; p.dataset.key='home';
+    var groups=[{id:'staff',t:'교직원 업무'},{id:'student',t:'학생 안내'}];
+    var html='<div class="scroller"><div class="inner">'
+      +'<div class="lead"><h2>흩어져 있던 국제협력처 자료를 한자리에</h2>'
+      +'<p>아래 카드나 위쪽 탭을 누르면 해당 사이트가 이 화면 안에서 바로 열립니다. '
+      +'주소를 따로 외울 필요 없이 이 페이지 하나만 즐겨찾기 해 두세요.</p></div>';
+    groups.forEach(function(g){
+      var items=LINKS.filter(function(l){return l.group===g.id;});
+      if(!items.length) return;
+      html+='<h3 class="sec">'+esc(g.t)+'</h3><div class="grid">';
+      items.forEach(function(l){
+        html+='<button class="c" type="button" data-key="'+esc(l.key)+'">'
+          +'<div class="chead"><div class="ico">'+esc(l.icon)+'</div>'
+          +'<div class="cttl"><b>'+esc(l.name)+'</b><span>'+esc(l.scope)+'</span></div></div>'
+          +'<p>'+esc(l.desc)+'</p>'
+          +'<div class="cfoot"><span>'+(l.embed?'여기서 열기':'새 창으로 열기')+'</span>'
+          +'<a href="'+esc(l.url)+'" target="_blank" rel="noopener" data-stop>'+esc(host(l.url))+'</a>'
+          +'</div></button>';
+      });
+      html+='</div>';
+    });
+    html+='<p class="foot">이 허브는 기존 사이트를 그대로 불러와 보여줍니다. 각 사이트의 주소와 내용은 바뀌지 않았습니다.<br>'
+      +'광주대학교 국제협력처 · Office of International Affairs</p>'
+      +'</div></div>';
+    p.innerHTML=html;
+    p.addEventListener('click',function(e){
+      if(e.target.closest('a[data-stop]')) return;
+      var c=e.target.closest('.c'); if(!c) return;
+      var l=byKey(c.dataset.key);
+      if(l && !l.embed){ window.open(l.url,'_blank','noopener'); return; }
+      show(c.dataset.key,true);
+    });
+    panels.home=p;
+    return p;
+  }
+
+  function sitePanel(l){
+    var p=document.createElement('div'); p.className='panel'; p.dataset.key=l.key;
+    var bar=document.createElement('div'); bar.className='bar';
+    bar.innerHTML='<b>'+esc(l.name)+'</b><em>'+esc(host(l.url))+'</em>'
+      +'<div class="acts"><button type="button" data-act="reload">새로고침</button>'
+      +'<button type="button" data-act="copy">주소 복사</button>'
+      +'<a class="go" href="'+esc(l.url)+'" target="_blank" rel="noopener">새 창</a></div>';
+    var fr=document.createElement('iframe');
+    fr.src=l.url; fr.title=l.name;
+    fr.setAttribute('referrerpolicy','no-referrer');
+    fr.setAttribute('allow','clipboard-write; fullscreen');
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      if(b.dataset.act==='reload'){ var s=fr.src; fr.src='about:blank'; setTimeout(function(){fr.src=s;},0); }
+      if(b.dataset.act==='copy' && navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(l.url).then(function(){
+          var t=b.textContent; b.textContent='복사됨';
+          setTimeout(function(){ b.textContent=t; },1200);
+        },function(){});
+      }
+    });
+    p.appendChild(bar); p.appendChild(fr);
+    panels[l.key]=p;
+    return p;
+  }
+
+  function awayPanel(l){
+    var p=document.createElement('div'); p.className='panel'; p.dataset.key=l.key;
+    p.innerHTML='<div class="away"><div class="awaybox"><div class="ico">'+esc(l.icon)+'</div>'
+      +'<b>'+esc(l.name)+'</b><p>'+esc(l.note||l.desc)+'</p>'
+      +'<a href="'+esc(l.url)+'" target="_blank" rel="noopener">새 창으로 열기</a></div></div>';
+    panels[l.key]=p;
+    return p;
+  }
+
+  function show(key,push){
+    var l=byKey(key);
+    if(key!=='home' && !l) key='home';
+    if(!panels[key]) main.appendChild(l.embed ? sitePanel(l) : awayPanel(l));
+    Object.keys(panels).forEach(function(k){ panels[k].hidden = (k!==key); });
+    Array.prototype.forEach.call(tabs.children,function(b){
+      var on = b.dataset.key===key;
+      b.setAttribute('aria-current', on?'true':'false');
+      if(on && b.scrollIntoView) b.scrollIntoView({block:'nearest',inline:'nearest'});
+    });
+    current=key;
+    if(push){ try{ history.replaceState(null,'','#'+key); }catch(e){ location.hash=key; } }
+    document.title = (key==='home' || !l) ? '국제협력처 자료 허브 · 광주대학교'
+                                          : l.name+' · 국제협력처 허브';
+  }
+
+  window.addEventListener('hashchange',function(){
+    var k=(location.hash||'').replace('#','')||'home';
+    if(k!==current && (k==='home'||byKey(k))) show(k,false);
+  });
+
+  var saved=null; try{ saved=localStorage.getItem(KEY); }catch(e){}
+  if(saved){ unlock(saved,true).then(function(ok){ if(!ok) gcode.focus(); }); }
+  else { gcode.focus(); }
+})();
+</script>
+</body>
+</html>
