@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>국제협력처 일정</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#EEF2F9">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+:root{
+  --navy:#0F2F5E; --navy2:#1B4B8F; --sky:#8CC0E4;
+  --paper:#EEF2F9; --card:#FFFFFF; --fill:#F5F8FD; --fill2:#E8EFFA;
+  --line:#D8E1EE; --line2:#C3D2E6;
+  --ink:#16233A; --ink2:#3C4A61; --muted:#5F6E85; --faint:#8B98AC;
+  --red:#C0392B; --sat:#2C6FB5; --sun:#C0392B;
+  --r:14px; --r2:10px; --wide:1900px;
+  --shadow:0 1px 2px rgba(16,40,80,.06),0 6px 22px rgba(16,40,80,.07);
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0C1220; --card:#151D2C; --fill:#1A2434; --fill2:#1E2B40;
+  --line:#27334A; --line2:#33415C;
+  --ink:#E6ECF7; --ink2:#C2CCDC; --muted:#93A2B9; --faint:#6E7C93;
+  --red:#E4685A; --sat:#7FB2E8; --sun:#E4685A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 22px rgba(0,0,0,.3);
+}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,"Malgun Gothic","Noto Sans KR",sans-serif;
+  font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+
+/* ── 상단 : 밝은 바탕에 컬러 로고 ── */
+.top{position:sticky;top:0;z-index:30;background:var(--paper);
+  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.t1{max-width:var(--wide);margin:0 auto;padding:10px 16px 7px;display:flex;align-items:center;gap:14px}
+.t1 img.lg{height:52px;width:auto;display:block;flex:none}
+/* 라이티 — 상단 오른쪽, 이름 단추 옆에 세운다 (아래 탭줄과 겹치지 않게 여백은 건드리지 않는다) */
+.t1 img.lt{height:60px;width:auto;display:block;flex:none;margin-left:auto;margin-right:2px;
+  filter:drop-shadow(0 3px 6px rgba(16,40,80,.20))}
+@media (prefers-color-scheme:dark){.t1 img{filter:brightness(1.14) saturate(1.06)}
+  .t1 img.lt{filter:brightness(1.1) drop-shadow(0 3px 6px rgba(0,0,0,.5))}}
+.tt{flex:1;min-width:0}
+.tt h1{margin:0;font-size:20px;font-weight:840;letter-spacing:-.025em;line-height:1.2}
+.tt p{margin:2px 0 0;font-size:12.5px;color:var(--muted);font-weight:700;letter-spacing:.01em}
+.who{font-size:12.5px;color:var(--ink2);background:var(--fill2);border:1px solid var(--line);
+  border-radius:999px;padding:6px 13px;cursor:pointer;white-space:nowrap;font-weight:750;flex:none}
+.t2{max-width:var(--wide);margin:0 auto;padding:0 14px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.seg{display:flex;background:var(--fill2);border:1px solid var(--line);border-radius:10px;padding:3px;
+  gap:2px}
+.seg button{border:0;background:transparent;color:var(--muted);font-weight:800;font-size:14.5px;
+  padding:8px 17px;border-radius:8px;cursor:pointer;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,transform .1s}
+.seg button:hover{color:var(--ink)}
+.seg button:active{transform:scale(.95)}
+.seg button[aria-current="true"]{background:var(--navy);color:#fff;
+  box-shadow:0 2px 7px rgba(15,47,94,.32)}
+.seg button[aria-current="true"]:hover{color:#fff}
+.nav{display:flex;align-items:center;gap:3px;margin-left:auto}
+.nav button{border:1px solid var(--line2);background:var(--card);color:var(--ink2);
+  border-radius:9px;padding:7px 13px;font-size:14px;font-weight:780;cursor:pointer;line-height:1}
+.navarrow{display:none;padding:7px 11px !important;color:var(--navy) !important}
+.per{font-size:17px;font-weight:840;padding:0 8px;min-width:142px;text-align:center;
+  font-variant-numeric:tabular-nums}
+.add{border:0;background:var(--navy);color:#fff;border-radius:9px;padding:8px 17px;
+  font-size:14.5px;font-weight:840;cursor:pointer}
+
+.wrap{max-width:var(--wide);margin:0 auto;padding:14px 12px calc(46px + env(safe-area-inset-bottom))}
+
+/* ── 달력 양옆 이동 화살표 ── */
+.stage{display:grid;grid-template-columns:56px minmax(0,1fr) 56px;gap:4px;align-items:stretch}
+.arrowcol{display:block;min-width:0}
+.arrow{position:sticky;top:46vh;width:46px;height:46px;border-radius:50%;padding:0;cursor:pointer;
+  border:1px solid var(--line2);background:var(--card);color:var(--navy);
+  box-shadow:0 2px 10px rgba(16,40,80,.16);font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,transform .12s}
+.arrow:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.arrow:active{transform:scale(.94)}
+
+.none{color:var(--faint);font-size:14px;padding:4px 0}
+
+/* ── 월간 ── */
+.grid{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden}
+.dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));background:var(--fill2);
+  border-bottom:1px solid var(--line)}
+.dow div{padding:10px 0;text-align:center;font-size:14px;font-weight:850;color:var(--muted)}
+.dow div:first-child{color:var(--sun)} .dow div:last-child{color:var(--sat)}
+/* 칸 높이는 화면 높이에 맞춰 자란다 (--rowh 는 month() 가 계산해 넣는다).
+   줄 높이는 고정이다 — 내용이 많은 칸 때문에 줄이 늘어나면 달력이 한 화면을 넘긴다. */
+.cells{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  grid-auto-rows:var(--rowh,120px)}
+.cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:7px 7px 8px;cursor:pointer;min-width:0;overflow:hidden}
+.cell:nth-child(7n){border-right:0}
+.cell.out{background:var(--fill);opacity:.5}
+.cell.today{background:var(--fill2);box-shadow:inset 0 0 0 2px var(--navy2)}
+.cell .n{font-size:15px;font-weight:840;color:var(--ink2);font-variant-numeric:tabular-nums;
+  line-height:1.35}
+.cell:nth-child(7n+1) .n{color:var(--sun)} .cell:nth-child(7n) .n{color:var(--sat)}
+.cell.today .n{background:var(--navy);color:#fff !important;border-radius:999px;padding:1px 9px;display:inline-block}
+.ev{margin-top:4px;font-size:13px;font-weight:750;color:#fff;border-radius:5px;
+  padding:3px 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5;
+  letter-spacing:-.01em}
+.ev:hover{filter:brightness(1.12)}
+.ev.imp{box-shadow:inset 0 0 0 2px rgba(255,255,255,.62);font-weight:850}
+.more{font-size:12.5px;color:var(--muted);margin-top:3px;font-weight:780}
+/* 칸이 아주 좁을 때(휴대폰 세로) — 글자를 한 자라도 더 밀어 넣는다 */
+.ev.tiny{font-size:10.5px;padding:1px 3px;margin-top:2px;border-radius:4px;letter-spacing:-.04em}
+/* 일정이 적어 자리가 남는 칸 — 제목을 두 줄까지 펼친다 */
+.ev.two{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;text-overflow:clip;line-height:1.3;overflow-wrap:anywhere}
+
+/* ── 휴대폰 세로일 때만 뜨는 가로보기 안내 ── */
+.rot{display:none;align-items:center;gap:9px;margin-bottom:10px;
+  background:var(--fill2);border:1px solid var(--line2);border-radius:var(--r2);
+  padding:9px 11px;font-size:13px;font-weight:750;color:var(--ink2)}
+.rot b{flex:none;font-size:15px;color:var(--navy2);line-height:1}
+.rot span{flex:1;min-width:0}
+.rotx{flex:none;border:0;background:transparent;color:var(--faint);font-size:14px;
+  cursor:pointer;padding:2px 5px;line-height:1;-webkit-tap-highlight-color:transparent}
+.rotx:active{transform:scale(.9)}
+@media (max-width:760px) and (orientation:portrait){.rot{display:flex}}
+
+/* ── 주간 ── */
+.week{display:grid;gap:10px}
+.wday{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);
+  box-shadow:var(--shadow);padding:13px 16px;cursor:pointer}
+.wday.today{border-color:var(--navy2);box-shadow:0 0 0 2px rgba(27,75,143,.16)}
+.wh{display:flex;align-items:baseline;gap:9px}
+.wh b{font-size:17.5px;font-variant-numeric:tabular-nums}
+.wh span{font-size:14px;color:var(--muted);font-weight:750}
+.wl{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-width:0}
+.chip{font-size:14px;font-weight:750;color:#fff;border-radius:7px;padding:5px 11px;cursor:pointer;
+  max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow-wrap:anywhere;line-height:1.45}
+.chip.imp{box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+
+/* ── 연간 ── */
+.year{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);
+  box-shadow:var(--shadow);padding:12px 13px 13px;cursor:pointer}
+.mini{min-width:0;overflow:hidden}
+.mini h3{margin:0 0 8px;font-size:15px;font-weight:850;color:var(--navy2)}
+.mini h3 em{font-style:normal;color:var(--faint);font-weight:750;font-size:12.5px}
+.mg{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.mg div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12px;
+  color:var(--muted);border-radius:4px}
+.mg div.has{background:var(--fill2);color:var(--navy2);font-weight:800}
+.mg div.imp{background:var(--red);color:#fff;font-weight:800}
+.mg div.tod{outline:2px solid var(--navy);outline-offset:-1px}
+.ml{margin-top:9px;border-top:1px solid var(--line);padding-top:8px}
+.ml div{font-size:13px;color:var(--ink2);font-weight:700;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;line-height:1.8}
+.ml i{font-style:normal;display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;
+  vertical-align:0}
+
+/* ── 한눈에 (학년도 개관) ── */
+.ovtop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ovtop .lab{font-size:14px;color:var(--muted);font-weight:750}
+.tog{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:750;color:var(--ink2);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer}
+.tog.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.tog input{width:16px;height:16px;accent-color:var(--navy)}
+.ov{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden}
+.ovh,.ovr{display:grid;grid-template-columns:84px 1fr 1fr 1fr}
+.ovh{background:var(--fill2);border-bottom:1px solid var(--line)}
+.ovh div{padding:9px 12px;font-size:13px;font-weight:850;color:var(--muted);text-align:center}
+.ovh div:first-child{text-align:left}
+.ovr{border-bottom:1px solid var(--line)}
+.ovr:last-child{border-bottom:0}
+.ovr.now{background:var(--fill2)}
+.ovm{padding:11px 12px;font-size:16px;font-weight:850;color:var(--navy2);
+  border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;line-height:1.25}
+.ovm em{font-style:normal;font-size:11.5px;color:var(--faint);font-weight:750}
+.ovc{padding:9px 10px;border-right:1px solid var(--line);display:flex;flex-wrap:wrap;gap:5px;
+  align-content:flex-start;min-height:56px;min-width:0;overflow:hidden}
+.ovc:last-child{border-right:0}
+.oc{font-size:13.5px;font-weight:750;color:#fff;border-radius:6px;padding:4px 9px;cursor:pointer;
+  line-height:1.5;max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.oc.imp{box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+.oc em{font-style:normal;opacity:.75;font-weight:700}
+
+/* ── 상세·편집 ── */
+.mask{position:fixed;inset:0;background:rgba(10,22,44,.55);z-index:50;display:flex;
+  align-items:flex-end;justify-content:center}
+@media(min-width:640px){.mask{align-items:center;padding:20px}}
+.modal{background:var(--card);width:100%;max-width:720px;border-radius:16px 16px 0 0;
+  max-height:92vh;overflow:auto;padding:18px 20px 0;position:relative}
+@media(min-width:640px){.modal{border-radius:16px}}
+.modal h3{margin:0 0 12px;font-size:19px;font-weight:850;overflow-wrap:anywhere;padding-right:44px}
+
+/* 오른쪽 위 닫기 단추 — 모든 창에 붙는다 */
+.xbtn{position:absolute;top:11px;right:12px;z-index:3;width:34px;height:34px;padding:0;
+  border-radius:50%;border:1px solid var(--line2);background:var(--card);color:var(--muted);
+  font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,transform .1s}
+.xbtn:hover{background:var(--fill2);color:var(--ink)}
+.xbtn:active{transform:scale(.92)}
+.modal.big .xbtn{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.38);color:#fff}
+.modal.big .xbtn:hover{background:rgba(255,255,255,.34);color:#fff}
+
+/* 상세 — 분류색 머리띠 + 항목표 */
+.modal.big{max-width:840px;padding:0}
+.dhead{padding:22px 60px 18px 26px;border-radius:16px 16px 0 0;color:#fff}
+@media(max-width:639px){.dhead{border-radius:0}}
+.dhead .tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.dhead .tg{font-size:13px;font-weight:850;border-radius:999px;padding:3px 12px;
+  background:rgba(255,255,255,.24);color:#fff;letter-spacing:.01em}
+.dhead .tg.on{background:#fff;color:#B3251B}
+.dhead h3{margin:0;font-size:26px;font-weight:860;line-height:1.3;color:#fff;overflow-wrap:anywhere}
+.dhead .when{margin-top:10px;font-size:16.5px;font-weight:820;color:rgba(255,255,255,.95);
+  font-variant-numeric:tabular-nums}
+.dbody{padding:18px 26px 0}
+.drow{display:grid;grid-template-columns:108px minmax(0,1fr);gap:16px;padding:13px 0;
+  border-top:1px solid var(--line)}
+.drow:first-child{border-top:0;padding-top:3px}
+.drow dt{margin:0;font-size:13.5px;font-weight:850;color:var(--muted);letter-spacing:.02em;line-height:1.7}
+.drow dd{margin:0;font-size:16.5px;font-weight:650;color:var(--ink);line-height:1.75;
+  overflow-wrap:anywhere;white-space:pre-wrap}
+.dmeta{margin-top:15px;padding-top:13px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--faint);font-weight:700}
+@media(max-width:639px){
+  .dhead{padding:18px 54px 15px 18px}
+  .dhead h3{font-size:21px;padding-right:0}
+  .dbody{padding:14px 18px 0}
+  .drow{grid-template-columns:minmax(0,1fr);gap:3px;padding:11px 0}
+  .drow dd{font-size:15.5px}
+}
+.f{margin-bottom:10px}
+.f label{display:block;font-size:12.5px;font-weight:850;color:var(--muted);letter-spacing:.04em;margin-bottom:4px}
+.f input,.f select,.f textarea{width:100%;padding:9px 11px;color:var(--ink);background:var(--fill);
+  border:1.5px solid var(--line2);border-radius:9px;outline:none}
+.f textarea{min-height:46px;resize:vertical;line-height:1.5}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--navy2);background:var(--card)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.two.tall{grid-template-columns:1fr}}  /* 좁은 화면에선 내용·비고를 위아래로 */
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cats button{border:1.5px solid var(--line2);background:var(--fill);color:var(--ink2);border-radius:999px;
+  padding:5px 12px;font-size:13px;font-weight:750;cursor:pointer}
+.cats button{-webkit-tap-highlight-color:transparent;transition:transform .1s}
+.cats button:active{transform:scale(.95)}
+.cats button[aria-pressed="true"]{color:#fff;border-color:transparent;font-weight:850;
+  box-shadow:0 2px 7px rgba(16,40,80,.22)}
+.chk{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--ink2);cursor:pointer;
+  background:var(--fill);border:1.5px solid var(--line2);border-radius:9px;padding:9px 11px}
+.chk input{width:18px;height:18px;accent-color:var(--red)}
+.btns{display:flex;gap:8px;margin-top:14px;position:sticky;bottom:0;z-index:2;
+  background:var(--card);padding:10px 0 calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -10px 16px -12px rgba(16,40,80,.45)}
+@media (prefers-color-scheme:dark){.btns{box-shadow:0 -10px 16px -12px rgba(0,0,0,.7)}}
+.btns button{flex:1;padding:11px;border:0;border-radius:10px;font-size:14.5px;font-weight:800;cursor:pointer}
+.b1{background:var(--navy);color:#fff} .b2{background:var(--fill2);color:var(--ink2)}
+.b3{background:transparent;color:var(--red);border:1.5px solid var(--red) !important;flex:0 0 auto !important;padding:11px 15px !important}
+.dl{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.dl b{color:var(--muted);font-weight:800;font-size:13px;letter-spacing:.04em;display:block;margin-top:10px}
+.tag{display:inline-block;font-size:13px;font-weight:800;color:#fff;border-radius:6px;padding:3px 10px}
+.guard{background:var(--fill2);border:1px solid var(--line);border-radius:var(--r2);padding:9px 11px;margin-bottom:10px}
+.guard label{display:block;font-size:11.5px;font-weight:850;color:var(--muted);letter-spacing:.04em;margin-bottom:6px}
+.guard input{width:100%;padding:9px 11px;color:var(--ink);background:var(--card);
+  border:1.5px solid var(--line2);border-radius:9px;outline:none}
+.guard input:focus{border-color:var(--navy2)}
+.gh2{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.55}
+.warn{background:#FDF0E4;border:1px solid #E7B98E;color:#7A3D10;border-radius:var(--r2);
+  padding:10px 12px;font-size:13px;font-weight:700;margin-top:12px}
+@media (prefers-color-scheme:dark){.warn{background:#2A2013;border-color:#6B4A22;color:#E9C08D}}
+
+/* ── 접속코드 ── */
+.gate{max-width:410px;margin:7vh auto;padding:0 18px}
+.gate .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:24px 22px}
+.gh{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.gh img.lg{height:52px}
+.gh img.lt{height:64px;margin-left:auto}
+.gate h2{margin:0;font-size:19px;font-weight:850}
+.gate p{margin:4px 0 18px;font-size:13.5px;color:var(--muted)}
+.err{color:var(--red);font-size:13px;font-weight:750;margin-top:9px}
+.foot{text-align:center;font-size:11.5px;color:var(--faint);margin-top:18px;line-height:1.8}
+
+/* ── 화면이 넉넉하지 않으면 옆 화살표를 걷어내고 달력에 폭을 다 준다 (머리말 ◀▶ 로 대신) ── */
+@media(max-width:1100px){
+  .wrap{padding-left:8px;padding-right:8px}
+  .stage{grid-template-columns:minmax(0,1fr);gap:0}
+  .arrowcol{display:none}
+  .navarrow{display:block}
+}
+/* ── 휴대폰·태블릿(가로 포함) : 글씨와 여백을 줄여 제목을 한 자라도 더 ── */
+@media(max-width:950px){
+  .cell{padding:4px 3px 5px}
+  .cell .n{font-size:13px}
+  .ev{font-size:11.5px;padding:2px 4px;margin-top:3px;letter-spacing:-.02em}
+  .more{font-size:11px}
+  .dow div{padding:7px 0;font-size:12.5px}
+  .per{min-width:100px;font-size:15px}
+}
+
+@media(max-width:760px){
+  .year{grid-template-columns:repeat(2,1fr)}
+  .t1{gap:10px;padding:8px 12px 6px}
+  .t1 img.lg{height:40px}
+  .t1 img.lt{height:46px;margin-right:0}
+  .tt h1{font-size:17px}
+  .tt p{display:none}
+  .mini h3{font-size:13.5px}
+  .mg div{font-size:10.5px}
+  .ml div{font-size:12px}
+  .ovh,.ovr{grid-template-columns:60px 1fr 1fr 1fr}
+  .ovm{font-size:13.5px;padding:8px 7px}
+  .oc{font-size:12px;padding:3px 7px}
+  .ovc{padding:6px 6px;min-height:44px}
+  .ovh div{padding:7px 5px;font-size:11.5px}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* 분류 — 국제협력처 업무 흐름에 맞춘 7가지. 색으로 구분되며 겹치는 색은 없다.
+   '기타'도 회색이 아니라 제 색(청록빛 파랑)을 갖는다. */
+const CAT={'입시':'#1B4B8F','회의':'#0F7F62','교류':'#7A4FA3','업체':'#9A6410',
+           '행사':'#C2185B','보고':'#C0392B','기타':'#4E7D2E'};
+const col=c=>CAT[c]||CAT['기타'];
+const DOW=['일','월','화','수','목','금','토'];
+
+let CODE=localStorage.getItem('cal_code')||'';
+let ME=localStorage.getItem('cal_name')||'';
+let VIEW=localStorage.getItem('cal_view')||'month';
+let IMPONLY=localStorage.getItem('cal_imponly')==='1';
+let CUR=new Date(); CUR.setHours(0,0,0,0);
+let ITEMS=[];
+
+/* ── 날짜 도구 ── */
+const p2=n=>String(n).padStart(2,'0');
+const key=d=>d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());
+const parse=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c);};
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const TODAY=key(new Date());
+const dayEvents=k=>ITEMS.filter(e=>e.s<=k&&k<=e.e)
+  .sort((a,b)=>(b.imp-a.imp)||(a.st||'zz').localeCompare(b.st||'zz')||a.t.localeCompare(b.t));
+/* 학년도: 3월 시작. 2026학년도 = 2026.3 ~ 2027.2 */
+const acadYear=d=>d.getMonth()>=2?d.getFullYear():d.getFullYear()-1;
+
+const $=s=>document.querySelector(s);
+function h(tag,attr,...kids){
+  const e=document.createElement(tag);
+  for(const k in (attr||{})){
+    const v=attr[k];
+    if(k==='class')e.className=v;
+    else if(k==='html')e.innerHTML=v;
+    else if(k.startsWith('on'))e[k.toLowerCase()]=v;
+    else if(v!==null&&v!==false)e.setAttribute(k,v===true?'true':v);
+  }
+  kids.flat().forEach(c=>{if(c==null||c===false)return;
+    e.appendChild(typeof c==='object'?c:document.createTextNode(String(c)));});
+  return e;
+}
+
+/* ── 서버 ── */
+async function api(method,body){
+  const r=await fetch('/api/events?code='+encodeURIComponent(CODE),
+    {method,cache:'no-store',headers:body?{'Content-Type':'application/json'}:undefined,
+     body:body?JSON.stringify(body):undefined});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok) throw Object.assign(new Error(d.error||'error'),{code:d.error,status:r.status});
+  return d;
+}
+async function reload(){ const d=await api('GET'); ITEMS=d.items||[]; render(); }
+
+/* ── 접속코드 화면 ── */
+function gate(msg,after){
+  const inp=h('input',{type:'password',placeholder:'접속코드',autocomplete:'off'});
+  const nm=h('input',{type:'text',placeholder:'이름 (예: 정재훈)',value:ME,autocomplete:'off'});
+  const err=h('div',{class:'err'});
+  const go=async()=>{
+    CODE=inp.value.trim(); ME=nm.value.trim();
+    if(!CODE||!ME){err.textContent='접속코드와 이름을 모두 입력해 주세요.';return;}
+    try{
+      const d=await api('GET'); ITEMS=d.items||[];
+      localStorage.setItem('cal_code',CODE); localStorage.setItem('cal_name',ME);
+      render();
+      if(after) after();                       // 저장하려던 내용을 그대로 다시 띄운다
+    }catch(e){ err.textContent = e.code==='bad_code'?'접속코드가 맞지 않습니다.':'연결에 실패했습니다.'; }
+  };
+  inp.onkeydown=e=>{if(e.key==='Enter')nm.focus();};
+  nm.onkeydown=e=>{if(e.key==='Enter')go();};
+  $('#app').replaceChildren(h('div',{class:'gate'},
+    h('div',{class:'card'},
+      h('div',{class:'gh'},
+        h('img',{class:'lg',src:'logo.png',alt:'광주대학교'}),
+        h('img',{class:'lt',src:'lighty.png',alt:'라이티'})),
+      h('h2',{},'국제협력처 일정'),
+      h('p',{},'구성원 공유 캘린더입니다. 접속코드와 이름을 입력해 주세요.'),
+      msg?h('div',{class:'warn',style:'margin:0 0 14px'},msg):null,
+      h('div',{class:'f'},h('label',{},'접속코드'),inp),
+      h('div',{class:'f'},h('label',{},'이름'),nm),
+      h('div',{class:'btns'},h('button',{class:'b1',onclick:go},'들어가기')),
+      err),
+    h('div',{class:'foot'},'광주대학교 국제협력처')));
+  setTimeout(()=>inp.focus(),80);
+}
+
+/* ── 기간 이동 : 화살표·방향키·스와이프가 함께 쓴다 ── */
+const lastDay=(y,m)=>new Date(y,m+1,0).getDate();      // 그 달의 마지막 날
+/* 8월 31일 → 9월은 30일까지뿐이므로 30일로 맞춘다. 그냥 더하면 10월로 튄다. */
+function jump(y,m,d){
+  const t=new Date(y,m,Math.min(d,lastDay(y,m)));
+  t.setHours(0,0,0,0);
+  return t;
+}
+function shift(n){
+  const y=CUR.getFullYear(), m=CUR.getMonth(), d=CUR.getDate();
+  if(VIEW==='over')CUR=new Date(acadYear(CUR)+n,2,1);
+  else if(VIEW==='year')CUR=jump(y+n,m,d);
+  else if(VIEW==='month')CUR=jump(y,m+n,d);
+  else CUR=addD(CUR,7*n);
+  render();
+}
+const unitName=()=>VIEW==='over'?'학년도':VIEW==='year'?'해':VIEW==='month'?'달':'주';
+
+/* ── 상단 ── */
+function header(){
+  const ay=acadYear(CUR);
+  const label = VIEW==='over' ? ay+'학년도'
+    : VIEW==='year' ? CUR.getFullYear()+'년'
+    : VIEW==='month' ? CUR.getFullYear()+'. '+(CUR.getMonth()+1)
+    : (()=>{const a=addD(CUR,-CUR.getDay()),b=addD(a,6);
+        return (a.getMonth()+1)+'.'+a.getDate()+' – '+(b.getMonth()+1)+'.'+b.getDate();})();
+  const seg=h('div',{class:'seg'},...[['week','주'],['month','월'],['year','연'],['over','한눈에']].map(([v,t])=>
+    h('button',{'aria-current':VIEW===v,onclick:()=>{VIEW=v;localStorage.setItem('cal_view',v);render();}},t)));
+  return h('div',{class:'top'},
+    h('div',{class:'t1'},
+      h('img',{class:'lg',src:'logo.png',alt:'광주대학교'}),
+      h('div',{class:'tt'},h('h1',{},'국제협력처 일정'),h('p',{},'구성원 공유 캘린더')),
+      h('img',{class:'lt',src:'lighty.png',alt:'라이티'}),
+      h('button',{class:'who',onclick:()=>{localStorage.removeItem('cal_name');ME='';gate();}},ME||'이름')),
+    h('div',{class:'t2'},seg,
+      h('button',{class:'add',onclick:()=>edit(null)},'+ 일정'),
+      h('div',{class:'nav'},
+        h('button',{class:'navarrow',title:'이전 '+unitName(),'aria-label':'이전',
+          onclick:()=>shift(-1)},'◀'),
+        h('div',{class:'per'},label),
+        h('button',{class:'navarrow',title:'다음 '+unitName(),'aria-label':'다음',
+          onclick:()=>shift(1)},'▶'),
+        h('button',{onclick:()=>{CUR=new Date();CUR.setHours(0,0,0,0);render();}},'오늘'))));
+}
+
+/* ── 월간 : 칸 높이를 화면 높이에 맞춰 최대한 키운다 ── */
+function month(){
+  const y=CUR.getFullYear(), m=CUR.getMonth();
+  const first=new Date(y,m,1), start=addD(first,-first.getDay());
+  /* 이 달이 몇 줄인지 먼저 센다 (4~6줄) — 빈 줄을 만들지 않는다 */
+  const rows=Math.ceil((first.getDay()+lastDay(y,m))/7), days=rows*7;
+  /* 화면에서 달력이 아닌 부분(머리말·요일줄·여백)을 뺀 나머지를 줄 수로 나눈다 */
+  const narrow=innerWidth<=950;    /* 글씨·여백이 작아지는 기준 (휴대폰 가로 844·932 포함) */
+  const noArrow=innerWidth<=1100;  /* 이 아래에선 옆 화살표가 없어 폭을 다 쓴다 */
+  /* MCHROME : 달력 격자를 뺀 나머지(머리말·요일줄·안내·바닥글·여백)의 실제 높이.
+     첫 그림 때는 어림수를 쓰고, 그린 뒤 fitMonth() 가 실측값으로 한 번 고쳐 그린다. */
+  const chrome=MCHROME||(narrow?206:252);
+  const rowh=Math.max(narrow?78:118,Math.floor((innerHeight-chrome)/rows));
+  const evH=narrow?21:26, dateH=narrow?22:27, evH2=(narrow?21:26)+13;
+  const show=Math.max(2,Math.min(6,Math.floor((rowh-dateH)/evH)));
+  /* 칸 하나의 대략적인 너비. 좁으면 시각을 빼고 제목에 자리를 몰아준다 —
+     "09:00 영…" 처럼 시각이 자리를 다 먹고 제목이 한 글자만 남는 걸 막는다. */
+  const cw=(innerWidth-(noArrow?16:136))/7;
+  const withTime=cw>=150, tiny=cw<58;   /* 시각을 넣고도 제목 6자는 남아야 넣는다 */
+  const cells=[];
+  for(let i=0;i<days;i++){
+    const d=addD(start,i), k=key(d), out=d.getMonth()!==m, evs=dayEvents(k);
+    /* 일정이 적어 자리가 남으면 제목을 두 줄로 펼친다 (한 줄일 때보다 배로 보인다) */
+    const two=evs.length>0 && (dateH+evs.length*evH2)<=rowh;
+    const cap=two?evs.length:show, hid=evs.length-cap;
+    cells.push(h('div',{class:'cell'+(out?' out':'')+(k===TODAY?' today':''),onclick:()=>dayView(k)},
+      h('div',{class:'n'},d.getDate()),
+      ...evs.slice(0,hid>0?cap-1:cap).map(e=>h('div',
+        {class:'ev'+(e.imp?' imp':'')+(tiny?' tiny':'')+(two?' two':''),style:'background:'+col(e.c),
+         title:(e.st?e.st+' ':'')+e.t,
+         onclick:ev=>{ev.stopPropagation();detail(e);}},
+        (withTime&&e.st?e.st+' ':'')+e.t)),
+      hid>0?h('div',{class:'more'},'+'+(hid+1)+'건 더'):null));
+  }
+  return h('div',{class:'grid'},
+    h('div',{class:'dow'},...DOW.map(d=>h('div',{},d))),
+    h('div',{class:'cells',style:'--rowh:'+rowh+'px'},...cells));
+}
+
+/* ── 주간 ── */
+function week(){
+  const a=addD(CUR,-CUR.getDay());
+  return h('div',{class:'week'},...Array.from({length:7},(_,i)=>{
+    const d=addD(a,i), k=key(d), evs=dayEvents(k);
+    return h('div',{class:'wday'+(k===TODAY?' today':''),onclick:()=>dayView(k)},
+      h('div',{class:'wh'},
+        h('b',{style:i===0?'color:var(--sun)':i===6?'color:var(--sat)':''},(d.getMonth()+1)+'월 '+d.getDate()+'일'),
+        h('span',{},'('+DOW[i]+')'+(k===TODAY?' · 오늘':''))),
+      evs.length
+        ? h('div',{class:'wl'},...evs.map(e=>h('span',{class:'chip'+(e.imp?' imp':''),
+            style:'background:'+col(e.c),title:(e.st?e.st+' ':'')+e.t,
+            onclick:ev=>{ev.stopPropagation();detail(e);}},
+            (e.st?e.st+' ':'')+e.t)))
+        : h('div',{class:'none'},'일정 없음'));
+  }));
+}
+
+/* ── 연간 : 미니 달력 + 그 달의 중요 일정 제목 ── */
+function year(){
+  const y=CUR.getFullYear();
+  return h('div',{class:'year'},...Array.from({length:12},(_,m)=>{
+    const first=new Date(y,m,1), start=addD(first,-first.getDay()), days=[];
+    for(let i=0;i<42;i++){
+      const d=addD(start,i);
+      if(d.getMonth()!==m){ days.push(h('div',{},'')); if(i>34&&d>first)break; continue; }
+      const k=key(d), evs=dayEvents(k);
+      days.push(h('div',{class:(evs.some(e=>e.imp)?'imp':evs.length?'has':'')+(k===TODAY?' tod':'')},d.getDate()));
+    }
+    const mk=y+'-'+p2(m+1);
+    const mine=ITEMS.filter(e=>e.s.slice(0,7)===mk||(e.s<mk+'-01'&&e.e>=mk+'-01'))
+      .sort((a,b)=>(b.imp-a.imp)||a.s.localeCompare(b.s));
+    return h('div',{class:'mini',onclick:()=>{CUR=new Date(y,m,1);VIEW='month';
+        localStorage.setItem('cal_view','month');render();}},
+      h('h3',{},(m+1)+'월 ',mine.length?h('em',{},'· '+mine.length+'건'):null),
+      h('div',{class:'mg'},...days),
+      mine.length?h('div',{class:'ml'},...mine.slice(0,3).map(e=>
+        h('div',{onclick:ev=>{ev.stopPropagation();detail(e);}},
+          h('i',{style:'background:'+col(e.c)}),
+          Number(e.s.slice(8))+'일 '+e.t)),
+        mine.length>3?h('div',{style:'color:var(--faint)'},'  외 '+(mine.length-3)+'건'):null):null);
+  }));
+}
+
+/* ── 한눈에 : 3월~2월 학년도 개관, 초·중·하순으로 배치 ── */
+function over(){
+  const ay=acadYear(CUR);
+  const months=Array.from({length:12},(_,i)=>{
+    const m=(2+i)%12, y=ay+(2+i>11?1:0);
+    return {y,m,label:(m+1)+'월',sub:y+(m===2?'':''),ym:y+'-'+p2(m+1)};
+  });
+  const now=new Date(), nowYm=now.getFullYear()+'-'+p2(now.getMonth()+1);
+  const pick=(ym,band)=>ITEMS
+    .filter(e=>(!IMPONLY||e.imp))
+    .filter(e=>{
+      const s=e.s.slice(0,7), en=e.e.slice(0,7);
+      if(ym<s||ym>en) return false;
+      const day = ym===s ? Number(e.s.slice(8)) : 1;      // 그 달에 걸치는 첫날
+      return band===0?day<=10:band===1?(day>10&&day<=20):day>20;
+    })
+    .sort((a,b)=>(b.imp-a.imp)||a.s.localeCompare(b.s));
+  const chip=(e,ym)=>h('span',{class:'oc'+(e.imp?' imp':''),style:'background:'+col(e.c),
+      title:e.t,onclick:()=>detail(e)},
+    e.t, h('em',{},' '+(e.s.slice(0,7)===ym?Number(e.s.slice(8))+'일':'계속')));
+  const tog=h('input',{type:'checkbox'}); tog.checked=IMPONLY;
+  tog.onchange=()=>{IMPONLY=tog.checked;localStorage.setItem('cal_imponly',IMPONLY?'1':'0');render();};
+  const togLabel=h('label',{class:'tog'+(IMPONLY?' on':'')},tog,'중요 일정만');
+  return h('div',{},
+    h('div',{class:'ovtop'},
+      h('div',{class:'lab'},ay+'학년도 ('+ay+'. 3 ~ '+(ay+1)+'. 2) · 한 해 일정을 한 화면에서 봅니다'),
+      togLabel),
+    h('div',{class:'ov'},
+      h('div',{class:'ovh'},h('div',{},'월'),h('div',{},'초순 1–10'),h('div',{},'중순 11–20'),h('div',{},'하순 21–말')),
+      ...months.map(M=>h('div',{class:'ovr'+(M.ym===nowYm?' now':''),},
+        h('div',{class:'ovm',onclick:()=>{CUR=new Date(M.y,M.m,1);VIEW='month';
+            localStorage.setItem('cal_view','month');render();}},
+          M.label,h('em',{},M.y+(M.ym===nowYm?' · 이번달':''))),
+        ...[0,1,2].map(b=>{
+          const list=pick(M.ym,b);
+          return h('div',{class:'ovc'},...list.map(e=>chip(e,M.ym)));
+        })))));
+}
+
+/* ── 하루 일정 ── */
+function dayView(k){
+  const d=parse(k), evs=dayEvents(k);
+  modal(h('div',{},
+    h('h3',{},(d.getMonth()+1)+'월 '+d.getDate()+'일 ('+DOW[d.getDay()]+')'),
+    evs.length?h('div',{class:'wl',style:'margin-bottom:6px'},...evs.map(e=>
+      h('span',{class:'chip'+(e.imp?' imp':''),style:'background:'+col(e.c),onclick:()=>detail(e)},
+        (e.st?e.st+' ':'')+e.t)))
+      :h('div',{class:'none'},'등록된 일정이 없습니다.'),
+    h('div',{class:'btns'},
+      h('button',{class:'b1',onclick:()=>edit(null,k)},'+ 이 날에 일정 추가'),
+      h('button',{class:'b2',onclick:close},'닫기'))));
+}
+
+/* ── 상세 : 분류색 머리띠 + 넓은 항목표 ── */
+const fmtD=s=>{const d=parse(s);
+  return d.getFullYear()+'. '+(d.getMonth()+1)+'. '+d.getDate()+' ('+DOW[d.getDay()]+')';};
+const fmtMD=s=>{const d=parse(s);
+  return (d.getMonth()+1)+'. '+d.getDate()+' ('+DOW[d.getDay()]+')';};
+
+function detail(e){
+  const per = e.s===e.e ? fmtD(e.s)
+    : fmtD(e.s)+'  ~  '+(e.s.slice(0,4)===e.e.slice(0,4)?fmtMD(e.e):fmtD(e.e));
+  const nd=Math.round((parse(e.e)-parse(e.s))/864e5)+1;
+  const dd=Math.round((parse(e.s)-parse(TODAY))/864e5);
+  const state = e.e<TODAY ? '지난 일정' : dd>0 ? 'D-'+dd : '진행 중';
+  const row=(label,value)=>value?h('div',{class:'drow'},
+    h('dt',{},label),h('dd',{},value)):null;
+  modal(h('div',{},
+    h('div',{class:'dhead',style:'background:'+col(e.c)},
+      h('div',{class:'tags'},
+        h('span',{class:'tg'},e.c),
+        e.imp?h('span',{class:'tg on'},'중요'):null,
+        h('span',{class:'tg'},state)),
+      h('h3',{},e.t),
+      h('div',{class:'when'},per+(nd>1?'  ('+nd+'일간)':''))),
+    h('dl',{class:'dbody',style:'margin:0'},
+      row('시간', e.st?(e.st+(e.et?' ~ '+e.et:'')):'종일'),
+      row('장소', e.p),
+      row('담당', e.w),
+      row('참석자', e.a),
+      row('내용', e.m),
+      row('비고', e.r),
+      h('div',{class:'dmeta'},'최종 수정 · '+(e.by||'?')+' · '+(e.at||'')),
+      h('div',{class:'btns'},
+        h('button',{class:'b1',onclick:()=>edit(e)},'수정'),
+        h('button',{class:'b2',onclick:close},'닫기'),
+        h('button',{class:'b3',onclick:()=>del(e)},'삭제')))),
+    true);
+}
+
+/* ── 추가·수정 ── */
+function edit(e,onDate,draft){
+  const v=e||draft||{t:'',s:onDate||key(CUR),e:onDate||key(CUR),st:'',et:'',c:'행사',imp:false,
+    w:ME,p:'',a:'',m:'',r:''};
+  let cat=CAT[v.c]?v.c:'기타';
+  const F={};
+  const fld=(k,label,attr)=>{F[k]=h('input',Object.assign({value:v[k]||''},attr||{}));
+    return h('div',{class:'f'},h('label',{},label),F[k]);};
+  const cats=h('div',{class:'cats'},...Object.keys(CAT).map(c=>
+    h('button',{'aria-pressed':cat===c,style:cat===c?'background:'+CAT[c]:'',
+      onclick:()=>{cat=c;[...cats.children].forEach(x=>{const on=x.textContent===c;
+        x.setAttribute('aria-pressed',on);x.style.background=on?CAT[c]:'';});}},c)));
+  const imp=h('input',{type:'checkbox'}); imp.checked=!!v.imp;
+  const err=h('div',{class:'err'});
+  /* 이미 있는 일정을 고칠 때만 접속코드를 다시 확인한다 (새로 추가는 그대로) */
+  const ec=e?h('input',{type:'password',placeholder:'접속코드',autocomplete:'off'}):null;
+  const save=async()=>{
+    const ev={id:v.id,t:F.t.value.trim(),s:F.s.value,e:F.e.value||F.s.value,
+      st:F.st.value,et:F.et.value,c:cat,imp:imp.checked,
+      w:F.w.value.trim(),p:F.p.value.trim(),a:F.a.value.trim(),
+      m:F.m.value.trim(),r:F.r.value.trim(),by:ME};
+    if(!ev.t){err.textContent='제목을 입력해 주세요.';return;}
+    if(!ev.s){err.textContent='시작일을 입력해 주세요.';return;}
+    if(e&&!ec.value.trim()){err.textContent='수정하려면 접속코드를 입력해 주세요.';return;}
+    try{
+      const d=await api('POST',{op:e?'update':'add',event:ev,ecode:e?ec.value.trim():''});
+      ITEMS=d.items; close(); render();
+    }catch(x){
+      if(x.code==='bad_code'||x.code==='code_required'){   // 코드가 바뀐 채 열어둔 화면
+        close(); CODE='';
+        gate('접속코드가 변경되었습니다. 새 접속코드를 입력하시면 작성하던 일정이 그대로 다시 열립니다.',
+             ()=>edit(e,onDate,ev));
+        return;
+      }
+      err.textContent =
+        x.code==='bad_edit_code'?'접속코드가 맞지 않습니다.':
+        x.code==='conflict'?'다른 분이 동시에 수정 중입니다. 잠시 후 다시 저장해 주세요.':
+        '저장에 실패했습니다. 잠시 후 다시 시도해 주세요.'; }
+  };
+  F.m=h('textarea',{},v.m||'');
+  F.r=h('textarea',{},v.r||'');
+  modal(h('div',{},
+    h('h3',{},e?'일정 수정':'일정 추가'),
+    fld('t','제목',{type:'text',placeholder:'예: 2026-2학기 등록금 납부 마감'}),
+    h('div',{class:'f'},h('label',{},'분류'),cats),
+    h('div',{class:'two'},fld('s','시작일',{type:'date'}),fld('e','종료일',{type:'date'})),
+    h('div',{class:'two'},fld('st','시작 시각 (선택)',{type:'time'}),fld('et','종료 시각 (선택)',{type:'time'})),
+    h('div',{class:'f'},
+      h('label',{class:'chk'},imp,'중요 일정 — 「한눈에」에서 따로 추려 봅니다')),
+    h('div',{class:'two'},fld('w','담당',{type:'text',placeholder:'예: 정재훈'}),
+      fld('p','장소 (선택)',{type:'text',placeholder:'예: 호심관 6층'})),
+    fld('a','참석자 (선택)',{type:'text',placeholder:'예: 처장님, 국제팀 전원, 학과 조교'}),
+    h('div',{class:'two tall'},
+      h('div',{class:'f'},h('label',{},'내용 (선택)'),F.m),
+      h('div',{class:'f'},h('label',{},'비고 (선택)'),F.r)),
+    ec?h('div',{class:'guard'},h('label',{},'접속코드 확인'),ec,
+      h('div',{class:'gh2'},'이미 등록된 일정을 고치는 중입니다. 접속코드를 입력해야 저장됩니다.')):null,
+    err,
+    h('div',{class:'btns'},
+      h('button',{class:'b1',onclick:save},'저장'),
+      h('button',{class:'b2',onclick:close},'취소'))));
+}
+
+function del(e){
+  const ec=h('input',{type:'password',placeholder:'접속코드',autocomplete:'off'});
+  const err=h('div',{class:'err'});
+  const go=async()=>{
+    if(!ec.value.trim()){err.textContent='접속코드를 입력해 주세요.';return;}
+    try{
+      const d=await api('POST',{op:'delete',id:e.id,ecode:ec.value.trim()});
+      ITEMS=d.items; close(); render();
+    }catch(x){
+      if(x.code==='bad_code'||x.code==='code_required'){
+        close(); CODE='';
+        gate('접속코드가 변경되었습니다. 새 접속코드를 입력해 주세요.',()=>detail(e));
+        return;
+      }
+      err.textContent =
+        x.code==='bad_edit_code'?'접속코드가 맞지 않습니다.':'삭제에 실패했습니다.'; }
+  };
+  ec.onkeydown=ev=>{if(ev.key==='Enter')go();};
+  modal(h('div',{},
+    h('h3',{},'일정 삭제'),
+    h('div',{class:'dl'},h('b',{},'삭제할 일정'),e.t,
+      h('div',{style:'color:var(--muted);font-size:13px;margin-top:3px'},
+        e.s+(e.s===e.e?'':' ~ '+e.e))),
+    h('div',{class:'warn'},'삭제하면 모든 구성원의 화면에서 사라지며 되돌릴 수 없습니다.'),
+    h('div',{class:'guard',style:'margin-top:12px'},h('label',{},'접속코드 확인'),ec),
+    err,
+    h('div',{class:'btns'},
+      h('button',{class:'b2',onclick:()=>detail(e)},'취소'),
+      h('button',{class:'b1',style:'background:var(--red)',onclick:go},'삭제'))));
+  setTimeout(()=>ec.focus(),80);
+}
+
+/* ── 모달 ── */
+function modal(inner,big){
+  close();
+  const x=h('button',{class:'xbtn',type:'button',title:'닫기','aria-label':'닫기',onclick:close},'✕');
+  const m=h('div',{class:'mask',onclick:ev=>{if(ev.target===m)close();}},
+    h('div',{class:'modal'+(big?' big':'')},x,inner));
+  document.body.appendChild(m);
+}
+function close(){ const m=$('.mask'); if(m)m.remove(); }
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){close();return;}
+  if($('.mask'))return;                                   // 창이 열려 있으면 무시
+  const t=e.target&&e.target.tagName;
+  if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;     // 입력 중에는 무시
+  if(e.key==='ArrowLeft')shift(-1);
+  else if(e.key==='ArrowRight')shift(1);
+});
+
+/* ── 휴대폰 세로에서만 보이는 안내 (보이고 안 보이고는 CSS가 정한다) ── */
+function rotHint(){
+  if(localStorage.getItem('cal_rothint')==='0') return null;
+  if(VIEW==='week') return null;                     // 주간은 세로로 봐도 넉넉하다
+  const box=h('div',{class:'rot'},
+    h('b',{},'⟳'),
+    h('span',{},'휴대폰을 가로로 돌리면 일정 제목이 훨씬 많이 보입니다.'),
+    h('button',{class:'rotx',title:'다시 안 보기','aria-label':'다시 안 보기',
+      onclick:()=>{localStorage.setItem('cal_rothint','0');box.remove();}},'✕'));
+  return box;
+}
+
+/* ── 그리기 ── */
+function render(){
+  if(!CODE||!ME){gate();return;}
+  const body = VIEW==='month'?month():VIEW==='week'?week():VIEW==='year'?year():over();
+  const u=unitName();
+  const arrow=(n,g,t)=>h('div',{class:'arrowcol'},
+    h('button',{class:'arrow',title:t,'aria-label':t,onclick:()=>shift(n)},g));
+  const stage=h('div',{class:'stage'},
+    arrow(-1,'◀','이전 '+u),
+    h('div',{style:'min-width:0'},body),
+    arrow(1,'▶','다음 '+u));
+  swipe(stage);
+  $('#app').replaceChildren(header(),
+    h('div',{class:'wrap'},rotHint(),stage,
+      h('div',{class:'foot'},'광주대학교 국제협력처 · 모든 구성원이 함께 쓰는 일정표입니다.')));
+  if(VIEW==='month') requestAnimationFrame(fitMonth);
+}
+
+/* ── 월간을 딱 한 화면에 : 격자 밖 높이를 실제로 재서 다시 그린다 ── */
+let MCHROME=0, FITTING=false;
+function fitMonth(){
+  if(VIEW!=='month'||FITTING)return;
+  const app=$('#app'), cells=$('.cells');
+  if(!app||!cells)return;
+  /* 격자를 뺀 나머지 높이 — --rowh 와 무관하므로 한 번만 재면 된다 */
+  const chrome=Math.ceil(app.getBoundingClientRect().height-cells.getBoundingClientRect().height);
+  if(!(chrome>0)||Math.abs(chrome-MCHROME)<=1)return;
+  MCHROME=chrome;
+  FITTING=true; try{ render(); } finally{ FITTING=false; }
+}
+
+/* 창 크기가 바뀌면 달력 칸 높이를 다시 잡는다 */
+let rsz;
+addEventListener('resize',()=>{
+  if(!CODE||!ME||$('.mask'))return;
+  clearTimeout(rsz); rsz=setTimeout(render,180);      // 가로↔세로 전환 포함
+});
+
+/* 손가락으로 좌우로 밀어도 넘어간다 */
+function swipe(el){
+  let x0=0,y0=0,on=false;
+  el.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1)return;
+    x0=e.touches[0].clientX; y0=e.touches[0].clientY; on=true;
+  },{passive:true});
+  el.addEventListener('touchend',e=>{
+    if(!on)return; on=false;
+    const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx)>65&&Math.abs(dy)<55) shift(dx<0?1:-1);
+  },{passive:true});
+}
+
+function refresh(){
+  if(!CODE||!ME||$('.mask')) return;
+  reload().catch(x=>{
+    if(x.code==='bad_code'||x.code==='code_required'){
+      CODE=''; gate('접속코드가 변경되었습니다. 새 접속코드를 입력해 주세요.');
+    }
+  });
+}
+setInterval(refresh,60000);
+addEventListener('focus',refresh);
+
+if(CODE&&ME){ reload().catch(()=>gate('접속코드를 다시 입력해 주세요.')); } else gate();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
