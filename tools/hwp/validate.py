@@ -10,10 +10,16 @@ TPL = r'C:/Users/user/Desktop/★국제협력처/0. 회의/2. 학처장회의/�
 bad = 0
 
 
+PROBLEMS = []
+QUIET = '--ref' in sys.argv
+
+
 def err(msg):
     global bad
     bad += 1
-    print('  ★ ' + msg)
+    PROBLEMS.append(msg)
+    if not QUIET:
+        print('  ★ ' + msg)
 
 
 doc, secs, comp = H.sections(PATH)
@@ -147,4 +153,22 @@ else:
     print('   구역0 %d 바이트 정확히 소진' % tot)
 
 print()
-print('문제 %d건' % bad if bad else '문제 없음 — 한글에서 열릴 수 있는 상태')
+if QUIET:
+    import subprocess, re
+    ref = sys.argv[sys.argv.index('--ref') + 1]
+    r = subprocess.run([sys.executable, __file__, ref], capture_output=True,
+                       text=True, encoding='utf-8')
+    base = set(re.findall(r'★ (.+)', r.stdout))
+    mine = set(PROBLEMS)
+    new = sorted(mine - base)
+    gone = sorted(base - mine)
+    print('원본이 원래 갖고 있던 지적 %d건 (표가 든 문서에서 흔한 오탐)' % len(base))
+    print('내 편집으로 새로 생긴 문제 : %d건' % len(new))
+    for x in new:
+        print('   ★ ' + x)
+    if gone:
+        print('원본엔 있었는데 사라진 지적 %d건 (참고)' % len(gone))
+    print()
+    print('판정 —', '문제 없음. 원본과 같은 상태' if not new else '★ 새 문제가 있습니다')
+else:
+    print('문제 %d건' % bad if bad else '문제 없음 — 한글에서 열릴 수 있는 상태')
