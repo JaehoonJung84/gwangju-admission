@@ -151,7 +151,8 @@ for idx, (tag, lvl, p, ho, po) in enumerate(recs):
             recs[idx + 1] = (nxt[0], nxt[1],
                              b''.join(struct.pack('<II', a, b) for a, b in keep),
                              nxt[3], nxt[4])
-            struct.pack_into('<H', hb, 14, len(keep))
+            # 글자모양 개수는 오프셋 12. (14는 범위태그 개수라 건드리면 한글이 파일을 거부한다)
+            struct.pack_into('<H', hb, 12, len(keep))
             out[s:s + len(rec(htag, hlvl, bytes(hb)))] = rec(htag, hlvl, bytes(hb))
         continue
 
