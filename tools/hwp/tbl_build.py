@@ -55,9 +55,26 @@ heads = [i for i, r in enumerate(srecs) if r[0] == H.T_PARA_HEADER]
 # ── 본문 첫 문단 = 머리표 다음의 L0 문단
 body_rec = next(i for i in heads[1:] if srecs[i][1] == 0)
 BODY_FROM = heads.index(body_rec)
-CS_BODY = next(struct.unpack_from('<I', srecs[j][2], 4)[0]
-               for j in range(body_rec, len(srecs)) if srecs[j][0] == H.T_PARA_CHAR_SHAPE)
 PS_SRC = struct.unpack_from('<H', srecs[body_rec][2], 8)[0]
+
+
+def _cs_of(rec_i):
+    return next(struct.unpack_from('<I', srecs[j][2], 4)[0]
+                for j in range(rec_i, len(srecs)) if srecs[j][0] == H.T_PARA_CHAR_SHAPE)
+
+
+# 뼈대의 절 제목(○로 시작)은 진하게, 그 아래 항목은 보통 글자모양을 쓴다.
+CS_SEC = _cs_of(body_rec)
+CS_BODY = CS_SEC
+for hi in heads:
+    if srecs[hi][1] != 0 or hi <= body_rec:
+        continue
+    t = next((srecs[j][2].decode('utf-16-le') for j in range(hi, min(hi + 3, len(srecs)))
+              if srecs[j][0] == H.T_PARA_TEXT), '')
+    if t.strip().startswith('-'):
+        CS_BODY = _cs_of(hi)
+        break
+assert CS_BODY != CS_SEC, '본문(보통) 글자모양을 뼈대에서 못 찾음'
 
 # ── 머리표 안 제목·일시 문단 번호 찾기
 TITLE_P = DATE_P = None
@@ -220,8 +237,9 @@ for n, entry in enumerate(BODY):
         h = 1200
         if vert + h > PAGE_LIMIT:
             vert = 0
+        cs = CS_SEC if kind == 'sec' else CS_BODY
         body += para(None if kind == 'bl' else val, ps_id[(left, ind)],
-                     RED_ID if mark else CS_BODY, lvl=0, vert=vert, h=h, last=last)
+                     RED_ID if mark else cs, lvl=0, vert=vert, h=h, last=last)
         vert += h + h * 3 // 5
 
 sec_new = prefix + bytes(body)
