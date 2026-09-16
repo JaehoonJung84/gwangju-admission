@@ -85,6 +85,58 @@ a{color:inherit}
   font-variant-numeric:tabular-nums}
 @media (prefers-color-scheme:dark){.codenote b{color:#9CC0F5}}
 
+/* 왼쪽 메뉴 버튼 */
+.menub{flex:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line2);background:var(--card);color:var(--ink2);border-radius:9px;
+  cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
+.menub:hover{background:var(--fill2);color:var(--ink)}
+.menub:active{transform:scale(.94)}
+.menub svg{width:17px;height:17px;display:block}
+.bar .menub{width:29px;height:29px;border-radius:8px}
+.bar .menub svg{width:15px;height:15px}
+
+/* 왼쪽 서랍 */
+#drawer{position:fixed;inset:0;z-index:60;display:flex}
+#drawer[hidden]{display:none!important}
+.dscrim{position:absolute;inset:0;background:rgba(9,20,40,.42);animation:dfade .16s ease}
+.dpanel{position:relative;width:274px;max-width:82vw;background:var(--card);
+  border-right:1px solid var(--line);box-shadow:0 0 44px rgba(16,40,80,.26);
+  display:flex;flex-direction:column;animation:dslide .18s cubic-bezier(.2,.8,.3,1);
+  padding-top:env(safe-area-inset-top)}
+@keyframes dfade{from{opacity:0}}
+@keyframes dslide{from{transform:translateX(-100%)}}
+.dhead{flex:none;display:flex;align-items:center;gap:10px;padding:13px 12px 12px;
+  border-bottom:1px solid var(--line)}
+.dhead img{height:34px;width:auto;display:block;flex:none}
+@media (prefers-color-scheme:dark){.dhead img{filter:brightness(1.14) saturate(1.06)}}
+.dhead .dtt{flex:1;min-width:0}
+.dhead b{display:block;font-size:13.5px;font-weight:840;letter-spacing:-.02em;line-height:1.25}
+.dhead span{display:block;font-size:10.5px;color:var(--muted);font-weight:700;margin-top:1px}
+.dclose{flex:none;border:0;background:transparent;color:var(--faint);font-size:21px;line-height:1;
+  cursor:pointer;padding:2px 5px;border-radius:7px}
+.dclose:hover{color:var(--ink);background:var(--fill)}
+.dlist{flex:1;min-height:0;overflow:auto;padding:8px 8px 12px}
+.dgrp{margin:11px 6px 5px;font-size:10.5px;font-weight:850;letter-spacing:.06em;color:var(--faint)}
+.di{width:100%;display:flex;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink2);
+  border-radius:9px;padding:9px 10px;font:inherit;font-size:13.5px;font-weight:790;text-align:left;
+  cursor:pointer;-webkit-tap-highlight-color:transparent}
+.di:hover{background:var(--fill)}
+.di[aria-current="true"]{background:var(--navy);color:#fff}
+.di[aria-current="true"]:hover{background:var(--navy)}
+.dico{flex:none;width:23px;text-align:center;font-size:15px;line-height:1}
+.dtxt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dfoot{flex:none;border-top:1px solid var(--line);display:flex;gap:7px;flex-wrap:wrap;
+  padding:10px 12px calc(12px + env(safe-area-inset-bottom))}
+.dfoot button{border:1px solid var(--line2);background:var(--fill);color:var(--ink2);border-radius:8px;
+  padding:6px 11px;font-size:11.5px;font-weight:790;cursor:pointer}
+.dfoot button:hover{background:var(--fill2);color:var(--ink)}
+.dnote{flex-basis:100%;background:var(--fill2);border:1px solid var(--line);border-radius:8px;
+  padding:8px 10px;font-size:11.5px;font-weight:750;color:var(--ink2);line-height:1.7}
+.dnote b{font-size:13px;letter-spacing:.08em;color:var(--navy2);background:var(--card);
+  border:1px solid var(--line2);border-radius:6px;padding:1px 9px;margin-left:5px;
+  font-variant-numeric:tabular-nums}
+@media (prefers-color-scheme:dark){.dnote b{color:#9CC0F5}}
+
 /* 본문 */
 main{flex:1;min-height:0;display:flex}
 .panel{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -125,7 +177,8 @@ h3.sec::after{content:"";flex:1;height:1px;background:var(--line)}
 .cfoot a:hover{color:var(--ink);border-color:var(--line2)}
 
 /* 끼워넣기 탭 */
-.bar{flex:none;display:flex;align-items:center;gap:8px;padding:8px 14px;
+.bar{flex:none;display:flex;align-items:center;gap:8px;padding:6px 10px;
+  padding-top:calc(6px + env(safe-area-inset-top));
   background:var(--fill);border-bottom:1px solid var(--line)}
 .bar b{font-size:12.5px;font-weight:840;letter-spacing:-.01em;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;flex:none}
@@ -180,6 +233,7 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
 
 <header class="top" id="top" hidden>
   <div class="t1">
+    <button class="menub" id="menuBtn" type="button" aria-label="메뉴 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <img src="logo.png" alt="광주대학교">
     <div class="tt">
       <h1>국제협력처 자료 허브</h1>
@@ -197,6 +251,23 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
   </div>
 </header>
 
+<div id="drawer" hidden>
+  <div class="dscrim" data-close></div>
+  <aside class="dpanel" role="dialog" aria-modal="true" aria-label="메뉴">
+    <div class="dhead">
+      <img src="logo.png" alt="광주대학교">
+      <div class="dtt"><b>국제협력처 자료 허브</b><span>Office of International Affairs</span></div>
+      <button class="dclose" type="button" data-close aria-label="닫기">&times;</button>
+    </div>
+    <div class="dlist" id="dlist"></div>
+    <div class="dfoot">
+      <button type="button" id="dcode">접속코드 보기</button>
+      <button type="button" id="dforget">이 기기에서 잠그기</button>
+      <div class="dnote" id="dcodeout" hidden></div>
+    </div>
+  </aside>
+</div>
+
 <main id="main" hidden></main>
 
 <script>
@@ -206,7 +277,11 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
       gcode=document.getElementById('gcode'), gerr=document.getElementById('gerr'),
       topbar=document.getElementById('top'), main=document.getElementById('main'),
       tabs=document.getElementById('tabs'), codenote=document.getElementById('codenote'),
-      codeval=document.getElementById('codeval');
+      codeval=document.getElementById('codeval'),
+      drawer=document.getElementById('drawer'), dlist=document.getElementById('dlist'),
+      dcodeout=document.getElementById('dcodeout');
+  var MENUSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+    +'stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
   var LINKS=[], CODE='', panels={}, current='';
 
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
@@ -245,6 +320,50 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
     location.hash=''; location.reload();
   });
 
+  /* 왼쪽 서랍 */
+  function openDrawer(){
+    drawer.hidden=false;
+    document.addEventListener('keydown',escKey);
+    var f=dlist.querySelector('.di[aria-current="true"]')||dlist.querySelector('.di');
+    if(f&&f.focus) f.focus();
+  }
+  function closeDrawer(){
+    drawer.hidden=true; dcodeout.hidden=true;
+    document.removeEventListener('keydown',escKey);
+  }
+  function escKey(e){ if(e.key==='Escape'||e.key==='Esc') closeDrawer(); }
+  drawer.addEventListener('click',function(e){
+    if(e.target.closest('[data-close]')) closeDrawer();
+  });
+  document.getElementById('menuBtn').addEventListener('click',openDrawer);
+  document.getElementById('dcode').addEventListener('click',function(){
+    if(dcodeout.hidden){ dcodeout.innerHTML='각 사이트가 코드를 다시 물으면 같은 코드를 넣으세요<b>'+esc(CODE)+'</b>'; }
+    dcodeout.hidden=!dcodeout.hidden;
+  });
+  document.getElementById('dforget').addEventListener('click',function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    location.hash=''; location.reload();
+  });
+
+  function drawerItem(key,icon,name){
+    var b=document.createElement('button');
+    b.type='button'; b.className='di'; b.dataset.key=key;
+    b.innerHTML='<span class="dico">'+esc(icon)+'</span><span class="dtxt">'+esc(name)+'</span>';
+    b.addEventListener('click',function(){ closeDrawer(); show(key,true); });
+    return b;
+  }
+  function buildDrawer(){
+    dlist.innerHTML='';
+    dlist.appendChild(drawerItem('home','\u{1F3E0}','홈'));
+    [{id:'staff',t:'교직원 업무'},{id:'student',t:'학생 안내'}].forEach(function(g){
+      var items=LINKS.filter(function(l){return l.group===g.id;});
+      if(!items.length) return;
+      var h=document.createElement('div'); h.className='dgrp'; h.textContent=g.t;
+      dlist.appendChild(h);
+      items.forEach(function(l){ dlist.appendChild(drawerItem(l.key,l.icon,l.tab||l.name)); });
+    });
+  }
+
   /* 화면 구성 */
   function build(){
     var defs=[{key:'home',tab:'홈'}].concat(LINKS);
@@ -255,6 +374,7 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
       b.addEventListener('click',function(){ show(d.key,true); });
       tabs.appendChild(b);
     });
+    buildDrawer();
     main.appendChild(homePanel());
     var start=(location.hash||'').replace('#','');
     show(defs.some(function(d){return d.key===start;})?start:'home',false);
@@ -300,7 +420,8 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
   function sitePanel(l){
     var p=document.createElement('div'); p.className='panel'; p.dataset.key=l.key;
     var bar=document.createElement('div'); bar.className='bar';
-    bar.innerHTML='<b>'+esc(l.name)+'</b><em>'+esc(host(l.url))+'</em>'
+    bar.innerHTML='<button class="menub" type="button" data-act="menu" aria-label="메뉴 열기">'+MENUSVG+'</button>'
+      +'<b>'+esc(l.name)+'</b><em>'+esc(host(l.url))+'</em>'
       +'<div class="acts"><button type="button" data-act="reload">새로고침</button>'
       +'<button type="button" data-act="copy">주소 복사</button>'
       +'<a class="go" href="'+esc(l.url)+'" target="_blank" rel="noopener">새 창</a></div>';
@@ -310,6 +431,7 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
     fr.setAttribute('allow','clipboard-write; fullscreen');
     bar.addEventListener('click',function(e){
       var b=e.target.closest('button'); if(!b) return;
+      if(b.dataset.act==='menu'){ openDrawer(); return; }
       if(b.dataset.act==='reload'){ var s=fr.src; fr.src='about:blank'; setTimeout(function(){fr.src=s;},0); }
       if(b.dataset.act==='copy' && navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(l.url).then(function(){
@@ -342,6 +464,11 @@ iframe{flex:1;width:100%;border:0;background:var(--card);display:block}
       b.setAttribute('aria-current', on?'true':'false');
       if(on && b.scrollIntoView) b.scrollIntoView({block:'nearest',inline:'nearest'});
     });
+    Array.prototype.forEach.call(dlist.children,function(b){
+      if(b.className==='di') b.setAttribute('aria-current', b.dataset.key===key?'true':'false');
+    });
+    topbar.hidden = (key!=='home');
+    if(key!=='home') codenote.hidden=true;
     current=key;
     if(push){ try{ history.replaceState(null,'','#'+key); }catch(e){ location.hash=key; } }
     document.title = (key==='home' || !l) ? '국제협력처 자료 허브 · 광주대학교'
