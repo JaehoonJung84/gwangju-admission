@@ -22,4 +22,4 @@
 5. `netlify api restoreSiteDeploy --data '{"site_id":"…","deploy_id":"…"}'` → 프로덕션 승격(크레딧 미소모).
 
 - site_id : `dcde0049-80ae-4181-a88a-807069ecaee8`
-- 되돌리기 : 이전 배포 `6a9a893c672d40b752330ab1` 을 같은 방법으로 restore
+- 되돌리기 : 이전 배포 `6a9d28e559d7260c6746374b`(2026-09-22 승격 직전) 을 같은 방법으로 restore
