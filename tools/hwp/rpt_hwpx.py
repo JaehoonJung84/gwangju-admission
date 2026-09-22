@@ -16,8 +16,13 @@
 import importlib, os, re, shutil, subprocess, sys, zipfile
 from xml.sax.saxutils import escape
 
-SKEL = (r'C:\Users\user\Desktop\★국제협력처\0. 보고서'
-        r'\20260819 2025학년도 후기 외국인 유학생 학위수여식 계획(안).hwp')
+# 뼈대 = 같은 양식으로 만들어 한글이 실제로 열어 본 보고서.
+# 보고서 폴더 정리 규칙(yyyymmdd 제목 폴더)으로 위치가 바뀌므로 두 자리를 다 찾아본다.
+_BASE = r'C:\Users\user\Desktop\★국제협력처\0. 보고서'
+_NAME = '20260819 2025학년도 후기 외국인 유학생 학위수여식 계획(안).hwp'
+SKEL = next((p for p in (os.path.join(_BASE, _NAME),
+                         os.path.join(_BASE, os.path.splitext(_NAME)[0], _NAME))
+             if os.path.exists(p)), os.path.join(_BASE, _NAME))
 
 PP_BODY = 40          # 본문 문단모양(여백 0) — 여기서 복제해 내어쓰기 문단을 만든다
 PP_CELL = 52          # 표 셀 문단모양(가운데)
