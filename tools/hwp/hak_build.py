@@ -108,7 +108,7 @@ def main():
         assert '교무업적팀' in old
         sec, old = replace_cell(sec, 5, 7, lines_to_paras(C.PLAN))
         assert '교무업적팀' in old
-        disc = lines_to_paras(C.DISCUSS) if C.DISCUSS.strip() else para(63, 51, '-')
+        disc = lines_to_paras(C.DISCUSS) if C.DISCUSS.strip() else para(63, 51, ' ')
         sec, old = replace_cell(sec, 6, 7, disc)
         assert '>-<' in old
 
