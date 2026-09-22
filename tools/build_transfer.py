@@ -67,6 +67,9 @@ for k, v in scan(PRIOR1, '2026-2학기 신입생 명단', 3).items():
 
 # 왕월은 동명이인(교환학생)이 있어 편입생 기록을 명시 지정
 prior['왕월'] = dict(전적대학='치치하얼고등사범전문대학', 연제=3, 전공='수학')
+# 중국 지원자 현황에 없는 2명 — 담당자 확인분(2026.9.22)
+prior['다니야노바 굴누르'] = dict(전적대학='오시국립대학교', 연제=None, 전공='국제관계외교')
+prior['레티옥'] = dict(전적대학='사이공문화예술관광대', 연제=None, 전공='한국어')
 
 for s in roster:
     s.update(prior.get(s['이름'], dict(전적대학=None, 연제=None, 전공=None)))
@@ -74,7 +77,8 @@ for s in roster:
 # ── 3. 전적대학 계열 분류 (KEDI 7대계열) ──────────────────────────────────
 # 전공을 하나씩 확인해 배정한다(키워드 추정 금지 — '기술'·'공정' 같은 말이 계열을 가르지 못한다)
 MAJOR_GROUP = {
-    '응용한국어': '어문',
+    '응용한국어': '어문', '한국어': '어문',
+    '국제관계외교': '법정',
     '관관경영': '상경', '국제경제와무역': '상경', '마케팅': '상경', '온라인마케팅': '상경',
     '빅데이터와회계': '상경', 'BigDataandAccounting': '상경', '회계학': '상경',
     '현대물류관리': '상경', '스마트물류기술': '상경', '인력자원관리': '상경', '인적자원관리': '상경',
@@ -198,31 +202,16 @@ for (모집, 전적), v in matrix.items():
     s24.cell(row=ROW[모집], column=CIDX[전적], value=v)
 print('2-4 합계', sum(matrix.values()))
 
-# ── 6. 작성근거 시트 ──────────────────────────────────────────────────────
-ws = wbf.create_sheet('작성근거(제출 전 삭제)')
-ws.append(['2026학년도 후기(2026-2학기) 정원외 편입학 모집결과 작성근거'])
-ws.append([f'작성일 {datetime.date.today():%Y-%m-%d} · 등록 편입생 54명(3학년 12, 4학년 42) · 합격 61건(60명) · 입학포기 6명'])
-ws.append([])
-ws.append(['순번', '학번', '이름', '국적', '편입학년', '모집학과', '모집계열(2-4)',
-           '전적대학', '연제', '전적 졸업전공', '전적계열(2-4)'])
-for i, s in enumerate(sorted(roster, key=lambda x: (x['학과'], x['학년'], x['이름'])), 1):
-    ws.append([i, s['학번'], s['이름'], s['국적'], s['학년'], s['학과'],
-               DEPT_GROUP[s['학과']], s['전적대학'], s['연제'], s['전공'],
-               s['전적계열'] or '★확인 필요'])
-ws.append([])
-for line in [
-    '※ 출처: 편입 등록·학년 = ★20260911 기준 외국인 유학생 재학생 통계(학적 시스템) / '
-    '전적대학 = 2026.8.26(강향옥).xlsx, (신입편입대학원)2026-2학기 중국 유학생 지원자 현황(2차).xlsx',
-    '※ 지원자수·합격·등록 칸은 2025학년도 후기 제출본과 동일하게 등록인원으로 통일해 기재함',
-    '※ 전적대학이 모두 외국(중국 등) 대학이므로 2-2의 출신대학은 외국대학 열에만 기재, 소재지 칸은 공란',
-    '※ 체육교육·아동학 전공은 사범계열, 관광경영은 상경으로 분류함(변경 시 2-4 수정 필요)',
-    '※ 다니야노바 굴누르(키르기스), 레티옥(베트남)은 전적대학 자료가 없어 2-4에서 제외됨 → 확인 후 2명 추가 기재 필요',
-]:
-    ws.append([line])
-ws.column_dimensions['C'].width = 22
-ws.column_dimensions['F'].width = 20
-ws.column_dimensions['H'].width = 26
-ws.column_dimensions['J'].width = 26
+# ── 6. 제출 전 검산 ───────────────────────────────────────────────────────
+# 학생별 근거는 별도 파일(전적대학·계열 매칭표)에 있으므로 제출본에는 시트를 두지 않는다.
+assert sum(matrix.values()) == len(roster), f'2-4 총계 {sum(matrix.values())} ≠ {len(roster)}'
+tot22 = sum(s22.cell(row=r, column=7).value or 0 for r in range(first, last + 1))
+assert tot22 == len(roster), f'2-2 선발인원 합계 {tot22} ≠ {len(roster)}'
+for yr, col in (('3', 19), ('4', 20)):                       # S·T 총등록현황
+    got = sum(s22.cell(row=r, column=col).value or 0 for r in range(first, last + 1))
+    want = sum(1 for s in roster if s['학년'] == yr)
+    assert got == want, f'{yr}학년 등록 {got} ≠ {want}'
+print(f'검산 OK — 2-2 선발 {tot22}명, 2-4 계열 배정 {sum(matrix.values())}명')
 
 wbf.save(OUT)
 print('저장:', OUT)
