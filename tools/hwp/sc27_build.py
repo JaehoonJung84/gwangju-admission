@@ -19,6 +19,7 @@ import olewrite
 from sc27_content import BODY, TITLE, DATE
 
 TPL = (r'C:\Users\user\Desktop\★국제협력처\0. 보고서'
+       r'\20260819 2025학년도 후기 외국인 유학생 학위수여식 계획(안)'
        r'\20260819 2025학년도 후기 외국인 유학생 학위수여식 계획(안).hwp')
 OUT = sys.argv[1] if len(sys.argv) > 1 else '보고서.hwp'
 
