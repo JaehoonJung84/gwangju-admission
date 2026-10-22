@@ -67,12 +67,18 @@ for tag, lvl, p, ho, po in H.records(raw_sec):
     recs.append((tag, lvl, p, ho, po + len(p)))
 
 para_start = []    # 문단별 PARA_HEADER 레코드 시작 위치
+para_end = []      # 그 문단에 딸린 레코드까지 끝난 자리
 list_hdr = []      # (레코드 시작, 문단 수, 다음 문단 번호)
 for tag, lvl, p, ho, end in recs:
+    if lvl <= 2 and para_start and len(para_end) < len(para_start):
+        if tag != H.T_PARA_HEADER or ho != para_start[-1]:
+            para_end.append(ho)
     if tag == H.T_PARA_HEADER:
         para_start.append(ho)
     elif tag == H.T_LIST_HEADER:
         list_hdr.append((ho, struct.unpack_from('<i', p, 0)[0], len(para_start)))
+while len(para_end) < len(para_start):
+    para_end.append(len(raw_sec))
 
 # 템플릿(머리·줄나눔 정보)은 26번 문단 것을 쓴다
 tpl_head = tpl_seg = None
@@ -158,6 +164,10 @@ def build(block, where):
         else:
             raise SystemExit('종류를 모르는 줄: ' + t)
         cnt += 1
+    # 칸의 마지막 문단에는 '마지막' 표시(글자수 최상위 비트)를 세운다
+    tail = bytearray(out[-1])
+    struct.pack_into('<I', tail, 4, struct.unpack_from('<I', tail, 4)[0] | 0x80000000)
+    out[-1] = bytes(tail)
     return b''.join(out), cnt
 
 
@@ -166,8 +176,8 @@ plan_bytes, plan_n = build(C.PLAN, '계획')
 
 # ─── 5. 갈아끼우기 (뒤 칸부터) ───────────────────────────────────────────
 #   실시사항 칸 = 24~92번 문단, 계획사항 칸 = 94~137번 문단
-D0, D1 = para_start[24], para_start[93]
-P0, P1 = para_start[94], para_start[138]
+D0, D1 = para_start[24], para_end[92]
+P0, P1 = para_start[94], para_end[137]
 lh_done = next(h for h, npa, nxt in list_hdr if nxt == 24)
 lh_plan = next(h for h, npa, nxt in list_hdr if nxt == 94)
 
