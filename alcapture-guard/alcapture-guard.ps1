@@ -17,8 +17,10 @@ $CaptureDir = Join-Path $env:APPDATA 'ESTsoft\ALCapture'
 $BackupRoot = Join-Path $env:USERPROFILE 'Documents\알캡처_캡처백업'
 $ExePath    = 'C:\Program Files (x86)\ESTsoft\ALCapture\ALCapture.exe'
 
-$Threshold = 70   # 캡처가 이 장수 이상 쌓이면 정리 (한도 100)
-$KeepCount = 40   # 최근 이만큼은 목록에 남겨둠
+$Threshold  = 70   # 캡처가 이 장수 이상 쌓이면 정리 (한도 100)
+$KeepCount  = 40   # 최근 이만큼은 목록에 남겨둠
+$ForceLimit = 85   # 보류 중 결과창 목록이 이 장수에 닿으면 창이 열려 있어도 재시작
+$ForceHours = 12   # 또는 보류가 이 시간을 넘기면 재시작
 
 function Write-Log($msg) {
     if ((Test-Path -LiteralPath $LogPath) -and ((Get-Item -LiteralPath $LogPath).Length -gt 1MB)) {
@@ -44,6 +46,16 @@ function Test-ResultWindowVisible {
     return $false
 }
 
+# 보류 기록(정리 직전 장수 / 보류 시각)을 읽는다. 옛 형식(빈 파일)이면 파일 시각을 쓴다.
+function Get-PendingInfo {
+    $info = @{ Before = 0; At = (Get-Item -LiteralPath $FlagPath).LastWriteTime }
+    foreach ($line in @(Get-Content -LiteralPath $FlagPath -ErrorAction SilentlyContinue)) {
+        if ($line -match '^before=(\d+)$')  { $info.Before = [int]$Matches[1] }
+        elseif ($line -match '^at=(.+)$')    { try { $info.At = [datetime]$Matches[1] } catch { } }
+    }
+    return $info
+}
+
 # 정리는 끝났는데 결과창이 열려 있어 재시작을 못 했던 경우, 여기서 다시 시도한다.
 function Restart-ALCapture {
     foreach ($p in @(Get-Process ALCapture, ALCaptureEditor -ErrorAction SilentlyContinue)) {
@@ -60,11 +72,20 @@ function Restart-ALCapture {
 if (-not (Test-Path -LiteralPath $CaptureDir)) { exit 0 }
 
 if (Test-Path -LiteralPath $FlagPath) {
-    if (Test-ResultWindowVisible) {
-        exit 0                                  # 아직 보고 있음. 다음 점검 때 재시도.
+    # 결과창은 정리 전 목록을 그대로 들고 있다. 보류하는 동안 새 캡처가 쌓이면
+    # 화면상 목록이 100장에 닿아 캡처가 막힌다(파일은 64장뿐인데 "초과" 대화상자).
+    # 그래서 한도에 가까워지거나 보류가 길어지면 결과창이 열려 있어도 재시작한다.
+    # 캡처 파일은 이미 백업 폴더로 옮겨 두었으므로 잃는 것은 없다.
+    $pend  = Get-PendingInfo
+    $added = @(Get-ChildItem -LiteralPath $CaptureDir -Filter *.png -File |
+               Where-Object { $_.LastWriteTime -gt $pend.At }).Count
+    $stale = $pend.Before + $added
+    $hours = ((Get-Date) - $pend.At).TotalHours
+    if ((Test-ResultWindowVisible) -and $stale -lt $ForceLimit -and $hours -lt $ForceHours) {
+        exit 0                                  # 아직 보고 있고 여유도 있음. 다음 점검 때 재시도.
     } elseif (Restart-ALCapture) {
         Remove-Item -LiteralPath $FlagPath -Force
-        Write-Log '보류했던 알캡처 재시작 완료'
+        Write-Log ('보류했던 알캡처 재시작 완료 (목록 추정 {0}장, 보류 {1:N1}시간)' -f $stale, $hours)
     } else {
         Remove-Item -LiteralPath $FlagPath -Force
         Write-Log "보류했던 재시작 실패 - 실행파일 없음: $ExePath"
@@ -101,7 +122,9 @@ $msg = '캡처 {0}장 -> {1}장 (백업 {2}장{3})' -f $before, $after, $trimmed
 if ($trimmed -eq 0) {
     Write-Log $msg
 } elseif (Test-ResultWindowVisible) {
-    New-Item -ItemType File -Path $FlagPath -Force | Out-Null
+    Set-Content -LiteralPath $FlagPath -Encoding UTF8 -Value @(
+        ('before={0}' -f $before),
+        ('at={0}' -f (Get-Date -Format 'yyyy-MM-ddTHH:mm:ss')))
     Write-Log "$msg / 결과창이 열려 있어 재시작 보류(다음 점검 때 재시도)"
 } elseif (Restart-ALCapture) {
     Write-Log "$msg / 알캡처 재시작 완료"
