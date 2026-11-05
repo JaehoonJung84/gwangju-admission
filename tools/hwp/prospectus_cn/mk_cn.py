@@ -39,6 +39,8 @@ SECTIONS = ['1. 招生日程', '2. 选拔方法', '3. 申请资格', '4. 提交�
             '5. 招生专业', '6. 签证申请', '7. 奖学金', '8. 宿舍',
             '9. 其他事项', '10. 注意事项', '11. 主任教授介绍', '12. 校园指南']
 BREAKS = []
+# 표에서 통째로 빼는 열(머리글로 지정). 주임교수 이름은 한자 표기를 확인할 수 없어 뺀다.
+DROP_COLS = ['主任教授']
 
 LINE_SPACE = 0.97                  # 줄간격 조임(YaHei 줄높이 보정). 1.0 이면 원본 그대로
 TITLE_PT = 15                      # 원본 절 제목 크기 그대로(중문은 짧아 줄일 까닭이 없다)
@@ -170,6 +172,60 @@ def widen_titles(sec):
     return re.sub(r'<hp:tbl\b.*?</hp:tbl>', one, sec, flags=re.S), n[0]
 
 
+def drop_column(sec, header):
+    """머리글이 `header` 인 열을 표에서 통째로 뺀다.
+
+    칸만 지우면 표가 어긋난다. 뒤쪽 열의 colAddr 를 한 칸씩 당기고, colCnt 를 줄이고,
+    뺀 너비는 바로 왼쪽 열에 더해 표 전체 너비를 그대로 지킨다.
+    """
+    tag = '<hp:t>%s</hp:t>' % escape(header)
+    n = [0]
+
+    def one(m):
+        body = m.group(0)
+        if tag not in body:
+            return body
+        col = w = None
+        for tc in re.finditer(r'<hp:tc\b.*?</hp:tc>', body, re.S):
+            c = tc.group(0)
+            if tag in c:
+                col = int(re.search(r'colAddr="(\d+)"', c).group(1))
+                w = int(re.search(r'<hp:cellSz width="(\d+)"', c).group(1))
+                break
+        if col is None or col == 0:
+            return body
+
+        # 가로로 병합된 칸이 걸쳐 있으면 손대지 않는다(조용히 망가지는 것을 막는다)
+        for tc in re.finditer(r'<hp:tc\b.*?</hp:tc>', body, re.S):
+            c = tc.group(0)
+            a = int(re.search(r'colAddr="(\d+)"', c).group(1))
+            cs = int(re.search(r'colSpan="(\d+)"', c).group(1))
+            if cs > 1 and a <= col < a + cs:
+                raise SystemExit('가로 병합된 칸이 "%s" 열에 걸쳐 있다 — 손대지 않는다' % header)
+
+        def cell(tc):
+            c = tc.group(0)
+            a = int(re.search(r'colAddr="(\d+)"', c).group(1))
+            if a == col:
+                return ''                                   # 이 칸을 뺀다
+            if a == col - 1:                                # 왼쪽 열이 뺀 너비를 흡수
+                c = re.sub(r'(<hp:cellSz width=")(\d+)(")',
+                           lambda s: '%s%d%s' % (s.group(1), int(s.group(2)) + w, s.group(3)), c)
+            if a > col:
+                c = c.replace('colAddr="%d"' % a, 'colAddr="%d"' % (a - 1), 1)
+            return c
+
+        body = re.sub(r'<hp:tc\b.*?</hp:tc>', cell, body, flags=re.S)
+        head = body[:body.find('>') + 1]
+        cnt = int(re.search(r'colCnt="(\d+)"', head).group(1))
+        body = body.replace(head, head.replace('colCnt="%d"' % cnt,
+                                               'colCnt="%d"' % (cnt - 1), 1), 1)
+        n[0] += 1
+        return body
+
+    return re.sub(r'<hp:tbl\b.*?</hp:tbl>', one, sec, flags=re.S), n[0]
+
+
 def force_break(sec, title):
     """절 제목 표를 품은 '바깥' 문단에 쪽나눔을 준다."""
     i = sec.find('<hp:t>%s</hp:t>' % escape(title))
@@ -188,6 +244,10 @@ def build(scale, toc=None):
     z = zipfile.ZipFile(SRC)
     sec, hit, kept = translate(z.read('Contents/section0.xml').decode('utf-8'), toc)
     sec, ntitle = widen_titles(sec)
+    ndrop = 0
+    for h in DROP_COLS:
+        sec, k = drop_column(sec, h)
+        ndrop += k
     for t in BREAKS:
         sec, _ = force_break(sec, t)
     hdr, nfont = hanja_font(z.read('Contents/header.xml').decode('utf-8'))
@@ -208,8 +268,8 @@ def build(scale, toc=None):
     for n in names[1:]:
         zo.writestr(n, repl.get(n, z.read(n)))
     zo.close()
-    print('배율 %.2f  줄간격 %.2f(%d곳)  번역 %d  그대로 %d  한자글꼴 %d  크기조정 %d  제목칸 %d%s'
-          % (scale, LINE_SPACE, nls, hit, kept, nfont, nsh, ntitle,
+    print('배율 %.2f  줄간격 %.2f(%d곳)  번역 %d  그대로 %d  한자글꼴 %d  크기조정 %d  제목칸 %d  열뺌 %d%s'
+          % (scale, LINE_SPACE, nls, hit, kept, nfont, nsh, ntitle, ndrop,
              '  (목차 쪽번호 보정)' if toc else ''))
 
 
