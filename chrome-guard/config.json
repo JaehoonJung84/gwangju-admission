@@ -1,0 +1,6 @@
+{
+  "Enabled": true,
+  "Targets": ["chrome.exe"],
+  "WarnLastWindow": true,
+  "HitTestTimeoutMs": 80
+}
