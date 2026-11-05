@@ -206,18 +206,34 @@ def toc_pages(pages):
     return out
 
 
-def report(pages):
-    print('쪽수 %d (국문 원본 %d쪽)' % (len(pages), ORIG_PAGES))
+def report(pages, tag=''):
+    """쪽별 내용을 UTF-8 파일에 적는다.
+
+    cp949 콘솔은 em-dash(—) 같은 글자를 못 찍는다. 여기서 터지면 목차 보정이
+    통째로 날아가므로, 콘솔에는 숫자만 찍고 내용은 파일로 뺀다.
+    """
+    lines = ['쪽수 %d (국문 원본 %d쪽)' % (len(pages), ORIG_PAGES)]
+    left = []
     for i, t in enumerate(pages):
-        head = [x for x in t.splitlines() if x.strip()][:2]
-        print('  %2d쪽 글자%5d  %s' % (i + 1, len(t), ' | '.join(head)[:66]))
+        head = [x for x in t.splitlines() if x.strip()][:3]
+        lines.append('%2d쪽 글자%5d  %s' % (i + 1, len(t), ' | '.join(head)[:70]))
+        for line in t.splitlines():
+            if HANGUL.search(line):
+                left.append('%d쪽: %s' % (i + 1, line.strip()[:60]))
+    lines.append('')
+    lines.append('한글이 남은 줄 %d개' % len(left))
+    lines += ['   ' + x for x in left[:20]]
+    io.open(os.path.join(HERE, 'report%s.txt' % tag), 'w', encoding='utf-8').write(
+        os.linesep.join(lines))
+    print('쪽수 %d (국문 %d쪽), 한글 남은 줄 %d개 -> report%s.txt'
+          % (len(pages), ORIG_PAGES, len(left), tag))
 
 
 def main():
     scale = float(sys.argv[1]) if len(sys.argv) > 1 else 0.80
     build(scale)
     pages = convert()
-    report(pages)
+    report(pages, '1')
     toc = toc_pages(pages)
     print('\n목차 쪽번호 →', [toc.get(s, '?') for s in TOC_SLOTS])
     if len(toc) < len(SECTIONS):
@@ -225,7 +241,7 @@ def main():
         return
     build(scale, toc)
     pages = convert()
-    report(pages)
+    report(pages, '2')
 
 
 main()
