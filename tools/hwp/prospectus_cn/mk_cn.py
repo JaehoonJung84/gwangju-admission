@@ -23,12 +23,12 @@ sys.path.insert(0, HERE)
 from trans_cn import TR                                          # noqa: E402
 
 SRC = os.path.join(r'C:\Users\user\Desktop\★국제협력처\8. 모집요강\2027학년도 모집요강\대학원',
-                   '2027학년도 전기 외국인 대학원 신·편입 특별전형 모집요강(20261030)_초안_10차.hwpx')
+                   '2027학년도 전기 외국인 대학원 신·편입 특별전형 모집요강(20261030)_초안_14차.hwpx')
 IMG = os.path.join(HERE, 'img')
 HWPX = os.path.join(HERE, 'cn.hwpx')
 PDF = os.path.join(HERE, 'cn.pdf')
 CONV = r'C:\projects\tools\hwp\hwp_conv.py'
-ORIG_PAGES = 17
+ORIG_PAGES = 15
 KEEP_ABOVE = 1550
 FLOOR = 700
 HANGUL = re.compile('[\uac00-\ud7a3]')
@@ -309,13 +309,20 @@ def convert(tries=3):
 
 
 def toc_pages(pages):
+    """절 제목이 실제 몇 쪽인지 찾는다. 목차 쪽 자신은 건너뛴다.
+
+    목차가 몇 쪽인지는 판마다 다르므로(대학원 10차는 4쪽, 14차는 2쪽) 쪽 번호를
+    박아 두지 않고 'C O N T E N T S' 가 있는 쪽을 찾아 건너뛴다.
+    """
+    flats = [re.sub(r'\s+', '', t) for t in pages]
+    skip = {i for i, f in enumerate(flats) if 'CONTENTS' in f}
     out = {}
     for s, slot in zip(SECTIONS, TOC_SLOTS):
         flat = s.replace(' ', '')
-        for i, t in enumerate(pages):
-            if i == 3:
+        for i, f in enumerate(flats):
+            if i in skip:
                 continue
-            if flat in re.sub(r'\s+', '', t):
+            if flat in f:
                 out[slot] = str(i + 1)
                 break
     return out
@@ -351,7 +358,7 @@ def main():
     toc = toc_pages(pages)
     print('\n목차 쪽번호 →', [toc.get(s, '?') for s in TOC_SLOTS])
     if len(toc) < len(SECTIONS):
-        print('※ 절 제목을 못 찾은 것이 있다 — 목차 보정을 건너뛴다')
+        print('[!] 절 제목을 못 찾은 것이 있다. 목차 보정을 건너뛴다')
         return
     build(scale, toc)
     pages = convert()
