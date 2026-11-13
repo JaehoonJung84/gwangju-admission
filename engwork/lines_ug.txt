@@ -1,0 +1,687 @@
+===== page 1 =====
+===== page 2 =====
+===== page 3 =====
+03.000 |SDGyeokdongG206Hv   | 15.0| CONTENTS
+03.001 |TTMGothicSB         | 10.0| Ⅰ. 전형일정
+03.002 |TTMGothicSB         | 10.0| Ⅱ. 전형방법
+03.003 |TTMGothicSB         | 10.0| Ⅲ. 지원자격
+03.004 |TTMGothicSB         | 10.0| Ⅳ. 제출서류
+03.005 |TTMGothicSB         | 10.0| Ⅴ. 모집단위
+03.006 |TTMGothicSB         | 10.0| Ⅵ. 비자 신청
+03.007 |TTMGothicSB         | 10.0| Ⅶ. 장학금
+03.008 |TTMGothicSB         | 10.0| Ⅷ. 기숙사
+03.009 |TTMGothicSB         | 10.0| Ⅸ. 기타사항
+03.010 |TTMGothicSB         | 10.0| Ⅹ. 유의사항
+03.011 |TTMGothicSB         | 10.0| ⅩⅠ. 캠퍼스 안내
+03.012 |TTMGothicSB         | 10.0| 4
+03.013 |TTMGothicSB         | 10.0| 4
+03.014 |TTMGothicSB         | 10.0| 5
+03.015 |TTMGothicSB         | 10.0| 6
+03.016 |TTMGothicSB         | 10.0| 7
+
+03.017 |TTMGothicSB         | 10.0| 9
+03.018 |TTMGothicSB         | 10.0| 9
+03.019 |TTMGothicSB         | 10.0| 10
+03.020 |TTMGothicSB         | 10.0| 11
+03.021 |TTMGothicSB         | 10.0| 12
+03.022 |TTMGothicSB         | 10.0| 13
+===== page 4 =====
+04.000 |TTMGothicR          |  6.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+04.001 |SDGyeokdongG205Bd   |  7.0| 4
+04.002 |TTMGothicB          |  8.0| 구분
+04.003 |TTMGothicB          |  8.0| 1차
+04.004 |TTMGothicB          |  8.0| 2차
+04.005 |TTMGothicM          |  8.0| 원서접수
+04.006 |TTMGothicR          |  8.0| 2026. 11. 11.(수) 10:00 ∼ 
+04.007 |TTMGothicR          |  8.0| 12. 4.(금) 17:00
+04.008 |TTMGothicR          |  8.0| 2026. 12. 14.(월) 10:00 ∼ 
+04.009 |TTMGothicR          |  8.0| 12. 31.(목) 17:00
+04.010 |TTMGothicM          |  8.0| 서류심사
+04.011 |TTMGothicR          |  8.0| 2026. 12. 7.(월) ∼ 12. 10.(목) 
+04.012 |TTMGothicR          |  8.0| 2027. 1. 4.(월) ∼ 1. 7.(목)
+04.013 |TTMGothicM          |  8.0| 면접심사
+04.014 |TTMGothicR          |  8.0| 2026. 12. 15.(화) ∼ 12. 18.(금) 
+04.015 |TTMGothicR          |  8.0| 2027. 1. 12.(화) ∼ 1. 15.(금)
+04.016 |TTMGothicM          |  8.0| 합격자 발표
+04.017 |TTMGothicR          |  8.0| 2026. 12. 23.(수)
+04.018 |TTMGothicR          |  8.0| 2027. 1. 21.(목)
+04.019 |TTMGothicM          |  8.0| 등록금 납부
+04.020 |TTMGothicR          |  8.0| 2027. 1. 4.(월) ∼ 1. 8.(금) 
+04.021 |TTMGothicR          |  8.0| 2027. 1. 25.(월) ∼ 1. 29.(금)
+04.022 |TTMGothicM          |  8.0| 표준입학허가서 발급
+04.023 |TTMGothicR          |  8.0| 등록금 납부 및 제출서류 확인 후 발급
+04.024 |TTMGothicM          |  8.0| 비자 신청
+04.025 |TTMGothicR          |  8.0| 2027. 1월 ∼ 2월
+04.026 |TTMGothicM          |  8.0| 개강
+04.027 |TTMGothicR          |  8.0| 2027. 3. 2.(화)
+04.028 |TTMGothicB          |  8.0| ※ 전형료: 50,000원 (입금계좌: 광주은행 1127-020-252652 광주대학교)
+04.029 |SDGdGothic          | 10.0| 01
+04.030 |SDGdGothic          | 10.0| 전형일정
+04.031 |TTMGothicB          |  8.0| 구분
+04.032 |TTMGothicB          |  8.0| 평가내용
+04.033 |TTMGothicB          |  8.0| 배점
+04.034 |TTMGothicSB         |  8.0| 서류심사
+04.035 |TTMGothicR          |  8.0| ○ 지원자격 충족 여부, 학력·성적, 어학능력, 재정능력 확인
+04.036 |TTMGothicR          |  8.0| ○ 제출서류 진위 확인
+04.037 |TTMGothicR          |  8.0| 적격 / 부적격
+04.038 |TTMGothicSB         |  8.0| 면접심사
+04.039 |TTMGothicR          |  8.0| ○ 어학능력, 수학능력, 학업의지, 진로계획, 유학여건 등 종합 평가
+04.040 |TTMGothicR          |  8.0| 100점
+04.041 |TTMGothicSB         |  8.0| 선발기준
+04.042 |TTMGothicR          |  8.0| ○ 서류심사 적격자 중 면접심사 70점 이상 득점자 선발
+04.043 |SDGyeokdongG206Hv   |  9.0| 2. 전형요소
+04.044 |SDGdGothic          | 10.0| 02
+04.045 |SDGdGothic          | 10.0| 전형방법
+04.046 |TTMGothicSB         |  8.0| 서류심사
+04.047 |TTMGothicSB         |  8.0| 원서접수
+04.048 |TTMGothicSB         |  8.0| 면접심사
+04.049 |TTMGothicSB         |  8.0| 합격자 발표
+04.050 |TTMGothicSB         |  8.0| 표준입학허가서 발급
+04.051 |TTMGothicSB         |  8.0| 비자 신청
+04.052 |TTMGothicSB         |  8.0| 입국 · 개강
+04.053 |TTMGothicSB         |  8.0| 등록금 납부
+04.054 |SDGyeokdongG206Hv   |  9.0| 1. 전형절차
+04.055 |TTMGothicR          |  7.5| ※ 모든 일정은 한국 시간(KST) 기준
+04.056 |TTMGothicR          |  7.5| ※ 원서 및 제출서류는 접수 마감일까지 본교에 도착한 것에 한하여 접수
+04.057 |TTMGothicR          |  7.5| ※ 아포스티유·영사확인 원본 서류는 합격 후 등록기간까지 제출 가능
+04.058 |TTMGothicR          |  7.5| ※ 면접 일시 및 방법은 지원자에게 개별 안내
+04.059 |TTMGothicR          |  7.5| ※ 세부일정은 전형 진행 상황에 따라 변동 및 추가모집 가능
+===== page 5 =====
+05.000 |TTMGothicR          |  6.0| 카카오플러스친구  @광주대학교입학상담
+05.001 |SDGyeokdongG205Bd   |  7.0| 5
+05.002 |SDGyeokdongG206Hv   |  8.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+05.003 |TTMGothicL          |  7.5| ※ 어학 성적은 원서접수 마감일 기준 유효한 것만 인정
+05.004 |TTMGothicL          |  7.5| ※ 상세한 자격 요건은 본교 규정에 따름
+05.005 |TTMGothicL          |  7.5| ※ 영어트랙: 모집단위를 별도로 설정하고 입학 시 「영어능력」을 검증하여 선발하는 과정으로, 졸업을 위하여
+05.006 |TTMGothicL          |  7.5|             이수하여야 하는 학점의 50% 이상이 영어로 진행되는 학사 단위를 의미
+05.007 |TTMGothicB          |  8.0| 구분
+05.008 |TTMGothicB          |  8.0| 내용
+05.009 |TTMGothicM          |  8.0| 공통
+05.010 |TTMGothicR          |  8.0| ○ 부모가 모두 외국인인 외국인
+05.011 |TTMGothicR          |  8.0| ○ 이중 국적자 및 무국적자는 외국인으로 인정하지 않음
+05.012 |TTMGothicM          |  8.0| 신입학
+05.013 |TTMGothicR          |  8.0| ○ 국내외에서 우리나라 초·중등교육에 상응하는 교육과정을     
+05.014 |TTMGothicR          |  8.0|     전부 이수한 졸업자 및 졸업예정자 
+05.015 |TTMGothicM          |  8.0| 편입학
+05.016 |TTMGothicM          |  8.0| 3학년
+05.017 |TTMGothicR          |  8.0| ○ 국내외 4년제 정규대학 2년 이상 수료(예정)자
+05.018 |TTMGothicR          |  8.0| ○ 국내외 전문대학 졸업(예정)자
+05.019 |TTMGothicM          |  8.0| 4학년
+05.020 |TTMGothicR          |  8.0| ○ 국내외 4년제 정규대학 3년 이상 수료(예정)자
+05.021 |TTMGothicR          |  8.0| ○ 국내외 전문대학 3년제 학과 졸업(예정)자
+05.022 |TTMGothicM          |  8.0| 언어능력
+05.023 |TTMGothicM          |  8.0| 한국어트랙
+05.024 |TTMGothicM          |  8.0| (자격 소지자)
+05.025 |TTMGothicR          |  8.0| ○ TOPIK(TOPIK IBT 포함) 3급 이상 또는 동등 자격 취득자
+05.026 |TTMGothicR          |  8.0|     (예체능 2급 이상)
+05.027 |TTMGothicR          |  8.0|     - 동등 자격: 세종학당 중급1 이상 수료, 
+05.028 |TTMGothicR          |  8.0|     사회통합프로그램 3단계 이상 이수(사전평가 61점 이상)
+05.029 |TTMGothicR          |  8.0| ○ 본교 한국어 어학연수과정 1년 이상 수료 후
+05.030 |TTMGothicR          |  8.0|     GU-TOPIK 3급 이상 취득자
+05.031 |TTMGothicM          |  8.0| 한국어트랙
+05.032 |TTMGothicM          |  8.0| (이중언어과정)
+05.033 |TTMGothicR          |  8.0| ○ 위 한국어능력 자격을 충족하지 못한 자는    
+05.034 |TTMGothicR          |  8.0|     이중언어과정으로 지원 가능
+05.035 |TTMGothicR          |  8.0| ○ 입학 후 본교가 지정하는 한국어 교육과정을 의무적으로      
+05.036 |TTMGothicR          |  8.0|     이수하여야 함
+05.037 |TTMGothicR          |  8.0|  -  1년 이내에 200시간 이상의 한국어 연수를 이수하여야 함.
+05.038 |TTMGothicR          |  8.0|     단, TOPIK 3급 이상 또는 이와 동등한 자격을 취득한 자는     
+05.039 |TTMGothicR          |  8.0|     제외 (예체능계열은 2급 이상)
+05.040 |TTMGothicM          |  8.0| 영어트랙
+05.041 |TTMGothicR          |  8.0| ○ TOEFL PBT 530·CBT 210·iBT 80, IELTS 5.5,
+05.042 |TTMGothicR          |  8.0|     TEPS 600(NEW TEPS 330) 
+05.043 |TTMGothicR          |  8.0|     또는 이에 상응하는 국가공인 영어능력평가 성적 소지자
+05.044 |TTMGothicR          |  8.0| ○ 법무부 기준에 따라 영어를 모국어·공용어로 사용하는     
+05.045 |TTMGothicR          |  8.0|     국가의 국적자로서 해당 국가에서 중등·고등교육 이수 시     
+05.046 |TTMGothicR          |  8.0|     성적 제출 면제
+05.047 |TTMGothicM          |  8.0| 졸업요건
+05.048 |TTMGothicM          |  8.0| 한국어트랙
+05.049 |TTMGothicR          |  8.0| ○ TOPIK 4급 이상 또는 동등한 자격 취득 (예체능 3급 이상)
+05.050 |TTMGothicM          |  8.0| 영어트랙
+05.051 |TTMGothicR          |  8.0| ○ 별도 어학 졸업요건 없음
+05.052 |SDGdGothic          | 10.0| 03
+05.053 |SDGdGothic          | 10.0| 지원자격
+===== page 6 =====
+06.000 |TTMGothicR          |  6.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+06.001 |SDGyeokdongG205Bd   |  7.0| 6
+06.002 |TTMGothicB          |  8.0| 순번
+06.003 |TTMGothicB          |  8.0| 제출서류
+06.004 |TTMGothicB          |  8.0| 비고
+06.005 |TTMGothicM          |  8.0| 1
+06.006 |TTMGothicR          |  8.0| 입학지원서 (본교 소정양식)
+06.007 |TTMGothicR          |  7.5| ○ 지원서, 유학계획서, 자기소개서, 유학경비 부담 서약서
+06.008 |TTMGothicR          |  7.5| ○ 개인정보 수집·이용·제공 동의서
+06.009 |TTMGothicM          |  8.0| 2
+06.010 |TTMGothicR          |  8.0| 여권 사본 및 여권용 사진 2매
+06.011 |TTMGothicR          |  7.5| ○ 여권 유효기간 입학일 기준 6개월 이상
+06.012 |TTMGothicM          |  8.0| 3
+06.013 |TTMGothicR          |  8.0| 본인 및 부모 신분증 사본
+06.014 |TTMGothicR          |  7.5| ○ 본국 신분증 또는 시민권
+06.015 |TTMGothicM          |  8.0| 4
+06.016 |TTMGothicR          |  8.0|  가족관계 증명서류
+06.017 |TTMGothicR          |  7.5| ○ 중국: 호구부 사본
+06.018 |TTMGothicR          |  7.5|      (호구부 2개 이상인 경우 친족관계증명서 공증본)
+06.019 |TTMGothicR          |  7.5| ○ 그 밖의 국가: 가족관계증명서 또는 출생증명서(영문)
+06.020 |TTMGothicM          |  8.0| 5
+06.021 |TTMGothicR          |  8.0| 외국인등록증 사본
+06.022 |TTMGothicR          |  7.5| ○ 국내 체류자에 한함
+06.023 |TTMGothicM          |  8.0| 6
+06.024 |TTMGothicR          |  8.0| 최종학교 졸업 및 성적증명서
+06.025 |TTMGothicR          |  7.5| ○ (신입학) 고등학교 졸업(예정)증명서 및 전 학년 성적증명서
+06.026 |TTMGothicR          |  7.5| ○ (편입학) 전문대학 이상 졸업(학위)증명서 및 성적증명서,
+06.027 |TTMGothicR          |  7.5|      4년제 대학 재학자는 수료증명서 포함
+06.028 |TTMGothicR          |  7.5| ○ 아포스티유 또는 재외공관 영사인증 원본,
+06.029 |TTMGothicR          |  8.0|     중국은 학력인증보고서
+06.030 |TTMGothicR          |  7.5| ○ 접수 시 사본 제출, 원본은 합격 후 등록기간까지 제출 가능
+06.031 |TTMGothicR          |  7.5| ○ 베트남은 고등학교 졸업시험 응시 증명서로 졸업(예정)증명서 
+06.032 |TTMGothicR          |  7.5|      대체 가능 (졸업 후 졸업증명서 제출)
+06.033 |TTMGothicM          |  8.0| 7
+06.034 |TTMGothicR          |  8.0| 재정보증 서류
+06.035 |TTMGothicR          |  7.5| ○ 보증금액 16,000,000원 이상
+06.036 |TTMGothicR          |  7.5| ○ 본인 또는 부모 명의 은행 잔고증명서
+06.037 |TTMGothicR          |  7.5|      (발급일로부터 30일 이내)
+06.038 |TTMGothicM          |  8.0| 8
+06.039 |TTMGothicR          |  8.0| 부모 재직증명서 및 수입증명서
+06.040 |TTMGothicR          |  7.5| ○ 재직증명서: 근무처 발행
+06.041 |TTMGothicR          |  8.0|     (자영업자는 사업자등록증 사본으로 갈음)
+06.042 |TTMGothicR          |  7.5| ○ 수입증명서: 최근 1년간 소득금액 확인 서류
+06.043 |TTMGothicR          |  7.5| ○ 입학 지원일로부터 3개월 이내 발급분
+06.044 |TTMGothicM          |  8.0| 9
+06.045 |TTMGothicR          |  8.0| 어학능력 증명서
+06.046 |TTMGothicR          |  7.5| ○ 해당자에 한함 (TOPIK 성적증명서 등)
+06.047 |TTMGothicR          |  7.5| ※ 지원하는 차수의 원서접수 시작일 기준으로
+06.048 |TTMGothicR          |  8.0|     유효기간 이내여야 함
+06.049 |TTMGothicM          |  8.0| 10
+06.050 |TTMGothicR          |  8.0| 학력조회 동의서 (본교 양식)
+06.051 |TTMGothicR          |  7.5|  ○ 제출서류 진위 확인용
+06.052 |SDGdGothic          | 10.0| 04
+06.053 |SDGdGothic          | 10.0| 제출서류
+06.054 |TTMGothicL          |  7.5| ※ 한국어·영어 이외의 언어로 작성된 서류는 한국어 또는 영어 번역본 첨부
+06.055 |TTMGothicL          |  7.5| ※ 심사에 필요한 경우 본교가 추가 서류 요구 가능
+===== page 7 =====
+07.000 |TTMGothicR          |  6.0| 카카오플러스친구  @광주대학교입학상담
+07.001 |SDGyeokdongG205Bd   |  7.0| 7
+07.002 |SDGyeokdongG206Hv   |  8.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+07.003 |SDGyeokdongG206Hv   |  9.0| 1. 신입학·편입학 모집단위 - 신입학(1학년)
+07.004 |TTMGothicB          |  8.0| 대학
+07.005 |TTMGothicB          |  8.0| 학부(과)
+07.006 |TTMGothicB          |  8.0| 계열
+07.007 |TTMGothicB          |  8.0| 한국어트랙
+07.008 |TTMGothicB          |  8.0| 영어트랙
+07.009 |TTMGothicB          |  8.0| 등록금(원)
+07.010 |TTMGothicSB         |  8.0| 보건
+07.011 |TTMGothicSB         |  8.0| 복지
+07.012 |TTMGothicSB         |  8.0| 대학 
+07.013 |TTMGothicR          |  8.0| 보건행정학과
+07.014 |TTMGothicR          |  8.0| 자연
+07.015 |TTMGothicR          |  8.0| ○
+07.016 |TTMGothicR          |  8.0| 3,744,000
+07.017 |TTMGothicR          |  8.0| 사회복지학부
+07.018 |TTMGothicR          |  8.0| 인문사회
+07.019 |TTMGothicR          |  8.0| ○
+07.020 |TTMGothicR          |  8.0| 3,167,000
+07.021 |TTMGothicR          |  8.0|  식품영양학과
+07.022 |TTMGothicR          |  8.0| 자연
+07.023 |TTMGothicR          |  8.0| ○
+07.024 |TTMGothicR          |  8.0| 3,744,000
+07.025 |TTMGothicR          |  8.0| 반려동물보건산업학과
+07.026 |TTMGothicR          |  8.0| 자연
+07.027 |TTMGothicR          |  8.0| ○
+07.028 |TTMGothicR          |  8.0| 3,744,000
+07.029 |TTMGothicSB         |  8.0| 문화
+07.030 |TTMGothicSB         |  8.0| 산업
+07.031 |TTMGothicSB         |  8.0| 대학
+07.032 |TTMGothicR          |  8.0| 스포츠과학부
+07.033 |TTMGothicR          |  8.0| 예체능
+07.034 |TTMGothicR          |  8.0| ○
+07.035 |TTMGothicR          |  8.0| 3,744,000
+07.036 |TTMGothicR          |  8.0| 태권도학과
+07.037 |TTMGothicR          |  8.0| 예체능
+07.038 |TTMGothicR          |  8.0| ○
+07.039 |TTMGothicR          |  8.0| 3,744,000
+07.040 |TTMGothicR          |  8.0| 시각영상디자인학과
+07.041 |TTMGothicR          |  8.0| 예체능
+07.042 |TTMGothicR          |  8.0| ○
+07.043 |TTMGothicR          |  8.0| 3,744,000
+07.044 |TTMGothicR          |  8.0| 인테리어디자인학과
+07.045 |TTMGothicR          |  8.0| 예체능
+07.046 |TTMGothicR          |  8.0| ○
+07.047 |TTMGothicR          |  8.0| 3,744,000
+07.048 |TTMGothicR          |  8.0| 패션주얼리디자인학과
+07.049 |TTMGothicR          |  8.0| 예체능
+07.050 |TTMGothicR          |  8.0| ○
+07.051 |TTMGothicR          |  8.0| 3,744,000
+07.052 |TTMGothicR          |  8.0| 뷰티미용학과
+07.053 |TTMGothicR          |  8.0| 예체능
+07.054 |TTMGothicR          |  8.0| ○
+07.055 |TTMGothicR          |  8.0| ○
+07.056 |TTMGothicR          |  8.0| 3,744,000
+07.057 |TTMGothicR          |  8.0| 사진영상미디어학과
+07.058 |TTMGothicR          |  8.0| 예체능
+07.059 |TTMGothicR          |  8.0| ○
+07.060 |TTMGothicR          |  8.0| 3,744,000
+07.061 |TTMGothicR          |  8.0| 항공서비스학과
+07.062 |TTMGothicR          |  8.0| 인문사회
+07.063 |TTMGothicR          |  8.0| ○
+07.064 |TTMGothicR          |  8.0| 3,167,000
+07.065 |TTMGothicR          |  8.0| 호텔조리제과제빵학과
+07.066 |TTMGothicR          |  8.0| 인문사회
+07.067 |TTMGothicR          |  8.0| ○
+07.068 |TTMGothicR          |  8.0| 3,744,000
+07.069 |TTMGothicSB         |  8.0| 인문
+07.070 |TTMGothicSB         |  8.0| 사회
+07.071 |TTMGothicSB         |  8.0| 과학
+07.072 |TTMGothicSB         |  8.0| 대학
+07.073 |TTMGothicR          |  8.0| 교육상담학과
+07.074 |TTMGothicR          |  8.0| 인문사회
+07.075 |TTMGothicR          |  8.0| ○
+07.076 |TTMGothicR          |  8.0| 3,167,000
+07.077 |TTMGothicR          |  8.0| 심리학과
+07.078 |TTMGothicR          |  8.0| 인문사회
+07.079 |TTMGothicR          |  8.0| ○
+07.080 |TTMGothicR          |  8.0| 3,744,000
+07.081 |TTMGothicR          |  8.0| 경찰행정학과
+07.082 |TTMGothicR          |  8.0| 인문사회
+07.083 |TTMGothicR          |  8.0| ○
+07.084 |TTMGothicR          |  8.0| 3,167,000
+07.085 |TTMGothicR          |  8.0| 소방행정학과
+07.086 |TTMGothicR          |  8.0| 인문사회
+07.087 |TTMGothicR          |  8.0| ○
+07.088 |TTMGothicR          |  8.0| 3,167,000
+07.089 |TTMGothicR          |  8.0| 문헌정보학과
+07.090 |TTMGothicR          |  8.0| 인문사회
+07.091 |TTMGothicR          |  8.0| ○
+07.092 |TTMGothicR          |  8.0| 3,167,000
+07.093 |TTMGothicR          |  8.0| 경영학과
+07.094 |TTMGothicR          |  8.0| 인문사회
+07.095 |TTMGothicR          |  8.0| ○
+07.096 |TTMGothicR          |  8.0| ○
+07.097 |TTMGothicR          |  8.0| 3,167,000
+07.098 |TTMGothicR          |  8.0| 회계세무학과
+07.099 |TTMGothicR          |  8.0| 인문사회
+07.100 |TTMGothicR          |  8.0| ○
+07.101 |TTMGothicR          |  8.0| 3,167,000
+07.102 |TTMGothicR          |  8.0| 무역유통학과
+07.103 |TTMGothicR          |  8.0| 인문사회
+07.104 |TTMGothicR          |  8.0| ○
+07.105 |TTMGothicR          |  8.0| 3,167,000
+07.106 |TTMGothicSB         |  8.0| 공과
+07.107 |TTMGothicSB         |  8.0| 대학
+07.108 |TTMGothicR          |  8.0| 건축공학과
+07.109 |TTMGothicR          |  8.0| 공학
+07.110 |TTMGothicR          |  8.0| ○
+07.111 |TTMGothicR          |  8.0| 3,744,000
+07.112 |TTMGothicR          |  8.0| 컴퓨터공학과
+07.113 |TTMGothicR          |  8.0| 공학
+07.114 |TTMGothicR          |  8.0| ○
+07.115 |TTMGothicR          |  8.0| ○
+07.116 |TTMGothicR          |  8.0| 3,744,000
+07.117 |TTMGothicR          |  8.0| 전기공학과
+07.118 |TTMGothicR          |  8.0| 공학
+07.119 |TTMGothicR          |  8.0| ○
+07.120 |TTMGothicR          |  8.0| 3,744,000
+07.121 |TTMGothicR          |  8.0| 토목공학과
+07.122 |TTMGothicR          |  8.0| 공학
+07.123 |TTMGothicR          |  8.0| ○
+07.124 |TTMGothicR          |  8.0| 3,744,000
+07.125 |TTMGothicR          |  8.0| 기계자동차공학부
+07.126 |TTMGothicR          |  8.0| 공학
+07.127 |TTMGothicR          |  8.0| ○
+07.128 |TTMGothicR          |  8.0| 3,744,000
+07.129 |TTMGothicSB         |  8.0| AI
+07.130 |TTMGothicSB         |  8.0| 앙트십대학
+07.131 |TTMGothicR          |  8.0| 글로벌콘텐츠학부
+07.132 |TTMGothicR          |  8.0| 인문사회
+07.133 |TTMGothicR          |  8.0| ○
+07.134 |TTMGothicR          |  8.0| 3,167,000
+07.135 |SDGdGothic          | 10.0| 05
+07.136 |SDGdGothic          | 10.0| 모집단위
+===== page 8 =====
+08.000 |TTMGothicR          |  6.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+08.001 |SDGyeokdongG205Bd   |  7.0| 8
+08.002 |SDGyeokdongG206Hv   |  9.0| 2. 신입학·편입학 모집단위 - 편입학(3·4학년)
+08.003 |TTMGothicB          |  8.0| 대학
+08.004 |TTMGothicB          |  8.0| 학부(과)
+08.005 |TTMGothicB          |  8.0| 계열
+08.006 |TTMGothicB          |  8.0| 한국어트랙
+08.007 |TTMGothicB          |  8.0| 등록금(원)
+08.008 |TTMGothicB          |  8.0| 이중언어과정
+08.009 |TTMGothicM          |  8.0| 보건
+08.010 |TTMGothicM          |  8.0| 복지
+08.011 |TTMGothicM          |  8.0| 대학 
+08.012 |TTMGothicR          |  8.0| 사회복지학부
+08.013 |TTMGothicR          |  8.0| 인문사회
+08.014 |TTMGothicR          |  8.0| ○
+08.015 |TTMGothicR          |  8.0| 3,167,000
+08.016 |TTMGothicR          |  8.0| 식품영양학과
+08.017 |TTMGothicR          |  8.0| 자연
+08.018 |TTMGothicR          |  8.0| ○
+08.019 |TTMGothicR          |  8.0| 3,744,000
+08.020 |TTMGothicR          |  8.0| 보건행정학부
+08.021 |TTMGothicR          |  8.0| 자연
+08.022 |TTMGothicR          |  8.0| ○
+08.023 |TTMGothicR          |  8.0| ○
+08.024 |TTMGothicR          |  8.0| 3,744,000
+08.025 |TTMGothicR          |  8.0| 반려동물보건산업학과
+08.026 |TTMGothicR          |  8.0| 자연
+08.027 |TTMGothicR          |  8.0| ○
+08.028 |TTMGothicR          |  8.0| 3,744,000
+08.029 |TTMGothicM          |  8.0| 문화
+08.030 |TTMGothicM          |  8.0| 산업
+08.031 |TTMGothicM          |  8.0| 대학
+08.032 |TTMGothicR          |  8.0| 스포츠과학부
+08.033 |TTMGothicR          |  8.0| 예체능
+08.034 |TTMGothicR          |  8.0| ○
+08.035 |TTMGothicR          |  8.0| 3,744,000
+08.036 |TTMGothicR          |  8.0| 시각영상디자인학과
+08.037 |TTMGothicR          |  8.0| 예체능
+08.038 |TTMGothicR          |  8.0| ○
+08.039 |TTMGothicR          |  8.0| ○
+08.040 |TTMGothicR          |  8.0| 3,744,000
+08.041 |TTMGothicR          |  8.0| 산업디자인학과
+08.042 |TTMGothicR          |  8.0| 예체능
+08.043 |TTMGothicR          |  8.0| ○
+08.044 |TTMGothicR          |  8.0| ○
+08.045 |TTMGothicR          |  8.0| 3,744,000
+08.046 |TTMGothicR          |  8.0| 인테리어디자인학과
+08.047 |TTMGothicR          |  8.0| 예체능
+08.048 |TTMGothicR          |  8.0| ○
+08.049 |TTMGothicR          |  8.0| 3,744,000
+08.050 |TTMGothicR          |  8.0| 패션주얼리디자인학부
+08.051 |TTMGothicR          |  8.0| 예체능
+08.052 |TTMGothicR          |  8.0| ○
+08.053 |TTMGothicR          |  8.0| ○
+08.054 |TTMGothicR          |  8.0| 3,744,000
+08.055 |TTMGothicR          |  8.0| 뷰티미용학과
+08.056 |TTMGothicR          |  8.0| 예체능
+08.057 |TTMGothicR          |  8.0| ○
+08.058 |TTMGothicR          |  8.0| ○
+08.059 |TTMGothicR          |  8.0| 3,744,000
+08.060 |TTMGothicR          |  8.0| 사진영상학과
+08.061 |TTMGothicR          |  8.0| 예체능
+08.062 |TTMGothicR          |  8.0| ○
+08.063 |TTMGothicR          |  8.0| 3,744,000
+08.064 |TTMGothicR          |  8.0| 항공서비스학과
+08.065 |TTMGothicR          |  8.0| 인문사회
+08.066 |TTMGothicR          |  8.0| ○
+08.067 |TTMGothicR          |  8.0| ○
+08.068 |TTMGothicR          |  8.0| 3,167,000
+08.069 |TTMGothicR          |  8.0| 호텔조리제과제빵학과
+08.070 |TTMGothicR          |  8.0| 인문사회
+08.071 |TTMGothicR          |  8.0| ○
+08.072 |TTMGothicR          |  8.0| 3,744,000
+08.073 |TTMGothicM          |  8.0| 인문
+08.074 |TTMGothicM          |  8.0| 사회
+08.075 |TTMGothicM          |  8.0| 과학
+08.076 |TTMGothicM          |  8.0| 대학
+08.077 |TTMGothicR          |  8.0| 청소년상담·평생교육학과
+08.078 |TTMGothicR          |  8.0| 인문사회
+08.079 |TTMGothicR          |  8.0| ○
+08.080 |TTMGothicR          |  8.0| ○
+08.081 |TTMGothicR          |  8.0| 3,167,000
+08.082 |TTMGothicR          |  8.0| 심리학과
+08.083 |TTMGothicR          |  8.0| 인문사회
+08.084 |TTMGothicR          |  8.0| ○
+08.085 |TTMGothicR          |  8.0| 3,744,000
+08.086 |TTMGothicR          |  8.0| 경찰행정학과
+08.087 |TTMGothicR          |  8.0| 인문사회
+08.088 |TTMGothicR          |  8.0| ○
+08.089 |TTMGothicR          |  8.0| 3,167,000
+08.090 |TTMGothicR          |  8.0| 소방행정학과
+08.091 |TTMGothicR          |  8.0| 인문사회
+08.092 |TTMGothicR          |  8.0| ○
+08.093 |TTMGothicR          |  8.0| 3,167,000
+08.094 |TTMGothicR          |  8.0| 문헌정보학과
+08.095 |TTMGothicR          |  8.0| 인문사회
+08.096 |TTMGothicR          |  8.0| ○
+08.097 |TTMGothicR          |  8.0| 3,167,000
+08.098 |TTMGothicR          |  8.0| 경영학과
+08.099 |TTMGothicR          |  8.0| 인문사회
+08.100 |TTMGothicR          |  8.0| ○
+08.101 |TTMGothicR          |  8.0| ○
+08.102 |TTMGothicR          |  8.0| 3,167,000
+08.103 |TTMGothicR          |  8.0| 회계세무학과
+08.104 |TTMGothicR          |  8.0| 인문사회
+08.105 |TTMGothicR          |  8.0| ○
+08.106 |TTMGothicR          |  8.0| ○
+08.107 |TTMGothicR          |  8.0| 3,167,000
+08.108 |TTMGothicR          |  8.0| 무역유통학과
+08.109 |TTMGothicR          |  8.0| 인문사회
+08.110 |TTMGothicR          |  8.0| ○
+08.111 |TTMGothicR          |  8.0| ○
+08.112 |TTMGothicR          |  8.0| 3,167,000
+08.113 |TTMGothicM          |  8.0| 공과
+08.114 |TTMGothicM          |  8.0| 대학
+08.115 |TTMGothicR          |  8.0| 건축학부
+08.116 |TTMGothicR          |  8.0| 공학
+08.117 |TTMGothicR          |  8.0| ○
+08.118 |TTMGothicR          |  8.0| 3,744,000
+08.119 |TTMGothicR          |  8.0| 컴퓨터공학과
+08.120 |TTMGothicR          |  8.0| 공학
+08.121 |TTMGothicR          |  8.0| ○
+08.122 |TTMGothicR          |  8.0| ○
+08.123 |TTMGothicR          |  8.0| 3,744,000
+08.124 |TTMGothicR          |  8.0| 전기공학과
+08.125 |TTMGothicR          |  8.0| 공학
+08.126 |TTMGothicR          |  8.0| ○
+08.127 |TTMGothicR          |  8.0| 3,744,000
+08.128 |TTMGothicR          |  8.0| 토목공학과
+08.129 |TTMGothicR          |  8.0| 공학
+08.130 |TTMGothicR          |  8.0| ○
+08.131 |TTMGothicR          |  8.0| 3,744,000
+08.132 |TTMGothicR          |  8.0| 기계자동차공학부
+08.133 |TTMGothicR          |  8.0| 공학
+08.134 |TTMGothicR          |  8.0| ○
+08.135 |TTMGothicR          |  8.0| 3,744,000
+08.136 |TTMGothicL          |  7.5| ※ 이중언어과정은 통번역기 사용 가능
+08.137 |TTMGothicL          |  7.5| ※ 등록금은 2026학년도 기준이며, 매 학년도 등록금 조정에 따라 변동 가능
+08.138 |SDGdGothic          | 10.0| 05
+08.139 |SDGdGothic          | 10.0| 모집단위
+===== page 9 =====
+09.000 |TTMGothicR          |  6.0| 카카오플러스친구  @광주대학교입학상담
+09.001 |SDGyeokdongG205Bd   |  7.0| 9
+09.002 |SDGyeokdongG206Hv   |  8.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+09.003 |SDGdGothic          | 10.0| 06
+09.004 |SDGdGothic          | 10.0| 비자 신청
+09.005 |TTMGothicR          |  7.5| ※ 등록금 납부자에 한하여 표준입학허가서 발급
+09.006 |TTMGothicR          |  7.5| ※ 사증(비자) 발급 지연·거부에 따른 불이익은 지원자 본인 부담
+09.007 |TTMGothicB          |  8.0| 구분
+09.008 |TTMGothicB          |  8.0| 국내 체류자
+09.009 |TTMGothicB          |  8.0| 국외 체류자
+09.010 |TTMGothicSB         |  8.0| 신청 기관
+09.011 |TTMGothicR          |  8.0| 광주대학교 국제협력처
+09.012 |TTMGothicR          |  8.0| 본국 주재 대한민국 공관
+09.013 |TTMGothicSB         |  8.0| 신청 내용
+09.014 |TTMGothicR          |  8.0| 체류자격 변경 (D-2)
+09.015 |TTMGothicR          |  8.0| 유학(D-2) 사증 발급
+09.016 |TTMGothicSB         |  8.0| 신청 시기
+09.017 |TTMGothicR          |  8.0| 2027. 2월
+09.018 |TTMGothicR          |  8.0| 2027. 1월 ∼ 2월
+09.019 |TTMGothicSB         |  8.0| 절차
+09.020 |TTMGothicR          |  8.0| ○ 국제협력처 체류자격 변경 설명회 참석
+09.021 |TTMGothicR          |  8.0| ○ 안내에 따라 신청서류 준비
+09.022 |TTMGothicR          |  8.0| ○ 등록금 납부·원본서류 확인 후 본교가 
+
+09.023 |TTMGothicR          |  8.0|     비자 서류 발송
+09.024 |TTMGothicR          |  8.0| ○ 서류 구비 후 본국 공관에 직접 신고
+09.025 |TTMGothicSB         |  8.0| 유의사항
+09.026 |TTMGothicR          |  8.0| ○ 체류기간 만료 전·개강 전 신청
+09.027 |TTMGothicR          |  8.0| ○ 변경 절차 완료 시까지 국내 체류
+09.028 |TTMGothicR          |  8.0| ○ 입국 직후 외국인 등록
+09.029 |SDGdGothic          | 10.0| 07
+09.030 |SDGdGothic          | 10.0| 장학금
+09.031 |TTMGothicR          |  7.5| ※ 입학 학기 1회 지급
+09.032 |TTMGothicR          |  7.5| ※ 성적우수장학금은 4.5 만점 기준, 학년 구분 없이 직전 학기 성적으로 지급
+09.033 |TTMGothicR          |  7.5| ※ 어학 성적은 등록금 고지서 발급일 기준 유효기간 이내의 것만 인정
+09.034 |TTMGothicR          |  7.5| ※ 선발기준 및 금액은 매 학년도 시행계획과 본교 「장학금 지급에 관한 시행세칙」에 따라 변동 가능
+09.035 |SDGyeokdongG206Hv   |  9.0| 1. 신·편입생 장학금
+09.036 |SDGyeokdongG206Hv   |  9.0| 2. 재학생 장학금
+09.037 |TTMGothicB          |  8.0| 트랙
+09.038 |TTMGothicB          |  8.0| 어학 성적
+09.039 |TTMGothicB          |  8.0| 수업료 감면
+09.040 |TTMGothicSB         |  8.0| 한국어트랙
+09.041 |TTMGothicSB         |  8.0| 및
+09.042 |TTMGothicSB         |  8.0| 이중언어과정
+09.043 |TTMGothicR          |  8.0| TOPIK 3급
+09.044 |TTMGothicR          |  8.0| 40%
+09.045 |TTMGothicR          |  8.0| TOPIK 4급
+09.046 |TTMGothicR          |  8.0| 100%
+09.047 |TTMGothicR          |  8.0| TOPIK 5급
+09.048 |TTMGothicR          |  8.0| 100%
+09.049 |TTMGothicR          |  8.0| TOPIK 6급
+09.050 |TTMGothicR          |  8.0| 100%
+09.051 |TTMGothicSB         |  8.0| 영어트랙
+09.052 |TTMGothicR          |  8.0|  TOEFL PBT 530·CBT 210·iBT 80, IELTS 5.5,
+09.053 |TTMGothicR          |  8.0| TEPS 600(NEW TEPS 330)
+09.054 |TTMGothicR          |  8.0| 50%
+09.055 |TTMGothicB          |  8.0| 종류
+09.056 |TTMGothicB          |  8.0| 기준
+09.057 |TTMGothicB          |  8.0| 혜택
+09.058 |TTMGothicSB         |  8.0| 공인언어능력
+09.059 |TTMGothicSB         |  8.0| 장학금
+09.060 |TTMGothicR          |  8.0| TOPIK 3급
+09.061 |TTMGothicR          |  8.0| 수업료 20% 감면
+09.062 |TTMGothicR          |  8.0| TOPIK 4급
+09.063 |TTMGothicR          |  8.0| 수업료 30% 감면
+09.064 |TTMGothicR          |  8.0| TOPIK 5급
+09.065 |TTMGothicR          |  8.0| 수업료 40% 감면
+09.066 |TTMGothicR          |  8.0| TOPIK 6급
+09.067 |TTMGothicR          |  8.0| 수업료 50% 감면
+09.068 |TTMGothicSB         |  8.0| 성적우수장학금
+09.069 |TTMGothicR          |  8.0| 직전 학기 평점평균 4.00 ∼ 4.29
+09.070 |TTMGothicR          |  8.0| 300,000원
+09.071 |TTMGothicR          |  8.0| 직전 학기 평점평균 4.30 이상
+09.072 |TTMGothicR          |  8.0|  500,000원
+===== page 10 =====
+10.000 |TTMGothicR          |  6.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+10.001 |SDGyeokdongG205Bd   |  7.0| 10
+10.002 |SDGdGothic          | 10.0| 08
+10.003 |SDGdGothic          | 10.0| 기숙사
+10.004 |SDGyeokdongG206Hv   |  9.0| 1. 안내
+10.005 |TTMGothicR          |  8.0| ○ 신·편입생은 기숙사 또는 외부 거주 중 선택 가능
+10.006 |TTMGothicR          |  8.0| ○ 입사 신청 시 「결핵검사확인서」 제출
+10.007 |TTMGothicR          |  8.0| ○ 신·편입생은 1일 1식 이상 의무식 (최소 1식 식비 반드시 납부)
+10.008 |TTMGothicR          |  8.0| ○ 입사자는 사생수칙(기숙사 홈페이지 게시)을 준수하여야 하며, 위반 시 벌점 부과 및 강제퇴사 가능
+10.009 |SDGyeokdongG206Hv   |  9.0| 2. 기간 및 비용
+10.010 |TTMGothicR          |  8.0| ○ 기간: 2027년 2월말 입국 시 ∼ 2027. 8. 27.(금)
+10.011 |TTMGothicB          |  8.0| 관리비 (180일 기준)
+10.012 |TTMGothicB          |  8.0| 식비 (130일 기준, 1식 4,500원)
+10.013 |TTMGothicSB         |  8.0| 2인실
+10.014 |TTMGothicR          |  8.0| 1,306,800원
+10.015 |TTMGothicSB         |  8.0| 1일 1식
+10.016 |TTMGothicR          |  8.0| 585,000원
+10.017 |TTMGothicSB         |  8.0| 3인실
+10.018 |TTMGothicR          |  8.0| 1,119,600원
+10.019 |TTMGothicSB         |  8.0| 1일 2식
+10.020 |TTMGothicR          |  8.0| 1,170,000원
+10.021 |TTMGothicSB         |  8.0| 4인실
+10.022 |TTMGothicR          |  8.0| 889,200원
+10.023 |TTMGothicSB         |  8.0| 1일 3식
+10.024 |TTMGothicR          |  8.0| 1,755,000원
+10.025 |TTMGothicL          |  7.5| ※ 2인실·3인실은 잔여 객실 범위 내에서만 신청 가능하며, 초과 시 신청 불가
+10.026 |TTMGothicL          |  7.5| ※ 최소 1일 1식 식비(585,000원) 의무 납부, 식당 현장 구매 시 1식 5,500원
+10.027 |TTMGothicL          |  7.5| ※ 식당은 주말 및 명절 연휴 미운영
+10.028 |TTMGothicL          |  7.5| ※ 식수 변경은 개강 초 식수변경기간에만 가능하며, 이후 변경·환불 불가 (일정 추후 공지)
+10.029 |TTMGothicL          |  7.5| ※ 기간은 학사일정에 따라 변경 가능하며, 이에 따라 관리비·식비도 변동 가능
+10.030 |SDGyeokdongG206Hv   |  9.0| 3. 입사절차
+10.031 |TTMGothicR          |  8.0| ○ 입사 신청: 기숙사 홈페이지 → 신·편입생 입사신청(생년월일 로그인)
+10.032 |TTMGothicR          |  8.0|     → 신청서 작성(결핵검사확인서 첨부)
+10.033 |TTMGothicR          |  8.0| ○ 국외 체류 유학생은 국제협력처를 통하여 입사신청서를 작성·제출
+10.034 |TTMGothicR          |  8.0| ○ 1지망 인실 우선 배정, 미배정 시 잔여 객실에 한하여 2·3·4지망 순으로 배정
+10.035 |TTMGothicR          |  8.0| ○ 기숙사비 납부: 홈페이지에서 고지서 출력(우편 미발송) 후 광주은행 또는 가상계좌 입금
+10.036 |TTMGothicR          |  8.0| ○ 납부기간 내 미납 시 불합격 처리, 납부 후 인실 변경 불가
+10.037 |TTMGothicR          |  8.0| ○ 호실 발표 및 세부 일정은 기숙사 홈페이지 공지 및 합격자 개별 안내
+10.038 |TTMGothicSB         |  8.0| 입사 신청
+10.039 |TTMGothicSB         |  8.0| 기숙사 선택
+10.040 |TTMGothicSB         |  8.0| 호실 발표
+10.041 |TTMGothicSB         |  8.0| 입사
+10.042 |TTMGothicSB         |  8.0| 기숙사비 납부
+===== page 11 =====
+11.000 |TTMGothicR          |  6.0| 카카오플러스친구  @광주대학교입학상담
+11.001 |SDGyeokdongG205Bd   |  7.0| 11
+11.002 |SDGyeokdongG206Hv   |  8.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+11.003 |SDGdGothic          | 10.0| 09
+11.004 |SDGdGothic          | 10.0| 기타사항
+11.005 |SDGyeokdongG206Hv   |  9.0| 4. 생활 안내
+11.006 |TTMGothicR          |  8.0| ○ 준비물: 신분증, 침구류, 세면도구, 개인 생활용품
+11.007 |TTMGothicR          |  8.0| ○ 반입 금지: TV, 전열 취사도구, 인화성 물질, 애완동물, 도박성 오락기구, 과도 등
+11.008 |TTMGothicR          |  8.0| ○ 생활수칙: 건물 내 흡연(전자담배 포함) 엄금, 22시 이후 정숙, 01:00 ∼ 05:00 출입 전면 폐쇄
+11.009 |TTMGothicR          |  8.0| ○ 중도퇴사: 퇴사 3일 전까지 포털시스템에서 퇴사신청서 작성 후 사감 확인
+11.010 |TTMGothicR          |  8.0| ○ 환불: 관리비는 기숙사 규정에 따라 차등 정산, 식비는 잔여일수 중 5일을 제외한 일수 기준 환불
+11.011 |TTMGothicR          |  8.0| ○ 중도퇴사자는 해당 학기 및 계절학기 재입사 불가
+11.012 |TTMGothicR          |  8.0| ○ 공동생활 에티켓 준수 (생활관 홈페이지 참조)
+11.013 |TTMGothicR          |  8.0| ○ 객실 내 누전차단기 멀티콘센트 사용, 문어발식 콘센트 연결 금지
+11.014 |TTMGothicR          |  8.0| ○ 유학생 조리실 사용 후 정리정돈 및 위생·청결 유지
+11.015 |TTMGothicR          |  8.0| ○ 문의: 기숙사 행정실 062-670-2803 / https://dorm.gwangju.ac.kr
+11.016 |SDGyeokdongG206Hv   |  9.0| 1. 학사 일정
+11.017 |TTMGothicR          |  8.0| ○ 개강일: 2027. 3. 2.(화)
+11.018 |TTMGothicR          |  8.0| ○ 신·편입생 오리엔테이션: 2027년 2월 말 (세부 일정 개별 안내)
+11.019 |SDGyeokdongG206Hv   |  9.0| 2. 수강신청
+11.020 |TTMGothicR          |  8.0| ○ 상담: 오리엔테이션 이후 소속 학부(과) 상담을 거쳐 수강신청
+11.021 |TTMGothicR          |  8.0| ○ 방법: 광주대학교 포털시스템에서 온라인 신청
+11.022 |TTMGothicR          |  8.0| ○ 수강신청에 관련한 내용은 본교 학칙에 따름
+11.023 |SDGyeokdongG206Hv   |  9.0| 3. 국민건강보험
+11.024 |TTMGothicR          |  8.0| ○ 가입: 국내에서 외국인등록을 마치면 국민건강보험 지역가입자로 자동 가입
+11.025 |TTMGothicR          |  8.0| ○ 보험료: 가입자는 매월 보험료를 납부하여야 하며, 체납 시 비자 연장 등 각종 체류허가가 제한됨
+11.026 |TTMGothicR          |  8.0| ○ 자격 유지: 유학생은 재학 기간 동안 국민건강보험과 민간보험 자격을 모두 유지하여야 함
+===== page 12 =====
+12.000 |TTMGothicR          |  6.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+12.001 |SDGyeokdongG205Bd   |  7.0| 12
+12.002 |SDGdGothic          | 10.0| 10
+12.003 |SDGdGothic          | 10.0| 유의사항
+12.004 |TTMGothicR          |  8.0| 1. 지원자는 두 개 이상의 모집 단위에 중복 지원 불가
+12.005 |TTMGothicR          |  8.0| 2. 원서의 기재 사항은 모두 정확히 입력하여야 하며,
+12.006 |TTMGothicR          |  8.0|     입력 착오·누락·오기 및 제출서류 미비로 발생하는 불이익은 지원자 본인 부담
+12.007 |TTMGothicR          |  8.0| 3. 기재 사항이 사실과 다르거나 입학사정에 중대한 영향을 미칠 사항을 사전에 고지하지 않은 경우
+12.008 |TTMGothicR          |  8.0|     합격 취소
+12.009 |TTMGothicR          |  8.0| 4. 입학사정에 사용된 전형 자료에 주요 사항의 누락·허위·부정이 확인될 경우 입학 전후를 불문하고
+12.010 |TTMGothicR          |  8.0|     합격 및 입학 취소, 재학 중이라도 부정한 방법으로 입학한 사실이 드러나면 입학 허가 취소
+12.011 |TTMGothicR          |  8.0| 5. 제4호에 따라 입학 허가가 취소된 경우 납부한 등록금은 반환하지 않음
+12.012 |TTMGothicR          |  8.0| 6. 입학 성적 및 평가 내용은 공개하지 않음
+12.013 |TTMGothicR          |  8.0| 7. 제출한 원서 및 서류는 합격 여부와 관계없이 반환하지 않으므로, 비자 신청 등에
+12.014 |TTMGothicR          |  8.0|     필요한 서류는 별도 준비 필요
+12.015 |TTMGothicR          |  8.0| 8. 필수 제출 서류를 기한 내 제출하지 않을 경우 면접 대상에서 제외하고 불합격 처리하며,
+12.016 |TTMGothicR          |  8.0|     합격 후 확인된 경우 합격(입학) 무효 처리
+12.017 |TTMGothicR          |  8.0| 9. 졸업예정증명서 제출자는 입학 전까지 졸업증명서를 제출하여야 함
+12.018 |TTMGothicR          |  8.0| 10. 원서 접수가 완료(전형료 결제 및 입금)된 후에는 지원을 취소할 수 없으며 전형료는 반환하지 않음
+12.019 |TTMGothicR          |  8.0| 11. 등록 기간 내 등록금 미납 시 합격 취소
+12.020 |TTMGothicR          |  8.0| 12. 등록을 포기하려는 경우 학기 개시일 7일 전까지 국제협력처에 등록 포기 의사를 통보
+12.021 |TTMGothicR          |  8.0| 13. 복수 대학 합격 시 1개 대학에만 등록하여야 하며, 이중 학적은 금지되므로 학기 개시일(2027. 3. 2.)
+12.022 |TTMGothicR          |  8.0|       이전에 타 대학 학적을 정리하여야 함 (위반 시 입학 취소)
+12.023 |TTMGothicR          |  8.0| 14. 사증(비자) 발급 거부 또는 체류 자격 변경 불허로 입국하지 못한 경우 입학 허가 취소,
+12.024 |TTMGothicR          |  8.0|       등록금은 본교 규정에 따라 반환
+12.025 |TTMGothicR          |  8.0| 15. 신입생은 입학 후 첫 학기 휴학 불가
+12.026 |TTMGothicR          |  8.0| 16. 원서 접수 후 TOPIK 급수 상승 시 면접 심사 전까지 성적증명서를 제출하여야 장학금 산정에 반영
+12.027 |TTMGothicR          |  8.0| 17. 번역 공증·아포스티유·영사 확인 등 인증 절차는 해당 발급기관에 문의
+12.028 |TTMGothicR          |  8.0| 18. 등록금 및 장학금은 본교 규정에 따름
+12.029 |TTMGothicR          |  8.0| 19. 연락처는 전형 기간 중 연락 가능한 것으로 정확히 기재하여야 하며,
+12.030 |TTMGothicR          |  8.0|       연락처 오류로 인한 안내 미수신의 불이익은 지원자 본인 부담
+12.031 |TTMGothicR          |  8.0| 20. 본 요강의 국문본과 다국어 번역본의 내용이 서로 다를 경우 국문본을 우선 적용
+12.032 |TTMGothicR          |  8.0| 21. 본 요강에 명시되지 않은 사항은 본교 학사 관련 규정 및 「외국인 유학생 입학 시행세칙」에 따르며,       
+12.033 |TTMGothicR          |  8.0|       그 밖의 사항은 국제협력처가 정함
+12.034 |TTMGothicR          |  8.0| 22. 문의: 062-670-2855(중국), 2779(베트남), 2569(몽골 및 기타 국가), 2858(영어)
+===== page 13 =====
+13.000 |TTMGothicR          |  6.0| 카카오플러스친구  @광주대학교입학상담
+13.001 |SDGyeokdongG205Bd   |  7.0| 13
+13.002 |SDGyeokdongG206Hv   |  8.0| 2027학년도 1학기 외국인 학부 신·편입생 특별전형 모집요강
+13.003 |SDGdGothic          | 10.0| 11
+13.004 |SDGdGothic          | 10.0| 캠퍼스 안내
+13.005 |TTMGothicL          |  7.5| ※ 건물 위치 및 내부 VR 보기: https://www.gwangju.ac.kr/page/?site=pvr&mn=871
+13.006 |TTMGothicL          |  7.5| ※ 주소: (61743) 전남광주통합특별시 남구 효덕로 277 광주대학교 국제협력처
+13.007 |TTMGothicB          |  8.0| 언어 · 국가
+13.008 |TTMGothicB          |  8.0| 전화번호
+13.009 |TTMGothicB          |  8.0| 언어 · 국가
+13.010 |TTMGothicB          |  8.0| 전화번호
+13.011 |TTMGothicSB         |  8.0| 중국
+13.012 |TTMGothicR          |  8.0| +82-62-670-2855
+13.013 |TTMGothicSB         |  8.0| 베트남
+13.014 |TTMGothicR          |  8.0| +82-62-670-2779
+13.015 |TTMGothicSB         |  8.0| 영어
+13.016 |TTMGothicR          |  8.0| +82-62-670-2858
+13.017 |TTMGothicSB         |  8.0|  몽골 및 기타 국가
+13.018 |TTMGothicR          |  8.0| +82-62-670-2569
+13.019 |SDGyeokdongG206Hv   |  9.0| 문의처
+===== page 14 =====
+14.000 |SDGyeokdongG206Hv   | 15.0| memo.
+===== page 15 =====
+===== page 16 =====

@@ -1,0 +1,141 @@
+FIT  p4 lines 1->2 size 8.00->8.00 | Document Screening
+FIT  p4 lines 1->2 size 8.00->8.00 | Announcement of Results
+FIT  p4 lines 1->2 size 8.00->7.00 | Issuance of Standard Admission Letter
+FIT  p4 lines 1->2 size 8.00->8.00 | Issued after tuition payment and verification of submitted d
+FIT  p4 lines 1->2 size 8.00->8.00 | Document Screening
+FIT  p4 lines 1->2 size 8.00->6.75 | Announcement of Results
+FIT  p4 lines 1->2 size 8.00->8.00 | Tuition Payment
+FIT  p4 lines 1->2 size 8.00->7.00 | Issuance of Standard Admission Letter
+FIT  p4 lines 1->2 size 8.00->8.00 | Visa Application
+FIT  p4 lines 1->2 size 8.00->7.00 | Arrival · Start of Semester
+FIT  p4 lines 2->3 size 8.00->6.75 | ○ Verification of eligibility, academic records, language pr
+FIT  p4 lines 1->2 size 8.00->7.00 | Document Screening
+FIT  p4 lines 1->2 size 8.00->7.00 | ○ Comprehensive assessment of language proficiency, academic
+FIT  p4 lines 1->1 size 8.00->7.75 | Interview
+FIT  p4 lines 1->2 size 8.00->7.00 | Selection Criteria
+FIT  p4 lines 1->2 size 8.00->7.00 | ○ Applicants who pass the document screening and score 70 or
+FIT  p4 lines 1->2 size 8.00->8.00 | ※ Application fee: KRW 50,000 (Gwangju Bank 1127-020-252652,
+FIT  p5 lines 2->3 size 8.00->7.00 | ○ Foreign nationals whose parents are both foreign nationals
+FIT  p5 lines 2->3 size 8.00->8.00 | ○ Graduates or prospective graduates who completed, in Korea
+FIT  p5 lines 2->3 size 8.00->5.75 | ○ Applicants who have completed (or will complete) at least 
+FIT  p5 lines 2->4 size 8.00->6.00 | ○ Applicants who have completed (or will complete) at least 
+FIT  p5 lines 6->7 size 8.00->7.00 | ○ TOPIK Level 3 or higher (TOPIK IBT included), or an equiva
+FIT  p5 lines 2->3 size 8.00->8.00 | Korean Track/(Qualified Applicants)
+FIT  p5 lines 7->7 size 8.00->7.50 | ○ Applicants who do not meet the Korean proficiency requirem
+FIT  p5 lines 2->3 size 8.00->8.00 | Korean Track/(Bilingual Program)
+FIT  p5 lines 1->2 size 8.00->8.00 | Language Proficiency
+FIT  p5 lines 6->7 size 8.00->8.00 | ○ Holders of TOEFL PBT 530·CBT 210·iBT 80, IELTS 5.5, TEPS 6
+FIT  p5 lines 1->2 size 8.00->8.00 | ○ TOPIK Level 4 or higher, or an equivalent qualification (L
+FIT  p5 lines 1->2 size 8.00->8.00 | Graduation Requirement
+FIT  p5 lines 4->5 size 7.50->7.50 | ※ Only language test scores valid as of the application clos
+FIT  p6 lines 2->2 size 7.50->6.75 | ○ Application, study plan, self-introduction, financial affi
+FIT  p6 lines 1->2 size 8.00->8.00 | Application form/(University format)
+FIT  p6 lines 1->2 size 8.00->8.00 | Copy of passport and/two passport photos
+FIT  p6 lines 1->2 size 7.50->7.50 | ○ Passport valid for at least six months from the date of ad
+FIT  p6 lines 1->2 size 8.00->8.00 | Copies of the applicant’s/and parents’ ID cards
+FIT  p6 lines 3->4 size 7.50->7.50 | ○ China: copy of the household register (if two or more, a n
+FIT  p6 lines 1->2 size 8.00->8.00 | Copy of Alien/Registration Card
+FIT  p6 lines 8->12 size 7.50->6.50 | ○ (Freshman) High school graduation (or expected) certificat
+FIT  p6 lines 1->2 size 8.00->8.00 | Graduation certificate and/transcript (last school)
+FIT  p6 lines 1->2 size 8.00->8.00 | Financial guarantee/documents
+FIT  p6 lines 4->5 size 7.50->7.50 | ○ Employment: issued by the employer (self-employed: copy of
+FIT  p6 lines 1->3 size 8.00->8.00 | Parents’ certificate of/employment and proof of/income
+FIT  p6 lines 3->4 size 7.50->7.50 | ○ Only for applicable applicants (e.g. TOPIK score report)/※
+FIT  p6 lines 1->2 size 8.00->8.00 | Language proficiency/certificate
+FIT  p6 lines 1->2 size 8.00->7.00 | Consent to academic records/verification (University format)
+FIT  p6 lines 1->2 size 7.50->7.50 | ○ Used to verify the authenticity of submitted documents
+FIT  p6 lines 2->3 size 7.50->7.50 | ※ Documents written in a language other than Korean or Engli
+FIT  p7 lines 1->2 size 8.00->7.00 | Korean Track
+FIT  p7 lines 1->2 size 8.00->7.00 | English Track
+FIT  p7 lines 1->2 size 8.00->7.00 | Tuition (KRW)
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.50 | Food Science & Nutrition
+FIT  p7 lines 1->1 size 8.00->7.25 | Fashion & Jewelry Design
+FIT  p7 lines 1->2 size 8.00->6.75 | Photography, Image & Media
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->2 size 8.00->6.75 | Hotel Culinary & Baking Arts
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.75 | Education & Counseling
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 4->5 size 8.00->7.00 | College of/Humanities &/Social Sciences
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->2 size 8.00->6.75 | Library & Information Sciences
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.50 | Business Administration
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p7 lines 1->1 size 8.00->7.25 | Architectural Engineering
+FIT  p7 lines 2->2 size 8.00->7.00 | College of/Engineering
+FIT  p7 lines 1->2 size 8.00->6.75 | Mechanical & Automotive Engineering
+FIT  p7 lines 1->1 size 8.00->7.75 | Hum.·Social
+FIT  p8 lines 1->2 size 8.00->8.00 | Tuition (KRW)
+FIT  p8 lines 1->1 size 8.00->5.75 | Bilingual Program
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 3->4 size 8.00->8.00 | College of/Health Welfare
+FIT  p8 lines 1->1 size 8.00->7.50 | Food Science & Nutrition
+FIT  p8 lines 1->1 size 8.00->6.75 | Arts & P.E.
+FIT  p8 lines 1->1 size 8.00->6.75 | Arts & P.E.
+FIT  p8 lines 1->1 size 8.00->6.75 | Arts & P.E.
+FIT  p8 lines 1->1 size 8.00->6.75 | Arts & P.E.
+FIT  p8 lines 3->4 size 8.00->8.00 | College of/Cultural Industry
+FIT  p8 lines 1->1 size 8.00->7.25 | Fashion & Jewelry Design
+FIT  p8 lines 1->1 size 8.00->6.75 | Arts & P.E.
+FIT  p8 lines 1->1 size 8.00->6.75 | Arts & P.E.
+FIT  p8 lines 1->1 size 8.00->6.75 | Arts & P.E.
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->1 size 8.00->6.50 | Hotel Culinary & Baking Arts
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->2 size 8.00->6.50 | Youth Counseling & Lifelong Education
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 4->5 size 8.00->6.50 | College of/Humanities &/Social Sciences
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->2 size 8.00->6.50 | Library & Information Sciences
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->1 size 8.00->7.75 | Business Administration
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->1 size 8.00->5.50 | Hum.·Social
+FIT  p8 lines 1->1 size 8.00->5.75 | Engineering
+FIT  p8 lines 1->1 size 8.00->5.75 | Engineering
+FIT  p8 lines 2->2 size 8.00->6.25 | College of/Engineering
+FIT  p8 lines 1->1 size 8.00->5.75 | Engineering
+FIT  p8 lines 1->1 size 8.00->5.75 | Engineering
+FIT  p8 lines 1->2 size 8.00->6.50 | Mechanical & Automotive Engineering
+FIT  p8 lines 1->1 size 8.00->5.75 | Engineering
+FIT  p9 lines 1->2 size 8.00->6.00 | Where to Apply
+FIT  p9 lines 1->2 size 8.00->6.00 | Type of Application
+FIT  p9 lines 1->2 size 8.00->6.00 | When to Apply
+FIT  p9 lines 3->4 size 8.00->5.75 | ○ The University sends the visa documents after tuition paym
+FIT  p9 lines 2->3 size 8.00->6.50 | ○ Attend the OIA briefing on change of status/○ Prepare the 
+FIT  p9 lines 2->4 size 8.00->5.50 | ○ Apply before the stay expires and the semester begins/○ Re
+FIT  p9 lines 1->2 size 8.00->8.00 | Important Notes
+FIT  p9 lines 1->2 size 8.00->8.00 | ○ Complete alien registration immediately after arrival
+FIT  p9 lines 3->4 size 8.00->8.00 | Korean Track and/Bilingual Program
+FIT  p9 lines 1->2 size 8.00->8.00 | English Track
+FIT  p9 lines 1->1 size 8.00->6.75 | 20% tuition reduction
+FIT  p9 lines 1->1 size 8.00->6.75 | 30% tuition reduction
+FIT  p9 lines 2->3 size 8.00->8.00 | Language Proficiency/Scholarship
+FIT  p9 lines 1->1 size 8.00->6.75 | 40% tuition reduction
+FIT  p9 lines 1->1 size 8.00->6.75 | 50% tuition reduction
+FIT  p9 lines 1->3 size 8.00->8.00 | Academic Excellence/Scholarship
+FIT  p9 lines 3->5 size 7.50->7.50 | ※ The Academic Excellence Scholarship is based on a 4.5 scal
+FIT  p10 lines 4->6 size 8.00->8.00 | ○ Entering students may choose between the dormitory and off
+FIT  p10 lines 1->1 size 8.00->7.75 | Meal fee (130 days, KRW 4,500 per meal)
+FIT  p10 lines 5->7 size 7.50->7.50 | ※ Double and triple rooms may be applied for only within the
+FIT  p10 lines 1->2 size 8.00->8.00 | Choose dormitory
+FIT  p10 lines 1->2 size 8.00->7.00 | Room assignment
+FIT  p10 lines 7->10 size 8.00->7.00 | ○ Application: dormitory website → application for entering 
+FIT  p11 lines 10->15 size 8.00->7.00 | ○ What to bring: ID card, bedding, toiletries and personal i
+FIT  p11 lines 2->3 size 8.00->8.00 | ○ First day of class: 2027. 3. 2.(Tue)/○ Orientation for ent
+FIT  p11 lines 3->4 size 8.00->8.00 | ○ Advising: register for courses after consulting your depar
+FIT  p11 lines 3->6 size 8.00->8.00 | ○ Enrollment: once alien registration is completed in Korea,
+FIT  p12 lines 30->44 size 8.00->8.00 | 2. All entries on the application must be accurate; applican
+FIT  p13 lines 2->3 size 7.50->7.50 | ※ Building locations and interior VR tour: https://www.gwang
+FIT  p13 lines 1->1 size 8.00->7.75 | Language · Country
+FIT  p13 lines 1->1 size 8.00->7.75 | Language · Country
+FIT  p13 lines 1->2 size 8.00->8.00 | Mongolian & Other Countries
