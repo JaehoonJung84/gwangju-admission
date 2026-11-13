@@ -1,0 +1,256 @@
+MISS p1.02 2027학년도 전기 광주대학교
+MISS p1.03 외국인 신·편입생 특별전형 모집요강
+MISS p1.04 대학원
+FIT  p4 lines 1->2 size 8.00->7.00 | Announcement of Results
+FIT  p4 lines 1->2 size 8.00->7.00 | Issuance of Standard Admission Letter
+FIT  p4 lines 1->1 size 8.00->7.25 | Issued after tuition payment and verification of submitted d
+FIT  p4 lines 1->2 size 8.00->8.00 | Document Screening
+FIT  p4 lines 1->2 size 8.00->6.75 | Announcement of Results
+FIT  p4 lines 1->2 size 8.00->8.00 | Tuition Payment
+FIT  p4 lines 1->2 size 8.00->7.00 | Issuance of Standard Admission Letter
+FIT  p4 lines 1->2 size 8.00->8.00 | Visa Application
+FIT  p4 lines 1->2 size 8.00->7.00 | Arrival · Start of Semester
+FIT  p4 lines 2->3 size 8.00->7.00 | ○ Verification of eligibility, previous academic records, la
+FIT  p4 lines 1->2 size 8.00->7.00 | Document Screening
+FIT  p4 lines 1->2 size 8.00->7.00 | ○ Comprehensive assessment of aptitude for the major, langua
+FIT  p4 lines 1->1 size 8.00->7.75 | Interview
+FIT  p4 lines 2->3 size 8.00->5.75 | ○ Applicants who pass the document screening and score 70 or
+FIT  p4 lines 1->2 size 8.00->8.00 | Selection Criteria
+FIT  p4 lines 1->1 size 8.00->7.75 | ※ Application fee: KRW 50,000 (Gwangju Bank 1127-020-252652,
+FIT  p5 lines 1->2 size 8.00->8.00 | 2027 Spring Special Admission for International Graduate Stu
+FIT  p5 lines 2->3 size 8.00->7.00 | ○ Foreign nationals whose parents are both foreign nationals
+FIT  p5 lines 3->4 size 8.00->6.75 | ○ Holders of a bachelor’s degree from a university in Korea 
+FIT  p5 lines 3->4 size 8.00->6.75 | ○ Holders of a master’s degree from a university in Korea or
+FIT  p5 lines 2->3 size 8.00->8.00 | ○ Applicants majoring in the same field who have completed a
+FIT  p5 lines 2->3 size 8.00->8.00 | ○ Applicants majoring in the same field who have completed a
+FIT  p5 lines 4->4 size 8.00->7.50 | ○ TOPIK Level 3 or higher (TOPIK IBT included), or an equiva
+FIT  p5 lines 2->3 size 8.00->8.00 | Korean Track/(Qualified Applicants)
+FIT  p5 lines 1->2 size 8.00->8.00 | Language Proficiency
+FIT  p5 lines 7->7 size 8.00->7.75 | ○ Applicants who do not meet the Korean proficiency requirem
+FIT  p5 lines 2->3 size 8.00->8.00 | Korean Track/(Bilingual Program)
+FIT  p5 lines 3->4 size 7.50->7.50 | ※ Only language test scores valid as of the application clos
+FIT  p6 lines 2->3 size 7.50->6.50 | ○ Application, study and research plan, self-introduction/○ 
+FIT  p6 lines 1->2 size 8.00->8.00 | Application form/(University format)
+FIT  p6 lines 1->2 size 8.00->8.00 | Copy of passport and/two passport photos
+FIT  p6 lines 1->2 size 7.50->7.50 | ○ Passport valid for at least six months from the date of ad
+FIT  p6 lines 1->2 size 8.00->8.00 | Copies of the applicant’s/and parents’ ID cards
+FIT  p6 lines 3->5 size 7.50->6.50 | ○ China: copy of the household register (if two or more, a n
+FIT  p6 lines 1->2 size 8.00->8.00 | Copy of Alien/Registration Card
+FIT  p6 lines 6->11 size 7.50->5.75 | ○ (Master’s applicants) University graduation (or expected g
+FIT  p6 lines 2->3 size 8.00->8.00 | Previous university (graduate/school) diploma
+FIT  p6 lines 3->5 size 7.50->6.50 | ○ (Master’s applicants) University transcripts for all years
+FIT  p6 lines 1->2 size 8.00->7.00 | Transcript from the previous/university (graduate school)
+FIT  p6 lines 1->2 size 8.00->8.00 | Summary of the/master’s thesis
+FIT  p6 lines 1->2 size 7.50->7.50 | ○ Only for applicable doctoral applicants (within three A4 p
+FIT  p6 lines 3->5 size 7.50->6.50 | ○ Applicants in Korea: Korean bank balance certificate of KR
+FIT  p6 lines 1->2 size 8.00->8.00 | Financial guarantee/documents
+FIT  p6 lines 3->4 size 7.50->6.50 | ○ Employment: issued by the employer (self-employed: busines
+FIT  p6 lines 1->3 size 8.00->5.25 | Parents’ certificate of/employment and proof of/income
+FIT  p6 lines 2->3 size 7.50->6.50 | ○ Korean Track (qualified applicants): one TOPIK score repor
+FIT  p6 lines 1->2 size 8.00->8.00 | Official language/score report
+FIT  p6 lines 3->4 size 7.50->6.00 | ※ All documents must have been issued within the last three 
+FIT  p7 lines 1->2 size 8.00->8.00 | 2027 Spring Special Admission for International Graduate Stu
+FIT  p7 lines 1->2 size 8.00->8.00 | Tuition (KRW)
+FIT  p7 lines 1->2 size 8.00->5.50 | Bilingual Program
+FIT  p7 lines 1->2 size 8.00->7.00 | Business Administration
+FIT  p7 lines 1->2 size 8.00->7.00 | Business Administration
+FIT  p7 lines 1->1 size 8.00->7.25 | Accounting, Taxation
+FIT  p7 lines 1->2 size 8.00->7.00 | Logistics & Distribution Management
+FIT  p7 lines 1->2 size 8.00->7.00 | Logistics & Distribution Mgmt.
+FIT  p7 lines 1->2 size 8.00->7.00 | Hotel & Tourism Management
+FIT  p7 lines 1->2 size 8.00->7.00 | Hotel & Tourism Mgmt.
+FIT  p7 lines 1->1 size 8.00->5.00 | Hum.·Social
+FIT  p7 lines 1->2 size 8.00->7.00 | Hotel & Food Service Culinary Arts
+FIT  p7 lines 1->2 size 8.00->7.00 | Hotel & Food Service Culinary Arts
+FIT  p7 lines 1->2 size 8.00->7.00 | Early Childhood Education
+FIT  p7 lines 1->2 size 8.00->7.00 | Early Childhood Education
+FIT  p7 lines 1->2 size 8.00->7.00 | Library & Information Sciences
+FIT  p7 lines 1->2 size 8.00->7.00 | Library & Information Science
+FIT  p7 lines 1->2 size 8.00->7.00 | Urban Regeneration & Real Estate
+FIT  p7 lines 1->2 size 8.00->7.00 | Urban Regeneration, Real Estate
+FIT  p7 lines 1->2 size 8.00->7.00 | Computer Engineering
+FIT  p7 lines 1->1 size 8.00->7.25 | Computer Engineering
+FIT  p7 lines 1->2 size 8.00->7.00 | Information & Communication Eng.
+FIT  p7 lines 1->2 size 8.00->7.00 | Information & Communication
+FIT  p7 lines 1->2 size 8.00->7.00 | Architectural Engineering
+FIT  p7 lines 1->2 size 8.00->7.00 | Architectural Engineering
+FIT  p7 lines 1->1 size 8.00->5.25 | Engineering
+FIT  p7 lines 2->3 size 8.00->6.00 | Energy Convergence, Mechanical & Automotive Convergence
+FIT  p7 lines 1->2 size 8.00->8.00 | Future Convergence Technology Eng.
+FIT  p7 lines 1->2 size 8.00->7.00 | Disaster Prevention & Safety Eng.
+FIT  p7 lines 1->2 size 8.00->7.00 | Disaster Prevention & Safety Eng.
+FIT  p7 lines 2->3 size 8.00->8.00 | Visual & Media, Industrial, Jewelry, Interior
+FIT  p7 lines 1->2 size 8.00->8.00 | Arts & P.E.
+FIT  p7 lines 2->3 size 8.00->8.00 | Hair Care, Skin Care, Makeup, Nail Art
+FIT  p7 lines 2->3 size 8.00->8.00 | Food & Nutrition, Coffee Industry Convergence
+FIT  p7 lines 1->2 size 8.00->8.00 | Food Science & Nutrition
+FIT  p7 lines 1->2 size 8.00->8.00 | Natural Science
+FIT  p8 lines 1->2 size 8.00->8.00 | Tuition (KRW)
+FIT  p8 lines 1->1 size 8.00->5.50 | Bilingual Program
+FIT  p8 lines 1->2 size 8.00->8.00 | Business Administration
+FIT  p8 lines 1->2 size 8.00->8.00 | Business Administration
+FIT  p8 lines 1->2 size 8.00->8.00 | Accounting, Taxation
+FIT  p8 lines 1->2 size 8.00->7.00 | Logistics & Distribution Management
+FIT  p8 lines 1->2 size 8.00->6.50 | Logistics & Distribution Mgmt.
+FIT  p8 lines 1->2 size 8.00->8.00 | Urban Regeneration & Real Estate
+FIT  p8 lines 1->2 size 8.00->5.75 | Urban Regeneration, Real Estate
+FIT  p8 lines 1->2 size 8.00->8.00 | Hotel & Tourism Management
+FIT  p8 lines 1->2 size 8.00->8.00 | Hotel & Tourism Mgmt.
+FIT  p8 lines 1->2 size 8.00->8.00 | Lifelong Education
+FIT  p8 lines 1->2 size 8.00->8.00 | Early Childhood Education
+FIT  p8 lines 1->2 size 8.00->7.00 | Early Childhood Education
+FIT  p8 lines 1->1 size 8.00->6.75 | Entrepreneurship
+FIT  p8 lines 1->2 size 8.00->8.00 | Single Dept.
+FIT  p8 lines 2->4 size 8.00->6.00 | Korean Language·Culture Education, Culture Education Content
+FIT  p8 lines 1->2 size 8.00->7.00 | Korean Language·Culture Education Contents
+FIT  p8 lines 1->2 size 8.00->8.00 | Civil Engineering
+FIT  p8 lines 2->4 size 8.00->5.75 | Energy Convergence, Mechanical & Automotive Convergence
+FIT  p8 lines 1->2 size 8.00->8.00 | Future Convergence Technology Eng.
+FIT  p8 lines 1->2 size 8.00->8.00 | Disaster Prevention & Safety Eng.
+FIT  p8 lines 1->2 size 8.00->6.00 | Disaster Prevention & Safety Eng.
+FIT  p8 lines 2->3 size 8.00->7.00 | Visual & Media, Industrial, Jewelry, Interior
+FIT  p8 lines 2->3 size 8.00->8.00 | Hair Care, Skin Care, Makeup, Nail Art
+FIT  p8 lines 1->2 size 8.00->6.50 | Police, Law, Public Administration
+FIT  p8 lines 1->2 size 8.00->8.00 | Police·Judicial·Public Administration
+FIT  p8 lines 1->2 size 8.00->6.25 | Inter-/disciplinary
+FIT  p8 lines 1->2 size 8.00->8.00 | Photonics·Info. Communication Eng.
+FIT  p8 lines 1->2 size 8.00->5.25 | Photonics, Information & Communication
+FIT  p9 lines 1->2 size 8.00->8.00 | 2027 Spring Special Admission for International Graduate Stu
+FIT  p9 lines 1->2 size 8.00->8.00 | Tuition (KRW)
+FIT  p9 lines 1->2 size 8.00->5.50 | Bilingual Program
+FIT  p9 lines 1->2 size 8.00->7.00 | Youth Education & Counseling
+FIT  p9 lines 1->2 size 8.00->7.00 | Clinical & Counseling Psychology
+FIT  p9 lines 1->2 size 8.00->6.75 | Clinical Psychology, Counseling Psychology
+FIT  p9 lines 2->1 size 8.00->4.75 | Hum.·Social
+FIT  p9 lines 1->2 size 8.00->7.00 | Health Care Management
+FIT  p9 lines 1->2 size 8.00->7.00 | Korean Language Education
+FIT  p9 lines 1->2 size 8.00->7.00 | Entrepreneurship, Franchising
+FIT  p9 lines 1->2 size 8.00->6.00 | Clinical Speech-Language Therapy
+FIT  p9 lines 1->2 size 8.00->6.25 | Clinical Speech-Language Therapy
+FIT  p9 lines 1->1 size 8.00->7.25 | Occupational Therapy
+FIT  p9 lines 1->1 size 8.00->7.00 | Occupational Therapy
+FIT  p9 lines 1->2 size 8.00->7.00 | Arts & P.E.
+FIT  p9 lines 3->4 size 7.50->7.50 | ※ Duration: Master’s 2 years (24 credits), Doctoral 2 years 
+FIT  p9 lines 1->2 size 8.00->6.00 | Where to Apply
+FIT  p9 lines 1->2 size 8.00->6.00 | Type of Application
+FIT  p9 lines 1->2 size 8.00->6.00 | When to Apply
+FIT  p9 lines 3->4 size 8.00->5.75 | ○ The University sends the visa documents after tuition paym
+FIT  p9 lines 2->3 size 8.00->6.50 | ○ Attend the OIA briefing on change of status/○ Prepare the 
+FIT  p9 lines 2->4 size 8.00->5.50 | ○ Apply before the stay expires and the semester begins/○ Re
+FIT  p9 lines 1->2 size 8.00->8.00 | ○ Complete alien registration immediately after arrival
+FIT  p9 lines 1->2 size 8.00->8.00 | Important Notes
+FIT  p10 lines 1->2 size 7.50->6.50 | ※ Only the single internal scholarship most favourable to th
+FIT  p10 lines 1->1 size 8.00->6.75 | Scholarship
+FIT  p10 lines 1->2 size 8.00->7.00 | TOPIK Scholarship
+FIT  p10 lines 1->2 size 7.50->7.50 | ※ For students admitted to the Bilingual Program, the schola
+FIT  p10 lines 1->2 size 8.00->6.25 | As specified in the special recommendation
+FIT  p10 lines 1->2 size 8.00->8.00 | Hosim Special/Scholarship
+FIT  p10 lines 1->2 size 8.00->8.00 | Those who have contributed to the development of the Univers
+FIT  p10 lines 2->3 size 8.00->8.00 | Admission fee waived/Tuition 50%
+FIT  p10 lines 1->2 size 8.00->8.00 | Hosim Scholarship
+FIT  p10 lines 1->2 size 8.00->8.00 | Holders of a bachelor’s or master’s degree from this Univers
+FIT  p10 lines 1->2 size 8.00->8.00 | Special Scholarship
+FIT  p10 lines 1->2 size 8.00->8.00 | Tuition as designated
+FIT  p10 lines 3->3 size 8.00->7.25 | Admission fee waived/Master’s: tuition 70%/Doctoral: tuition
+FIT  p10 lines 2->3 size 8.00->7.00 | Faculty and staff of the University and its foundation who a
+FIT  p10 lines 1->2 size 8.00->7.00 | Faculty & Staff/Welfare Scholarship
+FIT  p10 lines 1->2 size 8.00->6.00 | Graduate Alumni/Association Scholarship
+FIT  p10 lines 1->2 size 8.00->5.75 | Industry-Academic/Cooperation Scholarship
+FIT  p10 lines 1->2 size 8.00->8.00 | As designated / for service
+FIT  p10 lines 1->2 size 8.00->8.00 | Other external/scholarships
+FIT  p11 lines 1->2 size 8.00->8.00 | 2027 Spring Special Admission for International Graduate Stu
+FIT  p11 lines 4->6 size 8.00->8.00 | ○ Entering students may choose between the dormitory and off
+FIT  p11 lines 1->2 size 8.00->8.00 | Meal fee (130 days, KRW 4,500 per meal)
+FIT  p11 lines 5->7 size 7.50->6.50 | ※ Double and triple rooms may be applied for only within the
+FIT  p11 lines 1->2 size 8.00->8.00 | Choose dormitory
+FIT  p11 lines 1->2 size 8.00->6.25 | Room assignment
+FIT  p11 lines 6->12 size 8.00->8.00 | ○ Application: dormitory website → application for entering 
+FIT  p12 lines 10->15 size 8.00->7.00 | ○ What to bring: ID card, bedding, toiletries and personal i
+FIT  p12 lines 2->3 size 8.00->8.00 | ○ First day of class: 2027. 3. 2.(Tue)/○ Orientation for ent
+FIT  p12 lines 2->2 size 8.00->7.00 | ○ Duration: Master’s 2 years (24 credits), Doctoral 2 years 
+FIT  p12 lines 2->3 size 8.00->8.00 | Thesis-substitute coursework (courses taken instead of writi
+FIT  p12 lines 1->2 size 8.00->7.00 | Graduate School of Health, Counseling & Policy
+FIT  p12 lines 1->1 size 8.00->7.50 | ○ Graduation language requirement: TOPIK Level 4 or higher, 
+FIT  p12 lines 2->3 size 8.00->8.00 | ○ Advising: register for courses after consulting the chair 
+FIT  p12 lines 3->6 size 8.00->6.00 | ○ Enrollment: once alien registration is completed in Korea,
+FIT  p13 lines 1->2 size 8.00->8.00 | 2027 Spring Special Admission for International Graduate Stu
+FIT  p13 lines 30->44 size 8.00->8.00 | 1. Applicants may not apply to more than one program/2. All 
+FIT  p14 lines 1->2 size 8.00->7.00 | Department Chair
+FIT  p14 lines 1->2 size 8.00->8.00 | Nam A-yeong
+FIT  p14 lines 1->2 size 8.00->8.00 | Cho Yu-geun
+FIT  p14 lines 1->2 size 8.00->8.00 | Logistics & Distribution Management
+FIT  p14 lines 1->2 size 8.00->8.00 | Kim Hyeon-jong
+FIT  p14 lines 1->2 size 8.00->8.00 | Hotel & Tourism Management
+FIT  p14 lines 1->2 size 8.00->8.00 | Kim Jeong-hun
+FIT  p14 lines 1->2 size 8.00->8.00 | Hotel & Food Service Culinary Arts
+FIT  p14 lines 1->2 size 8.00->8.00 | Kim Heon-cheol
+FIT  p14 lines 1->2 size 8.00->8.00 | Jung Bo-seong
+FIT  p14 lines 1->2 size 8.00->8.00 | Kim Ho-hyeon
+FIT  p14 lines 1->2 size 8.00->8.00 | Library & Information Sciences
+FIT  p14 lines 1->2 size 8.00->8.00 | Urban Regeneration & Real Estate
+FIT  p14 lines 1->2 size 8.00->8.00 | Kim Hang-jip
+FIT  p14 lines 1->2 size 8.00->8.00 | Information & Communication Eng.
+FIT  p14 lines 1->2 size 8.00->7.00 | Kim Gwang-hyeon
+FIT  p14 lines 1->2 size 8.00->8.00 | Kang Gyeong-o
+FIT  p14 lines 1->2 size 8.00->8.00 | Yang Won-yeong
+FIT  p14 lines 1->2 size 8.00->8.00 | Moon Han-sol
+FIT  p14 lines 1->2 size 8.00->8.00 | Future Convergence Technology Eng.
+FIT  p14 lines 1->2 size 8.00->8.00 | Choi Jae-hyeok
+FIT  p14 lines 1->2 size 8.00->8.00 | Disaster Prevention & Safety Eng.
+FIT  p14 lines 1->2 size 8.00->7.00 | Song Chang-yeong
+FIT  p14 lines 1->2 size 8.00->8.00 | Yoon Tae-jun
+FIT  p14 lines 1->2 size 8.00->8.00 | Park Hye-seon
+FIT  p14 lines 1->2 size 8.00->8.00 | Cho Dae-yeon
+FIT  p14 lines 1->2 size 8.00->8.00 | Natural Science
+FIT  p14 lines 1->2 size 8.00->8.00 | Heo Seung-yeon
+FIT  p15 lines 1->2 size 8.00->8.00 | 2027 Spring Special Admission for International Graduate Stu
+FIT  p15 lines 1->2 size 8.00->7.00 | Department Chair
+FIT  p15 lines 1->1 size 8.00->7.25 | Nam A-yeong
+FIT  p15 lines 1->1 size 8.00->7.75 | Cho Yu-geun
+FIT  p15 lines 1->1 size 8.00->6.00 | Logistics & Distribution Management
+FIT  p15 lines 1->1 size 8.00->6.00 | Kim Hyeon-jong
+FIT  p15 lines 1->1 size 8.00->6.75 | Urban Regeneration & Real Estate
+FIT  p15 lines 1->1 size 8.00->7.50 | Kim Hang-jip
+FIT  p15 lines 1->1 size 8.00->7.50 | Hotel & Tourism Management
+FIT  p15 lines 1->1 size 8.00->6.25 | Kim Jeong-hun
+FIT  p15 lines 1->1 size 8.00->6.50 | Park Jin-yeong
+FIT  p15 lines 1->1 size 8.00->6.75 | Kim Ho-hyeon
+FIT  p15 lines 1->1 size 8.00->7.00 | Yoon In-cheol
+FIT  p15 lines 1->2 size 8.00->5.25 | Korean Language·Culture Education Contents
+FIT  p15 lines 1->1 size 8.00->7.75 | Jin Jae-seop
+FIT  p15 lines 1->1 size 8.00->6.25 | Kang Gyeong-o
+FIT  p15 lines 1->1 size 8.00->6.00 | Future Convergence Technology Eng.
+FIT  p15 lines 1->1 size 8.00->6.25 | Choi Jae-hyeok
+FIT  p15 lines 1->1 size 8.00->6.75 | Disaster Prevention & Safety Eng.
+FIT  p15 lines 1->2 size 8.00->5.25 | Song Chang-yeong
+FIT  p15 lines 1->1 size 8.00->6.75 | Park Hye-seon
+FIT  p15 lines 1->1 size 8.00->6.25 | Moon Deok-hui
+FIT  p15 lines 1->1 size 8.00->6.50 | Jung Bo-seong
+FIT  p15 lines 1->2 size 8.00->5.25 | Police·Judicial·Public Administration (Police)
+FIT  p15 lines 1->2 size 8.00->5.25 | Police·Judicial·Public Administration (Law)
+FIT  p15 lines 1->2 size 8.00->5.25 | Cheon Seong-gwon
+FIT  p15 lines 1->2 size 8.00->8.00 | Inter-/disciplinary
+FIT  p15 lines 1->2 size 8.00->5.25 | Photonics·Info. Communication Eng. (Photonics)
+FIT  p15 lines 1->1 size 8.00->6.00 | Park Chang-gyu
+FIT  p15 lines 1->1 size 8.00->5.25 | Photonics·Info. Communication Eng. (ICT)
+FIT  p15 lines 1->1 size 8.00->5.25 | Kim Gwang-hyeon
+FIT  p15 lines 1->2 size 8.00->7.00 | Department Chair
+FIT  p15 lines 1->1 size 8.00->6.50 | Park Jin-yeong
+FIT  p15 lines 1->1 size 8.00->7.50 | Youth Education & Counseling
+FIT  p15 lines 1->1 size 8.00->6.75 | Lee Eung-taek
+FIT  p15 lines 1->1 size 8.00->6.75 | Clinical & Counseling Psychology
+FIT  p15 lines 1->1 size 8.00->6.75 | Park Ju-yeong
+FIT  p15 lines 1->1 size 8.00->6.75 | Yang Yu-jeong
+FIT  p15 lines 1->1 size 8.00->7.75 | Jin Jae-seop
+FIT  p15 lines 1->1 size 8.00->7.00 | Yoon In-cheol
+FIT  p15 lines 1->1 size 8.00->5.75 | Nam Yun-gyeong
+FIT  p15 lines 1->1 size 8.00->7.25 | Son Eun-nam
+FIT  p15 lines 1->1 size 8.00->6.50 | Clinical Speech-Language Therapy
+FIT  p15 lines 1->2 size 8.00->8.00 | Natural Science
+FIT  p15 lines 1->1 size 8.00->6.25 | Moon Deok-hui
+FIT  p15 lines 1->1 size 8.00->7.75 | Heo Myeong
+FIT  p15 lines 1->1 size 7.50->5.50 | ※ Department chairs and contact numbers are those in the 202
+FIT  p16 lines 2->3 size 8.00->7.00 | ※ Building locations and interior VR tour: https://www.gwang
+FIT  p16 lines 1->2 size 8.00->7.00 | Language · Country
+FIT  p16 lines 1->2 size 8.00->7.00 | Language · Country
+FIT  p16 lines 1->2 size 8.00->8.00 | Mongolian & Other Countries

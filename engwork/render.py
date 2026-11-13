@@ -100,7 +100,7 @@ def layout_lines(c, en, in_table):
                 return s, lines, left, avail, w
             if s == size and fits_row(s, len(lines)):
                 return s, lines, left, avail, w
-        if s <= size * 0.70 + 0.001:
+        if s <= size * 0.60 + 0.001:
             break
         s = round(s - 0.25, 2)
     good = [(s, l) for s, l in cand if not wide(l, s)]
@@ -127,8 +127,13 @@ def draw_cell(page, c, en):
     else:
         if n0 >= 2:
             lead = (c['lines'][-1]['origin'][1] - c['lines'][0]['origin'][1]) / (n0 - 1)
+            lead *= size / c['size']
         else:
             lead = size * 1.38
+        if not in_table and n > 1:
+            room = c['limit'] - c['bbox'][1] - size
+            if room > 0:
+                lead = min(lead, max(room / (n - 1), size * 1.02))
         if in_table:
             rtop, rbot = c['row']
             if n > 1:

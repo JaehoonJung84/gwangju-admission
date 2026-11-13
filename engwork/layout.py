@@ -4,6 +4,10 @@
 칸 경계는 표의 세로 괘선과 색칠 사각형 모서리에서 뽑는다.
 """
 import fitz
+import re
+
+# 번호 항목·글머리로 시작하는 줄은 줄 사이가 넓어도 같은 덩어리로 본다.
+LISTY = re.compile(r'^(?:[○※•-]|\d{1,2}\.)\s')
 
 PAGE_L, PAGE_R = 51.0, 385.5     # 본문 좌우 여백(실측)
 
@@ -96,7 +100,8 @@ def cells_of(page):
             if prev['font'] != l['font']:
                 continue
             gap = l['bbox'][1] - prev['bbox'][3]
-            if -1.0 <= gap <= l['size'] * 0.75 and not crossed(hcuts, prev, l):
+            lim = l['size'] * (1.25 if LISTY.match(l['text'].lstrip()) else 0.75)
+            if -1.0 <= gap <= lim and not crossed(hcuts, prev, l):
                 c['lines'].append(l)
                 break
         else:
@@ -113,7 +118,7 @@ def cells_of(page):
         bullet = c['text'].lstrip()[:1] in ('○', '※', '-')
         if abs(gl - gr) < 3.0 and gl > 2.0 and not bullet:
             c['align'] = 'C'
-        elif gr < 12.0 and gl > gr * 2 + 8 and not bullet:
+        elif len(c['lines']) == 1 and gr < 8.0 and gl > 25.0 and not bullet:
             c['align'] = 'R'
         else:
             c['align'] = 'L'
@@ -130,7 +135,7 @@ def cells_of(page):
                 continue
             if o['bbox'][2] < c['cell'][0] + 1 or o['bbox'][0] > c['cell'][1] - 1:
                 continue
-            lim = min(lim, o['bbox'][1] - 1.5)
+            lim = min(lim, o['bbox'][1] - 10.0)
         c['limit'] = round(max(lim, c['bbox'][3]), 2)
     return cells
 
