@@ -16,7 +16,7 @@ FIT  p4 lines 1->2 size 8.00->7.00 | Selection Criteria
 FIT  p4 lines 1->2 size 8.00->7.00 | ○ Applicants who pass the document screening and score 70 or
 FIT  p4 lines 1->1 size 8.00->7.75 | ※ Application fee: KRW 50,000 (Gwangju Bank 1127-020-252652,
 FIT  p5 lines 2->3 size 8.00->7.00 | ○ Foreign nationals whose parents are both foreign nationals
-FIT  p5 lines 2->3 size 8.00->8.00 | ○ Graduates or prospective graduates who completed, in Korea
+FIT  p5 lines 2->3 size 8.00->7.00 | ○ Graduates or prospective graduates who completed, in Korea
 FIT  p5 lines 2->3 size 8.00->5.75 | ○ Applicants who have completed (or will complete) at least 
 FIT  p5 lines 2->4 size 8.00->6.00 | ○ Applicants who have completed (or will complete) at least 
 FIT  p5 lines 6->7 size 8.00->7.00 | ○ TOPIK Level 3 or higher (TOPIK IBT included), or an equiva
@@ -135,7 +135,7 @@ FIT  p11 lines 10->15 size 8.00->7.00 | ○ What to bring: ID card, bedding, toi
 FIT  p11 lines 2->3 size 8.00->8.00 | ○ First day of class: 2027. 3. 2.(Tue)/○ Orientation for ent
 FIT  p11 lines 3->4 size 8.00->8.00 | ○ Advising: register for courses after consulting your depar
 FIT  p11 lines 3->6 size 8.00->8.00 | ○ Enrollment: once alien registration is completed in Korea,
-FIT  p12 lines 30->46 size 8.00->8.00 | 2. All entries on the application must be accurate; applican
+FIT  p12 lines 30->47 size 8.00->8.00 | 2. All entries on the application must be accurate; applican
 FIT  p13 lines 2->3 size 7.50->7.50 | ※ Building locations and interior VR tour: https://www.gwang
 FIT  p13 lines 1->1 size 8.00->7.75 | Language · Country
 FIT  p13 lines 1->1 size 8.00->7.75 | Language · Country

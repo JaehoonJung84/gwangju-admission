@@ -37,26 +37,32 @@ def rgb(color):
     return ((color >> 16) & 255) / 255.0, ((color >> 8) & 255) / 255.0, (color & 255) / 255.0
 
 
-def wrap(text, font, size, width, hang=True):
-    """forced '\\n' 를 지키며 width 안에서 낱말 단위로 접는다."""
+def wrap(text, font, size, width):
+    """forced '\\n' 를 지키며 width 안에서 낱말 단위로 접는다.
+
+    넘어간 줄은 글머리(`1.`·`10.`·`○`·`-`)의 **실제 폭**만큼 내어쓰기해
+    앞단(첫 글자) 자리에 맞춘다. 공백 개수로 맞추면 숫자·기호 폭이 달라 어긋난다.
+    돌려주는 값은 (글월, 내어쓰기 폭pt) 목록.
+    """
     out = []
     for seg in text.split('\n'):
         seg = seg.rstrip()
         if not seg:
-            out.append('')
+            out.append(('', 0.0))
             continue
         m = BULLET.match(seg)
-        indent = ' ' * len(m.group(1)) if (m and hang) else ''
-        words, cur = seg.split(' '), ''
-        for w in words:
+        ind = font.text_length(m.group(1), size) if m else 0.0
+        rows, cur = [], ''
+        for w in seg.split(' '):
             cand = (cur + ' ' + w) if cur else w
-            pre = indent if out and cur == '' and False else ''
-            if font.text_length(cand, size) <= width or not cur:
+            lim = width if not rows else width - ind
+            if font.text_length(cand, size) <= lim or not cur:
                 cur = cand
             else:
-                out.append(cur)
-                cur = indent + w
-        out.append(cur)
+                rows.append(cur)
+                cur = w
+        rows.append(cur)
+        out.extend((t, 0.0 if i == 0 else ind) for i, t in enumerate(rows))
     return out
 
 
@@ -83,7 +89,7 @@ def layout_lines(c, en, in_table):
         rowh = max(c['limit'] - c['bbox'][1], c['bbox'][3] - c['bbox'][1] + 2.0)
 
     def wide(lines, s):
-        return max((font.text_length(t, s) for t in lines if t), default=0) > avail + 0.2
+        return max((font.text_length(t, s) + ind for t, ind in lines if t), default=0) > avail + 0.2
 
     def fits_row(s, n):
         return (n - 1) * s * 1.15 + s + 0.8 <= rowh
@@ -144,7 +150,7 @@ def draw_cell(page, c, en):
             y0 = c['lines'][0]['origin'][1]
         ys = [y0 + lead * i for i in range(n)]
 
-    for y, t in zip(ys, lines):
+    for y, (t, ind) in zip(ys, lines):
         if not t:
             continue
         if c['align'] == 'C':
@@ -152,7 +158,7 @@ def draw_cell(page, c, en):
         elif c['align'] == 'R':
             x = left - font.text_length(t, size)
         else:
-            x = left
+            x = left + ind
         page.insert_text((x, y), t, fontname=fname, fontsize=size, color=col)
     return n, n0, size
 

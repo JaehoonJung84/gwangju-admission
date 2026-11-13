@@ -13,10 +13,10 @@ NAVY = (0.0296, 0.1888, 0.3090)
 WHITE = (1, 1, 1)
 
 TITLE = {
-    'ug': ('2027 Spring Semester, Gwangju University',
+    'ug': ('2027 Spring Semester',
            ['Special Admission for International', 'Freshmen and Transfer Students'],
            'Undergraduate'),
-    'gr': ('2027 Spring Semester, Gwangju University',
+    'gr': ('2027 Spring Semester',
            ['Special Admission for International', 'Freshmen and Transfer Students'],
            'Graduate School'),
 }

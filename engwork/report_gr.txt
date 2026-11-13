@@ -23,10 +23,11 @@ FIT  p5 lines 3->4 size 8.00->6.75 | ○ Holders of a bachelor’s degree from a
 FIT  p5 lines 3->4 size 8.00->6.75 | ○ Holders of a master’s degree from a university in Korea or
 FIT  p5 lines 2->3 size 8.00->8.00 | ○ Applicants majoring in the same field who have completed a
 FIT  p5 lines 2->3 size 8.00->8.00 | ○ Applicants majoring in the same field who have completed a
+FIT  p5 lines 4->5 size 8.00->8.00 | ○ Only holders of a registered nurse (RN) licence may apply;
 FIT  p5 lines 4->4 size 8.00->7.50 | ○ TOPIK Level 3 or higher (TOPIK IBT included), or an equiva
 FIT  p5 lines 2->3 size 8.00->8.00 | Korean Track/(Qualified Applicants)
 FIT  p5 lines 1->2 size 8.00->8.00 | Language Proficiency
-FIT  p5 lines 7->7 size 8.00->7.75 | ○ Applicants who do not meet the Korean proficiency requirem
+FIT  p5 lines 7->7 size 8.00->7.50 | ○ Applicants who do not meet the Korean proficiency requirem
 FIT  p5 lines 2->3 size 8.00->8.00 | Korean Track/(Bilingual Program)
 FIT  p5 lines 3->4 size 7.50->7.50 | ※ Only language test scores valid as of the application clos
 FIT  p6 lines 2->3 size 7.50->6.50 | ○ Application, study and research plan, self-introduction/○ 
