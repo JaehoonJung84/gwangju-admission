@@ -34,7 +34,7 @@ def main():
     try:
         hwp.RegisterModule('FilePathCheckDLL', 'FilePathCheckerModule')
         try:
-            hwp.XHwpWindows.Item(0).Visible = False
+            hwp.XHwpWindows.Item(0).Visible = True
         except Exception:
             pass
         print('open', hwp.Open(src.replace('\\', '/'), '', 'forceopen:true'), flush=True)
